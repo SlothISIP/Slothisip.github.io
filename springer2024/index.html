@@ -115,7 +115,21 @@ We propose vanishing point-based calibration for a three-viewpoint thermal camer
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Vanishing Point-Based Calibration
+                    Calibration Methodology
+                </h3>
+                <p style="text-align:center;">
+                    <image src="../images/springer2024_flow.jpg" class="img-responsive" alt="System Flow">
+                </p>
+                <p class="text-justify">
+                    Our calibration pipeline consists of three main stages: vanishing point detection from thermal images, geometric constraint establishment using the detected vanishing points, and multi-view calibration optimization. The system flow diagram above illustrates how each component interacts to achieve accurate calibration with minimal feature correspondences. The process begins with edge detection in thermal images, followed by line grouping and vanishing point estimation, and concludes with iterative refinement of camera parameters.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Vanishing Point Detection
                 </h3>
                 <p class="text-justify">
                     The key challenge in calibrating a three-viewpoint thermal camera system is the limited overlap between views, especially when cameras are separated by more than 180 degrees. Traditional calibration approaches that rely on finding corresponding feature points across multiple views become impractical in such configurations.
@@ -125,6 +139,12 @@ We propose vanishing point-based calibration for a three-viewpoint thermal camer
                 </p>
                 <p class="text-justify">
                     Our method leverages vanishing points derived from parallel lines in the scene to establish geometric constraints between the camera viewpoints. By detecting vanishing points in each thermal image, we can estimate the relative orientation and position of the cameras without requiring dense feature correspondences. This approach is particularly effective for thermal imaging where texture information is limited but structured environments with parallel edges are common.
+                </p>
+                <p style="text-align:center;">
+                    <image src="../images/springer2024_vp_detection.jpg" class="img-responsive" alt="VP Detection Process">
+                </p>
+                <p class="text-justify">
+                    The vanishing point detection process shown above employs a robust RANSAC-based line fitting algorithm to identify dominant line segments in thermal images. These line segments are then clustered according to their orientations, and their intersection points are computed to determine the vanishing points. The detected vanishing points correspond to the principal directions in the scene (typically horizontal, vertical, and depth directions), which provide strong geometric constraints for camera calibration.
                 </p>
             </div>
         </div>
@@ -140,6 +160,20 @@ We propose vanishing point-based calibration for a three-viewpoint thermal camer
                 </p>
                 <p class="text-justify">
                     The vanishing point-based calibration method operates with as few as three to five correspondence points per image pair, significantly reducing the manual effort required compared to traditional calibration approaches. This efficiency makes the system practical for deployment in real-world monitoring scenarios where recalibration may be necessary due to camera movement or environmental changes.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Calibration Accuracy
+                </h3>
+                <p style="text-align:center;">
+                    <image src="../images/springer2024_reprojection.jpg" class="img-responsive" alt="Reprojection Error">
+                </p>
+                <p class="text-justify">
+                    The reprojection error analysis demonstrates the accuracy of our vanishing point-based calibration method. The mean reprojection error across all three camera viewpoints is less than 0.8 pixels, which is comparable to traditional calibration methods that require significantly more feature correspondences. The error distribution shown above indicates consistent performance across different regions of the thermal images, with no systematic bias. This level of accuracy is sufficient for most surveillance and monitoring applications, including accurate 3D localization of objects and multi-view tracking. The low variance in reprojection errors across viewpoints confirms that our method successfully handles the challenging wide-baseline configuration with over 180-degree camera separation.
                 </p>
             </div>
         </div>

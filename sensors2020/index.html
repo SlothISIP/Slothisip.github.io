@@ -107,11 +107,53 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Method Overview
+                    Detection Pipeline
+                </h3>
+                <p style="text-align:center;">
+                    <image src="../images/sensors2020_flowchart.jpg" class="img-responsive" alt="Detection Flow">
+                </p>
+                <p class="text-justify">
+                    The detection flowchart above illustrates our comprehensive signal processing pipeline for abnormal respiration detection. The system begins with UWB radar signal acquisition from multiple sensors, followed by preprocessing steps including noise reduction and signal normalization. The core processing stages include Z-domain transformation for feature extraction, custom filter design for signal enhancement, and multi-input fusion for robust classification. This systematic approach ensures reliable detection performance across various environmental conditions and patient positions.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Multi-Input Signal Processing
                 </h3>
                 <image src="../images/sensors2020_apnea.jpg" class="img-responsive" alt="method"><br>
                 <p class="text-justify">
-                    Our approach uses multiple UWB radar sensors to capture respiratory signals from different positions. The signals are processed using Z-domain transformations to extract relevant features, followed by custom-designed filters to enhance the signal-to-noise ratio. The system employs both time-domain and frequency-domain analysis to accurately detect abnormal breathing patterns, including apnea events. The multi-input architecture provides redundancy and improves overall detection accuracy.
+                    Our approach uses multiple UWB radar sensors to capture respiratory signals from different positions. The signals are processed using Z-domain transformations to extract relevant features, followed by custom-designed filters to enhance the signal-to-noise ratio. The system employs both time-domain and frequency-domain analysis to accurately detect abnormal breathing patterns, including apnea events. The multi-input architecture provides redundancy and improves overall detection accuracy when individual sensors may be affected by positioning or environmental factors.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Z-Domain Analysis
+                </h3>
+                <p style="text-align:center;">
+                    <image src="../images/sensors2020_zdomain.jpg" class="img-responsive" alt="Z-domain Classification">
+                </p>
+                <p class="text-justify">
+                    The Z-domain transformation enables effective feature extraction from respiratory signals by converting time-domain signals into a representation that emphasizes periodic patterns and breathing rate characteristics. The classification results shown above demonstrate how different respiratory states (normal breathing, shallow breathing, and apnea) form distinct clusters in the Z-domain feature space. This separation facilitates accurate classification using relatively simple decision boundaries, achieving 93% accuracy in distinguishing abnormal respiration patterns. The Z-domain approach is particularly robust to signal amplitude variations and provides consistent performance across different subjects.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Filter-Based Enhancement
+                </h3>
+                <p style="text-align:center;">
+                    <image src="../images/sensors2020_filter.jpg" class="img-responsive" alt="Filter Responses">
+                </p>
+                <p class="text-justify">
+                    Custom-designed filters play a crucial role in enhancing respiratory signals and suppressing noise from body movements and environmental interference. The filter response characteristics shown above illustrate how our filter bank selectively amplifies frequency components corresponding to normal and abnormal breathing patterns while attenuating out-of-band noise. The combination of bandpass filtering in the respiratory frequency range (0.1-0.5 Hz) with adaptive notch filters for interference rejection enables robust signal extraction even in challenging real-world conditions. This filter-based approach complements the Z-domain analysis by providing clean input signals for feature extraction.
                 </p>
             </div>
         </div>
