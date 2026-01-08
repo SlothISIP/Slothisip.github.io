@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>DTW-Enhanced CNN-LSTM for Respiratory Monitoring</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FACEBOOK -->
+    <meta property="og:image" content="https://jonbarron.info/electronics2025/electronics2025_system.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jonbarron.info/electronics2025/"/>
+    <meta property="og:title" content="DTW-Enhanced CNN-LSTM for Respiratory Monitoring" />
+    <meta property="og:description" content="A CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation for UWB radar respiratory monitoring, achieving 94.3% accuracy with minimal training data." />
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DTW-Enhanced CNN-LSTM for Respiratory Monitoring" />
+    <meta name="twitter:description" content="A CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation for UWB radar respiratory monitoring, achieving 94.3% accuracy with minimal training data." />
+    <meta name="twitter:image" content="https://jonbarron.info/electronics2025/electronics2025_system.jpg" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                Overcoming Data Scarcity in Non-Contact Respiratory Monitoring:<br>A DTW-Enhanced CNN-LSTM Approach</br>
+                <small>
+                    Electronics (MDPI), 2025
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://jonbarron.info/">
+                          Ju O Kim
+                        </a>
+                        </br>Keimyung University
+                    </li>
+                    <li>
+                        <a href="#">
+                            Deokwoo Lee
+                        </a>
+                        </br>Keimyung University
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://www.mdpi.com/2079-9292/14/20/4120">
+                            <image src="img/paper_icon.png" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <image src="../images/electronics2025_system.jpg" class="img-responsive" alt="overview"><br>
+                <p class="text-justify">
+We propose a CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation for UWB radar respiratory monitoring, achieving 94.3% accuracy with minimal training data. This approach addresses the challenge of limited labeled datasets in medical monitoring applications. Our system demonstrates robust performance in distinguishing normal breathing from apnea events using non-contact ultra-wideband (UWB) radar technology. The integration of Dynamic Time Warping (DTW) with Synthetic Minority Over-sampling Technique (SMOTE) enables effective data augmentation for time-series respiratory signals, while the CNN-LSTM architecture efficiently captures both spatial and temporal patterns in the radar data. Experimental results show that our method significantly outperforms traditional machine learning approaches and standard deep learning models when training data is scarce, making it particularly suitable for real-world medical monitoring scenarios where collecting large labeled datasets is challenging and expensive.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    CNN-LSTM Architecture
+                </h3>
+                <image src="../images/electronics2025_cnnlstm.jpg" class="img-responsive" alt="CNN-LSTM Architecture"><br>
+                <p class="text-justify">
+                    Our proposed hybrid architecture combines Convolutional Neural Networks (CNN) for spatial feature extraction from UWB radar signals with Long Short-Term Memory (LSTM) networks for temporal sequence modeling. The CNN layers process the radar spectrograms to identify local patterns indicative of respiratory events, while the LSTM layers capture the temporal dependencies and dynamics of breathing patterns over time. This combination enables the model to learn both instantaneous signal characteristics and long-term breathing behavior patterns, leading to improved classification accuracy even with limited training samples.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    DTW-Based Data Augmentation
+                </h3>
+                <p class="text-justify">
+                    A key innovation in our approach is the use of Dynamic Time Warping (DTW) distance metrics within the SMOTE algorithm for generating synthetic training samples. Traditional SMOTE uses Euclidean distance, which is not well-suited for time-series data with temporal variations. By incorporating DTW, our augmentation method better accounts for the elastic nature of respiratory signals, where the same breathing pattern may occur at different speeds or with slight temporal shifts. This DTW-enhanced SMOTE generates more realistic synthetic samples that preserve the temporal characteristics of respiratory signals, leading to improved model generalization despite limited training data.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Results
+                </h3>
+                <p class="text-justify">
+                    Our experimental evaluation demonstrates that the proposed DTW-enhanced CNN-LSTM approach achieves 94.3% classification accuracy in distinguishing normal breathing from apnea events using UWB radar data. This represents a significant improvement over baseline methods:
+                </p>
+                <ul>
+                    <li>Standard CNN-LSTM without DTW-SMOTE: 87.6% accuracy</li>
+                    <li>Traditional machine learning (SVM, Random Forest): 82-85% accuracy</li>
+                    <li>LSTM-only architecture: 88.9% accuracy</li>
+                    <li>CNN-only architecture: 86.2% accuracy</li>
+                </ul>
+                <p class="text-justify">
+                    The results demonstrate that our method is particularly effective in scenarios with limited training data, making it highly practical for real-world medical monitoring applications where data collection is expensive and time-consuming.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@article{Kim2025Respiratory,
+  author = {Ju O Kim and Deokwoo Lee},
+  title = {Overcoming Data Scarcity in Non-Contact Respiratory Monitoring:
+           A DTW-Enhanced CNN-LSTM Approach},
+  journal = {Electronics},
+  volume = {14},
+  number = {20},
+  pages = {4120},
+  year = {2025},
+  month = {October},
+  publisher = {MDPI},
+  doi = {10.3390/electronics14204120},
+  url = {https://www.mdpi.com/2079-9292/14/20/4120},
+  note = {Open Access}
+}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                This research was supported by the Basic Science Research Program through the National Research Foundation of Korea (NRF) funded by the Ministry of Education. We thank the anonymous reviewers for their valuable feedback and suggestions.
+                    <br><br>
+                The website template was borrowed from <a href="http://mgharbi.com/">Michael Gharbi</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

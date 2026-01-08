@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Calibrating a Three-Viewpoints Thermal Camera</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <base href="/"> -->
+
+        <!--FACEBOOK-->
+    <meta property="og:image" content="https://jonbarron.info/images/springer2024_hardware.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jonbarron.info/springer2024/"/>
+    <meta property="og:title" content="Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences" />
+    <meta property="og:description" content="We propose vanishing point-based calibration for a three-viewpoint thermal camera system with greater than 180-degree separation and minimal overlap between views." />
+
+        <!--TWITTER-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences" />
+    <meta name="twitter:description" content="We propose vanishing point-based calibration for a three-viewpoint thermal camera system with greater than 180-degree separation and minimal overlap between views." />
+    <meta name="twitter:image" content="https://jonbarron.info/images/springer2024_hardware.jpg" />
+
+
+<!--     <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
+  <!-- <link rel="icon" type="image/png" href="img/seal_icon.png"> -->
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences</br>
+                <small>
+                    Journal of Signal Processing Systems (Springer), 2024
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://jonbarron.info/">
+                          Ju O Kim
+                        </a>
+                        </br>Keimyung University
+                    </li>
+                    <li>
+                        Jieun Kim
+                        </br>Keimyung University
+                    </li>
+                    <li>
+                        <a href="https://scholar.google.com/citations?user=example">
+                          Deokwoo Lee
+                        </a>
+                        </br>Keimyung University
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://link.springer.com/article/10.1007/s11265-023-01837-z">
+                            <image src="img/paper_icon.jpg" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <image src="../images/springer2024_hardware.jpg" class="img-responsive" alt="hardware"><br>
+                <p class="text-justify">
+We propose vanishing point-based calibration for a three-viewpoint thermal camera system with greater than 180-degree separation and minimal overlap between views. This method enables accurate calibration with limited feature correspondences. The proposed approach is particularly suited for thermal imaging systems where traditional calibration methods struggle due to the lack of distinctive features and minimal overlap between camera viewpoints. Our vanishing point-based method achieves reliable calibration by exploiting geometric constraints inherent in the camera configuration, making it practical for wide-baseline multi-view thermal camera systems used in surveillance and monitoring applications.
+                </p>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Vanishing Point-Based Calibration
+                </h3>
+                <p class="text-justify">
+                    The key challenge in calibrating a three-viewpoint thermal camera system is the limited overlap between views, especially when cameras are separated by more than 180 degrees. Traditional calibration approaches that rely on finding corresponding feature points across multiple views become impractical in such configurations.
+                </p>
+                <p style="text-align:center;">
+                    <image src="../images/springer2024_vp.jpg" class="img-responsive" alt="vanishing points">
+                </p>
+                <p class="text-justify">
+                    Our method leverages vanishing points derived from parallel lines in the scene to establish geometric constraints between the camera viewpoints. By detecting vanishing points in each thermal image, we can estimate the relative orientation and position of the cameras without requiring dense feature correspondences. This approach is particularly effective for thermal imaging where texture information is limited but structured environments with parallel edges are common.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    System Configuration
+                </h3>
+                <p class="text-justify">
+                    The three-viewpoint thermal camera system is designed for wide-area surveillance applications. Each camera captures a distinct field of view with minimal overlap, providing comprehensive coverage of the monitored area. The calibration process establishes the geometric relationships between these viewpoints, enabling accurate 3D reconstruction and object tracking across the entire surveillance zone.
+                </p>
+                <p class="text-justify">
+                    The vanishing point-based calibration method operates with as few as three to five correspondence points per image pair, significantly reducing the manual effort required compared to traditional calibration approaches. This efficiency makes the system practical for deployment in real-world monitoring scenarios where recalibration may be necessary due to camera movement or environmental changes.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@article{Kim2024Thermal,
+  author = {Ju O Kim and Jieun Kim and Deokwoo Lee},
+  title = {Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences},
+  journal = {Journal of Signal Processing Systems},
+  volume = {96},
+  number = {3},
+  year = {2024},
+  publisher = {Springer},
+  doi = {10.1007/s11265-023-01837-z},
+  url = {https://link.springer.com/article/10.1007/s11265-023-01837-z},
+}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korean government. We thank the reviewers for their valuable feedback and suggestions that helped improve this work.
+                    <br><br>
+                The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
