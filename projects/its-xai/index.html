@@ -63,6 +63,21 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
+                    System Architecture
+                </h3>
+                <center>
+                    <img src="images/architecture.svg" class="img-responsive" alt="System Architecture" style="max-width: 100%; background: #1a1a2e; border-radius: 8px; padding: 10px;">
+                </center>
+                <br>
+                <p class="text-justify">
+                    Multimodal fusion pipeline architecture combining 603 sensor features with YOLOv11 visual detection. Random Forest processes sensor data while the Feature Selection module filters key predictors. XGBoost meta-classifier fuses both streams achieving F1 0.9462. The XAI layer provides SHAP, LIME, and counterfactual explanations for production decision support.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
                     SHAP Waterfall Explanation
                 </h3>
                 <center>

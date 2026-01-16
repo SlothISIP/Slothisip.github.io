@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420">
+  <defs>
+    <linearGradient id="nerf-grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c0c1d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a3a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="nerf-core" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f7931e;stop-opacity:1" />
+    </linearGradient>
+    <filter id="nerf-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="nerf-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="850" height="420" fill="url(#nerf-grad1)"/>
+
+  <!-- Title -->
+  <text x="425" y="28" text-anchor="middle" fill="#ff6b35" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Industrial NeRF Factory - End-to-End Pipeline</text>
+
+  <!-- Phase Labels -->
+  <text x="100" y="55" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="10">DATA COLLECTION</text>
+  <text x="280" y="55" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="10">NEURAL RENDERING</text>
+  <text x="480" y="55" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="10">SYNTHETIC DATA</text>
+  <text x="680" y="55" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="10">DEPLOYMENT</text>
+
+  <!-- Stage 1: Multi-View Capture -->
+  <rect x="30" y="70" width="140" height="85" rx="8" fill="#1a1a3a" stroke="#4cc9f0" stroke-width="2" filter="url(#nerf-shadow)"/>
+  <text x="100" y="95" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Multi-View Capture</text>
+  <text x="100" y="113" text-anchor="middle" fill="#4cc9f0" font-family="Arial, sans-serif" font-size="9">36 Cameras</text>
+  <text x="100" y="130" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">360° Coverage</text>
+  <text x="100" y="145" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Synchronized</text>
+
+  <!-- Stage 2: NeRF Training -->
+  <rect x="200" y="65" width="160" height="95" rx="10" fill="url(#nerf-core)" stroke="#ff6b35" stroke-width="3" filter="url(#nerf-glow)"/>
+  <text x="280" y="90" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">NeRF Training</text>
+  <text x="280" y="108" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="9">Instant-NGP</text>
+  <text x="280" y="125" text-anchor="middle" fill="#ffe4d6" font-family="Arial, sans-serif" font-size="8">Hash Encoding</text>
+  <text x="280" y="140" text-anchor="middle" fill="#ffe4d6" font-family="Arial, sans-serif" font-size="8">Volume Rendering</text>
+  <text x="280" y="155" text-anchor="middle" fill="#ffe4d6" font-family="Arial, sans-serif" font-size="8">Nerfstudio</text>
+
+  <!-- Stage 3: Novel View Synthesis -->
+  <rect x="400" y="70" width="150" height="85" rx="8" fill="#1a1a3a" stroke="#a855f7" stroke-width="2" filter="url(#nerf-shadow)"/>
+  <text x="475" y="95" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Novel Views</text>
+  <text x="475" y="113" text-anchor="middle" fill="#a855f7" font-family="Arial, sans-serif" font-size="9">View Synthesis</text>
+  <text x="475" y="130" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Unlimited Angles</text>
+  <text x="475" y="145" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Photo-realistic</text>
+
+  <!-- Stage 4: Data Generation -->
+  <rect x="590" y="70" width="140" height="85" rx="8" fill="#1a1a3a" stroke="#00d9ff" stroke-width="2" filter="url(#nerf-shadow)"/>
+  <text x="660" y="95" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Synthetic Data</text>
+  <text x="660" y="113" text-anchor="middle" fill="#00d9ff" font-family="Arial, sans-serif" font-size="9">Training Datasets</text>
+  <text x="660" y="130" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Augmentation</text>
+  <text x="660" y="145" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Edge Cases</text>
+
+  <!-- Stage 5: AI Model Training -->
+  <rect x="400" y="185" width="150" height="85" rx="8" fill="#1a1a3a" stroke="#4ecdc4" stroke-width="2" filter="url(#nerf-shadow)"/>
+  <text x="475" y="210" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">AI Model Training</text>
+  <text x="475" y="228" text-anchor="middle" fill="#4ecdc4" font-family="Arial, sans-serif" font-size="9">Detection / Classification</text>
+  <text x="475" y="245" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">NeRF-enhanced Data</text>
+  <text x="475" y="260" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Domain Adaptation</text>
+
+  <!-- Stage 6: Sim-to-Real -->
+  <rect x="590" y="185" width="140" height="85" rx="8" fill="#1a1a3a" stroke="#ff6b6b" stroke-width="2" filter="url(#nerf-shadow)"/>
+  <text x="660" y="210" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Sim-to-Real</text>
+  <text x="660" y="228" text-anchor="middle" fill="#ff6b6b" font-family="Arial, sans-serif" font-size="9">Transfer Learning</text>
+  <text x="660" y="245" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Domain Alignment</text>
+  <text x="660" y="260" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Fine-tuning</text>
+
+  <!-- Stage 7: Real Deployment -->
+  <rect x="760" y="115" width="70" height="120" rx="8" fill="#1a1a3a" stroke="#00ff88" stroke-width="2" filter="url(#nerf-shadow)"/>
+  <text x="795" y="145" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="9" font-weight="bold">Deploy</text>
+  <text x="795" y="165" text-anchor="middle" fill="#00ff88" font-family="Arial, sans-serif" font-size="8">Production</text>
+  <text x="795" y="182" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="7">89.7%</text>
+  <text x="795" y="195" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="7">Real-world</text>
+  <text x="795" y="208" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="7">Performance</text>
+
+  <!-- ROS 2 / Robotics Layer -->
+  <rect x="30" y="185" width="140" height="85" rx="8" fill="#1a1a3a" stroke="#ffd93d" stroke-width="2" filter="url(#nerf-shadow)"/>
+  <text x="100" y="210" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Robot Control</text>
+  <text x="100" y="228" text-anchor="middle" fill="#ffd93d" font-family="Arial, sans-serif" font-size="9">ROS 2 + MoveIt</text>
+  <text x="100" y="245" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Motion Planning</text>
+  <text x="100" y="260" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Path Optimization</text>
+
+  <!-- Simulation Environment -->
+  <rect x="200" y="185" width="160" height="85" rx="8" fill="#1a1a3a" stroke="#bd93f9" stroke-width="2" filter="url(#nerf-shadow)"/>
+  <text x="280" y="210" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Simulation</text>
+  <text x="280" y="228" text-anchor="middle" fill="#bd93f9" font-family="Arial, sans-serif" font-size="9">NeRF Environment</text>
+  <text x="280" y="245" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">94.2% Success Rate</text>
+  <text x="280" y="260" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="8">Virtual Testing</text>
+
+  <!-- Infrastructure -->
+  <rect x="30" y="300" width="350" height="55" rx="8" fill="#1a1a3a" stroke="#233554" stroke-width="1"/>
+  <text x="205" y="320" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="9">Infrastructure</text>
+  <text x="205" y="340" text-anchor="middle" fill="#4cc9f0" font-family="Arial, sans-serif" font-size="9">Ray Cluster | Kubernetes | FastAPI | gRPC</text>
+
+  <!-- Metrics -->
+  <rect x="410" y="300" width="250" height="55" rx="8" fill="#1a1a3a" stroke="#233554" stroke-width="1"/>
+  <text x="535" y="320" text-anchor="middle" fill="#8892b0" font-family="Arial, sans-serif" font-size="9">Metrics</text>
+  <text x="535" y="340" text-anchor="middle" fill="#00ff88" font-family="Arial, sans-serif" font-size="9">15,704+ LOC | 157 Tests | 8-Phase Pipeline</text>
+
+  <!-- Arrows -->
+  <defs>
+    <marker id="nerf-arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#ff6b35"/>
+    </marker>
+    <marker id="nerf-arrow-cyan" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4cc9f0"/>
+    </marker>
+  </defs>
+
+  <!-- Main horizontal flow (top) -->
+  <line x1="170" y1="112" x2="195" y2="112" stroke="#4cc9f0" stroke-width="2" marker-end="url(#nerf-arrow-cyan)"/>
+  <line x1="360" y1="112" x2="395" y2="112" stroke="#ff6b35" stroke-width="2" marker-end="url(#nerf-arrow)"/>
+  <line x1="550" y1="112" x2="585" y2="112" stroke="#a855f7" stroke-width="2" marker-end="url(#nerf-arrow)"/>
+  <line x1="730" y1="112" x2="755" y2="155" stroke="#00d9ff" stroke-width="2" marker-end="url(#nerf-arrow)"/>
+
+  <!-- Vertical connections -->
+  <line x1="660" y1="160" x2="660" y2="180" stroke="#00d9ff" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="475" y1="160" x2="475" y2="180" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,2"/>
+
+  <!-- Lower horizontal flow -->
+  <line x1="100" y1="160" x2="100" y2="180" stroke="#ffd93d" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="170" y1="227" x2="195" y2="227" stroke="#ffd93d" stroke-width="1.5" marker-end="url(#nerf-arrow)"/>
+  <line x1="360" y1="227" x2="395" y2="227" stroke="#bd93f9" stroke-width="1.5" marker-end="url(#nerf-arrow)"/>
+  <line x1="550" y1="227" x2="585" y2="227" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#nerf-arrow)"/>
+  <line x1="730" y1="227" x2="755" y2="195" stroke="#ff6b6b" stroke-width="1.5" marker-end="url(#nerf-arrow)"/>
+
+  <!-- Feedback loop -->
+  <path d="M795,240 L795,375 L100,375 L100,275" stroke="#00ff88" stroke-width="1.5" fill="none" stroke-dasharray="6,3" marker-end="url(#nerf-arrow)"/>
+  <text x="450" y="390" text-anchor="middle" fill="#00ff88" font-family="Arial, sans-serif" font-size="8">Continuous Improvement Feedback Loop</text>
+</svg>

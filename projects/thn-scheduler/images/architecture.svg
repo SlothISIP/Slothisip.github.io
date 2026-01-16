@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">
+  <defs>
+    <linearGradient id="thn-grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="thn-grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0f3460;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#533483;stop-opacity:1" />
+    </linearGradient>
+    <filter id="thn-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="320" fill="url(#thn-grad1)"/>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" fill="#00d9ff" font-family="Arial, sans-serif" font-size="16" font-weight="bold">THN AI Production Scheduler - System Architecture</text>
+
+  <!-- Input Layer -->
+  <rect x="30" y="60" width="120" height="80" rx="8" fill="#0f3460" stroke="#00d9ff" stroke-width="2" filter="url(#thn-shadow)"/>
+  <text x="90" y="90" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Data Input</text>
+  <text x="90" y="108" text-anchor="middle" fill="#00d9ff" font-family="Arial, sans-serif" font-size="9">67,738 Circuits</text>
+  <text x="90" y="122" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="9">21 Machines</text>
+
+  <!-- Scheduling Engine -->
+  <rect x="200" y="50" width="180" height="100" rx="8" fill="url(#thn-grad2)" stroke="#e94560" stroke-width="2" filter="url(#thn-shadow)"/>
+  <text x="290" y="75" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Scheduling Engine</text>
+  <text x="290" y="95" text-anchor="middle" fill="#e94560" font-family="Arial, sans-serif" font-size="10">15 Algorithms</text>
+  <text x="290" y="112" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="9">ALNS | CP-SAT | Two-Phase</text>
+  <text x="290" y="128" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="9">Genetic | Simulated Annealing</text>
+  <text x="290" y="144" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="9">Balanced Load Distribution</text>
+
+  <!-- Optimization Module -->
+  <rect x="430" y="50" width="140" height="100" rx="8" fill="#0f3460" stroke="#00d9ff" stroke-width="2" filter="url(#thn-shadow)"/>
+  <text x="500" y="75" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Optimization</text>
+  <text x="500" y="95" text-anchor="middle" fill="#00d9ff" font-family="Arial, sans-serif" font-size="10">Multi-Objective</text>
+  <text x="500" y="115" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="9">CV: Load Balance</text>
+  <text x="500" y="130" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="9">APP: Setup Time</text>
+  <text x="500" y="145" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="9">Makespan</text>
+
+  <!-- Output -->
+  <rect x="620" y="60" width="150" height="80" rx="8" fill="#0f3460" stroke="#00ff88" stroke-width="2" filter="url(#thn-shadow)"/>
+  <text x="695" y="90" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Output</text>
+  <text x="695" y="108" text-anchor="middle" fill="#00ff88" font-family="Arial, sans-serif" font-size="10">Gantt Schedule</text>
+  <text x="695" y="124" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="9">5-Day Production Plan</text>
+
+  <!-- Dashboard -->
+  <rect x="300" y="200" width="200" height="70" rx="8" fill="#1a1a2e" stroke="#ff6b6b" stroke-width="2" filter="url(#thn-shadow)"/>
+  <text x="400" y="225" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Streamlit Dashboard</text>
+  <text x="400" y="245" text-anchor="middle" fill="#ff6b6b" font-family="Arial, sans-serif" font-size="10">Real-time Monitoring</text>
+  <text x="400" y="260" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="9">KPIs | Alerts | Analytics</text>
+
+  <!-- Arrows -->
+  <defs>
+    <marker id="thn-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#00d9ff"/>
+    </marker>
+    <marker id="thn-arrow-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#ff6b6b"/>
+    </marker>
+  </defs>
+
+  <line x1="150" y1="100" x2="195" y2="100" stroke="#00d9ff" stroke-width="2" marker-end="url(#thn-arrow)"/>
+  <line x1="380" y1="100" x2="425" y2="100" stroke="#00d9ff" stroke-width="2" marker-end="url(#thn-arrow)"/>
+  <line x1="570" y1="100" x2="615" y2="100" stroke="#00d9ff" stroke-width="2" marker-end="url(#thn-arrow)"/>
+
+  <!-- Feedback Loop -->
+  <path d="M695,145 L695,285 L505,285" stroke="#ff6b6b" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#thn-arrow-red)"/>
+  <path d="M295,235 L90,235 L90,145" stroke="#ff6b6b" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#thn-arrow-red)"/>
+
+  <!-- Labels -->
+  <text x="170" y="90" text-anchor="middle" fill="#00d9ff" font-family="Arial, sans-serif" font-size="8">Data</text>
+  <text x="405" y="90" text-anchor="middle" fill="#00d9ff" font-family="Arial, sans-serif" font-size="8">Optimize</text>
+  <text x="595" y="90" text-anchor="middle" fill="#00d9ff" font-family="Arial, sans-serif" font-size="8">Export</text>
+  <text x="600" y="220" text-anchor="middle" fill="#ff6b6b" font-family="Arial, sans-serif" font-size="8">Monitor</text>
+  <text x="180" y="275" text-anchor="middle" fill="#ff6b6b" font-family="Arial, sans-serif" font-size="8">Feedback</text>
+
+  <!-- Tech Stack Badge -->
+  <rect x="30" y="280" width="180" height="25" rx="4" fill="#0f3460" stroke="#533483" stroke-width="1"/>
+  <text x="120" y="297" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="9">Python | FastAPI | Plotly</text>
+</svg>

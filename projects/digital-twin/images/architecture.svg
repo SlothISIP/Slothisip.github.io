@@ -1,44 +1,99 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
   <defs>
-    <linearGradient id="dtV" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#2196F3"/><stop offset="100%" style="stop-color:#1565C0"/></linearGradient>
-    <linearGradient id="dtT" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#9C27B0"/><stop offset="100%" style="stop-color:#7B1FA2"/></linearGradient>
-    <linearGradient id="dtM" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF9800"/><stop offset="100%" style="stop-color:#F57C00"/></linearGradient>
-    <linearGradient id="dtS" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#4CAF50"/><stop offset="100%" style="stop-color:#388E3C"/></linearGradient>
-    <linearGradient id="dtD" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#E91E63"/><stop offset="100%" style="stop-color:#C2185B"/></linearGradient>
+    <linearGradient id="dt-grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f23;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a3e;stop-opacity:1" />
+    </linearGradient>
+    <filter id="dt-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
   </defs>
-  <text x="400" y="30" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#333">AI Digital Twin Factory - System Architecture</text>
-  <text x="400" y="50" text-anchor="middle" font-family="Arial" font-size="12" fill="#666">Microservices | SimPy Simulation | 172 Tests | 87% Complete</text>
-  <circle cx="400" cy="200" r="50" fill="#37474F" stroke="#263238" stroke-width="3"/>
-  <text x="400" y="195" text-anchor="middle" font-family="Arial" font-size="12" fill="white" font-weight="bold">API</text>
-  <text x="400" y="212" text-anchor="middle" font-family="Arial" font-size="10" fill="#CFD8DC">Gateway</text>
-  <rect x="80" y="80" width="140" height="80" rx="8" fill="url(#dtV)" stroke="#0D47A1" stroke-width="2"/>
-  <text x="150" y="110" text-anchor="middle" font-family="Arial" font-size="12" fill="white" font-weight="bold">Vision AI</text>
-  <text x="150" y="130" text-anchor="middle" font-family="Arial" font-size="9" fill="#BBDEFB">Real-time Inspection</text>
-  <text x="150" y="145" text-anchor="middle" font-family="Arial" font-size="9" fill="#BBDEFB">Defect Detection</text>
-  <rect x="580" y="80" width="140" height="80" rx="8" fill="url(#dtT)" stroke="#6A1B9A" stroke-width="2"/>
-  <text x="650" y="110" text-anchor="middle" font-family="Arial" font-size="12" fill="white" font-weight="bold">Digital Twin</text>
-  <text x="650" y="130" text-anchor="middle" font-family="Arial" font-size="9" fill="#E1BEE7">SimPy Simulation</text>
-  <text x="650" y="145" text-anchor="middle" font-family="Arial" font-size="9" fill="#E1BEE7">Process Modeling</text>
-  <rect x="80" y="240" width="140" height="80" rx="8" fill="url(#dtM)" stroke="#E65100" stroke-width="2"/>
-  <text x="150" y="265" text-anchor="middle" font-family="Arial" font-size="12" fill="white" font-weight="bold">Predictive</text>
-  <text x="150" y="285" text-anchor="middle" font-family="Arial" font-size="12" fill="white" font-weight="bold">Maintenance</text>
-  <text x="150" y="305" text-anchor="middle" font-family="Arial" font-size="9" fill="#FFE0B2">Failure Prediction</text>
-  <rect x="580" y="240" width="140" height="80" rx="8" fill="url(#dtS)" stroke="#2E7D32" stroke-width="2"/>
-  <text x="650" y="265" text-anchor="middle" font-family="Arial" font-size="12" fill="white" font-weight="bold">Production</text>
-  <text x="650" y="285" text-anchor="middle" font-family="Arial" font-size="12" fill="white" font-weight="bold">Scheduling</text>
-  <text x="650" y="305" text-anchor="middle" font-family="Arial" font-size="9" fill="#C8E6C9">AI Optimization</text>
-  <rect x="320" y="300" width="160" height="70" rx="8" fill="url(#dtD)" stroke="#AD1457" stroke-width="2"/>
-  <text x="400" y="330" text-anchor="middle" font-family="Arial" font-size="12" fill="white" font-weight="bold">Real-time Monitoring</text>
-  <text x="400" y="350" text-anchor="middle" font-family="Arial" font-size="10" fill="#F8BBD9">React Dashboard</text>
-  <line x1="220" y1="120" x2="350" y2="175" stroke="#666" stroke-width="2"/>
-  <line x1="580" y1="120" x2="450" y2="175" stroke="#666" stroke-width="2"/>
-  <line x1="220" y1="280" x2="350" y2="225" stroke="#666" stroke-width="2"/>
-  <line x1="580" y1="280" x2="450" y2="225" stroke="#666" stroke-width="2"/>
-  <line x1="400" y1="250" x2="400" y2="300" stroke="#666" stroke-width="2"/>
-  <text x="120" y="390" text-anchor="middle" font-family="Arial" font-size="10" fill="#666">Python</text>
-  <text x="240" y="390" text-anchor="middle" font-family="Arial" font-size="10" fill="#666">FastAPI</text>
-  <text x="360" y="390" text-anchor="middle" font-family="Arial" font-size="10" fill="#666">SimPy</text>
-  <text x="480" y="390" text-anchor="middle" font-family="Arial" font-size="10" fill="#666">PyTorch</text>
-  <text x="600" y="390" text-anchor="middle" font-family="Arial" font-size="10" fill="#666">React</text>
-  <text x="700" y="390" text-anchor="middle" font-family="Arial" font-size="10" fill="#666">Docker/K8s</text>
+
+  <rect width="800" height="400" fill="url(#dt-grad1)"/>
+
+  <!-- Title -->
+  <text x="400" y="28" text-anchor="middle" fill="#00d4ff" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Digital Twin Factory - Microservices Architecture</text>
+
+  <!-- API Gateway (Center) -->
+  <rect x="320" y="150" width="160" height="80" rx="10" fill="#1e3a5f" stroke="#00d4ff" stroke-width="3" filter="url(#dt-shadow)"/>
+  <text x="400" y="180" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="13" font-weight="bold">API Gateway</text>
+  <text x="400" y="200" text-anchor="middle" fill="#00d4ff" font-family="Arial, sans-serif" font-size="10">FastAPI</text>
+  <text x="400" y="218" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="9">Load Balancing | Auth</text>
+
+  <!-- Vision AI Service -->
+  <rect x="30" y="55" width="140" height="70" rx="8" fill="#1e3a5f" stroke="#ff6b6b" stroke-width="2" filter="url(#dt-shadow)"/>
+  <text x="100" y="80" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Vision AI</text>
+  <text x="100" y="98" text-anchor="middle" fill="#ff6b6b" font-family="Arial, sans-serif" font-size="9">Defect Detection</text>
+  <text x="100" y="113" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">YOLOv8 | OpenCV</text>
+
+  <!-- Digital Twin Service -->
+  <rect x="30" y="165" width="140" height="70" rx="8" fill="#1e3a5f" stroke="#4ecdc4" stroke-width="2" filter="url(#dt-shadow)"/>
+  <text x="100" y="190" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Digital Twin</text>
+  <text x="100" y="208" text-anchor="middle" fill="#4ecdc4" font-family="Arial, sans-serif" font-size="9">SimPy Simulation</text>
+  <text x="100" y="223" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">What-If Analysis</text>
+
+  <!-- Predictive Maintenance -->
+  <rect x="30" y="275" width="140" height="70" rx="8" fill="#1e3a5f" stroke="#ffd93d" stroke-width="2" filter="url(#dt-shadow)"/>
+  <text x="100" y="300" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Predictive</text>
+  <text x="100" y="318" text-anchor="middle" fill="#ffd93d" font-family="Arial, sans-serif" font-size="9">Maintenance AI</text>
+  <text x="100" y="333" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">Anomaly Detection</text>
+
+  <!-- Scheduling Service -->
+  <rect x="630" y="55" width="140" height="70" rx="8" fill="#1e3a5f" stroke="#a8e6cf" stroke-width="2" filter="url(#dt-shadow)"/>
+  <text x="700" y="80" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Scheduling</text>
+  <text x="700" y="98" text-anchor="middle" fill="#a8e6cf" font-family="Arial, sans-serif" font-size="9">Production Optimizer</text>
+  <text x="700" y="113" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">Resource Allocation</text>
+
+  <!-- Monitoring Service -->
+  <rect x="630" y="165" width="140" height="70" rx="8" fill="#1e3a5f" stroke="#dda0dd" stroke-width="2" filter="url(#dt-shadow)"/>
+  <text x="700" y="190" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Monitoring</text>
+  <text x="700" y="208" text-anchor="middle" fill="#dda0dd" font-family="Arial, sans-serif" font-size="9">Real-time KPIs</text>
+  <text x="700" y="223" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">OEE Tracking</text>
+
+  <!-- React Dashboard -->
+  <rect x="550" y="275" width="220" height="70" rx="8" fill="#1e3a5f" stroke="#00d4ff" stroke-width="2" filter="url(#dt-shadow)"/>
+  <text x="660" y="300" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">React Dashboard</text>
+  <text x="660" y="318" text-anchor="middle" fill="#00d4ff" font-family="Arial, sans-serif" font-size="9">Interactive Visualization</text>
+  <text x="660" y="333" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">Alerts | Reports | Analytics</text>
+
+  <!-- Database Layer -->
+  <rect x="230" y="290" width="140" height="55" rx="8" fill="#1e3a5f" stroke="#95e1d3" stroke-width="2"/>
+  <text x="300" y="315" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Data Layer</text>
+  <text x="300" y="332" text-anchor="middle" fill="#95e1d3" font-family="Arial, sans-serif" font-size="9">PostgreSQL | Redis</text>
+
+  <!-- Message Queue -->
+  <rect x="430" y="290" width="100" height="55" rx="8" fill="#1e3a5f" stroke="#f38181" stroke-width="2"/>
+  <text x="480" y="315" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Queue</text>
+  <text x="480" y="332" text-anchor="middle" fill="#f38181" font-family="Arial, sans-serif" font-size="9">RabbitMQ</text>
+
+  <!-- Arrows -->
+  <defs>
+    <marker id="dt-arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#00d4ff"/>
+    </marker>
+  </defs>
+
+  <!-- Left services to API Gateway -->
+  <line x1="170" y1="90" x2="315" y2="170" stroke="#ff6b6b" stroke-width="1.5" marker-end="url(#dt-arrow)"/>
+  <line x1="170" y1="200" x2="315" y2="190" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dt-arrow)"/>
+  <line x1="170" y1="310" x2="315" y2="210" stroke="#ffd93d" stroke-width="1.5" marker-end="url(#dt-arrow)"/>
+
+  <!-- Right services to API Gateway -->
+  <line x1="630" y1="90" x2="485" y2="170" stroke="#a8e6cf" stroke-width="1.5" marker-end="url(#dt-arrow)"/>
+  <line x1="630" y1="200" x2="485" y2="190" stroke="#dda0dd" stroke-width="1.5" marker-end="url(#dt-arrow)"/>
+
+  <!-- API Gateway to Dashboard -->
+  <line x1="480" y1="190" x2="545" y2="300" stroke="#00d4ff" stroke-width="2" marker-end="url(#dt-arrow)"/>
+
+  <!-- API Gateway to Data Layer -->
+  <line x1="370" y1="230" x2="320" y2="285" stroke="#95e1d3" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="430" y1="230" x2="460" y2="285" stroke="#f38181" stroke-width="1.5" stroke-dasharray="4,2"/>
+
+  <!-- Infrastructure Badge -->
+  <rect x="30" y="365" width="200" height="25" rx="4" fill="#1e3a5f" stroke="#44556f" stroke-width="1"/>
+  <text x="130" y="382" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="9">Infrastructure: Docker | Kubernetes</text>
+
+  <!-- Test Badge -->
+  <rect x="250" y="365" width="150" height="25" rx="4" fill="#1e3a5f" stroke="#44556f" stroke-width="1"/>
+  <text x="325" y="382" text-anchor="middle" fill="#4ecdc4" font-family="Arial, sans-serif" font-size="9">172 Tests | 87% Complete</text>
 </svg>
