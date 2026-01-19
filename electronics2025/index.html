@@ -12,10 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- FACEBOOK -->
-    <meta property="og:image" content="https://jonbarron.info/electronics2025/electronics2025_system.jpg">
+    <meta property="og:image" content="https://slothisip.github.io/images/electronics2025_system.jpg">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jonbarron.info/electronics2025/"/>
+    <meta property="og:url" content="https://slothisip.github.io/electronics2025/"/>
     <meta property="og:title" content="DTW-Enhanced CNN-LSTM for Respiratory Monitoring" />
     <meta property="og:description" content="A CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation for UWB radar respiratory monitoring, achieving 94.3% accuracy with minimal training data." />
 
@@ -23,11 +23,12 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="DTW-Enhanced CNN-LSTM for Respiratory Monitoring" />
     <meta name="twitter:description" content="A CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation for UWB radar respiratory monitoring, achieving 94.3% accuracy with minimal training data." />
-    <meta name="twitter:image" content="https://jonbarron.info/electronics2025/electronics2025_system.jpg" />
+    <meta name="twitter:image" content="https://slothisip.github.io/images/electronics2025_system.jpg" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="canonical" href="https://slothisip.github.io/electronics2025/">
     <link rel="stylesheet" href="css/app.css">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -75,7 +76,7 @@
                     <ul class="nav nav-pills nav-justified">
                         <li>
                             <a href="https://www.mdpi.com/2079-9292/14/20/4120">
-                            <image src="img/paper_icon.png" height="60px">
+                            <img src="img/paper_icon.png" height="60px">
                                 <h4><strong>Paper</strong></h4>
                             </a>
                         </li>
@@ -90,7 +91,7 @@
                 <h3>
                     Abstract
                 </h3>
-                <image src="../images/electronics2025_system.jpg" class="img-responsive" alt="overview"><br>
+                <img src="../images/electronics2025_system.jpg" class="img-responsive" alt="overview"><br>
                 <p class="text-justify">
 We propose a CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation for UWB radar respiratory monitoring, achieving 94.3% accuracy with minimal training data. This approach addresses the challenge of limited labeled datasets in medical monitoring applications. Our system demonstrates robust performance in distinguishing normal breathing from apnea events using non-contact ultra-wideband (UWB) radar technology. The integration of Dynamic Time Warping (DTW) with Synthetic Minority Over-sampling Technique (SMOTE) enables effective data augmentation for time-series respiratory signals, while the CNN-LSTM architecture efficiently captures both spatial and temporal patterns in the radar data. Experimental results show that our method significantly outperforms traditional machine learning approaches and standard deep learning models when training data is scarce, making it particularly suitable for real-world medical monitoring scenarios where collecting large labeled datasets is challenging and expensive.
                 </p>
@@ -103,7 +104,7 @@ We propose a CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation
                 <h3>
                     CNN-LSTM Architecture
                 </h3>
-                <image src="../images/electronics2025_cnnlstm.jpg" class="img-responsive" alt="CNN-LSTM Architecture"><br>
+                <img src="../images/electronics2025_cnnlstm.jpg" class="img-responsive" alt="CNN-LSTM Architecture"><br>
                 <p class="text-justify">
                     Our proposed hybrid architecture combines Convolutional Neural Networks (CNN) for spatial feature extraction from UWB radar signals with Long Short-Term Memory (LSTM) networks for temporal sequence modeling. The CNN layers process the radar spectrograms to identify local patterns indicative of respiratory events, while the LSTM layers capture the temporal dependencies and dynamics of breathing patterns over time. This combination enables the model to learn both instantaneous signal characteristics and long-term breathing behavior patterns, leading to improved classification accuracy even with limited training samples.
                 </p>
@@ -115,7 +116,7 @@ We propose a CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation
                 <h3>
                     DTW-Based Data Augmentation
                 </h3>
-                <image src="../images/electronics2025_augmentation.jpg" class="img-responsive" alt="Data Augmentation"><br>
+                <img src="../images/electronics2025_augmentation.jpg" class="img-responsive" alt="Data Augmentation"><br>
                 <p class="text-justify">
                     A key innovation in our approach is the use of Dynamic Time Warping (DTW) distance metrics within the SMOTE algorithm for generating synthetic training samples. Traditional SMOTE uses Euclidean distance, which is not well-suited for time-series data with temporal variations. By incorporating DTW, our augmentation method better accounts for the elastic nature of respiratory signals, where the same breathing pattern may occur at different speeds or with slight temporal shifts. This DTW-enhanced SMOTE generates more realistic synthetic samples that preserve the temporal characteristics of respiratory signals, leading to improved model generalization despite limited training data. The figure above illustrates how our augmentation strategy effectively generates diverse training samples while maintaining the physiological characteristics of respiratory signals.
                 </p>
@@ -137,7 +138,7 @@ We propose a CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation
                     <li>CNN-only architecture: 86.2% accuracy</li>
                 </ul>
                 <p style="text-align:center;">
-                    <image src="../images/electronics2025_confusion.jpg" class="img-responsive" alt="Confusion Matrix">
+                    <img src="../images/electronics2025_confusion.jpg" class="img-responsive" alt="Confusion Matrix">
                 </p>
                 <p class="text-justify">
                     The confusion matrix above shows the detailed classification performance across different respiratory states. Our model achieves high precision and recall for both normal breathing and apnea detection, with minimal false positives and false negatives. This balanced performance is crucial for clinical applications where both types of errors have significant implications for patient care.
@@ -151,7 +152,7 @@ We propose a CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation
                     ROC Analysis
                 </h3>
                 <p style="text-align:center;">
-                    <image src="../images/electronics2025_roc.jpg" class="img-responsive" alt="ROC Curves">
+                    <img src="../images/electronics2025_roc.jpg" class="img-responsive" alt="ROC Curves">
                 </p>
                 <p class="text-justify">
                     The Receiver Operating Characteristic (ROC) curves demonstrate the superior discriminative ability of our DTW-enhanced CNN-LSTM model across different operating points. The Area Under the Curve (AUC) of 0.969 indicates excellent classification performance. The curves show that our method maintains high true positive rates while keeping false positive rates low across various threshold settings, providing flexibility for deployment in different clinical scenarios with varying sensitivity requirements.
@@ -165,7 +166,7 @@ We propose a CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation
                     Ablation Study
                 </h3>
                 <p style="text-align:center;">
-                    <image src="../images/electronics2025_ablation.jpg" class="img-responsive" alt="Ablation Study">
+                    <img src="../images/electronics2025_ablation.jpg" class="img-responsive" alt="Ablation Study">
                 </p>
                 <p class="text-justify">
                     The ablation study systematically evaluates the contribution of each component in our proposed framework. Results show that both the CNN-LSTM architecture and DTW-based SMOTE augmentation are essential for achieving optimal performance. Removing the DTW component from SMOTE reduces accuracy by approximately 5.2% (from 94.3% to 89.1%), while using only CNN or LSTM alone results in 8.1% and 5.4% accuracy drops respectively. This analysis confirms that the synergy between our architectural design and data augmentation strategy is key to overcoming data scarcity challenges in respiratory monitoring applications.

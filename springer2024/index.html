@@ -14,12 +14,12 @@
     <!-- <base href="/"> -->
 
         <!--FACEBOOK-->
-    <meta property="og:image" content="https://jonbarron.info/images/springer2024_hardware.jpg">
+    <meta property="og:image" content="https://slothisip.github.io/images/springer2024_hardware.jpg">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jonbarron.info/springer2024/"/>
+    <meta property="og:url" content="https://slothisip.github.io/springer2024/"/>
     <meta property="og:title" content="Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences" />
     <meta property="og:description" content="We propose vanishing point-based calibration for a three-viewpoint thermal camera system with greater than 180-degree separation and minimal overlap between views." />
 
@@ -27,7 +27,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences" />
     <meta name="twitter:description" content="We propose vanishing point-based calibration for a three-viewpoint thermal camera system with greater than 180-degree separation and minimal overlap between views." />
-    <meta name="twitter:image" content="https://jonbarron.info/images/springer2024_hardware.jpg" />
+    <meta name="twitter:image" content="https://slothisip.github.io/images/springer2024_hardware.jpg" />
 
 
 <!--     <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="canonical" href="https://slothisip.github.io/springer2024/">
     <link rel="stylesheet" href="css/app.css">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -88,7 +89,7 @@
                     <ul class="nav nav-pills nav-justified">
                         <li>
                             <a href="https://link.springer.com/article/10.1007/s11265-023-01837-z">
-                            <image src="img/paper_icon.jpg" height="60px">
+                            <img src="img/paper_icon.jpg" height="60px">
                                 <h4><strong>Paper</strong></h4>
                             </a>
                         </li>
@@ -103,7 +104,7 @@
                 <h3>
                     Abstract
                 </h3>
-                <image src="../images/springer2024_hardware.jpg" class="img-responsive" alt="hardware"><br>
+                <img src="../images/springer2024_hardware.jpg" class="img-responsive" alt="hardware"><br>
                 <p class="text-justify">
 We propose vanishing point-based calibration for a three-viewpoint thermal camera system with greater than 180-degree separation and minimal overlap between views. This method enables accurate calibration with limited feature correspondences. The proposed approach is particularly suited for thermal imaging systems where traditional calibration methods struggle due to the lack of distinctive features and minimal overlap between camera viewpoints. Our vanishing point-based method achieves reliable calibration by exploiting geometric constraints inherent in the camera configuration, making it practical for wide-baseline multi-view thermal camera systems used in surveillance and monitoring applications.
                 </p>
@@ -118,7 +119,7 @@ We propose vanishing point-based calibration for a three-viewpoint thermal camer
                     Calibration Methodology
                 </h3>
                 <p style="text-align:center;">
-                    <image src="../images/springer2024_flow.jpg" class="img-responsive" alt="System Flow">
+                    <img src="../images/springer2024_flow.jpg" class="img-responsive" alt="System Flow">
                 </p>
                 <p class="text-justify">
                     Our calibration pipeline consists of three main stages: vanishing point detection from thermal images, geometric constraint establishment using the detected vanishing points, and multi-view calibration optimization. The system flow diagram above illustrates how each component interacts to achieve accurate calibration with minimal feature correspondences. The process begins with edge detection in thermal images, followed by line grouping and vanishing point estimation, and concludes with iterative refinement of camera parameters.
@@ -135,13 +136,13 @@ We propose vanishing point-based calibration for a three-viewpoint thermal camer
                     The key challenge in calibrating a three-viewpoint thermal camera system is the limited overlap between views, especially when cameras are separated by more than 180 degrees. Traditional calibration approaches that rely on finding corresponding feature points across multiple views become impractical in such configurations.
                 </p>
                 <p style="text-align:center;">
-                    <image src="../images/springer2024_vp.jpg" class="img-responsive" alt="vanishing points">
+                    <img src="../images/springer2024_vp.jpg" class="img-responsive" alt="vanishing points">
                 </p>
                 <p class="text-justify">
                     Our method leverages vanishing points derived from parallel lines in the scene to establish geometric constraints between the camera viewpoints. By detecting vanishing points in each thermal image, we can estimate the relative orientation and position of the cameras without requiring dense feature correspondences. This approach is particularly effective for thermal imaging where texture information is limited but structured environments with parallel edges are common.
                 </p>
                 <p style="text-align:center;">
-                    <image src="../images/springer2024_vp_detection.jpg" class="img-responsive" alt="VP Detection Process">
+                    <img src="../images/springer2024_vp_detection.jpg" class="img-responsive" alt="VP Detection Process">
                 </p>
                 <p class="text-justify">
                     The vanishing point detection process shown above employs a robust RANSAC-based line fitting algorithm to identify dominant line segments in thermal images. These line segments are then clustered according to their orientations, and their intersection points are computed to determine the vanishing points. The detected vanishing points correspond to the principal directions in the scene (typically horizontal, vertical, and depth directions), which provide strong geometric constraints for camera calibration.
@@ -170,7 +171,7 @@ We propose vanishing point-based calibration for a three-viewpoint thermal camer
                     Calibration Accuracy
                 </h3>
                 <p style="text-align:center;">
-                    <image src="../images/springer2024_reprojection.jpg" class="img-responsive" alt="Reprojection Error">
+                    <img src="../images/springer2024_reprojection.jpg" class="img-responsive" alt="Reprojection Error">
                 </p>
                 <p class="text-justify">
                     The reprojection error analysis demonstrates the accuracy of our vanishing point-based calibration method. The mean reprojection error across all three camera viewpoints is less than 0.8 pixels, which is comparable to traditional calibration methods that require significantly more feature correspondences. The error distribution shown above indicates consistent performance across different regions of the thermal images, with no systematic bias. This level of accuracy is sufficient for most surveillance and monitoring applications, including accurate 3D localization of objects and multi-view tracking. The low variance in reprojection errors across viewpoints confirms that our method successfully handles the challenging wide-baseline configuration with over 180-degree camera separation.

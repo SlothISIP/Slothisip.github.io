@@ -11,19 +11,19 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:image" content="https://jonbarron.info/sensors2020/img/sensors2020_respiration.jpg">
+    <meta property="og:image" content="https://slothisip.github.io/images/sensors2020_respiration.jpg">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jonbarron.info/sensors2020/"/>
+    <meta property="og:url" content="https://slothisip.github.io/sensors2020/"/>
     <meta property="og:title" content="Detection of Abnormal Respiration from Multiple-Input Respiratory Signals" />
     <meta property="og:description" content="We propose Z-domain and filter-based approaches for detecting abnormal respiration from single and multiple UWB radar signals with 93% accuracy. The method combines time-domain and frequency-domain analysis for robust detection." />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Detection of Abnormal Respiration from Multiple-Input Respiratory Signals" />
     <meta name="twitter:description" content="We propose Z-domain and filter-based approaches for detecting abnormal respiration from single and multiple UWB radar signals with 93% accuracy. The method combines time-domain and frequency-domain analysis for robust detection." />
-    <meta name="twitter:image" content="https://jonbarron.info/sensors2020/img/sensors2020_respiration.jpg" />
+    <meta name="twitter:image" content="https://slothisip.github.io/images/sensors2020_respiration.jpg" />
 
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🫁</text></svg>">
@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="canonical" href="https://slothisip.github.io/sensors2020/">
     <link rel="stylesheet" href="css/app.css">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -75,7 +76,7 @@
                     <ul class="nav nav-pills nav-justified">
                         <li>
                             <a href="https://www.mdpi.com/1424-8220/20/10/2977">
-                            <image src="img/paper_icon.png" height="60px">
+                            <img src="img/paper_icon.png" height="60px">
                                 <h4><strong>Paper</strong></h4>
                             </a>
                         </li>
@@ -87,7 +88,7 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <image src="../images/sensors2020_respiration.jpg" class="img-responsive" alt="overview"><br>
+                <img src="../images/sensors2020_respiration.jpg" class="img-responsive" alt="overview"><br>
             </div>
         </div>
 
@@ -110,7 +111,7 @@
                     Detection Pipeline
                 </h3>
                 <p style="text-align:center;">
-                    <image src="../images/sensors2020_flowchart.jpg" class="img-responsive" alt="Detection Flow">
+                    <img src="../images/sensors2020_flowchart.jpg" class="img-responsive" alt="Detection Flow">
                 </p>
                 <p class="text-justify">
                     The detection flowchart above illustrates our comprehensive signal processing pipeline for abnormal respiration detection. The system uses a single Novelda X4 UWB radar sensor positioned 30-50 cm from the chest, with multiple signal acquisitions for improved accuracy. The core processing stages include Z-domain transformation for feature extraction, custom filter design for signal enhancement, and multi-input fusion for robust classification. This systematic approach ensures reliable detection performance across various environmental conditions and patient positions.
@@ -123,7 +124,7 @@
                 <h3>
                     Multi-Input Signal Processing
                 </h3>
-                <image src="../images/sensors2020_apnea.jpg" class="img-responsive" alt="method"><br>
+                <img src="../images/sensors2020_apnea.jpg" class="img-responsive" alt="method"><br>
                 <p class="text-justify">
                     Our approach acquires multiple respiratory signal samples from a single UWB radar sensor to improve detection reliability. The signals are processed using Z-domain transformations to extract relevant features, followed by custom-designed high-pass filters to enhance the signal-to-noise ratio. The system employs both time-domain and frequency-domain analysis to accurately detect abnormal breathing patterns, including apnea events. The multi-input architecture provides redundancy and improves overall detection accuracy from 67% (single input) to 93% (triple inputs).
                 </p>
@@ -136,7 +137,7 @@
                     Z-Domain Analysis
                 </h3>
                 <p style="text-align:center;">
-                    <image src="../images/sensors2020_zdomain.jpg" class="img-responsive" alt="Z-domain Classification">
+                    <img src="../images/sensors2020_zdomain.jpg" class="img-responsive" alt="Z-domain Classification">
                 </p>
                 <p class="text-justify">
                     The Z-domain transformation enables effective feature extraction from respiratory signals by converting time-domain signals into a representation that emphasizes periodic patterns and breathing rate characteristics. The classification results shown above demonstrate how different respiratory states (normal breathing, shallow breathing, and apnea) form distinct clusters in the Z-domain feature space. This separation facilitates accurate classification using relatively simple decision boundaries, achieving up to 93% accuracy with triple inputs in distinguishing abnormal respiration patterns. The Z-domain approach is particularly robust to signal amplitude variations and provides consistent performance across different subjects.
@@ -150,7 +151,7 @@
                     Filter-Based Enhancement
                 </h3>
                 <p style="text-align:center;">
-                    <image src="../images/sensors2020_filter.jpg" class="img-responsive" alt="Filter Responses">
+                    <img src="../images/sensors2020_filter.jpg" class="img-responsive" alt="Filter Responses">
                 </p>
                 <p class="text-justify">
                     Custom-designed filters play a crucial role in enhancing respiratory signals and suppressing noise from body movements and environmental interference. The filter response characteristics shown above illustrate how our filter bank selectively amplifies frequency components corresponding to normal and abnormal breathing patterns while attenuating out-of-band noise. The combination of bandpass filtering in the respiratory frequency range (0.1-0.5 Hz) with adaptive notch filters for interference rejection enables robust signal extraction even in challenging real-world conditions. This filter-based approach complements the Z-domain analysis by providing clean input signals for feature extraction.

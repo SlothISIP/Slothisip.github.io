@@ -1,0 +1,11 @@
+# Robots.txt for Ju O Kim Academic Portfolio
+# https://slothisip.github.io/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://slothisip.github.io/sitemap.xml
+
+# Crawl-delay (optional, respectful crawling)
+Crawl-delay: 1
