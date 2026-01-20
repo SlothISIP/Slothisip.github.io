@@ -70,11 +70,26 @@
                     Overview
                 </h3>
                 <p class="text-justify">
-                    ITS_AI_XAI is a production-ready AI system for PCB manufacturing quality control. The multimodal fusion pipeline combines 603 sensor features with YOLOv11 visual inspection, achieving F1-score of 0.9462 with 67.3ms latency. SHAP and counterfactual explanations provide interpretability for manufacturing engineers.
+                    I designed and built ITS_AI_XAI as a solo developer handling both backend and frontend end-to-end, with guidance from my team manager. This production-ready AI system serves PCB manufacturing quality control. I engineered the multimodal fusion pipeline combining 603 sensor features with YOLOv11 visual inspection, achieving F1-score of 0.9462 with 67.3ms latency. I implemented SHAP and counterfactual explanations to provide interpretability for manufacturing engineers.
                 </p>
-                <p class="text-center" style="font-size: 0.85em; color: #666;">
-                    <em>Note: Code available upon request for academic collaboration.</em>
-                </p>
+                <div style="background: #f8f9fa; border-left: 4px solid #007bff; padding: 15px; margin: 15px 0;">
+                    <p style="margin: 0;"><strong>Note:</strong> This project was developed for industrial clients under NDA. Specific client names and proprietary datasets have been anonymized. The methodology and architecture described here accurately represent my contributions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    My Contributions
+                </h3>
+                <ul>
+                    <li><strong>System Architecture:</strong> I designed the complete multimodal fusion architecture combining sensor data with computer vision</li>
+                    <li><strong>Feature Engineering:</strong> I implemented the feature selection pipeline reducing 603 raw sensor features to optimal predictive subset using mutual information filtering</li>
+                    <li><strong>ML Pipeline:</strong> I built the XGBoost meta-classifier fusing Random Forest (sensor) predictions with YOLOv11 (vision) detection outputs</li>
+                    <li><strong>XAI Implementation:</strong> I developed the complete explainability layer including SHAP waterfall, LIME comparisons, and counterfactual analysis interface</li>
+                    <li><strong>Frontend Development:</strong> I built the 4-tab Streamlit dashboard with Plotly visualizations for real-time defect analysis</li>
+                </ul>
             </div>
         </div>
 
@@ -88,7 +103,7 @@
                 </center>
                 <br>
                 <p class="text-justify">
-                    Multimodal fusion pipeline architecture combining 603 sensor features with YOLOv11 visual detection. Random Forest processes sensor data while the Feature Selection module filters key predictors. XGBoost meta-classifier fuses both streams achieving F1 0.9462. The XAI layer provides SHAP, LIME, and counterfactual explanations for production decision support.
+                    I designed this multimodal fusion pipeline architecture combining 603 sensor features with YOLOv11 visual detection. I implemented Random Forest for sensor data processing and built the Feature Selection module to filter key predictors. I developed the XGBoost meta-classifier that fuses both streams achieving F1 0.9462. I also created the complete XAI layer providing SHAP, LIME, and counterfactual explanations for production decision support.
                 </p>
             </div>
         </div>
@@ -165,6 +180,54 @@
                 <p class="text-justify">
                     Automated feature selection pipeline reducing 603 raw sensor features to the most predictive subset. Combines statistical filtering, recursive feature elimination, and importance-based selection to optimize model performance while maintaining interpretability.
                 </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Key Technical Decisions
+                </h3>
+                <table class="table table-bordered" style="font-size: 0.9em;">
+                    <tbody>
+                        <tr>
+                            <td style="width: 25%;"><strong>Decision</strong></td>
+                            <td><strong>XGBoost Meta-Classifier over End-to-End Deep Learning</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Context</strong></td>
+                            <td>Manufacturing engineers require interpretable predictions for root cause analysis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Options</strong></td>
+                            <td>End-to-end neural network vs. Two-stage fusion with XGBoost meta-classifier</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rationale</strong></td>
+                            <td>XGBoost enables SHAP feature attribution at prediction time (3.1ms/sample), while deep learning would require expensive gradient-based explanations; equivalent accuracy with 67.3ms total latency</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered" style="font-size: 0.9em;">
+                    <tbody>
+                        <tr>
+                            <td style="width: 25%;"><strong>Decision</strong></td>
+                            <td><strong>SHAP + LIME Dual Explanation</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Context</strong></td>
+                            <td>Single explanation method may have biases; engineers need confidence in feature importance</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Options</strong></td>
+                            <td>SHAP only vs. LIME only vs. Both with consistency validation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rationale</strong></td>
+                            <td>Dual explanation with 94% top-5 feature agreement provides higher confidence; disagreements flag edge cases requiring human review</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 

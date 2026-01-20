@@ -70,11 +70,26 @@
                     Overview
                 </h3>
                 <p class="text-justify">
-                    VisionForge is a production-grade AI vision platform designed for PCB (Printed Circuit Board) defect inspection in manufacturing environments. The system supports IPC-A-610 compliant defect categories through a multi-model architecture combining YOLOv8, Stable Diffusion, and NeRF.
+                    I designed and built VisionForge as a solo developer handling both backend and frontend end-to-end, with guidance from my team manager. This production-grade AI vision platform serves PCB (Printed Circuit Board) defect inspection in manufacturing environments. I implemented IPC-A-610 compliant defect categories through a multi-model architecture combining YOLOv8 for detection, Stable Diffusion for synthetic data augmentation, and NeRF for 3D reconstruction.
                 </p>
-                <p class="text-center" style="font-size: 0.85em; color: #666;">
-                    <em>Note: Code available upon request for academic collaboration.</em>
-                </p>
+                <div style="background: #f8f9fa; border-left: 4px solid #007bff; padding: 15px; margin: 15px 0;">
+                    <p style="margin: 0;"><strong>Note:</strong> This project was developed for industrial clients under NDA. Specific client names and proprietary datasets have been anonymized. The methodology and architecture described here accurately represent my contributions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    My Contributions
+                </h3>
+                <ul>
+                    <li><strong>System Architecture:</strong> I designed the complete end-to-end PCB inspection pipeline from camera input to IPC-A-610 compliance classification</li>
+                    <li><strong>Object Detection:</strong> I trained and optimized YOLOv8 models for multi-class defect detection (solder bridges, insufficient solder, cold joints, component misalignment)</li>
+                    <li><strong>Data Augmentation:</strong> I implemented Stable Diffusion-based synthetic defect generation to address class imbalance in training data</li>
+                    <li><strong>3D Reconstruction:</strong> I integrated NeRF and Open3D for 3D solder joint inspection and quality analysis</li>
+                    <li><strong>Backend & Frontend:</strong> I built the complete FastAPI backend and React-based live inspection interface for production line integration</li>
+                </ul>
             </div>
         </div>
 
@@ -88,7 +103,7 @@
                 </center>
                 <br>
                 <p class="text-justify">
-                    End-to-end PCB inspection pipeline architecture showing the flow from high-resolution camera input through YOLOv8 detection engine to IPC-A-610 compliance classification. The system incorporates Stable Diffusion for synthetic defect augmentation, NeRF+Open3D for 3D reconstruction, and FastAPI for seamless integration.
+                    I designed this end-to-end PCB inspection pipeline from high-resolution camera input through YOLOv8 detection engine to IPC-A-610 compliance classification. I incorporated Stable Diffusion for synthetic defect augmentation, integrated NeRF+Open3D for 3D reconstruction, and built the FastAPI backend for seamless production line integration.
                 </p>
             </div>
         </div>

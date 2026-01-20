@@ -70,8 +70,26 @@
                     Overview
                 </h3>
                 <p class="text-justify">
-                    APEX-ML is an enterprise-grade AutoML platform featuring 6 algorithm families across a sophisticated 3-phase pipeline: Rapid Screening, Bayesian Optimization, and Ensemble Construction. Reduces model development time by 80%+ (weeks to days) with 60-80% GPU utilization through distributed computing via Ray clusters, enabling non-ML engineers to build production-ready models.
+                    I designed and built APEX-ML as a solo developer handling both backend and frontend end-to-end, with guidance from my team manager. This enterprise-grade AutoML platform features 6 algorithm families across a sophisticated 3-phase pipeline: Rapid Screening, Bayesian Optimization, and Ensemble Construction. The system reduces model development time by 80%+ (weeks to days) with 60-80% GPU utilization through distributed computing via Ray clusters, enabling non-ML engineers to build production-ready models.
                 </p>
+                <div style="background: #f8f9fa; border-left: 4px solid #007bff; padding: 15px; margin: 15px 0;">
+                    <p style="margin: 0;"><strong>Note:</strong> This project was developed for industrial clients under NDA. Specific client names and proprietary datasets have been anonymized. The methodology and architecture described here accurately represent my contributions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    My Contributions
+                </h3>
+                <ul>
+                    <li><strong>System Architecture:</strong> I designed the complete 3-phase pipeline architecture from scratch, implementing distributed GPU scheduling via Ray clusters</li>
+                    <li><strong>Algorithm Implementation:</strong> I implemented and integrated 81 ML algorithms across 6 families, including custom warm-start configurations for meta-learning</li>
+                    <li><strong>Backend Development:</strong> I built the entire FastAPI backend with Optuna integration for Bayesian hyperparameter optimization using Tree-structured Parzen Estimator (TPE)</li>
+                    <li><strong>Frontend Development:</strong> I developed the complete dashboard interface for real-time pipeline monitoring and result visualization</li>
+                    <li><strong>Production Deployment:</strong> I deployed the system serving 7 enterprise clients with sub-100ms inference latency</li>
+                </ul>
             </div>
         </div>
 
@@ -85,7 +103,7 @@
                 </center>
                 <br>
                 <p class="text-justify">
-                    The 3-phase AutoML pipeline architecture: Phase 1 rapidly screens 81 algorithms in parallel, Phase 2 performs Bayesian optimization with Optuna for hyperparameter tuning, and Phase 3 constructs optimized ensembles through model stacking. GPU acceleration via Ray cluster enables 60-80% utilization on RTX 4090.
+                    I designed this 3-phase AutoML pipeline architecture: Phase 1 rapidly screens 81 algorithms in parallel using Ray distributed computing, Phase 2 performs Bayesian optimization with Optuna TPE for hyperparameter tuning, and Phase 3 constructs optimized ensembles through model stacking. I achieved 60-80% GPU utilization on RTX 4090 through careful memory management and batch scheduling.
                 </p>
             </div>
         </div>
@@ -180,9 +198,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <p class="text-center" style="font-size: 0.85em; color: #666; margin-top: 10px;">
-                    <em>Note: Code available upon request for academic collaboration.</em>
-                </p>
             </div>
         </div>
 
@@ -258,6 +273,54 @@
                 <p class="text-justify">
                     The rapid screening interface shows parallel evaluation of all 81 algorithms during Phase 1. GPU-accelerated processing enables simultaneous model training with real-time progress tracking, algorithm success/failure status, and preliminary performance rankings.
                 </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Key Technical Decisions
+                </h3>
+                <table class="table table-bordered" style="font-size: 0.9em;">
+                    <tbody>
+                        <tr>
+                            <td style="width: 25%;"><strong>Decision</strong></td>
+                            <td><strong>3-Phase Pipeline over Single AutoML</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Context</strong></td>
+                            <td>Existing AutoML tools (Auto-sklearn, TPOT) were too slow for enterprise SLAs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Options</strong></td>
+                            <td>Single-phase exhaustive search vs. Multi-phase progressive refinement</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rationale</strong></td>
+                            <td>Phase 1 rapid screening eliminates 90% of algorithms in 2-5 min, Phase 2 focuses compute on top candidates, reducing total runtime from 4+ hours to 10-25 min</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered" style="font-size: 0.9em;">
+                    <tbody>
+                        <tr>
+                            <td style="width: 25%;"><strong>Decision</strong></td>
+                            <td><strong>Ray Cluster over Dask/Spark</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Context</strong></td>
+                            <td>Need distributed GPU scheduling for 81 parallel algorithm evaluations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Options</strong></td>
+                            <td>Ray, Dask, Apache Spark</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rationale</strong></td>
+                            <td>Ray provides native GPU task scheduling and integrates seamlessly with Optuna for distributed hyperparameter tuning; Spark lacks GPU-native support</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
