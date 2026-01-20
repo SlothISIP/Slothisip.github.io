@@ -7,6 +7,10 @@ __pycache__/
 *.pyc
 *.py
 
+# AI configuration files
+CLAUDE.md
+GEMINI.md
+
 # Questionnaires and planning docs
 CV_*.md
 IMAGE_*.md
