@@ -1,0 +1,24 @@
+# Reference template (not for deployment)
+jonbarron.github.io-master/
+
+# Development files
+nano_banana/
+__pycache__/
+*.pyc
+*.py
+
+# Questionnaires and planning docs
+CV_*.md
+IMAGE_*.md
+THUMBNAIL_*.md
+*.xlsx
+
+# Korean filename issues
+*.txt
+진행상황*.md
+프로필사진.jpg
+
+# System files
+nul
+.DS_Store
+Thumbs.db
