@@ -10,6 +10,19 @@ __pycache__/
 # AI configuration files
 CLAUDE.md
 GEMINI.md
+.claude/
+
+# Editor / IDE configuration
+.idea/
+.vscode/
+
+# Local tooling caches (Playwright MCP snapshots, etc.)
+.playwright-mcp/
+
+# Ad-hoc debug screenshots at repo root
+/arch-*.png
+/page-*.png
+/screenshot-*.png
 
 # Questionnaires and planning docs
 CV_*.md
