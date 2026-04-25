@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 780" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,8 L9,4 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,8 L9,4 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,8 L9,4 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-amber" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,8 L9,4 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,8 L9,4 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <text x="550" y="32" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">System Architecture</text>
+  <text x="550" y="55" text-anchor="middle" font-size="13" fill="#64748b">11 agents · MCP topology · 4-tier safety pipeline</text>
+
+  <rect x="60" y="90" width="120" height="50" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="120" y="121" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">Operator</text>
+
+  <line x1="180" y1="115" x2="215" y2="115" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="220" y="90" width="220" height="50" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="330" y="115" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">React Dashboard</text>
+  <text x="330" y="132" text-anchor="middle" font-size="11" fill="#64748b">port 3000 · ops/tech/metrics</text>
+
+  <line x1="440" y1="115" x2="475" y2="115" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="480" y="80" width="380" height="70" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="670" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">Orchestrator (LangGraph StateGraph)</text>
+  <text x="670" y="124" text-anchor="middle" font-size="12" fill="#1e3a8a">port 8000 — public surface</text>
+  <text x="670" y="140" text-anchor="middle" font-size="11" fill="#475569">classify_tier · guardrail_check · deliberation · hitl</text>
+
+  <rect x="880" y="80" width="180" height="70" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="970" y="103" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Inter-agent</text>
+  <text x="970" y="120" text-anchor="middle" font-size="10" fill="#64748b">MCP Streamable HTTP</text>
+  <text x="970" y="134" text-anchor="middle" font-size="10" fill="#64748b">max_depth = 2 · cache 300s</text>
+  <text x="970" y="148" text-anchor="middle" font-size="10" fill="#64748b">circular call detection</text>
+
+  <line x1="670" y1="150" x2="670" y2="195" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <text x="60" y="184" font-size="11" font-weight="700" fill="#475569" letter-spacing="1">PIPELINE — Fast Path → ReAct</text>
+
+  <rect x="130" y="200" width="310" height="120" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="285" y="225" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Recognition · :8001</text>
+  <text x="285" y="245" text-anchor="middle" font-size="11" fill="#92400e">GPU · vision tools</text>
+  <text x="285" y="265" text-anchor="middle" font-size="11" fill="#475569">PatchCore · AnomalyCLIP · SAM2</text>
+  <text x="285" y="285" text-anchor="middle" font-size="11" fill="#475569">Fast Path: score &lt; 0.2 or &gt; 0.9</text>
+  <text x="285" y="305" text-anchor="middle" font-size="10" fill="#64748b">→ skip LLM, return verdict in ms</text>
+
+  <line x1="440" y1="260" x2="535" y2="260" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="540" y="200" width="310" height="120" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="695" y="225" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Prediction · :8002</text>
+  <text x="695" y="245" text-anchor="middle" font-size="11" fill="#92400e">GPU · sensor + RUL</text>
+  <text x="695" y="265" text-anchor="middle" font-size="11" fill="#475569">XGBoost · Chronos-T5</text>
+  <text x="695" y="285" text-anchor="middle" font-size="11" fill="#475569">Fast Path: |z-score| &lt; 2</text>
+  <text x="695" y="305" text-anchor="middle" font-size="10" fill="#64748b">→ skip LLM, return verdict in ms</text>
+
+  <line x1="285" y1="320" x2="285" y2="345" stroke="#475569" stroke-width="2"/>
+  <line x1="695" y1="320" x2="695" y2="345" stroke="#475569" stroke-width="2"/>
+  <line x1="285" y1="345" x2="695" y2="345" stroke="#475569" stroke-width="2"/>
+  <line x1="490" y1="345" x2="490" y2="365" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <polygon points="490,370 660,420 490,470 320,420" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="490" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">Guardrail Check</text>
+  <text x="490" y="434" text-anchor="middle" font-size="11" fill="#991b1b">5 deterministic rules · NOT an LLM</text>
+
+  <line x1="380" y1="445" x2="200" y2="495" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="245" y="475" font-size="11" font-weight="700" fill="#15803d">PASS</text>
+
+  <line x1="490" y1="470" x2="490" y2="495" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-amber)"/>
+  <text x="500" y="488" font-size="11" font-weight="700" fill="#9a3412">DELIB</text>
+
+  <line x1="600" y1="445" x2="780" y2="495" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+  <text x="715" y="475" font-size="11" font-weight="700" fill="#991b1b">HITL</text>
+
+  <rect x="60" y="500" width="290" height="120" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="205" y="523" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">PASS — 8 downstream agents</text>
+  <text x="205" y="540" text-anchor="middle" font-size="11" fill="#475569">Automation · SPC · Learning ·</text>
+  <text x="205" y="556" text-anchor="middle" font-size="11" fill="#475569">Optimization · Safety · Scheduling ·</text>
+  <text x="205" y="572" text-anchor="middle" font-size="11" fill="#475569">Supply Chain · Generation</text>
+  <text x="205" y="595" text-anchor="middle" font-size="10" fill="#64748b">ports 8003 / 8005-8009 / 8011-8012</text>
+  <text x="205" y="610" text-anchor="middle" font-size="10" fill="#64748b">Communication :8004 (worker Q&amp;A)</text>
+
+  <rect x="370" y="500" width="240" height="120" rx="6" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="490" y="523" text-anchor="middle" font-size="12" font-weight="700" fill="#9a3412">DELIBERATION — 2 rounds</text>
+  <text x="490" y="544" text-anchor="middle" font-size="11" fill="#475569">Round 1: claims + evidence</text>
+  <text x="490" y="560" text-anchor="middle" font-size="11" fill="#475569">Round 2: review opposing claim</text>
+  <text x="490" y="576" text-anchor="middle" font-size="11" fill="#475569">Synthesis: consensus?</text>
+  <text x="490" y="599" text-anchor="middle" font-size="10" fill="#64748b">if NO_CONSENSUS → HITL</text>
+  <text x="490" y="613" text-anchor="middle" font-size="10" fill="#64748b">timeout 60s · max 2 rounds</text>
+
+  <rect x="630" y="500" width="290" height="120" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="775" y="523" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b">HITL ESCALATION</text>
+  <text x="775" y="544" text-anchor="middle" font-size="11" fill="#475569">Operator review queue</text>
+  <text x="775" y="560" text-anchor="middle" font-size="11" fill="#475569">Full reasoning trace surfaced</text>
+  <text x="775" y="576" text-anchor="middle" font-size="11" fill="#475569">Approve / Reject controls</text>
+  <text x="775" y="599" text-anchor="middle" font-size="10" fill="#64748b">triggers: low_confidence ·</text>
+  <text x="775" y="613" text-anchor="middle" font-size="10" fill="#64748b">NO_CONSENSUS · post-guardrail fail</text>
+
+  <line x1="60" y1="650" x2="1040" y2="650" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="60" y="670" font-size="11" font-weight="700" fill="#475569" letter-spacing="1">SHARED INFRASTRUCTURE</text>
+
+  <rect x="60" y="685" width="320" height="70" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="220" y="710" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">LLM provider</text>
+  <text x="220" y="728" text-anchor="middle" font-size="11" fill="#64748b">Ollama qwen2.5:7b ⇄ Claude ⇄ Gemini</text>
+  <text x="220" y="744" text-anchor="middle" font-size="10" fill="#64748b">single env-var swap · on-prem default</text>
+
+  <rect x="395" y="685" width="320" height="70" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="555" y="710" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">ChromaDB</text>
+  <text x="555" y="728" text-anchor="middle" font-size="11" fill="#64748b">embedded per-agent · port 8010</text>
+  <text x="555" y="744" text-anchor="middle" font-size="10" fill="#64748b">no separate vector server</text>
+
+  <rect x="730" y="685" width="310" height="70" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="885" y="710" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">SQLite</text>
+  <text x="885" y="728" text-anchor="middle" font-size="11" fill="#64748b">inspections · defect_history</text>
+  <text x="885" y="744" text-anchor="middle" font-size="10" fill="#64748b">LangGraph checkpointer</text>
+</svg>
