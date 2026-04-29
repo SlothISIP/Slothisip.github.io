@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800">
+  <defs>
+    <linearGradient id="hfSimGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfAppGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1abc9c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16a085;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfBusGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#34495e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfAgentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#9b59b6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfFallbackGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#95a5a6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7f8c8d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfQGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8e44ad;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6c3483;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfMGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a569bd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7d3c98;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfPGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#bb8fce;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9b59b6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfEGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d2b4de;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a569bd;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfCoordGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#5b2c6f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a235a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfDocGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e67e22;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ba4a00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hfFEGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2874a6;stop-opacity:1" />
+    </linearGradient>
+    <marker id="hfArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#444" />
+    </marker>
+    <marker id="hfArrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="800" fill="#ffffff" />
+
+  <!-- Title -->
+  <text x="550" y="28" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="19" font-weight="700" fill="#1a1f2e">Heater Degradation Scenario — End-to-End Event Flow</text>
+  <text x="550" y="48" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#666">A single L1 anomaly traverses simulator → SPC → agent fan-out → Coordinator fan-in → document → UI. Numbers (e.g. confidence 0.42) are illustrative for one example tick.</text>
+
+  <!-- ============= STAGE 1: SIMULATOR ============= -->
+  <g>
+    <rect x="220" y="68" width="660" height="56" rx="6" fill="url(#hfSimGrad)" />
+    <text x="550" y="88" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="13" font-weight="700" fill="#fff">1 · Simulator — simulator/scenarios/heater_degradation.py</text>
+    <text x="550" y="105" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10.5" fill="#fce9e6">72h quadratic drift on L1 Zone 1: degradation = (elapsed_h / 72)² · yield 0.995 → 0.94 → 0.90 · severity NORMAL → INFO → WARNING → CRITICAL</text>
+    <text x="550" y="120" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#fce9e6">Mode A: publishes sensor:L1:zone1 (temperature)         Mode B: publishes camera:L1 (signal-tower color shift) — same downstream schema</text>
+  </g>
+  <line x1="550" y1="124" x2="550" y2="156" stroke="#444" stroke-width="2" marker-end="url(#hfArrow)" />
+  <text x="558" y="145" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#555">event published to Redis Streams</text>
+
+  <!-- ============= STAGE 2: SPC + FAN-OUT ============= -->
+  <g>
+    <rect x="220" y="160" width="660" height="56" rx="6" fill="url(#hfAppGrad)" />
+    <text x="550" y="180" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="13" font-weight="700" fill="#fff">2 · Backend — SPC Westgard rule + integration/agent_loop._tick (5 s period)</text>
+    <text x="550" y="197" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10.5" fill="#eafaf5">spc/service.py raises out-of-control → publishes event:quality:L1     agent_loop iterates ACTIVE_LINE_CODES = [L1..L7] and publishes</text>
+    <text x="550" y="212" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#eafaf5">7 messages on agent:request:line_monitor — one per line_id (single-class fan-out, NOT seven cloned classes)</text>
+  </g>
+  <line x1="550" y1="216" x2="550" y2="248" stroke="#444" stroke-width="2" marker-end="url(#hfArrow)" />
+  <text x="558" y="237" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#555">dispatcher invokes LineMonitorAgent 7× — focus on L1</text>
+
+  <!-- ============= STAGE 3: LINE MONITOR AGENT (with branching) ============= -->
+  <g>
+    <rect x="220" y="252" width="660" height="120" rx="6" fill="url(#hfAgentGrad)" />
+    <text x="550" y="273" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="13" font-weight="700" fill="#fff">3 · LineMonitorAgent (line_id = L1) — agent/agents/line_monitor.py</text>
+    <text x="550" y="290" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10.5" fill="#f4eaf9">MCP tools — calculate_oee · list_downtimes (direct function call, same process)     LLM — Ollama Qwen 2.5 3B JSON mode, system_prompt loaded per language (ko/en)</text>
+
+    <!-- Branch: success path -->
+    <rect x="240" y="305" width="300" height="55" rx="4" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+    <text x="390" y="322" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="700" fill="#fff">If confidence ≥ 0.6</text>
+    <text x="390" y="338" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#f4eaf9">provider = "ollama"</text>
+    <text x="390" y="353" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#f4eaf9">use LLM verdict directly</text>
+
+    <!-- Branch: fallback path (highlighted - this is the active branch) -->
+    <rect x="560" y="305" width="300" height="55" rx="4" fill="rgba(231,76,60,0.85)" stroke="#fff" stroke-width="1.5" />
+    <text x="710" y="322" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="700" fill="#fff">confidence = 0.42 &lt; 0.6 → fallback</text>
+    <text x="710" y="338" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#fce9e6">needs_rule_fallback() = True</text>
+    <text x="710" y="353" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#fce9e6">→ LineMonitorClassifier (deterministic)</text>
+  </g>
+  <line x1="710" y1="372" x2="710" y2="402" stroke="#c0392b" stroke-width="2.5" marker-end="url(#hfArrowRed)" />
+  <text x="720" y="392" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#c0392b" font-weight="600">trigger = "heater_drift", severity = WARNING</text>
+
+  <!-- ============= STAGE 4: LANGGRAPH FAN-OUT (4 parallel) ============= -->
+  <g>
+    <text x="550" y="418" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="700" fill="#1a1f2e">4 · LangGraph fan-out — 4 domain agents run in parallel super-step</text>
+    <rect x="120" y="430" width="200" height="68" rx="6" fill="url(#hfQGrad)" />
+    <text x="220" y="452" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="700" fill="#fff">Quality (10 s)</text>
+    <text x="220" y="470" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#f4eaf9">SPC charts + NCR draft</text>
+    <text x="220" y="485" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#f4eaf9">vision verdict aggregation</text>
+
+    <rect x="340" y="430" width="200" height="68" rx="6" fill="url(#hfMGrad)" />
+    <text x="440" y="452" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="700" fill="#fff">Maintenance (10 s)</text>
+    <text x="440" y="470" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#f4eaf9">RUL forecast → priority</text>
+    <text x="440" y="485" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#f4eaf9">maintenance request</text>
+
+    <rect x="560" y="430" width="200" height="68" rx="6" fill="url(#hfPGrad)" />
+    <text x="660" y="452" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="700" fill="#fff">Planning (10 s)</text>
+    <text x="660" y="470" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#f4eaf9">work-order reshuffle</text>
+    <text x="660" y="485" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#f4eaf9">load-balancing across L1..L7</text>
+
+    <rect x="780" y="430" width="200" height="68" rx="6" fill="url(#hfEGrad)" />
+    <text x="880" y="452" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="12" font-weight="700" fill="#fff">Energy (10 s)</text>
+    <text x="880" y="470" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#f4eaf9">peak forecast (Chronos)</text>
+    <text x="880" y="485" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#f4eaf9">setpoint adjust</text>
+  </g>
+
+  <!-- Arrows from 4 fan-out boxes to Coordinator -->
+  <line x1="220" y1="498" x2="450" y2="540" stroke="#444" stroke-width="1.5" marker-end="url(#hfArrow)" />
+  <line x1="440" y1="498" x2="510" y2="540" stroke="#444" stroke-width="1.5" marker-end="url(#hfArrow)" />
+  <line x1="660" y1="498" x2="590" y2="540" stroke="#444" stroke-width="1.5" marker-end="url(#hfArrow)" />
+  <line x1="880" y1="498" x2="650" y2="540" stroke="#444" stroke-width="1.5" marker-end="url(#hfArrow)" />
+  <text x="700" y="528" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#555">super-step join → fan-in</text>
+
+  <!-- ============= STAGE 5: COORDINATOR FAN-IN ============= -->
+  <g>
+    <rect x="280" y="544" width="540" height="62" rx="6" fill="url(#hfCoordGrad)" />
+    <text x="550" y="566" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="13" font-weight="700" fill="#fff">5 · Coordinator (30 s) — agent/agents/coordinator.py</text>
+    <text x="550" y="583" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10.5" fill="#e8d5e8">Fan-in join: flattens (severity, summary) of 4 results into AgentInput.context</text>
+    <text x="550" y="600" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#e8d5e8">Auto-generates 작업일지 (work log) · 생산일보 (daily report) · 인수인계서 (handoff document)</text>
+  </g>
+  <line x1="550" y1="606" x2="550" y2="638" stroke="#444" stroke-width="2" marker-end="url(#hfArrow)" />
+  <text x="558" y="627" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#555">document payload</text>
+
+  <!-- ============= STAGE 6: DOCUMENT AGENT ============= -->
+  <g>
+    <rect x="280" y="642" width="540" height="56" rx="6" fill="url(#hfDocGrad)" />
+    <text x="550" y="662" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="13" font-weight="700" fill="#fff">6 · Document Agent (10 s) — agent/agents/document.py</text>
+    <text x="550" y="679" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10.5" fill="#fdf3e7">Routes by document type → approval_workflow → e-signature → CAPA registration if severity ≥ WARNING</text>
+    <text x="550" y="694" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#fdf3e7">audit_log entry on every CUD · MinIO stores PDF + signature image</text>
+  </g>
+  <line x1="550" y1="698" x2="550" y2="724" stroke="#444" stroke-width="2" marker-end="url(#hfArrow)" />
+  <text x="558" y="715" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#555">WS push to frontend (10 channels)</text>
+
+  <!-- ============= STAGE 7: FRONTEND ============= -->
+  <g>
+    <rect x="120" y="728" width="200" height="56" rx="6" fill="url(#hfFEGrad)" />
+    <text x="220" y="748" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="700" fill="#fff">ws/agent</text>
+    <text x="220" y="765" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#e8f4fc">→ AlertItem</text>
+    <text x="220" y="779" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9" fill="#e8f4fc">+ confidence + provider</text>
+
+    <rect x="340" y="728" width="200" height="56" rx="6" fill="url(#hfFEGrad)" />
+    <text x="440" y="748" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="700" fill="#fff">ws/quality/L1</text>
+    <text x="440" y="765" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#e8f4fc">→ SPC chart out-of-control</text>
+    <text x="440" y="779" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9" fill="#e8f4fc">+ severity color</text>
+
+    <rect x="560" y="728" width="200" height="56" rx="6" fill="url(#hfFEGrad)" />
+    <text x="660" y="748" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="700" fill="#fff">ws/digital-twin</text>
+    <text x="660" y="765" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#e8f4fc">→ 3D overlay glow</text>
+    <text x="660" y="779" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9" fill="#e8f4fc">on L1 Zone 1 nozzle</text>
+
+    <rect x="780" y="728" width="200" height="56" rx="6" fill="url(#hfFEGrad)" />
+    <text x="880" y="748" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="700" fill="#fff">ws/notification</text>
+    <text x="880" y="765" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#e8f4fc">→ ApprovalFlow modal</text>
+    <text x="880" y="779" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9" fill="#e8f4fc">e-sign + CAPA action</text>
+  </g>
+
+  <!-- Side annotation: timing budget -->
+  <g>
+    <rect x="20" y="252" width="180" height="120" rx="6" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1" />
+    <text x="110" y="272" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="700" fill="#1a1f2e">Per-agent timeout</text>
+    <text x="110" y="291" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#444">LineMonitor · Safety</text>
+    <text x="110" y="305" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" font-weight="600" fill="#c0392b">5 s</text>
+    <text x="110" y="324" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#444">Quality · Maintenance</text>
+    <text x="110" y="338" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#444">Planning · Energy · Doc</text>
+    <text x="110" y="352" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" font-weight="600" fill="#c0392b">10 s</text>
+    <text x="110" y="370" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" font-weight="600" fill="#c0392b">Coordinator: 30 s</text>
+  </g>
+
+  <g>
+    <rect x="20" y="430" width="90" height="68" rx="6" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1" />
+    <text x="65" y="450" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" font-weight="700" fill="#1a1f2e">VRAM</text>
+    <text x="65" y="468" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#444">idle 5.5 GB</text>
+    <text x="65" y="482" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#444">peak 11 GB</text>
+    <text x="65" y="494" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9" fill="#888">RTX 5080 16 GB</text>
+  </g>
+
+  <g>
+    <rect x="990" y="430" width="90" height="68" rx="6" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1" />
+    <text x="1035" y="450" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" font-weight="700" fill="#1a1f2e">If timeout</text>
+    <text x="1035" y="468" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#444">→ same</text>
+    <text x="1035" y="482" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#444">_fallback path</text>
+    <text x="1035" y="494" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9" fill="#888">no LLM-as-judge</text>
+  </g>
+</svg>
