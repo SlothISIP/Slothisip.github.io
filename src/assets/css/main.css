@@ -10,7 +10,7 @@
   --accent: #1772d0;
   --accent-hover: #f09228;
   --ink: #1a1a1a;
-  --muted: #6c757d;
+  --muted: #61686f;
   --line: #e9ecef;
   --bg: #ffffff;
   --highlight: #ffffd0;
@@ -32,12 +32,25 @@ body {
   color: var(--ink);
   background: var(--bg);
   font-family: var(--font);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.6;
+  overflow-wrap: break-word;
 }
 
 a { color: var(--accent); text-decoration: none; }
-a:hover, a:focus { color: var(--accent-hover); text-decoration: none; }
+a:hover, a:focus { color: var(--accent-hover); text-decoration: underline; }
+a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 2px; }
+
+/* Long tokens (file paths, identifiers) in prose must never force horizontal scroll */
+.tldr, .bullets li, .decisions p, .proj-section p, .detail p,
+.pub-meta, .cv-note, table.foothold td { overflow-wrap: anywhere; }
+
+/* Skip link (a11y) */
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 200;
+  background: var(--accent); color: #fff; padding: 8px 14px; border-radius: 0 0 6px 0;
+}
+.skip-link:focus { left: 0; }
 
 h1, h2, h3 { font-family: var(--font); line-height: 1.25; }
 h2 {
@@ -229,7 +242,7 @@ h2 .count { color: var(--muted); font-weight: 400; font-size: 16px; }
 table.foothold { width: 100%; border-collapse: collapse; font-size: 13px; }
 table.foothold th, table.foothold td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
 table.foothold th { color: var(--muted); font-weight: 700; }
-table.foothold td code { font-size: 12px; color: #333; word-break: break-word; }
+table.foothold td code { font-size: 12px; color: #333; overflow-wrap: anywhere; word-break: break-word; }
 
 .gallery { display: grid; gap: 22px; }
 .gallery figure { margin: 0; }

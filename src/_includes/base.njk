@@ -9,13 +9,14 @@
   {% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
   {% if keywords or site.keywords %}<meta name="keywords" content="{{ keywords or site.keywords }}">{% endif %}
 
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
   {% if canonical %}<meta property="og:url" content="{{ canonical }}">{% endif %}
   <meta property="og:title" content="{{ ogTitle or title or site.title }}">
   <meta property="og:description" content="{{ description or site.description }}">
   <meta property="og:image" content="{{ site.url }}/{{ ogImage or 'assets/img/KimJuO.jpg' }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ ogTitle or title or site.title }}">
+  <meta name="twitter:description" content="{{ description or site.description }}">
   <meta name="twitter:image" content="{{ site.url }}/{{ ogImage or 'assets/img/KimJuO.jpg' }}">
 
   <link rel="icon" href="/assets/img/favicon/favicon.ico" sizes="any">
@@ -28,6 +29,7 @@
   {% if isHome %}{% include "partials/jsonld.njk" %}{% endif %}
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   {% include "partials/nav.njk" %}
   <main class="container" id="main">
     {{ content | safe }}

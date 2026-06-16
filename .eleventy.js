@@ -38,10 +38,12 @@ module.exports = function (eleventyConfig) {
   }
 
   // Figures: WebP for raster (universal support; avoids huge lossless-PNG fallbacks of
-  // screenshots); SVGs pass through as vector via svgShortCircuit.
-  eleventyConfig.addAsyncShortcode("image", (src, alt, widths = [768, 1280], sizes = "100vw", className = "") =>
-    buildImage(src, [...new Set(widths)], sizes, { alt, sizes, loading: "lazy", decoding: "async", class: className }, ["svg", "webp"])
-  );
+  // screenshots); SVGs pass through as vector via svgShortCircuit. eager=true for LCP/above-the-fold.
+  eleventyConfig.addAsyncShortcode("image", (src, alt, widths = [768, 1280], sizes = "100vw", className = "", eager = false) => {
+    const attrs = { alt, sizes, loading: eager ? "eager" : "lazy", decoding: "async", class: className };
+    if (eager) attrs.fetchpriority = "high";
+    return buildImage(src, [...new Set(widths)], sizes, attrs, ["svg", "webp"]);
+  });
   // Thumbnails: tiny, keep a PNG/JPEG fallback alongside WebP.
   eleventyConfig.addAsyncShortcode("thumb", (src, alt) =>
     buildImage(src, [160, 320], "160px", { alt, sizes: "160px", loading: "lazy", decoding: "async", class: "project-thumb" }, ["webp", "auto"])

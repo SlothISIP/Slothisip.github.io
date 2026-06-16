@@ -117,7 +117,7 @@
     <text x="980" y="576" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">arch 0 violations</text>
     <text x="980" y="592" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">tsc 0 errors</text>
     <text x="980" y="608" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">vitest 18 / 54 pass</text>
-    <text x="980" y="624" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">health 34 / 34 live</text>
+    <text x="980" y="624" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">health 35 / 35 live</text>
   </g>
 
   <!-- ============= INTER-LAYER ARROWS ============= -->

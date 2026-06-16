@@ -8,4 +8,6 @@ permalink: "/publications/{{ pub.slug }}/index.html"
 eleventyComputed:
   title: "{{ pub.title }} | Ju O Kim"
   canonical: "{{ site.url }}/publications/{{ pub.slug }}/"
+  description: "{{ pub.title }}. {{ pub.venue }}, {{ pub.year }}."
+  ogType: "article"
 ---

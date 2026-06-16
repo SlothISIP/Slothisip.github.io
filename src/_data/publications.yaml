@@ -34,7 +34,7 @@
     - src: publications/electronics2025/electronics2025_ablation.jpg
       alt: Ablation Study
       caption: 'Ablation study quantifying each component''s contribution: removing DTW from SMOTE drops accuracy from 94.3% to 89.1% (~5.2%); CNN-only and LSTM-only cause 8.1% and 5.4% drops respectively.'
-  acknowledgements: This research was supported by the Basic Science Research Program through the National Research Foundation of Korea (NRF) funded by the Ministry of Education. We thank the anonymous reviewers for their valuable feedback and suggestions. The website template was borrowed from Michael Gharbi (http://mgharbi.com/).
+  acknowledgements: This research was supported by the Basic Science Research Program through the National Research Foundation of Korea (NRF) funded by the Ministry of Education. We thank the anonymous reviewers for their valuable feedback and suggestions.
 - slug: springer2024
   title: Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences
   authors: Ju O Kim, Jieun Kim, Deokwoo Lee
@@ -69,7 +69,7 @@
     - src: publications/springer2024/springer2024_reprojection.jpg
       alt: Reprojection Error
       caption: Reprojection error analysis; mean error across all three viewpoints is less than 0.8 pixels with consistent performance across image regions and no systematic bias.
-  acknowledgements: This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korean government. We thank the reviewers for their valuable feedback and suggestions that helped improve this work. The website template was borrowed from Michael Gharbi (http://mgharbi.com/).
+  acknowledgements: This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korean government. We thank the reviewers for their valuable feedback and suggestions that helped improve this work.
 - slug: sensors2020
   title: Detection of Abnormal Respiration from Multiple-Input Respiratory Signals
   authors: Ju O Kim, Deokwoo Lee
@@ -102,7 +102,7 @@
     - src: publications/sensors2020/sensors2020_filter.jpg
       alt: Filter Responses
       caption: 'Custom filter response characteristics: the filter bank amplifies frequency components of normal and abnormal breathing while attenuating out-of-band noise, combining 0.1-0.5 Hz bandpass filtering with adaptive notch filters for interference rejection.'
-  acknowledgements: This research was supported by Keimyung University. We thank the reviewers for their valuable feedback and suggestions. The website template was borrowed from Michael Gharbi (http://mgharbi.com/) and Jon Barron (https://jonbarron.info/).
+  acknowledgements: This research was supported by Keimyung University. We thank the reviewers for their valuable feedback and suggestions.
 - slug: iceic2021
   title: Mathematical Model for a Calibration of Multiple-View Thermal Camera
   authors: Ju O Kim, Deokwoo Lee
