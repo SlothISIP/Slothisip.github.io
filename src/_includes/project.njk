@@ -6,9 +6,71 @@ layout: base.njk
     <h1>{{ project.title }}</h1>
   </header>
 
-  <div class="tldr"><strong>TL;DR.</strong> {{ project.tagline }}</div>
+  {% if project.tldr %}<div class="tldr"><strong>TL;DR.</strong> {{ project.tldr }}</div>{% endif %}
 
-  {# Phase 5 adds the rich body: Problem -> Design Decisions -> Engineering Foothold -> Tech Stack #}
+  {% if project.problem %}
+  <section class="proj-section">
+    <h2>Problem</h2>
+    <p>{{ project.problem }}</p>
+  </section>
+  {% endif %}
+
+  {% if project.contributions and project.contributions.length %}
+  <section class="proj-section">
+    <h2>What I built</h2>
+    <ul class="bullets">{% for c in project.contributions %}<li>{{ c }}</li>{% endfor %}</ul>
+  </section>
+  {% endif %}
+
+  {% if project.design_decisions and project.design_decisions.length %}
+  <section class="proj-section">
+    <h2>Design decisions</h2>
+    <ol class="decisions">
+    {% for d in project.design_decisions %}
+      <li><span class="decision-title">{{ d.title }}</span><p>{{ d.detail }}</p></li>
+    {% endfor %}
+    </ol>
+  </section>
+  {% endif %}
+
+  {% if project.foothold and project.foothold.length %}
+  <section class="proj-section">
+    <h2>Engineering foothold</h2>
+    <table class="foothold">
+      <thead><tr><th>Claim</th><th>Evidence</th></tr></thead>
+      <tbody>
+      {% for f in project.foothold %}
+        <tr><td>{{ f.claim }}</td><td><code>{{ f.evidence }}</code></td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% endif %}
+
+  {% if project.figures and project.figures.length %}
+  <section class="proj-section">
+    <h2>Gallery</h2>
+    <div class="gallery">
+    {% for fig in project.figures %}
+      <figure>
+        {% image fig.src, fig.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
+        {% if fig.caption %}<figcaption>{{ fig.caption }}</figcaption>{% endif %}
+      </figure>
+    {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if project.stack and project.stack.length %}
+  <section class="proj-section">
+    <h2>Tech stack</h2>
+    <dl class="skills">
+    {% for s in project.stack %}
+      <dt>{{ s.category }}</dt><dd>{{ s.items | join(", ") }}</dd>
+    {% endfor %}
+    </dl>
+  </section>
+  {% endif %}
 
   <p class="detail-back"><a href="/#projects">&larr; All projects</a></p>
 </article>

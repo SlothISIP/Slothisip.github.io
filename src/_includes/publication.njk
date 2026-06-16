@@ -9,11 +9,42 @@ layout: base.njk
       <span class="pub-badge pub-badge-{{ pub.badge }}">{{ pub.badge | upper }}</span></p>
     <p class="detail-actions">
       {% if pub.paper_url %}<a class="paper-pill" href="{{ pub.paper_url }}">Paper</a>{% endif %}
-      <a class="paper-pill" href="/data/{{ pub.bib }}.bib">BibTeX</a>
+      <a class="paper-pill" href="/data/{{ pub.bib }}.bib">Download BibTeX</a>
     </p>
   </header>
 
-  {# Phase 5 adds: Abstract, figures, inline BibTeX, Acknowledgements #}
+  {% if pub.abstract %}
+  <section class="proj-section">
+    <h2>Abstract</h2>
+    <p>{{ pub.abstract }}</p>
+  </section>
+  {% endif %}
+
+  {% if pub.figures and pub.figures.length %}
+  <section class="proj-section">
+    <h2>Figures</h2>
+    <div class="gallery">
+    {% for fig in pub.figures %}
+      <figure>
+        {% image fig.src, fig.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
+        {% if fig.caption %}<figcaption>{{ fig.caption }}</figcaption>{% endif %}
+      </figure>
+    {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="proj-section">
+    <h2>BibTeX <button class="copy-btn" data-copy="#bibtex">Copy</button></h2>
+    <textarea id="bibtex" class="bibtex" readonly rows="11">{{ pub.bib | bibtex }}</textarea>
+  </section>
+
+  {% if pub.acknowledgements %}
+  <section class="proj-section">
+    <h2>Acknowledgements</h2>
+    <p>{{ pub.acknowledgements }}</p>
+  </section>
+  {% endif %}
 
   <p class="detail-back"><a href="/#publications">&larr; All publications</a></p>
 </article>

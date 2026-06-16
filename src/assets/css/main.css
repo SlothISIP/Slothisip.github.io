@@ -215,6 +215,38 @@ h2 .count { color: var(--muted); font-weight: 400; font-size: 16px; }
 }
 .detail-actions { margin: .5rem 0; display: flex; gap: 10px; flex-wrap: wrap; }
 
+/* ---------- Rich detail sections (project + publication) ---------- */
+.proj-section { margin: 1.75rem 0; }
+.proj-section > h2 { font-size: 19px; }
+.bullets { padding-left: 1.2rem; }
+.bullets li { margin: .3rem 0; }
+
+.decisions { padding-left: 1.3rem; }
+.decisions > li { margin: 0 0 1rem; }
+.decision-title { font-weight: 700; }
+.decisions p { margin: .25rem 0 0; }
+
+table.foothold { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.foothold th, table.foothold td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+table.foothold th { color: var(--muted); font-weight: 700; }
+table.foothold td code { font-size: 12px; color: #333; word-break: break-word; }
+
+.gallery { display: grid; gap: 22px; }
+.gallery figure { margin: 0; }
+.gallery img, .gallery picture { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.gallery figcaption { margin-top: .4rem; font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+.bibtex {
+  width: 100%; box-sizing: border-box; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 12px; line-height: 1.5; color: #222; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 8px; padding: 12px; resize: vertical;
+}
+.copy-btn {
+  font: inherit; font-size: 12px; margin-left: 8px; padding: 2px 10px; cursor: pointer;
+  border: 1px solid var(--accent); color: var(--accent); background: #fff; border-radius: 999px;
+}
+.copy-btn:hover { background: var(--accent); color: #fff; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .profile { flex-direction: column; gap: 16px; }

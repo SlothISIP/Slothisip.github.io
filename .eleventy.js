@@ -21,12 +21,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("src/assets/css/");
 
   // ---------- eleventy-img shortcodes (lazy-required) ----------
-  async function buildImage(src, widths, sizes, attrs) {
+  async function buildImage(src, widths, sizes, attrs, formats) {
     const Image = require("@11ty/eleventy-img");
     const inputPath = path.join("src/assets/img", src);
     const metadata = await Image(inputPath, {
       widths,
-      formats: ["webp", "auto"],
+      formats,
+      svgShortCircuit: true, // SVGs pass through unchanged (no rasterization)
       outputDir: "_site/assets/img/opt/",
       urlPath: "/assets/img/opt/",
       sharpWebpOptions: { quality: 80 },
@@ -36,15 +37,24 @@ module.exports = function (eleventyConfig) {
     return Image.generateHTML(metadata, attrs);
   }
 
-  eleventyConfig.addAsyncShortcode("image", (src, alt, widths = [320, 640, 960, 1920], sizes = "100vw", className = "") =>
-    buildImage(src, [...new Set(widths)], sizes, { alt, sizes, loading: "lazy", decoding: "async", class: className })
+  // Figures: WebP for raster (universal support; avoids huge lossless-PNG fallbacks of
+  // screenshots); SVGs pass through as vector via svgShortCircuit.
+  eleventyConfig.addAsyncShortcode("image", (src, alt, widths = [768, 1280], sizes = "100vw", className = "") =>
+    buildImage(src, [...new Set(widths)], sizes, { alt, sizes, loading: "lazy", decoding: "async", class: className }, ["svg", "webp"])
   );
+  // Thumbnails: tiny, keep a PNG/JPEG fallback alongside WebP.
   eleventyConfig.addAsyncShortcode("thumb", (src, alt) =>
-    buildImage(src, [160, 320], "160px", { alt, sizes: "160px", loading: "lazy", decoding: "async", class: "project-thumb" })
+    buildImage(src, [160, 320], "160px", { alt, sizes: "160px", loading: "lazy", decoding: "async", class: "project-thumb" }, ["webp", "auto"])
   );
 
   // ---------- Filters ----------
   eleventyConfig.addFilter("year", (d) => String(d).slice(0, 4));
+
+  // Inline a .bib file's contents by key (for the BibTeX box on publication pages).
+  eleventyConfig.addFilter("bibtex", (key) => {
+    try { return require("node:fs").readFileSync(path.join("src/data", key + ".bib"), "utf8").trim(); }
+    catch (e) { return ""; }
+  });
 
   // ---------- Directory config ----------
   return {
