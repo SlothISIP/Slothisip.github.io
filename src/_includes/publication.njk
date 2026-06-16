@@ -1,0 +1,15 @@
+---
+layout: base.njk
+---
+<article class="detail pub-detail">
+  <header class="detail-head">
+    <h1>{{ pub.title }}</h1>
+    {% if pub.authors %}<p class="authors">{{ pub.authors }}</p>{% endif %}
+    <p class="venue">{{ pub.venue }}{% if pub.year %} &middot; {{ pub.year }}{% endif %}</p>
+    {% if pub.paper_url and pub.paper_url != "#" %}<p><a class="paper-pill" href="{{ pub.paper_url }}">Paper</a></p>{% endif %}
+  </header>
+
+  {# Phase 5 fleshes out: Abstract -> Figures -> BibTeX -> Acknowledgements #}
+
+  <p class="detail-back"><a href="/#publications">&larr; All publications</a></p>
+</article>

@@ -40,3 +40,8 @@ THUMBNAIL_*.md
 nul
 .DS_Store
 Thumbs.db
+
+# Eleventy build (deploy is from GitHub Actions; never commit the build)
+_site/
+.cache/
+node_modules/

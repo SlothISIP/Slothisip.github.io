@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title or site.title }}</title>
+  <meta name="author" content="{{ site.author }}">
+  <meta name="description" content="{{ description or site.description }}">
+  {% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
+  {% if keywords or site.keywords %}<meta name="keywords" content="{{ keywords or site.keywords }}">{% endif %}
+
+  <meta property="og:type" content="website">
+  {% if canonical %}<meta property="og:url" content="{{ canonical }}">{% endif %}
+  <meta property="og:title" content="{{ ogTitle or title or site.title }}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  <meta property="og:image" content="{{ site.url }}/{{ ogImage or 'assets/img/KimJuO.jpg' }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ ogTitle or title or site.title }}">
+  <meta name="twitter:image" content="{{ site.url }}/{{ ogImage or 'assets/img/KimJuO.jpg' }}">
+
+  <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  {% if jsonld %}<script type="application/ld+json">{{ jsonld | dump | safe }}</script>{% endif %}
+</head>
+<body>
+  {% include "partials/nav.njk" %}
+  <main class="container" id="main">
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+  <script src="/assets/js/copy.js" defer></script>
+</body>
+</html>

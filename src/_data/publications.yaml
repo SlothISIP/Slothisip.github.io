@@ -1,0 +1,21 @@
+# PLACEHOLDER DATA (Phase 1 scaffold only).
+# Phase 2 replaces this with all 18 publications using canonical titles/venues
+# from data/Kim*.bib + JSON-LD, plus the bib-URL fixes. Do not treat as final.
+- slug: electronics2025
+  title: "Overcoming Data Scarcity in Respiratory Monitoring: DTW-Enhanced CNN-LSTM"
+  authors: "Ju O Kim, et al."
+  venue: "Electronics (MDPI)"
+  year: 2025
+  badge: scie
+  detail: true
+  paper_url: "https://www.mdpi.com/journal/electronics"
+  bib: KimELECTRONICS2025
+- slug: kais2021
+  title: "Thermal Camera Calibration using Images with Improved Quality"
+  authors: "Ju O Kim, et al."
+  venue: "JKAIS"
+  year: 2021
+  badge: kci
+  detail: false
+  paper_url: "#"
+  bib: KimKAIS2021

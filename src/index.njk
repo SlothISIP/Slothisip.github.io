@@ -1,0 +1,48 @@
+---
+layout: base.njk
+permalink: "/index.html"
+canonical: "https://slothisip.github.io/"
+---
+<section class="profile">
+  <div class="profile-photo">
+    <img src="/assets/img/KimJuO.jpg" alt="Ju O Kim" width="180" height="180">
+  </div>
+  <div class="profile-bio">
+    <h1 class="name">{{ site.author }}</h1>
+    <p class="role">{{ site.role }} &middot; {{ site.org }}</p>
+    <p class="contact">
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a> &middot;
+      <a href="{{ site.socials.scholar }}">Scholar</a> &middot;
+      <a href="{{ site.socials.linkedin }}">LinkedIn</a> &middot;
+      <a href="/data/CV_JuO_Kim.pdf">CV</a>
+    </p>
+    <p>{{ site.description }}</p>
+  </div>
+</section>
+
+<section id="publications">
+  <h2>Publications</h2>
+  <ul class="pub-list">
+  {% for p in publications %}
+    <li>
+      {% if p.detail %}<a href="/publications/{{ p.slug }}/"><span class="papertitle">{{ p.title }}</span></a>
+      {% elif p.paper_url and p.paper_url != "#" %}<a href="{{ p.paper_url }}"><span class="papertitle">{{ p.title }}</span></a>
+      {% else %}<span class="papertitle">{{ p.title }}</span>{% endif %}
+      {% if p.badge %}<span class="pub-badge pub-badge-{{ p.badge }}">{{ p.badge | upper }}</span>{% endif %}
+      <br><span class="pub-venue">{{ p.venue }}, {{ p.year }}</span>
+    </li>
+  {% endfor %}
+  </ul>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <ul class="project-list">
+  {% for pr in projects %}
+    <li>
+      <a href="/projects/{{ pr.slug }}/"><span class="papertitle">{{ pr.title }}</span></a>
+      {% if pr.tagline %}<br><span>{{ pr.tagline }}</span>{% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+</section>

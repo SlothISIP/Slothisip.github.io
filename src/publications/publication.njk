@@ -1,0 +1,11 @@
+---
+pagination:
+  data: pubDetail
+  size: 1
+  alias: pub
+layout: publication.njk
+permalink: "/publications/{{ pub.slug }}/index.html"
+eleventyComputed:
+  title: "{{ pub.title }} | Ju O Kim"
+  canonical: "{{ site.url }}/publications/{{ pub.slug }}/"
+---

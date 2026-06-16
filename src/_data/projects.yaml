@@ -1,0 +1,1392 @@
+# Single source for all projects. Bodies+figures verified vs repos & finalized per owner rules:
+# Public portfolio data with non-confidential scope labels and evidence framing.
+# no unproven field results, solo/main-developer authorship. Zero unresolved markers.
+- slug: multi-agent
+  title: Multi-Agent Manufacturing QC
+  scope: R&D prototype · open/synthetic data
+  tagline: 'An on-prem multi-agent QC system on one rule — the LLM orchestrates but never guards. Eleven agents cross-examine ML-tool evidence; a deterministic guardrail and a human-in-the-loop catch disagreement. Runs locally on Ollama + RTX 3060.'
+  thumb: thumbs/multi_agent_thumb.png
+  tier: rich
+  home: true
+  order: 3
+  tldr: 'An R&D system on one principle — the LLM orchestrates but never guards. Eleven LLM-driven agents inspect casting images and equipment-sensor data through a two-tier pipeline (a deterministic Fast Path for clear cases, a Goal-Driven ReAct loop for the rest); a rule-based guardrail — not another LLM — catches cross-agent contradictions and routes disagreement through a 2-round deliberation, escalating unresolved cases to a human, all on-prem on Ollama + RTX 3060 (one env var swaps to Claude or Gemini). Scope is stated up front: a single-machine architecture demo validated entirely on synthetic and open datasets — the engineering target is the orchestration, guardrails, and human-in-the-loop trace, not the underlying ML models.'
+  stats:
+    - value: '11'
+      label: LLM agents
+      sub: two-tier pipeline, one guardrail
+    - value: '1,150'
+      label: passing tests
+      sub: 1,168 collected
+    - value: '~18k'
+      label: lines of code
+      sub: ~15k Python · ~3k TypeScript
+    - value: $0
+      label: recurring API cost
+      sub: on-prem Ollama default
+  problem: 'Manufacturing QC sits between two unsatisfying extremes: rule-based systems that go brittle as defect modes multiply, and end-to-end ML models that produce verdicts an operator cannot audit. What a real line needs is in between: a system that uses multiple narrow ML tools (PatchCore, AnomalyCLIP, XGBoost RUL) but treats their outputs as evidence to be cross-examined, not ground truth, and that escalates instead of silently choosing a tiebreaker when the tools disagree. That is the gap this project fills.'
+  contributions:
+    - 'Built end-to-end as the sole developer: the 11-agent orchestration, the guardrail and deliberation layers, the LLM-provider abstraction, the ML-tool wiring, and the React/TypeScript dashboard (the design choices behind each are below).'
+    - 'ML-tool wiring as evidence, not verdicts: PatchCore / AnomalyCLIP / Grounded-SAM2 for vision and XGBoost / Chronos for RUL, each wrapped as a tool whose output the agents cross-examine rather than trust.'
+    - Reviewable trace surfaced through a dashboard (ReAct Timeline, Cross-Agent Graph, Guardrail Log, Deliberation Trace, HITL queue, Metrics) so every verdict can be audited end to end.
+  design_decisions:
+    - id: guardrail
+      title: LLM is the orchestrator, never the guardrail
+      detail: 'Guardrail violations (physical_inconsistency, cross_agent_contradiction, low_confidence, tool_anomaly, cost_time_exceeded) are evaluated by deterministic Python rules in shared/guardrail.py. An LLM judging an LLM has no error floor; a rule does. Keeping the safety net separate from the agent layer is non-negotiable. The same principle shapes the feedback loop: the Learning agent observes HITL approvals/rejections and suggests threshold deltas via analyze_hitl_history + suggest_threshold_adjustment, but the suggestion is never auto-applied. There is no DB write, no config write, no consumer that mutates state from a model output. An operator manually applies the change, which then takes effect in the next inspection''s guardrail evaluation. The loop is half-closed on purpose: parameters adapt, rules and write-paths stay human-authored. Verified by grep: suggest_threshold_adjustment is referenced in only 6 files, all of them tests / stub / the tuner itself / the agent registry, with no consumer applying the suggestion.'
+    - id: two-tier
+      title: 'Two-tier speed: Fast Path before ReAct'
+      detail: When an ML tool returns a confident result (PatchCore score > 0.9 or < 0.2, sensor |z-score| < 2), the agent skips the LLM entirely and returns the deterministic verdict in milliseconds. The expensive ReAct loop only fires when tools alone don't resolve the case. This collapses the median latency of clear cases without giving up the long-tail reasoning. The cheap path runs first by design, not as a fallback.
+    - id: disagreement
+      title: Disagreement is a first-class state, not a failure
+      detail: 'When Recognition reports DEFECT and Prediction reports NORMAL, the system does NOT pick a tiebreaker. It enters a 2-round Deliberation Protocol: Round 1 each agent re-states a position with evidence; Round 2 each rebuts the other''s claims; a synthesis node decides if there is consensus or escalates to HITL. The dashboard shows the full trace.'
+    - title: On-prem first
+      detail: Default config is Ollama running qwen2.5:7b locally on a 12 GB GPU, so inspection data never leaves the machine. The same code path swaps to Claude or Gemini by changing one env var (LLM_PROVIDER=claude|gemini|ollama). Data sovereignty is the constraint manufacturers in this domain raise most often, so positioning it as the default rather than the option was deliberate.
+    - title: Goal in the prompt, not how-to
+      detail: 'Every system prompt across all 11 agents follows the same skeleton: Domain -> Goal -> Available tools -> Constraints -> JSON output. Notably absent: instructions like ''if score > 0.5 then call SAM2'', ''first call A then call B'', or ''if confidence > 0.9 return early''. The LLM picks tools, sequence, and stop point, guided only by the goal text, the constraint list, and the tool results it observes. When the toolchain shifts (PatchCore -> FastFlow), only the Available tools block changes; the orchestration logic stays untouched. One mild exception: the Automation agent carries a single soft-ordering constraint (CRITICAL priority actions require HITL approval before execution).'
+  foothold:
+    - claim: 'Pipeline agents: 11'
+      evidence: agents/{recognition,prediction,automation,spc,learning,optimization,safety,scheduling,supply_chain,communication,generation}/ — `ls -d agents/*/` returns exactly 11 directories
+    - claim: 'Tests: 1,150 passing (1,168 collected)'
+      evidence: 'Static count: 1,140 `def test_` functions across 42 test files + parametrize expansions = 1,168 collected; README states 1,150 passing (the remaining 18 skip because they need a live LLM).'
+    - claim: 'Python source: ~15,000 LOC'
+      evidence: '`find shared agents orchestrator -name ''*.py'' | xargs cat | wc -l` = 14,966 (117 files)'
+    - claim: 'TypeScript source: ~3,000 LOC'
+      evidence: '`find dashboard/src -name ''*.ts'' -o -name ''*.tsx'' | xargs cat | wc -l` = 3,011 (33 files)'
+    - claim: 'Guardrail rules: 5 deterministic rules'
+      evidence: shared/guardrail.py — _check_physical_inconsistency, _check_cross_agent_contradiction, _check_low_confidence, _check_tool_anomaly, _check_cost_time_exceeded (lines 52-193)
+    - claim: 'LLM provider abstraction: 3 (Claude / Gemini / Ollama)'
+      evidence: shared/llm_client.py — ClaudeLLMClient (anthropic.AsyncAnthropic, default claude-sonnet-4-20250514), GeminiLLMClient (google-genai), OllamaLLMClient; selectable via LLM_PROVIDER. (A StubLLMClient also exists for offline tests but is not a production provider.)
+    - claim: ML-tool benchmarks on synthetic/open data
+      evidence: results/phase1_kpi.json — PatchCore AUROC 1.0000 and AnomalyCLIP AUROC 0.9850 on the synthetic casting set, XGBoost F1 0.9851 on the open AI4I-2020 dataset, Chronos-2 RMSE 40.29 on the open NASA C-MAPSS FD001 set.
+    - claim: 'Recurring API cost: $0 (Ollama on-prem default)'
+      evidence: .env.example — LLM_PROVIDER=ollama, OLLAMA_MODEL=qwen2.5:7b (local, no API billing)
+    - claim: 'End-to-end captures: 8 dashboard verifications'
+      evidence: 8 multi_agent_*.png in repo root (cross_agent_trace, deliberation, docker_ps, hitl, metrics, ops, react_trace, tech)
+  stack:
+    - category: Orchestration
+      items:
+        - LangGraph (StateGraph, conditional edges, checkpointing)
+    - category: Inter-agent protocol
+      items:
+        - MCP Streamable HTTP
+        - max_depth=2
+        - call-stack circular detection
+    - category: LLM
+      items:
+        - Ollama qwen2.5:7b (default, RTX 3060)
+        - Claude
+        - Gemini (single-env-var swap via LLM_PROVIDER)
+    - category: Vision
+      items:
+        - PatchCore (anomalib)
+        - AnomalyCLIP (open_clip ViT-B/32)
+        - Grounded SAM2
+    - category: Time-series / RUL
+      items:
+        - XGBoost (AI4I-2020, open)
+        - Chronos (chronos-forecasting; C-MAPSS, open)
+    - category: Vector DB
+      items:
+        - ChromaDB PersistentClient (embedded per-agent, no separate server)
+    - category: API & runtime
+      items:
+        - FastAPI
+        - uvicorn
+        - async-everywhere
+        - websockets
+    - category: Frontend
+      items:
+        - React 18
+        - TypeScript
+        - Tailwind CSS
+        - Recharts
+        - Vite
+    - category: Storage
+      items:
+        - SQLite (inspections, defect history)
+  figures:
+    - src: projects/multi-agent/08_benchmarks.svg
+      section: foothold
+      alt: 'Benchmark scoreboard: PatchCore AUROC 1.0000 and AnomalyCLIP 0.9850 on a synthetic casting set, XGBoost F1 0.9851 on open AI4I-2020, Chronos-2 RMSE 40.29 on open NASA C-MAPSS FD001.'
+      caption: 'ML-tool benchmarks (results/phase1_kpi.json) on synthetic and open datasets — recorded honestly, because the engineering target is the orchestration layer, not these underlying models.'
+    - src: projects/multi-agent/07_problem_positioning.svg
+      section: problem
+      alt: 'Positioning: rule-based vs end-to-end ML vs the cross-examined-evidence approach'
+      caption: 'Where this sits — rule-based QC goes brittle and end-to-end ML is unauditable; this project treats narrow ML tools (PatchCore, AnomalyCLIP, XGBoost RUL) as evidence to cross-examine, escalating to a human on disagreement.'
+    - src: projects/multi-agent/03_guardrail_rules.svg
+      section: decision
+      beat: guardrail
+      order: 1
+      band: true
+      alt: 5 deterministic guardrail rules
+      caption: All five rules evaluated outside the LLM in shared/guardrail.py. Action column is the routed outcome (retry / deliberation / hitl / force_stop).
+    - src: projects/multi-agent/05_hitl_learning_loop.svg
+      section: decision
+      beat: guardrail
+      order: 2
+      band: true
+      alt: HITL to Learning adaptive loop (half-closed)
+      caption: 'Half-closed feedback loop: Learning agent suggests, operator applies. No code path writes thresholds from a model output (verified by grep: suggest_threshold_adjustment has 6 references, all in tests / stub / tuner itself / agent registry, no consumer applies the suggestion).'
+    - src: projects/multi-agent/04_two_tier_funnel.svg
+      section: decision
+      beat: two-tier
+      order: 1
+      band: true
+      alt: 'Two-tier execution funnel: Fast Path to ReAct to Deliberation to HITL'
+      caption: 'Captured run on the inspection DB (N=10): 1 Fast Path (cold-start 113s), 4 Goal-Driven ReAct (2.3-26s), 4 Deliberation (5.3-33s), 6 reached HITL. The cheap path runs first by design, not as a fallback. Warm Fast Path latency is not yet benchmarked separately.'
+    - src: projects/multi-agent/06_prompt_anatomy.svg
+      section: decision
+      beat: Goal in the prompt, not how-to
+      order: 1
+      band: true
+      alt: 'Goal-driven prompt anatomy: Recognition agent verbatim'
+      caption: 'Recognition agent''s SYSTEM_PROMPT dissected by region (Domain / Goal / Tools / Constraints / JSON). All 11 agents share this skeleton; one mild exception (Automation has a single line of soft sequencing). The right panel lists what is not in any prompt: no procedural branching, no tool ordering, no control flow.'
+    - src: projects/multi-agent/01_architecture.svg
+      section: lead
+      alt: 'System architecture: 11 agents, 4-tier safety pipeline'
+      caption: 'System architecture — the 11 agents and the two-tier pipeline (Fast Path + Goal-Driven ReAct) all funnel into one deterministic guardrail, the only component that can route a case to PASS, deliberation, or a human. On-prem by default (Ollama qwen2.5:7b on an RTX 3060), one env var swaps to Claude or Gemini; agents communicate over MCP Streamable HTTP.'
+    - src: projects/multi-agent/multi_agent_react_trace.png
+      section: decision
+      beat: two-tier
+      order: 2
+      alt: ReAct Timeline showing tool failure recovery
+      caption: 'Case 2 - Tool failure recovery mid-loop: Plan -> Execute (patchcore_score) fails (model checkpoint missing) -> Replan -> Execute (anomaly_clip_classify) succeeds (scratch 0.7618) -> Execute (grounded_sam2_segment) -> Respond DEFECT 76% confidence.'
+    - src: projects/multi-agent/02_deliberation_sequence.svg
+      section: decision
+      beat: disagreement
+      order: 1
+      band: true
+      alt: 'Deliberation Protocol: 2 rounds, no tiebreaker'
+      caption: 'Deliberation Protocol for Case 3 — Recognition reported DEFECT and Prediction reported NORMAL, each at 0.95 confidence. Across 2 rounds neither agent moved, so synthesis returned NO CONSENSUS and escalated to a human; the live trace is the next screenshot.'
+    - src: projects/multi-agent/multi_agent_deliberation_screenshot.png
+      section: decision
+      beat: disagreement
+      order: 2
+      alt: Live Deliberation Trace from dashboard
+      caption: Live trace from the dashboard for the case above - NO CONSENSUS badge top-right.
+    - src: projects/multi-agent/multi_agent_hitl_screenshot.png
+      section: results
+      alt: HITL queue card for the escalated case
+      caption: HITL queue card - both agent positions, sensor context, escalation rule, and Approve / Reject controls.
+    - src: projects/multi-agent/multi_agent_ops_screenshot.png
+      section: results
+      alt: Operations page
+      caption: Operations - inspection history, KPI strip, HITL approval queue. Each row is a real call against the running orchestrator on :8000.
+    - src: projects/multi-agent/multi_agent_tech_screenshot.png
+      alt: Technical view
+      caption: 'Technical - four panels rendered from the same selected inspection: ReAct Timeline, Cross-Agent Graph, Guardrail Log, Deliberation Trace.'
+    - src: projects/multi-agent/multi_agent_metrics_screenshot.png
+      section: foothold
+      alt: Metrics page
+      caption: Metrics - agent confidence gauges (all 11 agents reported), latency distribution by tier, API cost trend, tier distribution.
+    - src: projects/multi-agent/multi_agent_docker_ps.png
+      alt: 'Native stack health: 14 ports listening'
+      caption: 14 ports listening (orchestrator + 11 agents + Ollama + dashboard) on the conda runtime, Chroma embedded per-agent. Same architecture as the Docker layout in docker-compose.yml, run as a single-machine deployment.
+- slug: full-factory
+  title: Full AI Factory — Camera-First Manufacturing Platform
+  scope: R&D prototype · synthetic data
+  tagline: 'Camera-First as a product mode, not a fallback: replace each missing PLC sensor with a camera-derived signal so both modes emit identical downstream events. 14 logical agents (8 classes × line_id) under a LangGraph fan-out / Coordinator fan-in, with architectural invariants enforced at pre-commit time.'
+  thumb: thumbs/full_factory_thumb.png
+  tier: rich
+  home: true
+  order: 4
+  tldr: 'A 7-line factory platform on one thesis — when a legacy plant has no PLC sensors, replace each with a camera signal so both modes emit identical downstream events and the 19 backend modules and 14 agents never branch on factory mode. Those 14 logical agents (8 classes × line_id) run under a LangGraph 4-way fan-out -> Coordinator fan-in, with architectural invariants enforced by a pre-commit arch_check.sh. Scope is stated up front: a single-machine R&D demo on synthetic data calibrated against open datasets, not deployed in any factory, with demo-grade auth pending a documented JWT/OAuth swap.'
+  stats:
+    - value: '14'
+      label: logical agents
+      sub: 8 classes × line_id
+    - value: '156'
+      label: REST endpoints
+      sub: 19 backend modules
+    - value: '189/189'
+      label: frontend tests pass
+      sub: pytest backend/sim/ai/agent also pass
+    - value: '35/35'
+      label: live health checks
+      sub: infra + app + module endpoints
+  problem: 'Most "smart factory" platforms assume a brownfield retrofit: install dozens of new PLC-connected sensors, integrate them into the historian, build dashboards on top. That assumption fails on the line that needs help most — the small or aging auto-parts plant where every retrofit is a capex fight, where process changes are frequent enough that a fixed sensor topology gets stale within months, and where shop-floor paperwork still flows through clipboards and signed copies. The architectural question is whether you can replace each sensor signal with a camera-derived signal cheaply enough that the rest of the stack — MES, ERP, SPC, QMS, WMS, APS, CMMS, predictive maintenance, agent orchestration — doesn''t have to know which mode is active. That''s the gap this project investigates.'
+  contributions:
+    - 'Built solo, end-to-end as the main developer — full stack (React/R3F UI, FastAPI backend, AI engine, LangGraph agents, simulator) plus the architecture-enforcement tooling, including Camera-First as a runtime-switchable mode (Mode B) that publishes the same Redis Streams topics and schema as Full Sensor mode (Mode A), so the 19 backend modules and 14 agents never branch on factoryMode.'
+    - 'A 14-logical-agent system built from 8 classes via line_id parametrization, orchestrated by a LangGraph 4-way fan-out -> Coordinator fan-in: every LLM verdict carries a confidence score, and timeout / exception / low-confidence (below the 0.3 default threshold) all converge on the same hand-authored Python rule-based codepath — no LLM-as-judge anywhere. The fan-in Coordinator also authors the Korean shop-floor documents (work log, daily report, handoff) in one synthesis step, so the paperwork never diverges from what the system understood.'
+    - 'Architectural invariants (Redis-Streams-only inter-module comms, 10 WS channels, audit_log on every CUD, source field on TimescaleDB inserts, ko/en i18n key parity) enforced by a 130-line pre-commit arch_check.sh hook running in <1s on every Edit/Write, with four physics-based degradation scenarios and open-dataset-calibrated line parameters (NASA C-MAPSS, Kaggle CNC tool-wear, RIAWELC/WDXI, MVTec AD) for repeatable end-to-end demonstration.'
+  design_decisions:
+    - id: camera-first
+      title: 1. Camera-First is a product mode, not a fallback.
+      detail: 'Mode A (Full Sensor) and Mode B (Camera-First) are first-class, runtime-switchable factory modes. The contract is that both publish the same Redis Streams topics with the same schema — sensor:{lineId}, event:production:{lineId}, event:quality:{lineId}, camera:{lineId} are interchangeable from a consumer''s perspective. The 19 backend modules and 14 agents do not branch on factoryMode; they treat any incoming event as ground truth and only the simulator + camera pipeline differ. This means Mode B doesn''t just "degrade gracefully" — it produces the exact same operational picture the rest of the platform consumes. Mode switch is a single API call: POST /api/v1/integration/factory-mode with {"mode":"A"} or {"mode":"B"}.'
+    - title: 2. line_id parametrization, not class duplication.
+      detail: Seven production lines could have been seven monitor classes. They are not. A single LineMonitorAgent class is invoked seven times per agent-loop tick (~30 s interval), once per line_id, via a Redis Streams dispatcher. Results land in a single agent:response:line_monitor stream with line_id as a discriminator field. The invariant is enforced in three places — backend/app/main.py:ACTIVE_LINE_CODES, backend/app/modules/integration/agent_loop.py:DEFAULT_LINE_CODES, and the simulator publish loop — and called out explicitly in the project rules. Adding L8 means changing three constants, not authoring an L8MonitorAgent class. This is the kind of decision that looks small until you imagine maintaining seven near-identical agent files.
+    - title: 3. Confidence is the routing key, not LLM accuracy.
+      detail: 'Every BaseAgent.run() call wraps the LLM verdict in an AgentResult with an explicit confidence float and provider tag. A deterministic helper needs_rule_fallback() in agent/agents/base_agent.py evaluates: (a) provider == "fallback" — the LLM call already failed mechanically (all providers exhausted); (b) confidence < settings.confidence_threshold (default 0.3). Either condition routes the case to that agent''s _fallback() implementation — a hand-authored Python classifier in agent/fallback/rules.py — and the result is re-wrapped with provider="rule_fallback" and an explicit fallback_reason. The same path catches LLM timeouts and exceptions: timeout, exception, and low-confidence all converge on the same deterministic codepath. There is no LLM-as-judge anywhere in the orchestration; the only thing an LLM can do is propose a verdict that a Python rule then accepts or replaces.'
+    - title: 4. Inter-module communication is Redis Streams only — enforced at hook time.
+      detail: 'Backend modules (backend/app/modules/{mes,erp,spc,qms,wms,aps,cmms,energy,safety,...}) cannot import each other directly. The sole permitted cross-module channel is the Redis Streams event bus. A scripts/arch_check.sh script — wired to run automatically on every file edit — greps for cross-module imports, verifies the WS channel set is exactly the 10 documented channels, checks audit_log coverage on every CUD, checks source-field presence on TimescaleDB inserts (sensor_data / spc_measurements), and checks both hardcoded-Korean-literal absence and ko<->en i18n key-count parity. Five rules, 130 lines of bash, runs in <1 s on every file change. (The Zustand 7-store ceiling is a documented project rule but is enforced by convention, not by this script.) Documented exceptions live in docs/ARCH_EXCEPTIONS.md with explicit # arch-allow markers in code — four entries, each with a written rationale.'
+    - title: 5. The Coordinator is the document author.
+      detail: 'In most multi-agent designs, document generation is a separate concern bolted onto the orchestrator. Here it is the Coordinator''s natural fan-in output. After the LangGraph 4-way fan-out (Quality / Maintenance / Planning / Energy) joins, the Coordinator flattens each domain''s (severity, summary) into the next AgentInput.context and synthesizes work log, daily report, and handoff document directly. The Document agent then handles routing, approval workflow, e-signature, and CAPA registration — but it inherits a fully-authored payload from the Coordinator rather than re-summarizing the agent traces itself. This means the operator never sees a difference between "what the system understood" and "what the paperwork says": there is exactly one synthesis step, and it produces both the operational alert and the document.'
+    - id: heater-flow
+      title: End-to-End Flow — Heater Degradation Scenario (physics-based, not random noise)
+      detail: 'A single L1 anomaly traverses all five layers. simulator/scenarios/heater_degradation.py applies a quadratic drift curve to L1 Zone 1 (nozzle) over 72 simulated hours: degradation = (elapsed_h / 72)^2, accelerating slowly. After hour 48, the model adds a sympathetic compensation on Zones 2-3 (operators on real injection lines do this reflexively), and yield decays in three steps: 99.5% -> 94% -> 90%. Severity transitions through NORMAL -> INFO -> WARNING -> CRITICAL in lockstep with the curve. The seven-stage flow runs simulator -> SPC Westgard rule -> LineMonitor (with confidence-routed fallback) -> LangGraph 4-way fan-out -> Coordinator fan-in -> Document agent -> WS-pushed UI updates across four channels. The other three scenarios (die_wear on L2, electrode_wear on L5, safety_intrusion across all lines) follow the same pattern: a real degradation mode rendered as a parameterizable curve, not stochastic ground-truth labels.'
+  foothold:
+    - claim: 'Production lines: 7 (Injection / Press / Assembly / Painting / Welding / CNC / Final Inspection)'
+      evidence: simulator/lines/ — 7 line files (injection/press/assembly/painting/welding/cnc/inspection)
+    - claim: 'Backend modules: 19 (same router/service/models/schemas/events shape)'
+      evidence: backend/app/modules/ — all 19 dirs verified to have identical 5-file shape
+    - claim: 'REST endpoints: 156'
+      evidence: grep ^@router.(get|post|put|delete|patch) backend/app/modules/ = 156; matches files/reviews/W42_B_Functional.md tally
+    - claim: 'WebSocket channels: 10 (fixed, enforced)'
+      evidence: 10 @app.websocket routes in backend/app/main.py; arch_check.sh Rule 4
+    - claim: 'Frontend pages: 20 (code-split)'
+      evidence: 20 lazy() route imports in frontend/src/App.tsx (no frontend/src/pages/ dir exists; pages are lazy-loaded component index files)
+    - claim: 'Frontend components: 111'
+      evidence: documented in files/reviews/W42_D_Quality.md and README (excludes shadcn ui/ primitives)
+    - claim: 'Zustand stores: 7 (5 domain + 2 infrastructure, fixed)'
+      evidence: frontend/src/stores/ = 7 .ts files (project rule; NOT enforced by arch_check.sh)
+    - claim: 'Logical agents: 14 = 8 classes × line_id parametrization'
+      evidence: agent/agents/ — 8 BaseAgent subclasses (LineMonitor/Quality/Maintenance/Planning/Energy/Safety/Coordinator/Document); parametrization documented in the project's agent spec.
+    - claim: 'MCP tools: 22'
+      evidence: agent/factory_mcp/tools.py — 22 @mcp_tool functions; agent/factory_mcp/server.py — 22 mcp.tool() registrations
+    - claim: 'TimescaleDB hypertables: 4 (sensor_data / spc_measurements / energy_readings / camera_detections, source field present)'
+      evidence: backend/scripts/init_timescaledb.py — 4 create_hypertable calls, all with a source column
+    - claim: 'Alembic revisions: 9 (linear chain, downgrade implemented for each)'
+      evidence: backend/app/migrations/versions/ — 001..009, each down_revision chains to prior, each has downgrade()
+    - claim: 'Demo scenarios: 4 physics-based (heater_degradation L1 / die_wear L2 / electrode_wear L5 / safety_intrusion)'
+      evidence: simulator/scenarios/ — 4 named scenario files present (plus tool_wear, camera_demo, base, degradation_curve)
+    - claim: 'Frontend tests: vitest 189/189 pass'
+      evidence: files/reviews/2026-06-10_full-project-audit.md (current); raw grep = 72 test files / ~192 cases (W42's 18 files/54 tests is a stale earlier snapshot)
+    - claim: 'Backend tests: pytest pass — backend 147 / simulator 177 / ai-engine 76 / agent 350'
+      evidence: files/reviews/2026-06-10_full-project-audit.md (8/8 gates PASS; note 18 backend integration tests skip without TEST_DATABASE_URL)
+    - claim: 'Architectural invariants: 0 violations'
+      evidence: scripts/arch_check.sh; documented in README + files/reviews/W42_Final.md
+    - claim: 'TypeScript strict: 0 errors'
+      evidence: tsc --noEmit; documented in README + 2026-06-10 audit (tsc 0err)
+    - claim: 'Live health checks: 35 / 35 pass (4 infra + 3 app + 28 module endpoints)'
+      evidence: scripts/health_check.sh = 35 check calls; files/reviews/2026-06-15_live-runtime-verification.md reports 35/35 PASS
+    - claim: 'Documented arch exceptions: 4 (each with # arch-allow + written rationale)'
+      evidence: 'docs/ARCH_EXCEPTIONS.md ''현재 예외 (4건)'' — 4 entries; 6 # arch-allow markers in code (entry 4 spans 2 import lines)'
+    - claim: VRAM budget enforced at 11 GB ceiling (static per-model estimates, not a measured trace)
+      evidence: ai-engine/serving/model_registry.py — ModelRegistry(max_vram_mb=11_000.0) budget enforcer + VRAM_ESTIMATES per-model table; estimates/budget, not a published measured runtime trace
+    - claim: 'i18n bundles: ko + en, key parity enforced'
+      evidence: frontend/src/i18n/locales/{ko,en}/ — 9 namespaces each; arch_check.sh Rule 5 (key-count parity)
+    - claim: 'End-to-end captures: 8 dashboard + terminal verifications'
+      evidence: images/full_factory_*.png (figures handled separately)
+  stack:
+    - category: Frontend
+      items:
+        - React 18
+        - TypeScript
+        - Vite
+        - TailwindCSS
+        - shadcn/ui
+        - React Three Fiber + Three.js
+        - Recharts
+        - ReactFlow
+        - React Query
+        - Zustand (7-store ceiling)
+        - i18next (ko/en, key-parity enforced)
+    - category: Backend
+      items:
+        - FastAPI
+        - Python 3.12
+        - SQLAlchemy 2
+        - Alembic (9 linear revisions)
+        - asyncpg
+        - structlog
+    - category: AI Engine
+      items:
+        - PyTorch / ONNX Runtime (FP16)
+        - gRPC serving
+        - PatchCore / EfficientAD (anomaly)
+        - YOLOv8n × 4 (person / pose / safety-gear / line-counting)
+        - ArcFace (face recognition)
+        - LSTM-Attention (press)
+        - CNN-GRU (CNC)
+        - TimesFM (injection)
+        - LSTM-AE
+        - Bayesian Optimization (GPO)
+        - Chronos (energy)
+    - category: Agent / LLM
+      items:
+        - LangGraph (StateGraph + 4-way fan-out + fan-in)
+        - Ollama Qwen 2.5 3B (local default)
+        - Anthropic Claude SDK (cloud fallback, single env-var swap)
+        - ChromaDB embedded (RAG)
+        - MCP (22 factory tools)
+    - category: Data
+      items:
+        - PostgreSQL 16 (operational, ~48 tables)
+        - TimescaleDB 2.17 (4 hypertables, source field present)
+        - Redis 7 (cache + Streams + Pub/Sub)
+        - ChromaDB embedded
+        - Synthetic simulation data calibrated against open datasets (NASA C-MAPSS, Kaggle CNC tool-wear, RIAWELC/WDXI, MVTec AD)
+  figures:
+    - src: projects/full-factory/full_factory_hero.png
+      section: lead
+      alt: Full AI Factory hero banner — seven isometric production line machines on the left with L1 alert glow, a fan-out and fan-in agent network in the middle converging into a Coordinator node, and three auto-generated document cards on the right
+      caption: 'Hero banner: seven production lines feeding a fan-out / fan-in agent network that converges on a Coordinator and auto-generates documents.'
+    - src: projects/full-factory/full_factory_architecture.svg
+      section: approach
+      alt: Full AI Factory 5-layer architecture with Redis Streams event bus
+      caption: 'Five layers (presentation → application → AI/agents → data → simulator) all publish to one Redis Streams event bus; both factory modes (A Full Sensor / B Camera-First) emit identical events, so the 19 modules and 14 agents never branch on mode. Architectural invariants — Redis-Streams-only inter-module comms, 10 WebSocket channels, audit_log on every CUD, ko/en i18n parity — are enforced by the pre-commit arch_check.sh.'
+    - src: projects/full-factory/full_factory_heater_flow.svg
+      section: decision
+      beat: heater-flow
+      order: 1
+      band: true
+      alt: 'Heater degradation event flow: simulator → SPC → agent fan-out → Coordinator fan-in → document → UI'
+      caption: Seven-stage flow from simulator/scenarios/heater_degradation.py → SPC Westgard rule → LineMonitor (with confidence-routed fallback) → LangGraph 4-way fan-out → Coordinator fan-in → Document agent → WS-pushed UI updates across four channels. Numbers (e.g. confidence 0.42) illustrate one example tick.
+    - src: projects/full-factory/full_factory_agent_log.png
+      section: results
+      featured: true
+      alt: Agent Console showing LangGraph topology graph, 14 agents panel, and log feed with confidence and fallback labels
+      caption: 'Agent Console — LangGraph topology + 14-agent state + log feed. The header shows the loop is alive: 178 ticks · 5,958 publishes · L1..L7. Center: the LangGraph topology mirrors the architecture diagram exactly — Line Monitor → 4-way fan-out (Quality / Maintenance / Planning / Energy) → Coordinator → Document, with Safety as a parallel node. Right: 14 agents (4 active in this snapshot) with confidence per agent. Bottom: the log feed shows FALLBACK, DECISION, and INFO events in real time — the rule-based fallback firing on Line Monitor is the routing decision from Design Decision #3 happening live.'
+    - src: projects/full-factory/full_factory_mode_a.png
+      section: decision
+      beat: camera-first
+      order: 1
+      band: true
+      alt: SCADA HMI in Sensor Mode showing actual sensor values on the injection machine diagram
+      caption: Mode A — Full Sensor. SCADA HMI for L1 in Sensor Mode. Each sensor point on the injection machine diagram (Z1..Z4 heater zones, hydraulic pressure, cooling, cycle time) shows the live numeric value with status-coded color. The header pill reads "Sensor Mode" in blue.
+    - src: projects/full-factory/full_factory_mode_b.png
+      section: decision
+      beat: camera-first
+      order: 2
+      band: true
+      alt: SCADA HMI in Camera-First Mode showing camera-derived signals replacing each sensor value
+      caption: Mode B — Camera-First. Same SCADA HMI, same machine, Mode B active. Every sensor label is now a "Camera" placeholder — the camera pipeline produces the equivalent operational signal (signal-tower color, line-count, WIP estimate, OCR) and the downstream consumers don't see the difference. Header pill reads "Camera-First" in amber. The "Backend unstable" banner at the top of the capture is a transient connectionStore mock-fallback alert that fired during the mode transition — not part of the captured flow.
+    - src: projects/full-factory/full_factory_spc_alert.png
+      section: results
+      alt: SPC chart showing out-of-control points and a violation table
+      caption: 'SPC out-of-control — Westgard rule trigger on L1 Zone 1. SPC page during the heater scenario: red dots mark Westgard-rule violations on the temperature chart. Each violation publishes event:quality:L1 on Redis Streams, which the agent loop picks up on the next 5-second tick.'
+    - src: projects/full-factory/full_factory_document_approval.png
+      section: results
+      featured: true
+      alt: Document Center pending approval queue with a coordinator-generated maintenance request modal open
+      caption: 'Coordinator output — auto-generated maintenance request + approval modal. Document Center, Pending Approval queue (28 items in this snapshot). The open modal is a 정비요청서 (maintenance request) for Line L4, Created by: document agent, trigger: coordinator, with the structured payload (window, data_hint, description) the Coordinator flattened from the four fan-out results. Approval Flow shows Step 1 / supervisor / Pending. The "Backend unstable" banner at top is the connectionStore mock-fallback alert — not part of the captured flow, an artifact of this particular capture session.'
+    - src: projects/full-factory/full_factory_3d_twin.png
+      section: results
+      featured: true
+      alt: 3D digital twin view of all 7 lines with PdM overlays, alert labels, and live KPI header
+      caption: 3D Digital Twin — main view (ceiling toggled off). React Three Fiber scene with all 7 lines rendered, animated personnel and AGVs from the simulator's tracking events, and live PdM / alert overlays driven by ws/digital-twin. The header strip shows live KPIs (yield, OEE, cycle count, downtime). L1 (foreground left) carries a red RUL CRIT alert from the predictive-maintenance overlay — the same heater_degradation drift visualized in the architecture diagram, here rendered on the actual machine. Toggleable layers (ceiling truss, lighting, personnel, AGVs, WIP, overlay labels) live in the dedicated vizStore; this capture has the ceiling truss toggled off so the seven lane layout is fully readable.
+    - src: projects/full-factory/full_factory_3d_twin_ceiling.png
+      section: results
+      alt: Same 3D digital twin scene with the ceiling truss layer toggled on, showing the actual factory enclosure
+      caption: Same scene, ceiling truss on. The exact same scene with the vizStore ceiling-truss layer enabled — what an operator sees standing on the shop floor. Same PdM overlays, same alert labels, but the seven lanes are partly occluded by the truss. The "Backend unstable" banner at the top is a transient connectionStore mock-fallback alert — an artifact of this capture session, not a property of the digital twin.
+    - src: projects/full-factory/full_factory_health_check.png
+      section: foothold
+      alt: Terminal output of health_check.sh showing 34 passed, 0 failed
+      caption: 'Native stack health — all checks passing. scripts/health_check.sh on the native Windows VM: 4 infrastructure services (PG × 2 / Redis / Ollama), 2 application services (Backend API / Frontend), and 28 backend module endpoint smoke checks — all checks passing. Run after ./scripts/start_dev.sh in every dev session.'
+- slug: gpo
+  title: GPO - Generative Process Optimizer
+  scope: Personal R&D · open/synthetic data
+  tagline: 'Known physics should narrow the search, not be thrown away. On an open 564-cycle injection-molding benchmark (n=20), GPO reaches 90% convergence in 14.8 evaluations versus 35.1 for random search, and a physics prior reduces that to 8.8.'
+  thumb: thumbs/gpo_thumb.png
+  tier: rich
+  home: true
+  order: 2
+  tldr: 'GPO turns known process physics into a head start for the optimizer: on an open injection-molding benchmark (564 cycles, n=20), the Gaussian Process surrogate reaches the 90% convergence threshold in 14.8 evaluations versus 35.1 for random search, and a physics-informed prior reduces that to 8.8. Built solo, end-to-end — BO core, four physics-prior modules, a FastAPI + Celery backend, and a React dashboard, shipped as an 8-service Docker stack. A personal R&D project validated only on open and synthetic datasets, not deployed in production.'
+  stats:
+    - value: '2.38x'
+      label: fewer experiments
+      sub: vs random search, injection-molding
+    - value: '+40.7%'
+      label: fewer with prior
+      sub: physics-informed prior
+    - value: '8'
+      label: Docker services
+      sub: full stack
+    - value: '4'
+      label: physics priors
+      sub: injection/CNC/laser/3D-print
+  problem: 'Setting up and tuning a manufacturing process (injection molding, CNC milling, laser welding, 3D printing) requires finding optimal process parameters, but the conventional approaches -- Design of Experiments (DoE) and random search -- are expensive: each physical experiment consumes material, machine time, and labor, and the number of runs needed grows quickly with the parameter space. GPO attacks this by minimizing the number of experiments needed to reach an optimum, reaching it in only 10-50 experiments on the datasets tested. Domain physics is available for many processes but is hard to exploit in a generic optimizer; conversely, a purely data-driven optimizer ignores known physical relationships. As a personal R&D project the goal was also to support a bilingual KO/EN UI and consume existing MES/ERP-style data exports rather than requiring new sensors or factory hardware, and to validate the whole approach on open and synthetic process datasets rather than any client production system.'
+  contributions:
+    - 'BO core engine, built solo: the Gaussian Process surrogate (Matérn 5/2 + ARD, warm-start, RFF and Deep GP variants), three acquisition functions (Expected Improvement, Upper Confidence Bound, Knowledge Gradient) on BoTorch / GPyTorch, the sequential optimizer loop with convergence detection, and qEHVI / qNEHVI multi-objective optimization (ModelListGP) for 3D-printing Pareto fronts.'
+    - 'Physics priors and transfer learning: an abstract prior interface plus four domain priors (injection-molding glass-transition / shrinkage, CNC Taylor-type tool-wear, laser-welding penetration-depth, 3D-printing multi-output), each auto-weighted by Empirical-Bayes; and a GP-to-GP residual transfer module that warm-starts hyperparameters across materials (PP -> ABS).'
+    - 'Full-stack delivery: a FastAPI + Celery + PostgreSQL/TimescaleDB backend (Redis pub/sub progress, GP checkpoint recovery) and a React + Plotly dashboard (live convergence, GP surface, uncertainty map), shipped as an 8-service Docker Compose stack with Prometheus / Grafana monitoring and a unit / integration / E2E / benchmark test suite.'
+  design_decisions:
+    - title: Generic BO engine + per-process physics prior (plug-in)
+      detail: 'Context: Physical dynamics differ across processes (injection molding vs. CNC vs. laser welding vs. 3D print) but the optimization mathematics is shared. Options: a single monolithic domain-specific optimizer, or a generic optimizer with pluggable domain modules. Rationale: an abstract PhysicsPrior interface lets new processes ship as a single new module (mean function + constraints + empirical weighting), without touching the surrogate, acquisition, or API layers.'
+    - title: Celery async execution with WebSocket progress
+      detail: 'Context: BO runs are long (minutes to hours) and must survive browser disconnects and server restarts. Options: synchronous HTTP request, background thread in the API process, or a dedicated task queue. Rationale: Celery workers isolate GPU workload from the API, Redis pub/sub streams per-iteration progress to the React client over WebSocket, and periodic GP checkpoints to Postgres let a restarted worker resume exactly where it left off.'
+    - title: BoTorch / GPyTorch over scikit-learn GP
+      detail: 'Context: need GPU-accelerated GP fits, batch acquisition (q>=1), and multi-objective support (qEHVI). Options: scikit-learn GaussianProcessRegressor, GPy (CPU), or BoTorch on PyTorch. Rationale: BoTorch provides native CUDA GP inference, analytic and Monte-Carlo acquisition variants, and first-class multi-objective support, which the other libraries would have required custom work to match.'
+    - title: Physics-informed mean function biases the GP posterior
+      detail: Bayesian Optimization treats the unknown process response as a random function and maintains a GP posterior over it; each iteration the acquisition function balances exploration (high-uncertainty regions) against exploitation (high predicted value) to choose the next experiment. In GPO the GP posterior is additionally biased by a physics-informed mean function (e.g. a Taylor tool-wear relation for CNC or a glass-transition constraint for injection molding) so the optimizer starts from a physically plausible region rather than an uninformed prior, and the prior's influence shrinks automatically as more data accumulates via the Empirical-Bayes weighting term.
+    - title: 'Async pipeline: upload -> define space -> launch -> review live -> record observation'
+      detail: 'End-to-end loop: (1) upload process data (CSV of historical runs, or an MES/ERP-style export) with client-side schema validation in the DataUpload component; (2) define the parameter space and constraints (per-variable bounds; continuous/integer/categorical types; physical constraints such as glass-transition temperature) and optionally attach a physics prior or run purely data-driven; (3) launch a BO run that the API enqueues as a Celery task on the GPU worker, fitting the GP and optimizing the acquisition function each iteration; (4) review recommendations live via Plotly convergence curves, GP posterior surface, and uncertainty map, accepting/overriding/stopping; (5) record the new observation back through the API, retrain the GP, and continue until convergence or the experiment budget is exhausted.'
+  foothold:
+    - claim: BO converges in 2.38x fewer iterations than random search on the open injection-molding benchmark
+      evidence: 'Open B2SHARE/EUDAT injection-molding dataset (564 cycles, 4-D process space; an oracle GP fit to all 564 points provides ground truth), 20 independent repeats: vanilla BO with Expected Improvement reaches the 90% convergence threshold in 14.8 iterations vs. 35.1 for random search -- a 2.38x reduction. results/gate_benchmark_report.md Gate 1 and results/gate_report.txt (90%-threshold ratio 2.38x, Random=35.1, BO=14.8). On the synthetic Branin function (50 repeats, 95% CI) BO-EI reaches a final best of 0.3975 vs. 0.4285 for random search (f*=0.397887), confirming correct convergence behavior.'
+    - claim: Physics-informed prior cuts iterations to 90% convergence by ~41% on the open injection-molding benchmark
+      evidence: 'Open injection-molding dataset (564 cycles, 4-D process space), n=20 repeats: a prior encoding the glass-transition temperature constraint and a shrinkage-packing-pressure relation reduces iterations to the 90% convergence threshold from vanilla BO ~14.8 iter to BO+Prior ~8.8 iter. results/gate_benchmark_report.md Gate 3 reports +40.7% (1 - 8.8/14.8), and results/summary.csv confirms the BO+Prior run.'
+    - claim: Transfer learning (PP -> ABS) reduces simple regret at iteration 15 by ~66% vs cold-start BO on the open benchmark
+      evidence: 'On the open injection-molding benchmark, warm-starting the optimizer for a new ABS polymer with knowledge transferred from a previously optimized PP polymer drops simple regret at iteration 15 by ~66% relative to cold-start vanilla BO, n=20 repeats; the transfer module reuses GP hyperparameters and a residual mean function and degrades gracefully to an independent GP if source and target disagree. results/gate_benchmark_report.md Gate 4 reports +65.7% regret reduction at iter 15; gpo_core/transfer/gp_transfer.py implements residual-mean transfer + hyperparameter warm-start. (Reported honestly: on the iteration-threshold metric transfer was slightly slower than vanilla BO, indicating some negative transfer across the PP/ABS domain gap.)'
+    - claim: The engine generalizes cross-domain to CNC tool wear on a public dataset
+      evidence: 'Public Kaggle CNC milling tool-wear dataset (University of Michigan SMART Lab, 18 machining experiments, 2-D parameter space: feedrate_norm, clamp_pressure_norm): the CNC prior -- a Taylor-type wear law V_B proportional to f^alpha v^beta combined with a feed-rate/surface-roughness relation -- identifies feed-rate and spindle-speed combinations balancing tool life against machining time, demonstrating the engine + plug-in prior design transfers to a different process family. scripts/validate_real_cnc_bo.py; gpo_core/prior/cnc_milling.py implements the Taylor-type wear law; data/processed/cnc_mill/metadata.json (Kaggle shasun/tool-wear-detection-in-cnc-mill, 18 experiments).'
+    - claim: GP surrogate behaves correctly on Branin (low uncertainty near observations, high in unexplored regions)
+      evidence: 'GP posterior on the synthetic Branin function fit on n=20 observations with BoTorch SingleTaskGP (same surrogate as the convergence benchmark): posterior mean and uncertainty/std maps show the three true global optima, with uncertainty low near observed points and high in unexplored regions -- exactly what Expected Improvement exploits. gpo_core/surrogate/gp_model.py uses MaternKernel(nu=2.5, ard_num_dims); SingleTaskGP used in scripts/_branin_analysis.py.'
+    - claim: Validated on standard synthetic functions and open manufacturing datasets
+      evidence: 'Datasets validated: synthetic Branin and Hartmann-6 functions; an open B2SHARE/EUDAT injection-molding dataset (564 cycles, PP+ABS); a public Kaggle CNC tool-wear dataset (18 experiments); and a public Kaggle 3D-printer dataset (50 samples, 3-objective MOBO). scripts/run_benchmarks.py supports branin/hartmann6/injection-molding; scripts/validate_real_cnc_bo.py (18 exp); scripts/validate_real_3dprint_mobo.py (qEHVI MOBO, 3 objectives); dataset metadata.json files cite the B2SHARE/EUDAT and Kaggle sources. Developed solo on a single workstation (i9-9900K, 32 GB RAM, RTX 2080 Super 8 GB) with no custom sensors or factory hardware required.'
+  stack:
+    - category: Optimization / BO Stack
+      items:
+        - PyTorch 2.6 (CUDA 12.4)
+        - BoTorch 0.17
+        - GPyTorch
+        - Gaussian Process surrogate (Matérn 5/2 + ARD)
+        - Variational / RFF / Deep GP variants
+        - 'Acquisition: Expected Improvement, Upper Confidence Bound (beta=2.0), Knowledge Gradient'
+        - 'Multi-objective: qEHVI / qNEHVI with ModelListGP'
+    - category: Physics Priors & Transfer
+      items:
+        - AbstractPhysicsPrior interface with Empirical-Bayes auto-weighting
+        - Injection Molding prior (glass-transition constraint + shrinkage model)
+        - CNC Milling prior (Taylor-type tool-wear + surface-roughness law)
+        - Laser Welding prior (penetration-depth relations)
+        - 3D Printing prior (multi-output constraints)
+        - GP-to-GP residual transfer with hyperparameter warm-start (PP -> ABS)
+    - category: Backend
+      items:
+        - 'FastAPI (9 routers: auth, oauth, experiments, data, metrics, billing, usage, webhooks, websocket)'
+        - Celery + Redis (async BO execution, pub/sub progress streaming)
+        - PostgreSQL + TimescaleDB
+        - Alembic migrations
+        - GP checkpoint recovery
+        - JWT auth
+        - WebSocket progress
+    - category: Frontend
+      items:
+        - React + Vite
+        - Plotly (convergence curves, GP response surface, uncertainty map)
+        - react-router
+        - AuthContext (JWT)
+        - DataUpload component (client-side schema validation)
+        - Bilingual KO / EN UI toggle (react-i18next)
+    - category: Infrastructure & Observability
+      items:
+        - Docker Compose -- 8 services
+        - nginx web
+        - GPU-enabled Celery worker
+        - Prometheus
+        - Alertmanager
+        - Grafana
+        - 'Test suite: unit / integration / E2E / benchmark layers'
+    - category: Hardware (development)
+      items:
+        - 'Single workstation: Intel i9-9900K'
+        - 32 GB RAM
+        - NVIDIA RTX 2080 Super 8 GB
+        - No custom sensors or factory hardware -- consumes existing MES / ERP-style data exports
+  figures:
+    - src: projects/gpo/concept_plugin_priors.svg
+      section: decision
+      beat: 'Generic BO engine + per-process physics prior (plug-in)'
+      order: 1
+      band: true
+      alt: 'Plug-in physics priors: four interchangeable PhysicsPrior modules (injection / CNC / laser / 3D-print) socket into one fixed Bayesian Optimization core.'
+      caption: 'An abstract PhysicsPrior interface lets each process plug into one fixed BO core, so a new process ships as a single module while the surrogate, acquisition, and API layers stay untouched.'
+    - src: projects/gpo/concept_physics_mean.svg
+      section: decision
+      beat: 'Physics-informed mean function biases the GP posterior'
+      order: 1
+      band: true
+      alt: 'Two GP panels — an uninformed flat prior versus a physics-informed mean that biases the posterior toward a plausible region; an inset shows the Empirical-Bayes weight decaying as data accumulates.'
+      caption: 'A physics-informed mean function biases the GP toward a physically-plausible region, and Empirical-Bayes weighting shrinks the prior''s influence as data accumulates.'
+    - src: projects/gpo/hero.png
+      alt: GPO - Bayesian Optimization landscape
+      caption: Hero banner -- GPO Bayesian Optimization landscape visualization.
+    - src: projects/gpo/architecture.svg
+      section: lead
+      alt: 'GPO system architecture: 8-service Docker Compose stack showing Browser, nginx web, FastAPI, Postgres+TimescaleDB, Redis, Celery GPU worker, and Prometheus/Alertmanager/Grafana observability'
+      caption: System architecture -- 8-service Docker Compose deployment. FastAPI is the synchronous control plane; long-running BO iterations run asynchronously on a GPU-enabled Celery worker. Redis handles the Celery job queue and a pub/sub channel that streams per-iteration progress to the React client over WebSocket. PostgreSQL + TimescaleDB persists experiment state, per-iteration GP checkpoints, and time-series metrics (Alembic migrations). Prometheus scrapes API metrics, Alertmanager routes alerts, Grafana surfaces live ops dashboards.
+    - src: projects/gpo/benchmark_gains.svg
+      section: foothold
+      featured: true
+      alt: 'Bar comparison: iterations to 90% convergence on the open injection-molding benchmark — Random search 35.1, vanilla BO 14.8, BO + physics-prior 8.8 (fewer is better), with gains of 2.38x vs random, +40.7% with the prior, and a 65.7% transfer-regret cut at iteration 15.'
+      caption: 'Headline result on the open injection-molding benchmark (n=20): Bayesian Optimization reaches 90% convergence in 2.38x fewer experiments than random search, and a physics-informed prior cuts ~41% more on top; transfer (PP -> ABS) drops simple regret at iteration 15 by ~66%.'
+    - src: projects/gpo/optimization_surface.png
+      section: foothold
+      alt: 'GP posterior on Branin: posterior mean heatmap (left) with observed points and true global optima, and posterior uncertainty standard deviation (right)'
+      caption: GP posterior on Branin -- posterior mean (left) and uncertainty / std (right), fit on n=20 observations with BoTorch SingleTaskGP, the same surrogate used in the Gate 1 convergence benchmark. The three true global optima are marked with stars; uncertainty is low near observed points and high in unexplored regions, which is exactly what the Expected Improvement acquisition exploits.
+    - src: projects/gpo/convergence_branin.png
+      section: foothold
+      alt: 'Branin benchmark convergence plot: BO vs Random Search'
+      caption: 'Benchmark: BO vs. Random Search (Branin). 50 independent repeats, 95% confidence intervals. BO with Expected Improvement reaches the 90% convergence threshold in ~2.1x fewer evaluations than random search (BO ~9 vs. Random ~20 evaluations).'
+    - src: projects/gpo/cnc_optimization_insights.png
+      section: foothold
+      featured: true
+      alt: CNC tool wear optimization insights
+      caption: Cross-Domain Validation (CNC Tool Wear). On a public CNC milling tool-wear dataset (18 experiments), the CNC prior -- a Taylor-type wear law V_B proportional to f^alpha v^beta combined with a feed-rate / surface-roughness relation -- identifies feed-rate and spindle-speed combinations balancing tool life against machining time, demonstrating that the engine + plug-in prior design transfers cleanly to a different process family.
+- slug: causal-rca
+  title: Causal RCA Platform
+  scope: Research prototype · open/synthetic data
+  tagline: 'Correlation tells you which variables move together; causation tells you which one to fix. This research platform learns the process causal graph via ensemble discovery (PC, GES, NOTEARS, FCI), then ranks root causes by |ATE| x edge_confidence x bootstrap_stability.'
+  thumb: thumbs/causal_rca_thumb.png
+  tier: rich
+  home: true
+  order: 5
+  tldr: 'Most defect analytics stops at correlation; this research platform learns the causal graph instead, so root causes are separated from co-symptoms and what-if changes can be screened with do-calculus before touching the line. Four discovery algorithms (PC, GES, NOTEARS, FCI) vote into a 12-node / 7-edge DAG, DoWhy ATE with refutation tests guards the effects, and causes rank by |ATE| x edge_confidence x bootstrap_stability. Research prototype validated on a synthetic injection-molding dataset plus open SECOM/TEP benchmarks; no real-factory numbers are claimed.'
+  stats:
+    - value: '4'
+      label: discovery algorithms
+      sub: PC · GES · NOTEARS · FCI, ensemble-voted
+    - value: '12 / 7'
+      label: nodes / edges
+      sub: consensus DAG after stability filtering
+    - value: '45+'
+      label: API endpoints
+      sub: FastAPI, API-key auth + RBAC
+    - value: '700+'
+      label: tests
+      sub: unit and integration
+  problem: Manufacturing process analytics typically stops at correlation-based defect detection, which tells you which variables move together but not which ones actually cause defects. That leaves operators unable to know which process change will fix a defect versus which is merely a co-symptom, and any what-if change has to be reasoned about without a model of cause and effect. The platform addresses this by learning the causal graph of the process and quantifying cause-effect strength, so root causes can be ranked and interventions can be screened against a causal model before being applied. The validation target is a synthetic injection-molding dataset with 12 variables organized into 3 tiers (process parameters -> intermediate states -> defects) and 13 ground-truth causal edges, plus the open SECOM and TEP benchmarks; real-factory numbers are explicitly not claimed.
+  contributions:
+    - 'Causal core, built end-to-end as main developer: four discovery algorithms (PC, GES, FCI via causal-learn, custom NOTEARS) behind a unified runner with weighted ensemble voting and joblib-parallel bootstrap edge stability, feeding a DoWhy ATE estimator guarded by three refutation tests (placebo, random common cause, data subset) and a do-calculus intervention simulator.'
+    - 'RCA engine and analytics: composite scoring |ATE| x edge_confidence x bootstrap_stability extended with mediation, multi-hop path, conditional, and counterfactual RCA; temporal discovery (Granger, window-based GES, regime detection); and a JSON-backed model registry with a 4-stage lifecycle, data/concept-drift detection (KS + PSI), and A/B comparison.'
+    - 'Full delivery stack: FastAPI backend (45+ endpoints, API-key auth + RBAC), a React 18 + TypeScript + MUI 6 SPA (12 pages, D3.js causal-graph viz, EN/KO, SSE-streamed local-Ollama chat grounded by ~1500-token context injection), 9 phase-based orchestrators, 700+ tests, and Docker Compose + GitHub Actions CI/CD.'
+  design_decisions:
+    - title: Learn causality, not correlation
+      detail: Rather than stopping at correlation-based defect detection, the platform learns the causal graph of the process via causal discovery (PC, GES, NOTEARS, FCI) so that root causes are distinguished from co-symptoms and interventions can be reasoned about with do-calculus.
+    - title: Ensemble discovery with bootstrap edge stability
+      detail: No single discovery algorithm is trusted alone. Four algorithms (PC, GES, FCI via causal-learn, and a custom NOTEARS) run behind a unified runner, then weighted ensemble voting plus bootstrap-based edge stability (joblib-parallelized) decide which edges survive into the final DAG, reducing dependence on any one method's assumptions.
+    - title: Guard inferred effects with refutation tests
+      detail: Effect estimation uses DoWhy ATE with three refutation tests (placebo treatment, random common cause, data subset). Effects that do not survive refutation are treated as suspect, guarding against spurious cause-effect claims.
+    - title: Transparent composite RCA scoring
+      detail: Root causes are ranked by score = |ATE| x edge_confidence x bootstrap_stability, and every row exposes the underlying ATE, edge confidence, composite score, and bootstrap stability separately so the ranking never becomes a black box. An operator can see, for target Shrinkage, that Cooling Time outranks Mold Temp because its absolute effect is larger while its edge is as confident (82%) and as stable (100%) as Mold Temp's.
+    - title: Extend beyond plain RCA
+      detail: The RCA engine adds mediation analysis (decomposing total effect into direct vs. indirect paths), multi-hop path analysis, conditional RCA (conditioning on a covariate), and counterfactual RCA, exposed through an Advanced Root Cause Analysis panel.
+    - title: Screen interventions against the causal model
+      detail: 'A What-If page simulates do-interventions on the learned graph: the user picks an intervention variable, sets a counterfactual value, picks a downstream target, and the system returns the expected outcome and the delta from baseline (e.g., forcing Mold Temp = 45 yields expected Shrinkage -6.15 vs baseline -0.001). This lets a user screen candidate process changes against the causal model before applying them, and stacks on a parameter-sweep utility for continuous variable scans.'
+    - title: Phase-based orchestration
+      detail: The pipeline is organized into 9 phase-based orchestrators sharing a common base class, spanning data ingestion through discovery, inference, RCA, and delivery, which keeps each stage independently testable and composable.
+    - title: Multi-process registry
+      detail: 'The platform manages multiple process types in parallel rather than a single hardcoded process. Three built-in processes ship: injection_molding (12 vars, 13 edges; defects Dim Defect / Flow Mark), extrusion (10 vars, 10 edges; defects Dimensional Accuracy / Tensile Strength), and cnc_machining (10 vars, 10 edges; defects Dimensional Tolerance / Tool Life).'
+    - title: MLOps lifecycle and drift detection
+      detail: A JSON-backed model registry tracks a 4-stage lifecycle (candidate -> staging -> production -> archived), with data-drift detection (KS test + PSI), concept-drift detection (edge- and ATE-comparison), and an A/B comparison engine with a recommendation heuristic to decide which model to promote.
+    - title: Grounded local-LLM chat
+      detail: A local Ollama model (qwen2.5:3b default) is integrated with SSE streaming. A context-injection prompt summarizes the current causal graph and RCA results into ~1500 tokens so the assistant answers natural-language questions while staying grounded in the actual model state rather than hallucinating.
+    - title: Operator-facing monitoring on top of Prometheus/Grafana
+      detail: 'Beyond Prometheus/Grafana metrics, a Monitoring page gives a human-readable operator view: a KPI strip (overall status, total requests, active alerts, uptime), a per-component health grid (api, graph, scheduler, data_registry, model_registry, auth, alert_manager) with Up/Down badges and contextual metadata, and a resources panel tracking disk usage and log-file size.'
+  foothold:
+    - claim: Learned DAG renders with 12 nodes and 7 edges after ensemble consensus and bootstrap stability filtering, with tier-colored hierarchical layout.
+      evidence: 'Causal Graph View: D3.js DAG with 12 nodes and 7 edges; process parameters (orange), intermediate states (blue), outcomes (red); confidence/stability sliders and a per-node detail panel showing incoming/outgoing edges. Confirmed by committed results/phase2/graph/production_graph.json: 12 variable_names, 7 entries in edge_confidence/edge_stability, metadata filtered_min_confidence=0.5 / filtered_min_stability=0.6, algorithms [fci, pc, ges, notears].'
+    - claim: For outcome Shrinkage the detail panel exposes three incoming edges with per-edge confidence and stability.
+      evidence: 'production_graph.json edge_confidence/edge_stability: mold_temp|shrinkage 0.8222 / 1.0 (82.2% / 100%), resin_temp|shrinkage 0.6000 / 1.0 (60.0% / 100%), cooling_time|shrinkage 0.8222 / 1.0 (82.2% / 100%) -- the three incoming edges shown in the Causal Graph View.'
+    - claim: RCA ranks causes for a target via score = |ATE| x confidence x stability and exposes each factor separately.
+      evidence: 'Root Cause Analysis: for target Shrinkage, top three causes are Cooling Time (score 0.62, ATE -0.065), Mold Temp (0.29, ATE +0.030), Resin Temp (0.09, ATE +0.013); table shows ATE, confidence, composite score, and stability per row. Formula verified in src/skills/rca_engine.py:166 (contribution = abs(ate_value) * confidence * stability); per-row fields (contribution_score, ate_value, confidence, stability, causal_paths) verified in committed results/phase2/rca/step3_rca_results.json.'
+    - claim: What-If page returns expected outcome under a do-intervention plus delta from baseline.
+      evidence: 'What-If Simulation: forcing Mold Temp = 45 yields expected Shrinkage -6.15 vs baseline -0.001 (effect -6.15). Intervention simulator (do-calculus) verified in src/skills/intervention_simulator.py (baselines / effects / target_baselines fields).'
+    - claim: Platform manages multiple process types in parallel with distinct variable/edge counts and defect targets.
+      evidence: 'Multi-Process Registry + src/skills/process_registry.py: injection_molding (12 vars / 13 edges; dim_defect / flow_mark), extrusion (10 vars / 10 edges; dimensional_accuracy / tensile_strength), cnc_machining (10 vars / 10 edges; dimensional_tolerance / tool_life). Advanced RCA panel with Mediation, Conditional, Counterfactual toggles.'
+    - claim: Monitoring exposes a per-component health grid and resource utilization in one pane.
+      evidence: 'Operational Monitoring + src/dashboard/pages/monitoring_view.py: KPI strip (overall status, total requests, active alerts, uptime); component grid for api, graph, scheduler, data_registry, model_registry, auth, alert_manager with Up/Down badges; resources panel for disk usage and log-file size.'
+    - claim: DoWhy ATE estimates are guarded by three refutation tests.
+      evidence: src/skills/causal_inference_engine.py:270 default methods = [random_common_cause, placebo_treatment_refuter, data_subset_refuter], invoked via DoWhy model.refute_estimate().
+    - claim: Validated on a synthetic injection-molding dataset and exercised on open public benchmarks; no real-factory numbers claimed.
+      evidence: 'Synthetic dataset verified in src/skills/synthetic_data_generator.py (12 variables, asserts exactly 13 edges, 3 tiers). Open SECOM + TEP benchmarks exercised via src/agents/real_data_validator.py (SECOM UCI semiconductor 590 vars / 1567 obs; TEP Tennessee Eastman 52 vars / 21 faults) and configs/phase{0,1,2}_config.yaml. README License: ''Personal research project''; no real-factory numbers claimed.'
+    - claim: Verified with 700+ unit and integration tests across all major modules.
+      evidence: '1498 test functions across the tests/ tree (grep ''def test_''); the project docs record ''Tests: 700+''. Conservative 700+ claim holds.'
+    - claim: Backend exposes 45+ endpoints with API-key auth and RBAC.
+      evidence: 50 endpoint decorators across src/api/routes/ (grep @router.{get,post,put,delete,patch}); API-key auth + RBAC (viewer/operator/admin) in src/skills/auth_manager.py.
+  stack:
+    - category: Causal Discovery
+      items:
+        - PC
+        - GES
+        - FCI (causal-learn)
+        - NOTEARS (custom)
+        - Weighted ensemble voting
+        - Bootstrap-based edge stability
+        - joblib (parallel)
+    - category: Causal Inference & RCA
+      items:
+        - DoWhy ATE estimation
+        - Refutation tests (placebo, random common cause, data subset)
+        - Composite ranking |ATE| x confidence x stability
+        - Mediation analysis
+        - Multi-hop path analysis
+        - Conditional RCA
+        - Counterfactual RCA
+        - do-calculus intervention simulator
+    - category: Temporal
+      items:
+        - Granger causality
+        - Window-based GES
+        - Regime detection
+        - Temporal stability tracking
+    - category: MLOps
+      items:
+        - JSON-backed model registry (4-stage lifecycle)
+        - Data-drift detection (KS test + PSI)
+        - Concept-drift detection (edge / ATE comparison)
+        - A/B comparison with recommendation
+    - category: Backend
+      items:
+        - FastAPI (45+ endpoints)
+        - uvicorn
+        - Pydantic
+        - SQLAlchemy
+        - SSE streaming
+    - category: Frontend
+      items:
+        - Vite
+        - React 18
+        - TypeScript
+        - MUI 6
+        - D3.js
+        - Recharts
+        - TanStack Query
+        - 12 pages
+        - bilingual EN / KO
+        - dark / light themes
+    - category: Knowledge Graph
+      items:
+        - Neo4j
+        - Pluggable GraphStore abstraction
+        - Cypher path exploration
+        - Data lineage
+    - category: LLM Integration
+      items:
+        - Ollama (qwen2.5:3b default)
+        - SSE streaming
+        - ~1500-token context injection (causal graph + RCA results)
+    - category: Dashboards
+      items:
+        - Streamlit (9 pages)
+        - matplotlib
+        - seaborn
+    - category: Security
+      items:
+        - API-key authentication
+        - RBAC (admin / operator / viewer)
+        - JSON-lines audit log
+        - Configurable alert rules with webhook delivery
+    - category: Monitoring
+      items:
+        - prometheus_client metrics
+        - Grafana dashboards
+        - Liveness / readiness / detailed health endpoints
+    - category: Infrastructure
+      items:
+        - 'Docker Compose (multi-service: API / frontend / dashboard / Prometheus / Grafana / Neo4j)'
+        - GitHub Actions CI/CD (lint, test, image build)
+        - Structured JSON logging with rotating handlers
+    - category: Validation
+      items:
+        - Synthetic injection-molding dataset (12 vars, 13 edges, 3 tiers)
+        - 'Open public benchmarks: SECOM, TEP'
+        - 700+ unit and integration tests
+  figures:
+    - src: projects/causal-rca/concept_ensemble_stability.svg
+      section: decision
+      beat: 'Ensemble discovery with bootstrap edge stability'
+      order: 1
+      band: true
+      alt: 'Pipeline: four discovery algorithms (PC, GES, FCI, NOTEARS) vote, bootstrap stability scores each edge, and a confidence >= 0.5 and stability >= 0.6 gate filters down to a 12-node, 7-edge DAG.'
+      caption: 'No single discovery algorithm is trusted alone: four methods vote, bootstrap stability scores each edge, and only edges clearing both thresholds (confidence ≥ 0.5 and stability ≥ 0.6) reach the final consensus DAG — 12 nodes, 7 edges.'
+    - src: projects/causal-rca/concept_composite_score.svg
+      section: decision
+      beat: 'Transparent composite RCA scoring'
+      order: 1
+      band: true
+      alt: 'The score = |ATE| x edge_confidence x bootstrap_stability formula with each factor exposed, and a worked Shrinkage example ranking Cooling Time (0.62) above Mold Temp (0.29) and Resin Temp (0.09).'
+      caption: 'Root causes rank by score = |ATE| x edge_confidence x bootstrap_stability with every factor exposed separately, so the ranking stays auditable rather than a black box.'
+    - src: projects/causal-rca/causal_intervention.svg
+      section: decision
+      beat: 'Screen interventions against the causal model'
+      order: 1
+      band: true
+      alt: 'A do-intervention on the learned graph: forcing Mold Temp = 45 yields expected Shrinkage -6.15 versus a baseline of -0.001 (effect -6.15).'
+      caption: 'Screen a process change before it touches the line: a do-intervention on the learned graph (Mold Temp = 45) returns the expected Shrinkage (-6.15) and its delta from baseline (-0.001).'
+    - src: projects/causal-rca/hero.jpg
+      alt: Causal RCA Platform - Hierarchical causal graph of manufacturing process variables
+      caption: 'Hero banner: hierarchical causal graph of manufacturing process variables.'
+    - src: projects/causal-rca/architecture.svg
+      section: lead
+      alt: 'Causal RCA Platform architecture: data layer, causal discovery, inference and RCA, MLOps and enterprise plumbing, and delivery layer (API, SPA, Streamlit, Neo4j, LLM chat)'
+      caption: 'System architecture. End-to-end flow: pluggable data connectors -> ensemble causal discovery -> DoWhy inference and RCA ranking -> MLOps / enterprise controls -> delivery surfaces (REST API, React SPA, Streamlit, Neo4j, LLM chat).'
+    - src: projects/causal-rca/CausalRCA_1.png
+      section: results
+      featured: true
+      alt: 'Causal graph page: learned DAG with 12 nodes and 7 edges, hierarchical layout with color-coded tiers, confidence and stability filters, and right-hand detail panel showing incoming edges to the selected outcome with confidence and stability per edge'
+      caption: 'Causal Graph View: learned DAG (12 nodes, 7 edges after ensemble consensus and bootstrap stability filtering) with tier-colored hierarchical layout, confidence/stability sliders, and a per-node detail panel. Outcome Shrinkage is selected, revealing three incoming edges: Mold Temp (82.2% / 100%), Resin Temp (60.0% / 100%), Cooling Time (82.2% / 100%).'
+    - src: projects/causal-rca/CausalRCA_2.png
+      section: results
+      alt: 'Root Cause Analysis page with target Shrinkage: contribution bar chart showing top three causes Cooling Time, Mold Temp, and Resin Temp, plus detailed results table exposing ATE, confidence, composite score, and stability per cause'
+      caption: 'Root Cause Analysis: causes ranked for target Shrinkage by score = |ATE| x confidence x stability. Top three: Cooling Time (score 0.62, ATE -0.065), Mold Temp (0.29, ATE +0.030), Resin Temp (0.09, ATE +0.013), with each factor exposed separately so the ranking stays transparent.'
+    - src: projects/causal-rca/CausalRCA_3.png
+      section: results
+      alt: 'What-If Simulation page: intervention on Mold Temp set to 45 against target Shrinkage, showing baseline value, expected value after intervention, and the effect as a change'
+      caption: 'What-If Simulation: do-interventions on the learned graph. Forcing Mold Temp = 45 yields expected Shrinkage -6.15 versus a baseline of -0.001 (effect -6.15), letting operators screen process changes before risking them on the line.'
+    - src: projects/causal-rca/CausalRCA_4.png
+      section: results
+      alt: 'Processes page: multi-process registry listing injection molding, extrusion, and CNC machining with their variable counts, edge counts, and defect targets, plus an Advanced Root Cause Analysis panel with Mediation, Conditional, and Counterfactual toggles'
+      caption: 'Multi-Process Registry: three built-in processes (injection_molding 12 vars/13 edges; extrusion 10 vars/10 edges; cnc_machining 10 vars/10 edges) with an Advanced Root Cause Analysis panel exposing Mediation, Conditional, and Counterfactual RCA.'
+    - src: projects/causal-rca/CausalRCA_5.png
+      section: foothold
+      alt: 'Monitoring page: overall health status, total requests, active alerts, uptime, a per-component health grid covering api graph scheduler data_registry model_registry auth and alert_manager, and resource utilization with disk free disk total disk usage and log file size'
+      caption: 'Operational Monitoring: KPI strip (overall status, total requests, active alerts, uptime), per-component health grid (api, graph, scheduler, data_registry, model_registry, auth, alert_manager) with Up/Down badges, and a resources panel tracking disk usage and log-file size; backs the platform''s Prometheus / Grafana integration.'
+- slug: visionforge
+  title: VisionForge - AI Vision Platform
+  scope: Personal R&D · open benchmark data
+  tagline: 'Grade the defect, don''t just label it: a PCB inspection platform that maps each detection to IPC-A-610 Class 1/2/3 acceptability, combining YOLOv8, a Stable Diffusion module, and a from-scratch NeRF + Open3D 3D stack, validated on the open PKU-Market dataset.'
+  thumb: thumbs/visionforge_thumb.png
+  tier: boilerplate
+  home: true
+  order: 6
+  tldr: 'The core idea is the compliance layer: rather than emit a raw defect label, VisionForge grades each detection against the IPC-A-610 Class 1/2/3 standard, so the same defect can be acceptable under one class and nonconforming under a stricter one. A platform combining YOLOv8, a Stable Diffusion module, and a from-scratch NeRF + Open3D 3D stack behind a dual-service FastAPI backend and tkinter GUI. Honest scope: it runs on the open PKU-Market PCB dataset (6 classes), so this is an R&D build, not a deployed system, with no coverage or eval report committed.'
+  stats:
+    - value: 'Class 1/2/3'
+      label: IPC-A-610 grading
+      sub: compliance verdict, not a raw label
+    - value: '4'
+      label: models in the pipeline
+      sub: YOLOv8 · Stable Diffusion · NeRF · Open3D
+    - value: '6'
+      label: PCB defect classes
+      sub: open PKU-Market dataset
+    - value: '1,039'
+      label: test functions
+      sub: across 58 test files
+  problem: 'PCB inspection requires checking solder joints and component placement against IPC-A-610 acceptability standards, but manual or rule-based optical inspection is slow, inconsistent, and struggles with rare defect types. The engineering goal was a vision system that detects multiple PCB defect classes, maps them to IPC-A-610 Class 1/2/3 compliance categories, and is structured to run on a high-throughput line. A core challenge addressed in the design is class imbalance: rare defect types are underrepresented in typical PCB defect datasets. The project is a personal/R&D build developed on the open PKU-Market PCB defect dataset, not real production data from any factory or client.'
+  contributions:
+    - 'IPC-A-610 compliance mapping (the differentiator): built the module that grades each detected defect to ACCEPTABLE / PROCESS_INDICATOR / NONCONFORMING / DEFECT per IPC Class 1/2/3, with per-class tolerances and solder requirements, so the output is a recognized compliance verdict rather than a raw model label.'
+    - 'Multi-model vision pipeline: wired YOLOv8 (Ultralytics 8.3.182, yolov8n/s/m/l/x via a FastAPI route) for multi-class detection, a from-scratch NeRF (PositionalEncoder, ray bundles, volume rendering) + Open3D for 3D solder-joint inspection, and a Stable Diffusion module (NoiseScheduler, CLIPTextEncoder, SafetyChecker via diffusers) for synthetic augmentation — though the only augmentation actually wired into the training pipeline is geometric OpenCV transforms, and the SD module''s measured effect is not in the repo.'
+    - 'Built end-to-end as solo developer: the dual-service FastAPI backend (VisionForge on :8000, standalone PCB_Vision API on :8001) and a tkinter live-inspection desktop GUI (image overlays, pass/fail status, batch processing).'
+  design_decisions:
+    - title: Map detections to IPC-A-610 Class 1/2/3 compliance
+      detail: Detected defects are classified against the IPC-A-610 industry acceptability standard via an explicit mapping module (PCB_Vision/core/ipc_standards.py + config), which encodes per-defect outcomes (ACCEPTABLE / PROCESS_INDICATOR / NONCONFORMING / DEFECT) for Class 1, Class 2, and Class 3 separately, plus per-class tolerance levels and solder requirements. Output is expressed as a recognized compliance category rather than a raw model label, making results actionable for quality control. This compliance-verdict layer is the platform's core differentiator.
+    - title: Multi-model architecture instead of a single detector
+      detail: 'Rather than relying on one model, the pipeline combines YOLOv8 for real-time 2D defect detection, a Stable Diffusion module for generative image synthesis, and a from-scratch NeRF + Open3D for 3D reconstruction. Each component targets a distinct need: fast 2D detection, training-data coverage, and 3D solder-joint geometry inspection. All four are present in the repo (ultralytics 8.3.182 in models/detection/yolo_detector.py; diffusers-based Stable Diffusion in advanced_vision/generative_ai.py; PyTorch NeRF in models/reconstruction/nerf_model.py; Open3D across models/vision3d and models/depth).'
+    - title: YOLOv8 for multi-class defect detection
+      detail: YOLOv8 (Ultralytics 8.3.182, PyTorch) is the detection engine, producing bounding boxes and confidence scores. The FastAPI detection route accepts yolov8n/s/m/l/x variants (VisionForge/api/routes/detection.py), and the defect taxonomy is defined as a DefectType enum (PCB_Vision/core/defect_detector.py) covering solder_bridge, solder_cold_joint, solder_insufficient, component_misalignment, open_circuit and more. The defect data shipped in the repo is the open PKU-Market PCB dataset (missing_hole / mouse_bite / open_circuit / short / spur / spurious_copper).
+    - title: Stable Diffusion generative module for the class-imbalance problem
+      detail: 'Because rare defect types are underrepresented in PCB defect datasets, a Stable Diffusion generative-AI module (diffusers, with NoiseScheduler, CLIPTextEncoder, and a SafetyChecker in advanced_vision/generative_ai.py) is available to synthesize images and help balance the training distribution. Honest scope: the module exists and is exposed via the advanced-vision API, but no committed code path connects it to PCB defect-class balancing; the augmentation actually used in the training pipeline is geometric OpenCV transforms (DataAugmentationStep). The amount of synthetic data generated and its measured effect on accuracy/recall are not in the repo.'
+    - title: NeRF + Open3D for 3D solder-joint inspection
+      detail: Solder-joint quality depends on 3D geometry that 2D images cannot fully capture, so a from-scratch NeRF (PositionalEncoder, ray bundles, volume rendering in models/reconstruction/nerf_model.py) and Open3D were integrated to reconstruct and analyze solder joints in 3D.
+    - title: FastAPI backend + tkinter live-inspection desktop GUI
+      detail: A FastAPI (Python 3.10+) backend serves the models as two services (VisionForge on :8000, standalone PCB_Vision API on :8001), and a tkinter desktop GUI (PCB_Vision/gui/app.py, documented in docs/FRONTEND_EN.md) provides live inspection feedback (image overlays, pass/fail status) plus batch processing of multiple boards.
+    - title: GPU acceleration and containerized packaging
+      detail: The system uses GPU acceleration (CUDA 12.1, PyTorch 2.1.0+cu121) and is packaged with Docker (deployment/docker/Dockerfile + docker-compose.yml, plus Kubernetes manifests under deployment/k8s) for reproducible setup. The repo does not contain committed throughput/latency/FPS benchmark output; README performance figures are self-reported and not backed by committed measurement files, so no quantitative performance number is claimed here.
+  foothold:
+    - claim: Validated on the open PKU-Market PCB defect dataset (6 defect classes)
+      evidence: Demo-dataset/PCB_DATASET/Annotations/ contains the canonical 6-class PKU PCB defect set — Missing_hole / Mouse_bite / Open_circuit / Short / Spur / Spurious_copper (~115-116 Pascal-VOC XML annotations per class; 3034x1586 board images), identifying it as the public Peking University PCB defect dataset rather than client data.
+    - claim: Detects multiple PCB defect classes mapped to a rich internal taxonomy
+      evidence: DefectType enum in PCB_Vision/core/defect_detector.py defines SOLDER_BRIDGE, SOLDER_COLD_JOINT, SOLDER_INSUFFICIENT, COMPONENT_MISALIGNMENT, OPEN_CIRCUIT (plus ~15 more solder/component/trace types); defect_classes list enumerates the matching labels.
+    - claim: Classifies defects against the IPC-A-610 Class 1/2/3 acceptability standard
+      evidence: PCB_Vision/core/ipc_standards.py maps each defect to ACCEPTABLE/PROCESS_INDICATOR/NONCONFORMING/DEFECT per IPCClass.CLASS_1/2/3; PCB_Vision/config + pcb_inspection_config.yaml define per-class tolerances and solder requirements for all three classes.
+    - claim: Detection returns bounding boxes and confidence scores; supports YOLOv8 size variants
+      evidence: VisionForge/api/routes/detection.py exposes /single and batch detection returning DetectionBox + confidence and supports yolov8n/s/m/l/x variants.
+    - claim: Stable Diffusion generative-AI module is implemented (intended for synthetic-data / class imbalance)
+      evidence: VisionForge/advanced_vision/generative_ai.py implements DiffusionConfig, NoiseScheduler, CLIPTextEncoder, SafetyChecker and loads a StableDiffusion model via diffusers. No code path ties SD output to PCB defect-class balancing; the training-pipeline augmentation actually wired in is the geometric OpenCV DataAugmentationStep in core/preprocessing_implementations.py.
+    - claim: 3D solder-joint inspection via from-scratch NeRF + Open3D
+      evidence: From-scratch NeRF in VisionForge/models/reconstruction/nerf_model.py (PositionalEncoder, RayBundle, volume rendering) + advanced_vision/nerf_3d.py; Open3D used in models/vision3d/ and models/depth/.
+    - claim: Live inspection with pass/fail status and batch processing (tkinter desktop GUI)
+      evidence: PCB_Vision/gui/app.py (tkinter) implements batch inspection, passed/failed counters, and pass/fail verdict rendering; documented in docs/FRONTEND_EN.md as a tkinter desktop application.
+    - claim: GPU-accelerated and Docker/Kubernetes deployable
+      evidence: PyTorch 2.1.0+cu121, CUDA 12.1 (environment.yml, nvidia/cuda:12.1-runtime base in docs/ARCHITECTURE_EN.md); Docker + docker-compose.yml under deployment/docker, K8s manifests under deployment/k8s. No committed throughput/latency/FPS benchmark output exists.
+    - claim: 'Test suite present: 1,039 test functions across 58 test files'
+      evidence: 'grep -rE ''def test_'' over the repo: 1,039 test functions across 58 test_*.py files (48 under VisionForge/tests, 7 under PCB_Vision/tests, 3 top-level: PCB_Vision/test_system.py, VisionForge/test_depth.py, VisionForge/test_models.py). The README badge claims 95% coverage but no coverage report or pass-rate output is committed.'
+  stack:
+    - category: Deep Learning
+      items:
+        - PyTorch 2.1.0+cu121
+        - YOLOv8 (Ultralytics 8.3.182)
+        - Stable Diffusion (diffusers)
+        - TensorFlow 2.15.0
+    - category: 3D Reconstruction
+      items:
+        - NeRF (from-scratch PyTorch)
+        - Open3D
+    - category: Backend
+      items:
+        - FastAPI 0.116.1
+        - Python 3.10+
+        - OpenCV 4.12.0
+    - category: Frontend / UI
+      items:
+        - tkinter desktop GUI (PCB_Vision)
+    - category: Infrastructure
+      items:
+        - Docker + docker-compose
+        - Kubernetes manifests
+        - CUDA 12.1
+    - category: Standards / Domain
+      items:
+        - IPC-A-610 Class 1/2/3
+    - category: Data
+      items:
+        - Open PKU-Market PCB defect dataset (6 classes, Pascal-VOC annotations)
+  figures:
+    - src: projects/visionforge/hero.png
+      section: lead
+      alt: 'VisionForge hero — PCB defect inspection graded against IPC-A-610 Class 1/2/3 on the open PKU-Market dataset.'
+      caption: 'VisionForge — PCB defect inspection mapped to IPC-A-610 Class 1/2/3, validated on the open PKU-Market dataset.'
+    - src: projects/visionforge/concept_ipc_mapping.svg
+      section: decision
+      beat: 'Map detections to IPC-A-610 Class 1/2/3 compliance'
+      order: 1
+      band: true
+      alt: 'IPC-A-610 class-mapping matrix: detected defects (insufficient solder, solder bridge, misalignment) graded across Class 1/2/3, color-coded ACCEPTABLE / PROCESS_INDICATOR / NONCONFORMING-DEFECT, stricter by class.'
+      caption: 'Each detected defect is graded against IPC-A-610 Class 1/2/3, so the same defect can be acceptable under one class and nonconforming under a stricter one — output is a recognized compliance category, not a raw model label.'
+    - src: projects/visionforge/architecture.svg
+      section: approach
+      alt: System Architecture
+      caption: End-to-end PCB inspection pipeline from high-resolution camera input through the YOLOv8 detection engine to IPC-A-610 compliance classification, with a Stable Diffusion module for synthetic defect augmentation, NeRF + Open3D for 3D reconstruction, and a FastAPI backend.
+    - src: projects/visionforge/Vision_Forge_1.png
+      section: results
+      featured: true
+      alt: Defect Detection Dashboard
+      caption: 'Main dashboard showing PCB inspection results: detected defects with bounding boxes, confidence scores, and defect classifications. Supports batch processing and individual board analysis with IPC-A-610 compliance checking.'
+    - src: projects/visionforge/Vision_Forge_2.png
+      section: results
+      alt: Macro Closeup Analysis
+      caption: High-resolution macro closeup view for detailed inspection of individual components and solder joints, enabling precise defect identification (solder bridges, insufficient solder, cold joints, component placement errors) at the microscopic level.
+    - src: projects/visionforge/Vision_Forge_3.png
+      section: results
+      alt: Live Inspection Interface
+      caption: Live inspection interface providing real-time feedback, with defect detection overlays and pass/fail status indicators for quality-control integration.
+    - src: projects/visionforge/Vision_Forge_4.png
+      section: results
+      featured: true
+      alt: Multi-Board Batch Processing
+      caption: Batch processing mode for inspecting multiple PCBs simultaneously, with aggregated statistics and defect distribution analysis across batches to identify systematic production issues.
+    - src: projects/visionforge/Vision_Forge_5.png
+      section: results
+      featured: true
+      alt: Model Training Evolution
+      caption: Visualization of the model training process showing loss curves, accuracy metrics, and performance evolution over training epochs.
+- slug: apex-ml
+  title: APEX-ML - Open Benchmark
+  scope: Open-data benchmark · no company/client data
+  tagline: 'Screen cheap, then spend GPU compute only on survivors. A GPU-native AutoML platform whose 3-phase pipeline (Rapid Screening, Optuna TPE tuning, genetic-algorithm ensemble) explores ~85 algorithms for imbalanced tabular classification, benchmarked on the public Credit Card Fraud dataset.'
+  thumb: thumbs/apex_ml_thumb.png
+  tier: enhanced
+  home: true
+  order: 9
+  tldr: 'Unlike general-purpose AutoML (Auto-sklearn, TPOT) that tunes the full candidate set, APEX-ML screens ~85 algorithms cheaply on a 10% sample, then spends Optuna TPE and genetic-algorithm compute only on the survivors — a 3-phase funnel for imbalanced tabular classification on Ray-distributed GPUs. The public Credit Card Fraud dataset (284,807 samples, 0.17% positives) is used as an integration and throughput benchmark; raw accuracy is not presented as evidence of model quality at that imbalance. Scope is stated up front: this open-data project shares its name and approach with an AutoML platform I built at JS SYSTEM, but no company data, results, or client work are reproduced here — it was built and validated solo on open/public datasets, not deployed at any client.'
+  stats:
+    - value: '284,807'
+      label: benchmark samples
+      sub: Credit Card Fraud dataset
+    - value: '0.17%'
+      label: positive class
+      sub: extreme imbalance
+    - value: '3'
+      label: pipeline phases
+      sub: screen · tune · ensemble
+    - value: '23'
+      label: committed core tests
+      sub: repository-verified suite
+  problem: General-purpose AutoML tools (Auto-sklearn, TPOT) are slow and not GPU-native, and building strong models for imbalanced tabular classification (e.g. fraud or defect detection) takes substantial manual ML effort. The goal of this personal R&D project was a GPU-native AutoML platform that exhaustively explores a large algorithm space efficiently and is purpose-built for imbalanced classification. It shares its name and approach with an AutoML platform I built at JS SYSTEM, but no company data, results, or client work are reproduced here — it is a solo-built engineering project validated on open/public datasets, not deployed at any client.
+  contributions:
+    - 'Built end-to-end as the sole developer: the complete 3-phase pipeline (Rapid Screening -> Focused Optimization -> Self-Evolution), the FastAPI backend (port 8010), and the FastAPI-served HTML/vanilla-JS/Plotly.js dashboard for real-time pipeline monitoring (no React/Vue/Angular framework).'
+    - 'Implemented and integrated ~85 ML algorithms (81 classification-capable) across roughly 15 categories — Tree-Based, Traditional ML, Neural Networks, Deep Tabular, Foundation Models, Ensemble, GNN, Meta-Learning, Quantum-Inspired, Self-Supervised, Time Series, Clustering, and SOTA 2024-2025 — with custom meta-learning warm-start configurations.'
+    - 'Engineered the GPU layer and validation: distributed GPU scheduling via Ray (backend/distributed/, @ray.remote num_gpus tasks, RayClusterManager, checkpoint-based fault tolerance) and Optuna TPE Bayesian tuning, validated end-to-end on open/public datasets (Credit Card Fraud, diabetes, titanic, wine-quality, breast-cancer, iris) with a committed 23-test core suite (tests/test_core.py).'
+  design_decisions:
+    - title: 3-Phase progressive pipeline over single-phase AutoML
+      detail: 'Context: general-purpose AutoML tools (Auto-sklearn, TPOT) are slow because they tune the full candidate set. Options weighed: single-phase exhaustive search vs. multi-phase progressive refinement. Decision: a 3-phase pipeline — Phase 1 Rapid Screening evaluates candidates on a 10% data sample to eliminate weak algorithms, Phase 2 Focused Optimization concentrates Optuna TPE Bayesian tuning on the surviving top candidates, Phase 3 Self-Evolution evolves and stacks the best models via a genetic algorithm (crossover/mutation). Per the repo''s user guide the phases run Phase 1 ~5-15 min, Phase 2 ~15-45 min, Phase 3 ~10-30 min, with Fast mode (15 algorithms) ~5-15 min, Normal (30) ~15-45 min, and Production (all ~85) 1-6 hours; the public Credit Card Fraud benchmark (284,807 samples) ran ~6 hours end-to-end.'
+    - title: Ray cluster over Dask / Apache Spark for distributed GPU scheduling
+      detail: 'Context: needed distributed GPU scheduling to evaluate the algorithm set in parallel. Options weighed: Ray, Dask, Apache Spark. Decision: Ray, because it provides native GPU task scheduling and integrates seamlessly with Optuna for distributed hyperparameter tuning, whereas Spark lacks GPU-native support. The Ray-based distributed layer (backend/distributed/) implements checkpoint-based fault tolerance and multi-node cluster execution (distributed_algorithm_trainer.py with @ray.remote num_gpus=0.25, RayClusterManager, and node-failure tracking in distributed_monitoring.py).'
+    - title: Optuna with Tree-structured Parzen Estimator (TPE) for Phase 2 hyperparameter optimization
+      detail: Phase 2 (Focused Optimization) employs Optuna-based Bayesian optimization with the TPE sampler (backend/algorithms/gpu_algorithm_optimizer.py imports optuna.samplers.TPESampler) to tune hyperparameters only on the top-performing algorithms surviving Phase 1, concentrating compute where it yields the most gain rather than tuning all candidates. The dashboard visualizes the optimization landscape, acquisition function, and convergence trajectory.
+    - title: GPU-native full-CUDA pipeline with a 70-80% utilization target on consumer GPUs
+      detail: The pipeline runs on CUDA with dynamic batch scheduling and memory-pressure management. The optimizer code sets an explicit GPU-utilization target (backend/algorithms/gpu_algorithm_optimizer.py:95, target_gpu_utilization = 70.0, aiming for 70-80%) so algorithm screening saturates the GPU rather than leaving it idle; the documentation cites a 60-80% utilization range as the design target on an RTX 4090.
+    - title: 'Phase 3 Self-Evolution: genetic-algorithm ensemble construction'
+      detail: 'Rather than shipping the single best model, Phase 3 runs a SelfEvolutionEngine that evolves the best models through crossover and mutation and stacks them into an optimized ensemble with dynamic weighting (backend/pipline/main_pipeline.py: ''Phase 3: Self-Evolution (genetic algorithm)''; advanced ensemble methods include Caruana, Stacking, and Blending), reporting accuracy, F1, precision, and recall per the configured metrics.'
+    - title: Domain specialization for imbalanced tabular classification
+      detail: Unlike general-purpose AutoML, APEX-ML is purpose-built for imbalanced classification. The public Credit Card Fraud benchmark has only 0.17% positives, which is why the pipeline is configured to emphasize F1, precision, and recall rather than treating raw accuracy as a sufficient quality measure.
+  foothold:
+    - claim: ~85 registered algorithms (canonical '85 Unique') across roughly 15 categories; 81 of them are classification-capable.
+      evidence: 'The repo''s project-overview doc, ''Algorithm System (85 Unique)'' with ''Classification capable: 81'', ''Regression capable: 46'', ''Categories (15)''; docs/configuration/algorithms.md, docs/USER_GUIDE.md, docs/END_TO_END_TEST_PLAN.md all state 85 algorithms. backend/models/algorithm_factory.py registers the algorithm set via self.algorithms[...] entries (with conditionally-registered XGBoost/LightGBM/CatBoost). NOTE: README badge/body say 81 (the classification-capable subset) and docs/ARCHITECTURE.md says 84 — an internal documentation inconsistency.'
+    - claim: Completed a full 3-phase run on the public Credit Card Fraud benchmark (284,807 samples, 0.17% positives).
+      evidence: 'docs/README.md:119-147 documents the Credit Card Fraud run (284,807 samples, 0.17% fraud, ~6 hours, 8.1 GB); docs/USER_GUIDE.md:1215-1216 records the Phase 1 run. Because raw accuracy is weak evidence at this class ratio and the source CSV is not committed, the portfolio treats this as an integration/throughput benchmark rather than a comparative model-quality result.'
+    - claim: Validated on open/public datasets only.
+      evidence: 'Committed datasets are all public: data/diabetes.csv, data/titanic.csv, data/winequality-red.csv, data/winequality-white.csv, data/wine_quality_combined.csv, test_data/breast_cancer.csv, test_data/iris.csv, test_data/sklearn_wine.csv; the flagship Credit Card Fraud benchmark is the well-known public Kaggle dataset. No proprietary or client data is present.'
+    - claim: Per-phase / per-mode runtimes from the repo's user guide.
+      evidence: 'docs/USER_GUIDE.md:71-95: Phase 1 Rapid Screening 5-15 min, Phase 2 Focused Optimization 15-45 min, Phase 3 Self-Evolution 10-30 min; modes Fast (15 algs) 5-15 min, Normal (30) 15-45 min, Production (~85) 1-6 hours. The flagship Credit Card Fraud run (284,807 samples) took ~6 hours end-to-end (docs/README.md:147).'
+    - claim: Optuna Bayesian optimization uses the Tree-structured Parzen Estimator (TPE) sampler.
+      evidence: 'Confirmed: backend/algorithms/gpu_algorithm_optimizer.py:263 ''from optuna.samplers import TPESampler'' and :268 ''sampler=TPESampler(...)''; requirements.txt ''optuna>=3.5.0''.'
+    - claim: 70-80% GPU-utilization target set in the optimizer code.
+      evidence: 'Confirmed: backend/algorithms/gpu_algorithm_optimizer.py:95 ''target_gpu_utilization: float = 70.0  # Aim for 70-80% GPU utilization''; the 60-80% range is documented as the design target in docs/README.md and backend/algorithms/GPU_INTEGRATION_SUMMARY.md. Stated as a target; no profiler/nvidia-smi capture is committed.'
+    - claim: Ray cluster supports fault tolerance and multi-node scheduling.
+      evidence: 'Confirmed in code: backend/distributed/ (distributed_algorithm_trainer.py @ray.remote num_gpus=0.25 with checkpointing for fault tolerance; RayClusterManager; distributed_monitoring.py tracks cluster_nodes / node_failure_threshold); requirements.txt ''ray[default]>=2.10.0''.'
+    - claim: Dashboard is a FastAPI-served HTML/JS frontend (not a JS SPA framework).
+      evidence: frontend/templates/ (dashboard.html, all_models.html, demo.html, prescriptive.html, report_template.html) + frontend/static/js/ (dashboard.js, realtime-progress.js, demo-visualizations.js) using Plotly.js (Plotly.newPlot throughout demo-visualizations.js); served via FastAPI StaticFiles/HTMLResponse (backend/api/api_server.py). No React/Vue/Angular/Vite present.
+    - claim: Committed test suite covers the core platform (23 tests).
+      evidence: tests/test_core.py contains 23 test functions (type/logging/exception imports, config, AlgorithmFactory instantiation and registry, pipeline import and phase definitions, task-compatibility validator, memory-pressure manager, GPU accelerator/config, and a mock pipeline init); plus test_data/test_all_algorithms.py for algorithm-level checks. (The README's '69 passed' references test_api.py/test_distributed.py/test_e2e_pipeline.py, which are not present in the committed tests/ directory, so 23 is the repo-true committed count.)
+  stack:
+    - category: Languages & Core
+      items:
+        - Python 3.10+
+    - category: ML / DL Frameworks
+      items:
+        - PyTorch (>=2.0)
+        - scikit-learn (>=1.5)
+        - XGBoost
+        - LightGBM
+        - CatBoost
+        - TabNet
+        - NODE
+        - SAINT
+        - FT-Transformer
+        - TabPFN / foundation models
+        - Graph Neural Networks (GCN/GAT/GraphSAGE)
+        - Quantum-Inspired (QuantumSVM, VQC)
+    - category: Hyperparameter Optimization
+      items:
+        - Optuna (Tree-structured Parzen Estimator / TPE)
+    - category: Distributed Computing & GPU
+      items:
+        - Ray[default] (distributed GPU scheduling, checkpoint-based fault tolerance, multi-node)
+        - CUDA full pipeline
+        - RTX 4090 (reference GPU)
+    - category: Backend / API
+      items:
+        - FastAPI (port 8010)
+        - uvicorn
+        - structlog
+    - category: Frontend
+      items:
+        - FastAPI-served HTML templates (Jinja-style) + vanilla JavaScript
+        - Plotly.js (interactive visualizations)
+    - category: Algorithm System (~85 algorithms, ~15 categories)
+      items:
+        - Tree-Based (XGBoost, LightGBM, CatBoost, RandomForest, ExtraTrees, GradientBoosting, HistGradientBoosting, AdaBoost, DecisionTree)
+        - Traditional / Classical ML (SVM, KNN, Logistic/Linear Regression, Ridge/Lasso/ElasticNet, Naive Bayes, LDA/QDA)
+        - Neural Networks (StandardMLP, EnhancedMLP, AutoEncoder, WideAndDeep)
+        - Deep Tabular (TabNet, NODE, SAINT, FT-Transformer, VIME)
+        - Foundation Models (TabPFN, TabLLM, CTBERT)
+        - Ensemble (Voting, Bagging, Stacking, Blending, DynamicEnsemble)
+        - Graph Neural Networks (GCN, GAT, GraphSAGE, GraphSAINT)
+        - Meta-Learning (MAML/MAML++, Prototypical/Matching/Relation Networks, Reptile)
+        - Quantum-Inspired, Self-Supervised, Rule-Based, Time Series, Clustering, SOTA 2024-2025 (ReMasker, MambaTab, TabKANet)
+  figures:
+    - src: projects/apex-ml/concept_3phase_funnel.svg
+      section: approach
+      alt: 'A narrowing 3-phase funnel: ~85 algorithms to Phase 1 rapid screening on a 10% sample, Phase 2 Optuna TPE tuning, and Phase 3 genetic-algorithm ensemble construction.'
+      caption: 'The 3-phase progressive funnel keeps fewer algorithms at each stage, so expensive Optuna and genetic-algorithm compute is spent only on the candidates that survive screening.'
+    - src: projects/apex-ml/architecture.svg
+      section: lead
+      alt: System Architecture
+      caption: '3-phase AutoML pipeline architecture: Phase 1 rapidly screens 81 algorithms in parallel via Ray distributed computing, Phase 2 performs Bayesian optimization with Optuna TPE for hyperparameter tuning, and Phase 3 constructs optimized ensembles through model stacking, with GPU memory management and batch scheduling across the CUDA pipeline.'
+    - src: projects/apex-ml/APEX_1.png
+      section: results
+      featured: true
+      alt: 3-Phase Dashboard Overview
+      caption: 'Main dashboard giving a comprehensive view of the AutoML pipeline with real-time status of all three phases: Phase 1 parallel screening of all 81 algorithms, Phase 2 Bayesian hyperparameter optimization on top candidates via Optuna, and Phase 3 evolutionary ensemble construction through model stacking.'
+    - src: projects/apex-ml/APEX_2.png
+      section: results
+      alt: Bayesian Optimization Visualization
+      caption: Phase 2 Optuna-based Bayesian optimization view showing the optimization landscape, acquisition function, and convergence trajectory as the system searches the hyperparameter space for optimal configurations of top-performing algorithms.
+    - src: projects/apex-ml/APEX_3.png
+      section: results
+      alt: Ensemble Performance Metrics
+      caption: Ensemble performance dashboard comparing individual models against combined ensemble predictions, charting accuracy, F1, precision, and recall improvements achieved via Phase 3 model stacking and dynamic weighting.
+    - src: projects/apex-ml/APEX_4.png
+      section: results
+      alt: Feature Importance Matrix
+      caption: Feature importance matrix aggregating feature rankings across multiple algorithms; this cross-model analysis surfaces which input features consistently drive predictions, supporting feature selection and explainability.
+    - src: projects/apex-ml/APEX_5.png
+      section: results
+      alt: Phase 1 Rapid Screening
+      caption: Phase 1 rapid-screening interface showing parallel GPU-accelerated evaluation of all 81 algorithms with real-time progress, algorithm success/failure status, and preliminary performance rankings.
+- slug: nerf-factory
+  title: Industrial NeRF Factory
+  scope: Research demo · open/synthetic data
+  tagline: 'Turn a handful of photos into unlimited auto-labeled training data: a from-scratch PyTorch NeRF reconstructs the part, then a physics-based defect-injection engine synthesizes labeled defects. Solo-built R&D platform on synthetic/open data, demo/research level.'
+  thumb: thumbs/nerf_factory_thumb.png
+  tier: boilerplate
+  home: true
+  order: 8
+  tldr: 'The payoff: turn a handful of photos into unlimited auto-labeled training data. A from-scratch PyTorch NeRF (Instant-NGP-style hash encoding) reconstructs the part in 3D, then a physics-based defect-injection engine perturbs its density/color fields to synthesize scratches, cracks, dents, and contamination with automatic COCO labels — so downstream inspection AI trains on synthetic data without manual annotation. Built solo end-to-end across 7-8 integrated modules behind a FastAPI/Celery backend. Scope is stated up front: a personal R&D prototype on synthetic/open data, self-described as demo/research level and not deployed in any factory.'
+  stats:
+    - value: '10,000'
+      label: synthetic images
+      sub: per labeled dataset export
+    - value: '4'
+      label: defect types
+      sub: scratch · crack · dent · contamination
+    - value: COCO
+      label: auto-labeled output
+      sub: no manual annotation
+    - value: '7-8'
+      label: integrated modules
+      sub: NeRF core to sim-to-real
+  problem: Industrial AI models for manufacturing (e.g. robotic inspection and manipulation) need large, diverse, accurately-labeled training data, but capturing real-world data for every part, angle, lighting condition, and defect type is slow and expensive. The goal was to build a NeRF-based pipeline that reconstructs an industrial target in 3D from a set of multi-view camera images, then renders unlimited photorealistic novel views and physics-based synthetic defects (scratches, cracks, dents, contamination) so that downstream inspection/robotics AI can be trained on automatically-labeled synthetic data, plus a digital twin and domain-randomized simulation for sim-to-real robot training.
+  contributions:
+    - 'NeRF core, from scratch: implemented an Instant-NGP-style NeRF in PyTorch (multi-resolution hash encoding + tiny MLP, src/.../core/nerf_engine.py) with volume rendering and marching-cubes mesh export — reused by the acoustic and hyperspectral variants.'
+    - 'Synthetic-data pipeline: built a physics-based DefectInjectionEngine (scratch/crack/dent/contamination) and a SyntheticDataGenerator that produces labeled datasets (COCO export) for training inspection AI without manual annotation.'
+    - 'Solo developer of the full platform end-to-end (backend + ML): a modular architecture spanning NeRF synthetic data, digital twin, sim-to-real, and multimodal variants behind a FastAPI/Typer API+CLI (Celery/Redis, PostgreSQL, MinIO/S3, Docker, Prometheus/Grafana), with a 500+ test-function pytest suite across 31 files.'
+  design_decisions:
+    - title: Physics-based defect injection for automatically-labeled synthetic data
+      detail: Rather than capturing rare real defects, a DefectInjectionEngine modifies the trained NeRF's density/color fields to synthesize scratches, cracks, dents, and contamination, and SyntheticDataGenerator renders large labeled datasets (e.g. 10,000 images, COCO export) for inspection-AI training. This is the actual 'synthetic data' mechanism in the repo (more so than novel-view rendering alone).
+    - title: Implement an Instant-NGP-style NeRF from scratch in PyTorch instead of binding the native CUDA library
+      detail: The NeRF core (src/industrial_nerf_factory/core/nerf_engine.py) implements multi-resolution hash encoding (MultiResHashEncoding) plus a small MLP in the style of Instant-NGP, with a docstring fast-training goal of <5 min (an aspirational target, not a measured benchmark). This same encoding is reused by the acoustic and hyperspectral NeRF variants. Nerfstudio and tiny-cuda-nn are listed as dependencies but are not imported in the source, and the native NVIDIA Instant-NGP CUDA library is not wired in; the implementation is the project's own from-scratch PyTorch reimplementation.
+    - title: 'Camera pose estimation: COLMAP is referenced as the intended production path but not integrated'
+      detail: Camera poses can be supplied directly to the NeRF engine; where poses are missing (e.g. plant_nerf), the code generates a mock circular trajectory and explicitly notes 'For production use, integrate with COLMAP or OpenCV SfM' (src/.../agriculture/plant_nerf.py). COLMAP-based pose estimation is documented as future work, not implemented; the pipeline currently relies on supplied poses or a synthetic circular trajectory.
+    - title: Domain randomization for sim-to-real robot training
+      detail: The sim-to-real approach is visual + physics domain randomization (src/.../robotics/domain_randomization.py) wrapping a Gymnasium NeRF environment, with PPO policy training and a success-rate evaluation computed over simulated episodes. The robot's NeRF rendering is a mock stub (returns random RGB/depth), so transfer is not validated on hardware and no real sim-to-real success rate is measured; the technique implemented is domain randomization, not a separate learned domain-adaptation method.
+    - title: FastAPI + Celery/Redis service architecture (not Ray/gRPC)
+      detail: The backend is a FastAPI REST API with a Celery/Redis task queue, SQLAlchemy + PostgreSQL, and MinIO/S3 storage, containerized via Docker/docker-compose with Prometheus + Grafana monitoring scaffolding. ray[tune] is a dependency for hyperparameter search, but there is no Ray distributed-cluster training and no gRPC anywhere in the code; the architecture is single-node, not a distributed training cluster.
+    - title: 'Multimodal NeRF variants: acoustic and hyperspectral'
+      detail: Beyond RGB NeRF, the platform extends the radiance field to predict sound intensity (AcousticNeRF, for 3D sound-source localization and predictive maintenance) and 128-band spectra (HyperspectralNeRF, 400-1000nm, for material-level QC), reusing the shared hash encoding. These are framed as novel research directions.
+    - title: Quality metric capture is scaffolded, not measured
+      detail: The data model stores a nullable best_psnr field, and the platform is intended to evaluate rendering quality; however SSIM and LPIPS are not computed anywhere in the source and no PSNR/SSIM/LPIPS values are committed. Rendering-quality metrics are scaffolded for storage only, not measured; no fidelity numbers are claimed.
+  foothold:
+    - claim: Sim-to-real success rate is computed in simulation only, not measured on real hardware
+      evidence: The code computes success_rate = n_success / n_episodes over simulated episodes (rl_trainer.py / sim_to_real.py) with a mock NeRF renderer; there is no real-robot measurement. The '>95%' figure in the README Key Features table and sim_to_real.py docstring is an aspirational target, not a measured result, and is not claimed here.
+    - claim: Multi-view image inputs drive NeRF training (per-target view count is supplied at runtime, not a fixed constant)
+      evidence: The NeRF engine consumes a set of multi-view images with camera poses; there is no fixed '36'-viewpoint constant anywhere in the source, so no specific viewpoint count is claimed.
+    - claim: ~14k LOC of core platform source (~23k including tests/scripts)
+      evidence: src/ = 14,256 LOC across 34 .py files; whole repo = 23,079 LOC (find . -name '*.py' | xargs wc -l). The README/badges/citation '15,704 lines' figure is a stale self-reported sum and does not match the current tree.
+    - claim: 500+ test functions across 31 test files
+      evidence: Current suite has 511 test functions (grep -rE 'def test_' tests/ | wc -l) across 31 test files. (README/badges say '157 tests' and an older TEST_ANALYSIS_REPORT.md counted '114+' — both stale snapshots.) No committed pytest run/coverage report exists, so the count is a static collection figure, not a pass-status figure.
+    - claim: End-to-end pipeline is architected and demo-runnable, not a validated production deployment
+      evidence: Architecture/README describe a full data-collection -> NeRF -> synthetic-data -> training -> deployment flow, and modules exist for each stage. The validation reports (ULTRATHINK_VALIDATION_REPORT.md, COMPREHENSIVE_CODE_VALIDATION_REPORT.md) rate it 'demo/research level' (데모 가능 / 프로덕션 불가) with 5 unfixed Critical issues and mock stages (robot NeRF render, SfM pose estimation).
+    - claim: Novel view synthesis from arbitrary unseen camera positions
+      evidence: The NeRF engine supports rendering novel views from arbitrary poses (nerf_engine.render), the core capability of NeRF. No committed quantitative fidelity (PSNR/SSIM/LPIPS) exists for the rendered views, so the capability is claimed structurally, not with a measured photorealism score.
+    - claim: Rendering-quality metric storage is scaffolded (best_psnr field), but SSIM/LPIPS are not implemented and no values are measured
+      evidence: Only best_psnr (a nullable DB column) exists; SSIM and LPIPS are not computed anywhere in src, and no metric values are committed. PSNR is scaffolded for storage; SSIM/LPIPS are not implemented and no measured fidelity values exist, so none are claimed.
+    - claim: Physics-based synthetic defect generation with automatic labels
+      evidence: DefectInjectionEngine implements scratch/crack/dent/contamination by modifying NeRF density/color, and SyntheticDataGenerator.generate_dataset produces labeled images (COCO export). Verified in src/.../core/defect_injection.py and core/synthetic_data.py and README usage examples.
+  stack:
+    - category: 3D Reconstruction / NeRF
+      items:
+        - NeRF (custom PyTorch)
+        - Instant-NGP-style hash encoding
+        - PyTorch
+        - Open3D / Trimesh
+        - scikit-image (marching cubes)
+    - category: Synthetic Data / Vision
+      items:
+        - Physics-based defect injection
+        - OpenCV / Kornia
+        - COCO-format dataset export
+        - Albumentations
+    - category: Robotics / Sim-to-Real
+      items:
+        - Gymnasium
+        - PPO (Stable-Baselines3)
+        - Visual + physics domain randomization
+    - category: Multimodal NeRF
+      items:
+        - Acoustic NeRF (librosa / pyroomacoustics)
+        - Hyperspectral NeRF (128 bands)
+    - category: Backend / Infrastructure
+      items:
+        - FastAPI
+        - Celery + Redis
+        - SQLAlchemy + PostgreSQL
+        - Alembic
+        - MinIO / S3
+        - Docker / docker-compose
+        - Prometheus + Grafana
+    - category: Quality Metrics
+      items:
+        - PSNR (stored field, scaffolded)
+  figures:
+    - src: projects/nerf-factory/architecture.svg
+      section: lead
+      alt: System Architecture
+      caption: 'End-to-end pipeline architecture: multi-view data collection through from-scratch NeRF training, novel view synthesis, physics-based synthetic data generation, AI model training, to simulated sim-to-real transfer, with continuous-improvement feedback loops. (Robot control and SfM pose estimation are mock/prototype stages; no ROS 2 or real-robot deployment is wired in.)'
+    - src: projects/nerf-factory/defect_injection.svg
+      section: decision
+      beat: 'Physics-based defect injection for automatically-labeled synthetic data'
+      order: 1
+      band: true
+      alt: 'Pipeline: a trained NeRF density/color field, a DefectInjectionEngine that perturbs it to synthesize scratch/crack/dent/contamination, and a SyntheticDataGenerator that exports auto-labeled images (COCO).'
+      caption: 'The differentiator: rather than capture rare real defects, the DefectInjectionEngine perturbs the trained NeRF density/color fields to synthesize scratches, cracks, dents, and contamination, then exports automatically-labeled training data (COCO).'
+    - src: projects/nerf-factory/Nerf_1.png
+      section: results
+      featured: true
+      alt: Training Pipeline Architecture
+      caption: Comprehensive visualization of the NeRF training pipeline architecture, illustrating the data flow from raw multi-view images through neural network training to final 3D scene reconstruction. The pipeline incorporates positional encoding, ray marching, and volume rendering stages for photorealistic novel view synthesis.
+    - src: projects/nerf-factory/Nerf_2.png
+      section: decision
+      beat: 'Domain randomization for sim-to-real robot training'
+      order: 1
+      band: true
+      alt: Sim-to-Real Transfer Comparison
+      caption: 'Side-by-side comparison illustrating the sim-to-real concept: synthetic renderings generated from the digital twin alongside reference captures, highlighting the visual + physics domain-randomization technique used to bridge the simulation gap. Transfer is evaluated in simulation only; no real-robot deployment or measured degradation is shown.'
+    - src: projects/nerf-factory/Nerf_3.png
+      section: results
+      alt: Multi-View Camera Input Grid
+      caption: Grid visualization of the multi-view camera inputs used for NeRF training. Each image captures the target from a different angle, providing coverage for 3D reconstruction with consistent lighting and supplied camera poses. The per-target view count is a runtime input, not a fixed constant.
+    - src: projects/nerf-factory/Nerf_4.png
+      section: results
+      featured: true
+      alt: Rendering Quality Comparison
+      caption: Conceptual quality comparison across NeRF configurations and resolutions, illustrating the rendering-speed vs. visual-fidelity trade-off for inspection use. PSNR storage is scaffolded in the data model; SSIM/LPIPS are not implemented and no measured metric values are committed.
+    - src: projects/nerf-factory/Nerf_5.png
+      section: results
+      alt: Novel View Synthesis Results
+      caption: Gallery of novel view synthesis results from the trained NeRF model, rendering photorealistic images from arbitrary camera positions not present in the training set and enabling unlimited synthetic data generation for downstream AI model training.
+- slug: avs
+  title: Acoustic Vision System (AVS)
+  scope: Personal research · public DCASE/MIMII data
+  tagline: 'Adapt an 87M-parameter audio transformer with 0.68%-1.35% trainable parameters depending on machine type — a multimodal acoustic-camera anomaly detector self-evaluated under the open DCASE 2020 Task 2 protocol at mean AUC ~0.94 across Fan, Pump, Slider, and Valve.'
+  thumb: thumbs/avs_thumb.png
+  tier: enhanced
+  home: true
+  order: 7
+  tldr: 'An end-to-end multimodal anomaly-detection platform that fuses microphone-array beamforming with camera vision and scores machine sound through an Audio Spectrogram Transformer adapted by LoRA — using 0.68%-1.35% trainable parameters depending on machine type (~0.6M-1.18M of the 87M-parameter encoder). A self-evaluation under the open DCASE 2020 Task 2 protocol reaches mean AUC ~0.94 across Fan/Pump/Slider/Valve; this is not an official challenge submission. Scope: a personal research/evaluation platform on the public MIMII / DCASE 2020 datasets, not a deployed factory system.'
+  stats:
+    - value: '~0.94'
+      label: mean AUC
+      sub: self-evaluated under DCASE 2020 protocol
+    - value: '0.68%-1.35%'
+      compact: true
+      label: trainable parameters
+      sub: depending on machine type · ~0.6M-1.18M of 87M
+    - value: '4'
+      label: machine types
+      sub: Fan · Pump · Slider · Valve
+    - value: '1,036'
+      label: automated tests
+      sub: 995 passed · 41 skipped
+  problem: 'Unplanned machine failures cause costly factory downtime, and the audible/inaudible acoustic signatures of impending faults are hard to localize and classify in noisy, reverberant factory environments. AVS addresses industrial machine anomaly detection by combining acoustic imaging (sound-source localization via beamforming) with deep-learning-based anomalous-sound classification, targeting predictive-maintenance use cases. It is a personal R&D project: the methodology and architecture are validated on the public MIMII / DCASE 2020 Task 2 datasets, an open unsupervised anomalous-sound-detection benchmark, rather than on any client or production line.'
+  contributions:
+    - 'Built solo, end-to-end (backend + frontend): the full acoustic-vision pipeline from 4-channel microphone-array input through MVDR beamforming and STFT spectrogram processing to deep-learning inference and a real-time beamforming/anomaly visualization dashboard.'
+    - 'Deep learning: fine-tuned an Audio Spectrogram Transformer (AST, ~87M params) with LoRA, using 0.68%-1.35% trainable parameters depending on machine type (~0.6M-1.18M) so the encoder stays frozen, with K-NN / Mahalanobis anomaly scoring over the AST embeddings.'
+    - 'Self-evaluated under the open DCASE 2020 Task 2 protocol at mean AUC ~0.94 across Fan/Pump/Slider/Valve. This is a project evaluation on public benchmark data, not an official challenge submission or leaderboard result.'
+  design_decisions:
+    - title: AST + LoRA over full fine-tuning
+      detail: 'Context: per-machine anomaly training data is limited and dominated by normal samples, so fully fine-tuning a large (~87M-parameter) transformer risks overfitting. Options considered: train from scratch, full fine-tuning, and LoRA adaptation. Decision: use the Audio Spectrogram Transformer (AST, MIT/ast-finetuned-audioset-10-10-0.4593) with LoRA (default rank r=16, alpha=32, targeting the query/value projections), freezing the pretrained encoder. Rationale: LoRA uses 0.68%-1.35% trainable parameters depending on machine type (~589k / 0.68% at the default rank; ~1.18M / 1.35% at the higher rank used for the harder Fan machine), giving parameter-efficient adaptation without retraining the full encoder.'
+    - title: MVDR over Delay-and-Sum beamforming
+      detail: 'Context: factory environments contain multiple simultaneous noise sources and strong reverberation. Options considered: Delay-and-Sum (DAS), MVDR, and MUSIC (all three are implemented in signal_processing/beamforming.py). Decision: Minimum Variance Distortionless Response (MVDR) beamforming as the primary localizer. Rationale: MVDR provides adaptive null steering to suppress interfering noise sources while preserving the signal of interest, which DAS cannot do; a coarse-to-fine grid refinement brings beamforming to real-time (RTF 0.03).'
+    - title: Multimodal fusion of acoustic features with YOLOv8 visual detection
+      detail: 'Decision: fuse beamforming-derived acoustic localization with a YOLOv8 (yolov8n via Ultralytics) visual object-detection stream through an Uncertainty-Aware Multimodal Fusion (UAMF) layer, so anomalous-sound events can be spatially associated with equipment in the camera view. Rationale: associating the spatial acoustic estimate with visual detections (uncertainty-weighted Bayesian fusion) lets the system overlay 2D sound-source localization onto the camera image to identify the responsible machine/region; when Ultralytics is unavailable the detector falls back to a mock for pipeline testing.'
+    - title: STFT mel-spectrogram front end for the transformer
+      detail: 'Decision: convert raw microphone-array audio into STFT/mel-spectrogram patches (via torchaudio/librosa, 16 kHz, AST 768-dim features) as the input representation for the AST model. Rationale: spectrograms expose distinctive time-frequency patterns that let the transformer''s self-attention extract features distinguishing normal from anomalous machine operation; SpecAugment (freq/time masking) is applied during training. Anomaly scoring is done with a K-NN (k=5) / Mahalanobis ensemble over the AST embeddings rather than a learned classifier head.'
+  foothold:
+    - claim: Self-evaluation under the DCASE 2020 Task 2 protocol reaches mean AUC ~0.94 across four machine types (Fan 0.88, Pump 0.93, Slider 0.98, Valve 0.99).
+      evidence: 'results/DCASE2020_EVALUATION_SUMMARY.md and results/dcase2020_results.csv (per-machine-ID DCASE protocol): Fan 0.8846 (sota_optimized), Pump 0.9326, Slider 0.9819, Valve 0.9936. This is a project self-evaluation on the public benchmark, not an official challenge submission or leaderboard result.'
+    - claim: 'AST + LoRA uses 0.68%-1.35% trainable parameters depending on machine type: ~0.6M-1.18M of an ~87M-parameter AST encoder.'
+      evidence: 'results/SOTA_SUMMARY_20251225.md: ''trainable_params: 589,824 (0.68% of total)''; results/FULL_MODE_FINAL_REPORT.md: ''LoRA: 1.35% trainable parameters (1.18M / 87.4M)''; anomaly_detection/pretrained_encoder.py default lora_r=16, alpha=32, target query/value.'
+    - claim: MVDR adaptive beamforming chosen over Delay-and-Sum for null steering in reverberant, multi-source factory audio.
+      evidence: signal_processing/beamforming.py implements Delay-and-Sum, MVDR, and MUSIC; README Signal Processing section. (No measured dB SNR-vs-DAS figure is published in the repo.)
+    - claim: Inference ~12 ms/sample on an RTX 4090 (batched throughput).
+      evidence: README.md Project Status / GPU Optimization tables report '12ms/sample inference' at RTF 0.03 on an RTX 4090; results/PHASE5_BENCHMARK_SUMMARY.md reports 49-76 files/sec at batch size 16 (~13-20 ms/file) and K-NN scoring <10 ms. The 12 ms figure is the batched/throughput-derived best case (single-sample latency runs higher).
+    - claim: ~88k lines of code across 160+ source files.
+      evidence: find . -name '*.py' (excluding archive/) = 166 files, total 87,520 LOC; README states '88,000+ lines across 160+ files'.
+    - claim: Automated test suite of 1,036 tests (995 passed, 41 skipped for optional dependencies).
+      evidence: 'The project-overview doc and FULL_MODE_TEST_PLAN.md: ''1,036 total | 995 passed, 41 skipped (optional deps)''; HONEST_PROJECT_ASSESSMENT confirms 1,036.'
+    - claim: Trained and evaluated on the open MIMII / DCASE 2020 datasets (18,019 wav files); per-machine normal-sample counts are in the thousands.
+      evidence: results/FULL_MODE_FINAL_REPORT.md 'MIMII (18,019 wav files)'; results/sota_final_results_20251225.md dataset stats (e.g. Fan 4,075 normal test); archive/research/DATASET_COMPLETION_REPORT.md per-machine 4k-5.5k wav files. MIMII / DCASE 2020 Task 2 are public benchmark datasets.
+  stack:
+    - category: Deep Learning
+      items:
+        - PyTorch 2.0+
+        - Audio Spectrogram Transformer (AST, MIT/ast-finetuned-audioset-10-10-0.4593)
+        - LoRA adaptation (PEFT)
+        - K-NN / Mahalanobis ensemble scoring
+        - YOLOv8 (yolov8n, Ultralytics)
+    - category: Audio Processing & DSP
+      items:
+        - torchaudio
+        - librosa
+        - STFT / mel-spectrogram processing
+        - MVDR beamforming (Delay-and-Sum, MVDR, MUSIC implemented)
+        - GCC-PHAT / TDOA localization
+    - category: Acoustic Imaging Hardware
+      items:
+        - Microphone array (default 4-channel config)
+        - Camera (for acoustic-visual overlay)
+        - Array geometric calibration
+    - category: Benchmark & Evaluation
+      items:
+        - DCASE 2020 Task 2 (unsupervised anomalous sound detection, open benchmark)
+        - MIMII dataset (18,019 wav files, public)
+        - 1,036 automated tests (995 passed / 41 skipped)
+    - category: Compute
+      items:
+        - NVIDIA RTX 4090 (~12 ms/sample batched inference, RTF 0.03)
+    - category: Application
+      items:
+        - Real-time visualization dashboard (beamforming heatmaps + anomaly results)
+        - Uncertainty-Aware Multimodal Fusion (UAMF)
+  figures:
+    - src: projects/avs/architecture.svg
+      section: lead
+      alt: System Architecture
+      caption: 'End-to-end acoustic vision pipeline: from microphone-array hardware through MVDR beamforming for sound-source localization, STFT spectrogram processing, to the Audio Spectrogram Transformer (AST) with LoRA adaptation, fusing acoustic features with YOLOv8 visual detection and evaluated on DCASE 2020 Task 2.'
+    - src: projects/avs/AVS_1.png
+      section: results
+      featured: true
+      alt: Beamforming Heatmap Visualization
+      caption: 'Spatial acoustic intensity heatmap from the beamforming algorithm: 2D sound-source localization overlaid on the camera view, identifying acoustic events via MVDR (Minimum Variance Distortionless Response) beamforming.'
+    - src: projects/avs/dcase_auc.svg
+      section: foothold
+      featured: true
+      alt: 'Project self-evaluation under the DCASE 2020 Task 2 protocol: Fan AUC 0.88, Pump 0.93, Slider 0.98, Valve 0.99, mean ~0.94.'
+      caption: 'Project self-evaluation under the open DCASE 2020 Task 2 protocol: mean AUC ~0.94 across Fan, Pump, Slider, and Valve. This is not an official challenge submission.'
+    - src: projects/avs/AVS_3.png
+      section: decision
+      beat: 'STFT mel-spectrogram front end for the transformer'
+      order: 1
+      band: true
+      alt: Time-Frequency Spectrogram Analysis
+      caption: Time-frequency (STFT) spectrogram analysis contrasting acoustic signatures of normal vs. anomalous machine operation, highlighting the distinctive time-frequency patterns used by the model to detect subtle anomalies.
+    - src: projects/avs/lora_params.svg
+      section: decision
+      beat: 'AST + LoRA over full fine-tuning'
+      order: 1
+      band: true
+      alt: 'Parameter efficiency: a frozen ~87M-parameter AST encoder with 0.68%-1.35% trainable parameters depending on machine type (~0.6M-1.18M through LoRA).'
+      caption: 'AST + LoRA uses 0.68%-1.35% trainable parameters depending on machine type: the ~87M-parameter encoder stays frozen while a ~0.6M-1.18M LoRA adapter is trained for each machine type.'
+    - src: projects/avs/AVS_5.png
+      section: results
+      featured: true
+      alt: Microphone Array Calibration Setup
+      caption: Hardware calibration setup for the microphone array, showing the geometric arrangement of microphones and the calibration procedure that ensures accurate beamforming and sound-source localization.
+- slug: its-xai
+  title: ITS AI XAI - Explainable PCB Defect Detection
+  scope: R&D prototype · open/synthetic data
+  tagline: 'Every defect verdict must be explainable, not just accurate. A two-stream pipeline fuses 603 SECOM sensor features with YOLO visual inspection (F1 ≈0.95 on a 236-sample hold-out, 67.3 ms on CPU) and serves SHAP plus counterfactual explanations, validated on open SECOM and DeepPCB.'
+  thumb: thumbs/its_xai_thumb.png
+  tier: enhanced
+  home: true
+  order: 10
+  tldr: 'Every defect verdict ships with a faithful explanation, not just a score. A two-stage pipeline fuses 603 SECOM sensor features with YOLO visual inspection through an XGBoost meta-classifier, hitting F1 ≈0.95 on a 236-sample hold-out at 67.3 ms end-to-end CPU latency, while SHAP attributions validated against the model''s own importances (Pearson > 0.95) make the explanations demonstrably faithful. Scope is stated up front: a solo R&D system built and validated entirely on open SECOM and DeepPCB benchmarks (sensor-image pairing is synthetic), not on real-factory data.'
+  stats:
+    - value: '≈0.95'
+      label: meta-classifier F1
+      sub: XGBoost meta-classifier, n=236 hold-out
+    - value: '67.3 ms'
+      label: end-to-end latency
+      sub: CPU /predict
+    - value: '~96%'
+      label: defect recall
+      sub: FAIL class, n=236 hold-out
+    - value: '15.6 ms'
+      label: explanation latency
+      sub: SHAP /explain
+  problem: PCB manufacturing quality control needs defect detection that engineers can trust and act on, not just a black-box pass/fail verdict. Sensor telemetry alone (603 raw features) and visual inspection alone each miss defects the other catches, and end-to-end deep models do not give engineers the interpretable, per-prediction feature attribution they need for root-cause analysis and process correction. The system had to combine both signal types, stay fast enough for inline use, and explain every decision in a way a process engineer could use to adjust the line — and it was built and benchmarked entirely on open/synthetic data (open SECOM sensor data + open DeepPCB images, paired synthetically), not on data from any real factory.
+  contributions:
+    - 'Built end-to-end as the solo developer: the multimodal fusion architecture, the XGBoost meta-classifier that fuses Random Forest (sensor) and YOLO (vision) outputs into 8 fusion features, the FastAPI backend, and the Streamlit frontend (design choices below).'
+    - Engineered the feature-reduction pipeline that cuts the 603 raw SECOM sensor features to 164 (-72.8%) via tiered missing-value handling and importance-based selection, improving prediction quality and uncertainty calibration.
+    - 'Developed the explainability layer surfaced through a 4-tab Streamlit dashboard: SHAP waterfall attribution and a counterfactual what-if interface, with Plotly visualizations for defect analysis.'
+  design_decisions:
+    - title: XGBoost meta-classifier over end-to-end deep learning
+      detail: 'Context: interpretable predictions are needed for root-cause analysis. Options weighed: an end-to-end neural network vs. a two-stage fusion with an XGBoost meta-classifier. Rationale: XGBoost enables SHAP feature attribution served by a dedicated /explain endpoint at 15.6 ms per request, whereas deep learning would require expensive gradient-based explanations; the tree approach delivered the accuracy targets at 67.3 ms end-to-end /predict CPU latency.'
+    - title: SHAP attribution with consistency validation against the model
+      detail: 'Context: a single explanation method may carry biases, and the feature-importance ranking needs to be trustworthy. Rationale: SHAP feature-importance rankings were validated against the Random Forest model''s own built-in importance scores, reaching a Pearson correlation above 0.95, giving confidence the explanations reflect what the model actually learned; outputs are kept domain-agnostic so real sensor names can be mapped in later.'
+    - title: Dimensionality reduction of the 603-feature sensor stream
+      detail: The SECOM sensor stream carries 603 features (590 original + 13 engineered). A tiered pipeline (removing >90%-missing features, KNN/median imputation for the rest, and importance-based selection) narrowed this to 164 features (-72.8%), which cut dimensionality and inference cost while actually improving SECOM prediction quality and uncertainty calibration.
+    - title: 'Two-stream fusion: Random Forest (sensor) + YOLO (vision)'
+      detail: Sensor telemetry is handled by a Random Forest and visual inspection by a YOLO detector (the trained YOLOv8m benchmarked at mAP@50 93.51% on the open DeepPCB dataset; a lighter YOLOv11n is used at inference time); the XGBoost meta-classifier fuses both streams into 8 features so defects visible in only one modality are still caught, reaching F1 ≈0.95 on the 236-sample hold-out test set.
+  foothold:
+    - claim: Meta-classifier F1-score of 0.9462 on the 236-sample hold-out test set (+26% above the F1 >= 0.75 target)
+      evidence: 'FINAL_VALIDATION_REPORT.md lines 462, 468, 505-518: F1 0.9462 measured on a 236-sample hold-out test set (70/15/15 stratified split; 5-fold CV for model selection), target F1 >= 0.75 so +26% margin. Confirmed in README.md line 14/39.'
+    - claim: End-to-end /predict latency of 67.3 ms on CPU (44-45% under the <120 ms target)
+      evidence: 'FINAL_VALIDATION_REPORT.md lines 604-635: mean 67.3 ms over 10 runs (P50 66.5, P95 78.2, P99 101.0) on CPU-based inference, end-to-end /predict including SECOM RF, YOLO, meta-classifier, and API overhead; target <120 ms (PASS -44%). Confirmed README.md lines 14/40/257.'
+    - claim: YOLOv8m visual detection mAP@50 of 93.51% on the open DeepPCB benchmark
+      evidence: 'FINAL_VALIDATION_REPORT.md lines 325-341: YOLOv8m (medium) trained on 999 DeepPCB image pairs, validated on 501, mAP@50 93.51% (also mAP@50-95 63.50%, precision 89.74%, recall 90.44%). The 93.51% belongs to YOLOv8m, while the inference model is YOLOv11n (lines 632, API_IMPLEMENTATION_SUMMARY.md line 52).'
+    - claim: Meta-classifier defect (FAIL) recall of 95.91% on the 236-sample test set
+      evidence: 'FINAL_VALIDATION_REPORT.md lines 214-220, 429, 469, 508: meta-classifier recall 0.9591 on the 236-sample test set (211 of 220 FAIL caught, 9 missed); this is the fused meta-classifier''s defect-class recall, not YOLO''s. Confirmed README.md lines 21/245.'
+    - claim: SHAP feature-attribution latency of 15.6 ms per /explain request
+      evidence: 'FINAL_VALIDATION_REPORT.md line 599: /explain (SHAP explanations) measured at 15.6 ms, 100% success.'
+    - claim: SHAP consistency validated against Random Forest built-in importance (Pearson > 0.95)
+      evidence: 'FINAL_VALIDATION_REPORT.md line 823: SHAP feature-importance rankings match the Random Forest built-in importance scores at Pearson correlation > 0.95; the XAI method table (lines 815-819) lists only SHAP, Counterfactual, and Grad-CAM (no LIME, which is not implemented).'
+  stack:
+    - category: ML / AI
+      items:
+        - XGBoost (meta-classifier)
+        - Random Forest (sensor stream)
+        - YOLO (visual inspection - YOLOv8m benchmark, YOLOv11n at inference)
+        - scikit-learn, imbalanced-learn (SMOTE)
+        - Importance-based feature reduction (603 to 164)
+    - category: Explainability (XAI)
+      items:
+        - SHAP (waterfall attribution)
+        - Counterfactual analysis
+    - category: Dashboard / Frontend
+      items:
+        - Streamlit (4 interactive tabs)
+        - Plotly (visualizations)
+    - category: API / Backend
+      items:
+        - FastAPI, Uvicorn (REST API, 7 endpoints)
+        - pandas, numpy, OpenCV
+    - category: Data (open / synthetic)
+      items:
+        - SECOM (open semiconductor-manufacturing sensor dataset)
+        - DeepPCB (open PCB defect image benchmark)
+        - Synthetic SECOM-DeepPCB pairing (statistical matching)
+  figures:
+    - src: projects/its-xai/foothold_scorecard.svg
+      section: foothold
+      featured: true
+      alt: 'Target-vs-achieved scorecard: F1 ≈0.95 (target 0.75), end-to-end /predict 67.3 ms (target 120 ms), defect recall ~96%, SHAP /explain 15.6 ms, YOLOv8m mAP@50 93.51% on open DeepPCB; P50/P95/P99 latency strip.'
+      caption: 'Validation scorecard on open SECOM + DeepPCB: F1 ≈0.95 on a 236-sample hold-out (+26% over the 0.75 target) at 67.3 ms end-to-end CPU latency (44% under the 120 ms target), with ~96% defect recall and 15.6 ms SHAP explanations.'
+    - src: projects/its-xai/architecture.svg
+      section: lead
+      alt: System architecture diagram
+      caption: 'Multimodal fusion pipeline architecture: 603 sensor features processed by a Random Forest and a feature-selection module, fused with YOLOv11 visual detection through an XGBoost meta-classifier (F1 ≈0.95), feeding a SHAP / Grad-CAM / counterfactual explainability layer for decision support.'
+    - src: projects/its-xai/xai_verdict_to_action.svg
+      section: decision
+      beat: 'SHAP attribution with consistency validation against the model'
+      order: 1
+      band: true
+      alt: "Three-stage XAI flow: a PASS/DEFECT verdict, a SHAP waterfall attribution validated against the model's own importances (Pearson > 0.95), and a counterfactual showing the minimal change to flip the verdict."
+      caption: "Every prediction carries a faithful explanation: a SHAP waterfall whose feature ranking matches the model's own built-in importances (Pearson > 0.95), plus a counterfactual that turns the verdict into an actionable process change."
+    - src: projects/its-xai/ITS_AI_1.png
+      section: results
+      alt: SHAP waterfall explanation
+      caption: 'SHAP waterfall visualization showing each feature''s contribution to a single prediction: red bars push toward DEFECT, blue bars push toward PASS, and the cumulative effect determines the final classification.'
+    - src: projects/its-xai/ITS_AI_2.png
+      section: results
+      alt: Counterfactual analysis interface
+      caption: 'Interactive counterfactual interface for what-if exploration: it identifies the minimal parameter changes needed to flip a prediction, surfacing actionable process-optimization recommendations.'
+    - src: projects/its-xai/ITS_AI_3.png
+      section: results
+      alt: Explainability output (SHAP attributions)
+      caption: 'SHAP explainability output for a single prediction: per-feature attributions and the resulting feature-importance ranking.'
+    - src: projects/its-xai/ITS_AI_4.png
+      section: results
+      featured: true
+      alt: XGBoost training pipeline
+      caption: 'XGBoost meta-classifier training pipeline: data preprocessing, cross-validation, hyperparameter tuning, and evaluation, fusing Random Forest sensor analysis with YOLOv11 visual detection to reach the ≈0.95 F1-score.'
+    - src: projects/its-xai/ITS_AI_5.png
+      section: foothold
+      featured: true
+      alt: Feature selection pipeline
+      caption: Automated feature-selection pipeline reducing 603 raw sensor features to 164 via tiered missing-value handling (>90%-missing removal, KNN/median imputation) and importance-based selection.
+- slug: production-scheduler
+  title: AI Production Scheduler
+  scope: Applied engineering · public-safe summary
+  tagline: 'Developed and validated a production-scale scheduling system for manufacturing workflows, outperforming a legacy planning baseline while satisfying all hard constraints.'
+  thumb: projects/production-scheduler/public_safe_overview.svg
+  tier: enhanced
+  home: true
+  order: 1
+  tldr: 'Developed and validated a production-scale scheduling system for manufacturing workflows, outperforming a legacy planning baseline while satisfying all hard constraints.'
+  problem: 'Manufacturing scheduling must convert changing production demand into a feasible plan while respecting hard operational constraints and balancing competing efficiency objectives. The engineering challenge was to improve planning quality without allowing an optimization gain to invalidate the schedule.'
+  contributions:
+    - 'Developed the scheduling workflow end to end, including input validation, constraint handling, optimization, schedule generation, and an operational monitoring interface.'
+    - 'Evaluated heuristic and exact optimization approaches, selecting methods according to workload scale and response-time requirements.'
+    - 'Validated the system against a legacy planning baseline while treating hard-constraint feasibility as a release gate.'
+  design_decisions:
+    - title: Feasibility before objective improvement
+      detail: 'Hard operational constraints are checked before any candidate schedule can be accepted, so an apparent optimization gain cannot produce an unusable plan.'
+    - title: Method selection by workload
+      detail: 'The system chooses between fast heuristic search and exact optimization according to problem scale and the available response-time budget instead of forcing one solver onto every case.'
+  stack:
+    - category: Language
+      items: [Python]
+    - category: Data / Integration
+      items:
+        - pandas
+        - numpy
+        - Excel I/O
+    - category: Frontend / Dashboard
+      items:
+        - Streamlit
+        - Plotly
+    - category: Optimization
+      items:
+        - CP-SAT (OR-Tools)
+        - Constraint-aware heuristic search
+        - Multi-objective optimization
+  figures:
+    - src: projects/production-scheduler/public_safe_overview.svg
+      section: lead
+      alt: 'Public-safe production scheduling workflow from manufacturing demand through hard-constraint validation to a feasible plan.'
+      caption: 'Public-safe overview: manufacturing demand passes through constraint validation and scheduling before a feasible plan is compared with a legacy baseline.'
