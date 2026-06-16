@@ -53,23 +53,23 @@
     Citation: Ju O Kim and Deokwoo Lee, "Overcoming Data Scarcity in Non-Contact Respiratory Monitoring: A DTW-Enhanced CNN-LSTM Approach," Electronics (MDPI), vol. 14, no. 20, p. 4120, October 2025. DOI: 10.3390/electronics14204120. Impact Factor: 2.9 (SCIE).
   figures:
     - src: publications/electronics2025/electronics2025_system.jpg
-      alt: overview
-      caption: System overview of the DTW-enhanced CNN-LSTM pipeline for non-contact UWB radar respiratory monitoring (Abstract section header image).
+      alt: System architecture overview
+      caption: 'System architecture overview: a UWB radar (Xethru X4M300, 10 Hz, ~600 samples/min) captures chest-surface motion; signals are bandpass-filtered (0.1-1 Hz) and augmented with DTW-SMOTE-TS, then classified by a CNN-LSTM network into normal vs. abnormal breathing.'
     - src: publications/electronics2025/electronics2025_cnnlstm.jpg
-      alt: CNN-LSTM Architecture
-      caption: 'Proposed hybrid architecture: CNN layers extract spatial features from UWB radar spectrograms while LSTM layers model temporal dependencies of breathing patterns over time.'
+      alt: CNN-LSTM hybrid architecture
+      caption: 'CNN-LSTM hybrid architecture: three 1-D convolutional blocks (32 -> 64 -> 128 filters) extract local signal morphology, two stacked LSTM layers (64 -> 32 units) model temporal dynamics, and a dense softmax head produces the normal/abnormal decision (~104.6K parameters).'
     - src: publications/electronics2025/electronics2025_augmentation.jpg
-      alt: Data Augmentation
-      caption: DTW-based SMOTE data augmentation. Replacing Euclidean distance with Dynamic Time Warping generates realistic synthetic respiratory samples that preserve temporal characteristics, illustrating diverse augmented samples while maintaining physiological signal traits.
+      alt: Data augmentation techniques
+      caption: 'Data augmentation on respiratory signals: (a) original signal, (b) time shifting, (c) amplitude scaling, (d) Gaussian-noise addition, (e) DTW alignment, and (f) the resulting DTW-SMOTE-TS synthetic sample generated between two parent signals.'
     - src: publications/electronics2025/electronics2025_confusion.jpg
-      alt: Confusion Matrix
-      caption: Confusion matrix showing detailed classification performance across respiratory states, with high precision and recall for both normal breathing and apnea detection and minimal false positives/negatives.
+      alt: Confusion matrix
+      caption: 'Confusion matrix on the held-out test set (175 samples): 121/125 normal and 44/50 abnormal cases classified correctly -- 94.3% overall accuracy (normal precision 0.953 / recall 0.968; abnormal precision 0.917 / recall 0.880).'
     - src: publications/electronics2025/electronics2025_roc.jpg
-      alt: ROC Curves
-      caption: Receiver Operating Characteristic (ROC) curves; the model attains an Area Under the Curve (AUC) of 0.969, maintaining high true positive rates at low false positive rates across thresholds.
+      alt: ROC, precision-recall and AUC comparison
+      caption: 'Model comparison: (a) ROC curves, (b) precision-recall curves, and (c) AUC scores across model variants. The proposed CNN-LSTM attains the highest AUC (0.974), ahead of CNN-only, Bi-LSTM, LSTM-only, 1D-ResNet, and GRU baselines.'
     - src: publications/electronics2025/electronics2025_ablation.jpg
-      alt: Ablation Study
-      caption: 'Ablation study quantifying each component''s contribution: removing DTW from SMOTE drops accuracy from 94.3% to 89.1% (~5.2%); CNN-only and LSTM-only cause 8.1% and 5.4% drops respectively.'
+      alt: Architecture ablation study
+      caption: 'Architecture ablation -- accuracy versus (a) number of CNN blocks, (b) LSTM unit width, (c) dropout rate, and (d) batch normalization. The chosen configuration (3 blocks, medium LSTM, 0.3 dropout, with BatchNorm) reaches 94.3%.'
   acknowledgements: This research was supported by the Basic Science Research Program through the National Research Foundation of Korea (NRF) funded by the Ministry of Education. We thank the anonymous reviewers for their valuable feedback and suggestions.
 - slug: springer2024
   title: Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences
@@ -91,20 +91,20 @@
     Citation: Ju O Kim, Jieun Kim, and Deokwoo Lee, "Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences," Journal of Signal Processing Systems (Springer), vol. 96, no. 3, pp. 191-202, 2024. DOI: 10.1007/s11265-023-01837-z. Impact Factor: 1.8 (SCI).
   figures:
     - src: publications/springer2024/springer2024_hardware.jpg
-      alt: hardware
-      caption: Three-viewpoint thermal camera hardware setup for wide-baseline (>180-degree) surveillance with minimal inter-view overlap (Abstract section header image).
+      alt: Three-viewpoint thermal camera hardware
+      caption: 'Three-viewpoint thermal camera hardware: (a) the fabricated wide-baseline rig and (b, c) its CAD model, with viewpoints separated by more than 180 degrees and minimal inter-view overlap.'
     - src: publications/springer2024/springer2024_flow.jpg
-      alt: System Flow
-      caption: 'Calibration pipeline system flow: vanishing point detection from thermal images, geometric constraint establishment, and multi-view calibration optimization — starting from edge detection and line grouping through iterative refinement of camera parameters.'
+      alt: Calibration pipeline flowchart
+      caption: 'Calibration pipeline: a captured checkerboard image is enhanced by VDSR super-resolution; intrinsic parameters follow from corner detection, while extrinsic parameters follow from line detection and vanishing-point extraction.'
     - src: publications/springer2024/springer2024_vp.jpg
-      alt: vanishing points
-      caption: Vanishing points derived from parallel scene lines establish geometric constraints between camera viewpoints, enabling estimation of relative orientation and position without dense feature correspondences.
+      alt: Vanishing-point principle
+      caption: 'Vanishing-point principle: parallel lines in the real world (A, B, C) project to a common vanishing point (VP) in the image, supplying the geometric constraint used to relate the camera viewpoints.'
     - src: publications/springer2024/springer2024_vp_detection.jpg
-      alt: VP Detection Process
-      caption: 'Vanishing point detection process: RANSAC-based line fitting identifies dominant line segments in thermal images, which are clustered by orientation and intersected to determine vanishing points along principal scene directions.'
+      alt: Vanishing-point detection
+      caption: 'Vanishing-point detection: dominant line segments are fit on the thermal checkerboard (a) and intersected (b); the intersection of the fitted lines yields the vanishing point used as a calibration constraint.'
     - src: publications/springer2024/springer2024_reprojection.jpg
-      alt: Reprojection Error
-      caption: Reprojection error analysis; mean error across all three viewpoints is less than 0.8 pixels with consistent performance across image regions and no systematic bias.
+      alt: Reprojection error per viewpoint
+      caption: 'Reprojection error per viewpoint (a, b, c): the mean reprojection error stays below ~0.66 pixels across all three thermal camera views, confirming accurate calibration from only a few correspondences.'
   acknowledgements: This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korean government. We thank the reviewers for their valuable feedback and suggestions that helped improve this work.
 - slug: sensors2020
   title: Detection of Abnormal Respiration from Multiple-Input Respiratory Signals
@@ -124,20 +124,20 @@
     Citation: Ju O Kim and Deokwoo Lee, "Detection of Abnormal Respiration from Multiple-Input Respiratory Signals," Sensors (MDPI), vol. 20, no. 10, p. 2977, 2020. DOI: 10.3390/s20102977. Impact Factor: 3.9 (SCIE).
   figures:
     - src: publications/sensors2020/sensors2020_respiration.jpg
-      alt: overview
-      caption: Overview of the multiple-input UWB radar respiratory monitoring system for abnormal respiration detection (top-of-page header image).
+      alt: Experiment setup
+      caption: 'Experiment setup for non-contact respiratory monitoring: a UWB radar module captures chest-surface motion while the recorded respiration signal is displayed on the acquisition PC.'
     - src: publications/sensors2020/sensors2020_flowchart.jpg
-      alt: Detection Flow
-      caption: 'Detection pipeline flowchart: a single Novelda X4 UWB radar sensor (30-50 cm from the chest) feeds Z-domain transformation for feature extraction, custom filter design for signal enhancement, and multi-input fusion for robust classification.'
+      alt: Overall processing pipeline
+      caption: 'Overall processing pipeline: respiration signals are acquired in the time domain (single- and multiple-input), analyzed in the Z-domain or through a tunable high-pass filter, and combined to decide whether abnormal respiration (apnea) is present.'
     - src: publications/sensors2020/sensors2020_apnea.jpg
-      alt: method
-      caption: 'Multi-input signal processing method: multiple respiratory samples from a single UWB sensor are processed via Z-domain transformations and custom high-pass filters, improving detection accuracy from 67% (single input) to 93% (triple inputs).'
+      alt: Abnormal (apnea) respiration examples
+      caption: 'Two examples of abnormal (apnea) respiration measured by the UWB radar: regular breathing oscillations are interrupted by flat apnea intervals where chest-surface motion stops.'
     - src: publications/sensors2020/sensors2020_zdomain.jpg
-      alt: Z-domain Classification
-      caption: 'Z-domain classification results: normal breathing, shallow breathing, and apnea form distinct clusters in the Z-domain feature space, enabling up to 93% accuracy with triple inputs using simple decision boundaries.'
+      alt: Z-domain pole-zero classification
+      caption: 'Z-domain classification: pole-zero plots of the transfer ratios B(z)/A(z) on the complex z-plane. Normal and abnormal (apnea) respiration yield distinct pole-zero distributions relative to the unit circle, giving a simple decision rule.'
     - src: publications/sensors2020/sensors2020_filter.jpg
-      alt: Filter Responses
-      caption: 'Custom filter response characteristics: the filter bank amplifies frequency components of normal and abnormal breathing while attenuating out-of-band noise, combining 0.1-0.5 Hz bandpass filtering with adaptive notch filters for interference rejection.'
+      alt: High-pass filtered responses (triple input)
+      caption: 'High-pass-filtered responses for three combined inputs across breathing combinations, from (a) all-normal to (d) all-apnea. Apnea events appear as sharp transient bursts whose count grows with apnea content, enabling detection from the filtered peaks.'
   acknowledgements: This research was supported by Keimyung University. We thank the reviewers for their valuable feedback and suggestions.
 - slug: iceic2021
   title: Mathematical Model for a Calibration of Multiple-View Thermal Camera
