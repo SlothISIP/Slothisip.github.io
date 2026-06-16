@@ -18,7 +18,7 @@ isHome: true
       <a href="{{ site.socials.github }}">GitHub</a> &middot;
       <a href="/data/CV_JuO_Kim.pdf">CV</a>
     </p>
-    <p class="bio">{{ home.bio }}</p>
+    <p class="bio">{{ home.bio | safe }}</p>
   </div>
 </section>
 
@@ -28,8 +28,8 @@ isHome: true
   {% for e in home.education %}
     <li>
       <div class="cv-line"><strong>{{ e.degree }}</strong> <span class="cv-period">{{ e.period }}</span></div>
-      <div class="cv-org">{{ e.institution }}</div>
-      {% if e.note %}<div class="cv-note">{{ e.note }}</div>{% endif %}
+      <div class="cv-org">{{ e.institution | safe }}</div>
+      {% if e.note %}<div class="cv-note">{{ e.note | safe }}</div>{% endif %}
     </li>
   {% endfor %}
   </ul>
@@ -41,12 +41,23 @@ isHome: true
   {% for x in home.experience %}
     <li>
       <div class="cv-line"><strong>{{ x.role }}</strong> <span class="cv-period">{{ x.period }}</span></div>
-      <div class="cv-org">{{ x.org }}</div>
-      {% if x.detail %}<div class="cv-note">{{ x.detail }}</div>{% endif %}
+      <div class="cv-org">{{ x.org | safe }}</div>
+      {% if x.detail %}<div class="cv-note">{{ x.detail | safe }}</div>{% endif %}
     </li>
   {% endfor %}
   </ul>
 </section>
+
+{% if home.awards and home.awards.length %}
+<section id="awards">
+  <h2>Awards</h2>
+  <ul class="cv-list">
+  {% for a in home.awards %}
+    <li>{{ a }}</li>
+  {% endfor %}
+  </ul>
+</section>
+{% endif %}
 
 <section id="skills">
   <h2>Technical Skills</h2>
