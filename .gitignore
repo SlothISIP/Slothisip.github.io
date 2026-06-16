@@ -19,10 +19,16 @@ GEMINI.md
 # Local tooling caches (Playwright MCP snapshots, etc.)
 .playwright-mcp/
 
-# Ad-hoc debug screenshots at repo root
+# Ad-hoc debug / verification screenshots at repo root
 /arch-*.png
 /page-*.png
 /screenshot-*.png
+/verify-*.png
+/compare-*.png
+/post-*.png
+/recheck-*.png
+/rev-*.png
+/p5*.png
 
 # Questionnaires and planning docs
 CV_*.md

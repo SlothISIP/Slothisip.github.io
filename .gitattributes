@@ -1,0 +1,13 @@
+# Normalize line endings (fixes the CRLF/LF drift from the old hand-edited tree)
+* text=auto eol=lf
+
+# Treat these as binary (no eol normalization, no diff)
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.pdf  binary
+*.woff  binary
+*.woff2 binary
