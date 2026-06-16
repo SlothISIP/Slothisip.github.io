@@ -42,6 +42,12 @@ THUMBNAIL_*.md
 프로필사진.jpg
 논문/
 
+# Source manuscript PDFs at repo root (papers link to the publisher, not self-hosted)
+/*.pdf
+
+# Ad-hoc figure-extraction workspace
+.figwork/
+
 # System files
 nul
 .DS_Store

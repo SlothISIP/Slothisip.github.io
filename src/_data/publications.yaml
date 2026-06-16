@@ -1,4 +1,40 @@
 # Single source for all publications. Detail pubs carry abstract/figures/acknowledgements; markers resolved.
+- slug: applsci2026
+  title: 'FFT-Free Neural Operators for Helmholtz Scattering via Adaptive Coefficient Modulation'
+  authors: Ju O Kim, Deokwoo Lee
+  venue: Applied Sciences (MDPI)
+  year: 2026
+  badge: scie
+  detail: true
+  paper_url: https://www.mdpi.com/2076-3417/16/12/5997
+  bib: KimAPPLSCI2026
+  highlight: false
+  abstract: |-
+    We introduce the Helmholtz Neural Operator (HNO), a physics-informed, FFT-free branch-trunk operator in the DeepONet family for the 2D Helmholtz wave-scattering problem on high-contrast inhomogeneous media. HNO pairs a hybrid SIREN + learnable-Fourier trunk (local smoothness plus global periodicity) with a dual-path, rank-32 hypernetwork branch that emits a bounded multiplicative gate on the per-mode coefficients, so the operator adapts to each input medium by re-weighting a fixed hybrid basis rather than adding spectral modes. This targets the mode-saturation failure of Fourier Neural Operators (FNO), whose fixed Fourier bases must spend modes uniformly across the spectrum to resolve sharp material interfaces and therefore show diminishing returns on high-contrast media.
+
+    Key results (parameter-matched at ~1.05M params, 5 random seeds): HNO attains a 19.6% out-of-distribution generalization gap -- 2.6x lower than FNO (50.6%, p = 1.7x10^-3, Cohen's d = 5.1), 5.1x lower than vanilla DeepONet (99.9%), and 6.0x lower than MscaleFNO (117.4%); MscaleFNO's gap worsens monotonically with branch capacity (148.0% at 4.2x more parameters), ruling out per-branch capacity starvation. Being FFT-free, HNO runs 4.6x / 16.4x faster at inference than FNO / MscaleFNO and 64-245x faster than a multi-threaded FD-PML direct solver (183-698x versus the single-thread scipy pipeline that generated the ground truth). An architecture ablation attributes essentially all of the OOD improvement to the hybrid wave-tailored trunk, with the bounded coefficient gate being accuracy-neutral -- a stability guard rather than the accuracy driver. Reported honestly: absolute accuracy on extreme-contrast (15:1) OOD samples is limited (relative L2 ~ 1.04), so HNO is positioned as a fast many-query forward surrogate or a warm start for refinement loops, not a stand-alone replacement for direct solvers; and HNO underperforms FNO on the elliptic Darcy Flow benchmark (229.8% vs. 70.6% gap), confirming specialization for hyperbolic / wave equations rather than universal operator learning.
+
+    Citation: Ju O Kim and Deokwoo Lee, "FFT-Free Neural Operators for Helmholtz Scattering via Adaptive Coefficient Modulation," Applied Sciences (MDPI), vol. 16, no. 12, article 5997, 2026. DOI: 10.3390/app16125997. Open Access (CC BY).
+  figures:
+    - src: publications/applsci2026/applsci2026_architecture.jpg
+      alt: HNO architecture overview
+      caption: 'Helmholtz Neural Operator (HNO) architecture (Abstract section header image). The SpatialFeatureEncoder maps the input medium n²(x) to a pooled context vector z and a spatial feature tensor S; the dual-path EnhancedModulator combines a rank-32 LoRA global path with a 1x1-convolution spatial path into a bounded per-mode multiplicative gate Δφ ∈ [-0.5, 0.5]; and the HybridBasisNetwork (SIREN + learnable Fourier, K = 64) supplies the trunk basis evaluated at coordinates x. The wave field is reconstructed as û = Σ_k α_k(n²)·φ_k(x)·(1 + Δφ_k). The architecture is FFT-free -- spectral structure is captured by learnable Fourier features rather than by a global transform (1,047,440 parameters total).'
+    - src: publications/applsci2026/applsci2026_dataset.jpg
+      alt: Helmholtz dataset visualization
+      caption: 'Dataset visualization. Top row: input medium n²(x) and wave-field magnitude |u(x)|; bottom row: real and imaginary parts of the field. Level 1 (a,b,e,f) is a simple single-scatterer geometry (displayed sample ~2.3:1 contrast, dataset maximum 3:1); Level 4 (c,d,g,h) is a high-contrast multiple-scatterer regime (displayed sample ~12:1, dataset maximum 15:1). The red diamond S marks the point-source location. Models train only on random-blob Level 3 media and are evaluated out-of-distribution on Level 4, so the rising geometric and spectral complexity from Level 1 to Level 4 is exactly where fixed Fourier bases (FNO) struggle.'
+    - src: publications/applsci2026/applsci2026_oodgap.jpg
+      alt: Parameter-matched OOD generalization gap
+      caption: 'Parameter-matched comparison of the out-of-distribution generalization gap across DeepONet, FNO, MscaleFNO, and HNO (~1.05M parameters each, 5 seeds). HNO attains a 19.6% gap -- 2.6x better than FNO (p = 1.7x10^-3), 5.1x better than vanilla DeepONet (p = 8.2x10^-3), and 6.0x better than MscaleFNO (p = 2.4x10^-6). Adding parallel frequency-scaled branches (MscaleFNO) more than doubles the gap relative to FNO, and a 4.2x-larger MscaleFNO worsens further to 148.0%, confirming the collapse is architectural rather than capacity-related.'
+    - src: publications/applsci2026/applsci2026_qualitative.jpg
+      alt: Qualitative wave-field comparison (HNO vs FNO)
+      caption: 'Qualitative comparison across difficulty (seed-42 models). Rows: an easy in-distribution Level 3 medium, a moderate-contrast Level 4 medium, and a high-contrast Level 4 failure case. Columns: input medium n², ground-truth |u|, HNO |û|, and FNO |û| (relative L² annotated). HNO degrades gracefully (0.74 / 1.14 / 1.18) while FNO collapses on the high-contrast case (0.81 / 1.13 / 1.64); FNO error concentrates at material interfaces -- the mode-saturation signature -- whereas HNO stays more uniform through medium-conditioned coefficient modulation.'
+    - src: publications/applsci2026/applsci2026_frequency.jpg
+      alt: Frequency robustness across wavenumber
+      caption: 'Frequency robustness: generalization gap across wavenumber k0. Both models train at k0 = 20 (dashed line); HNO (blue) holds lower, more consistent gaps than the FNO baseline (red) across the tested k0 in [10, 30] -- about 1.8x better average robustness with 56% lower variance (29.9% vs. 55.2% mean gap). The behavior is a property of the fixed-spectral-basis architecture rather than of capacity: the parameter-matched FNO-5m5L sweep widens the margin to 2.2x.'
+    - src: publications/applsci2026/applsci2026_ablation.jpg
+      alt: Architecture ablation (basis type and modulator rank)
+      caption: 'Architecture ablation (3 seeds). (a) Basis type: the hybrid SIREN + Fourier trunk (19.9% gap) is 4.6x lower than SIREN-only and 2.2x lower than Fourier-only, identifying the wave-tailored trunk as the load-bearing component. (b) Modulator rank: rank 32 is the critical operating point, with both lower (8, 16) and higher (64) ranks degrading substantially. A five-seed re-run and a modulation-presence ablation attribute essentially all of the OOD improvement to the hybrid trunk, with the bounded coefficient gate acting as an accuracy-neutral stability mechanism.'
+  acknowledgements: This work was supported by the Basic Science Research Program through the National Research Foundation of Korea (NRF) funded by the Ministry of Education (No. 2022R1I1A3069352). We thank the academic editors and the anonymous reviewers for their valuable feedback.
 - slug: electronics2025
   title: 'Overcoming Data Scarcity in Non-Contact Respiratory Monitoring: A DTW-Enhanced CNN-LSTM Approach'
   authors: Ju O Kim, Deokwoo Lee
