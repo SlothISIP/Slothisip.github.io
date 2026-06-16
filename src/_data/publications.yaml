@@ -1,5 +1,4 @@
-# Single source for all publications. Order = render order = JSON-LD position.
-# The 3 detail pubs carry abstract/figures/acknowledgements (Phase 5). ' # VERIFY' = owner-confirm.
+# Single source for all publications. Detail pubs carry abstract/figures/acknowledgements; markers resolved.
 - slug: electronics2025
   title: 'Overcoming Data Scarcity in Non-Contact Respiratory Monitoring: A DTW-Enhanced CNN-LSTM Approach'
   authors: Ju O Kim, Deokwoo Lee
@@ -13,11 +12,9 @@
   abstract: |-
     We propose a CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation for UWB radar respiratory monitoring, achieving 94.3% accuracy with minimal training data. This approach addresses the challenge of limited labeled datasets in medical monitoring applications. Our system demonstrates robust performance in distinguishing normal breathing from apnea events using non-contact ultra-wideband (UWB) radar technology. The integration of Dynamic Time Warping (DTW) with Synthetic Minority Over-sampling Technique (SMOTE) enables effective data augmentation for time-series respiratory signals, while the CNN-LSTM architecture efficiently captures both spatial and temporal patterns in the radar data. Experimental results show that our method significantly outperforms traditional machine learning approaches and standard deep learning models when training data is scarce, making it particularly suitable for real-world medical monitoring scenarios where collecting large labeled datasets is challenging and expensive.
 
-    Key results (verbatim from detail page): 94.3% classification accuracy distinguishing normal breathing from apnea events; AUC of 0.969 on ROC analysis. Baseline comparisons: non-augmented CNN-LSTM 82.3%; traditional ML (SVM, Random Forest) 82-85%; LSTM-only 88.9%; CNN-only 86.2%. Ablation: removing DTW from SMOTE reduces accuracy ~5.2% (94.3% to 89.1%); CNN-only and LSTM-only cause 8.1% and 5.4% drops respectively.
+    Key results: 94.3% classification accuracy distinguishing normal breathing from apnea events; AUC of 0.969 on ROC analysis. Baseline comparisons: non-augmented CNN-LSTM 82.3%; traditional ML (SVM, Random Forest) 82-85%; LSTM-only 88.9%; CNN-only 86.2%. Ablation: removing DTW from SMOTE reduces accuracy ~5.2% (94.3% to 89.1%); CNN-only and LSTM-only cause 8.1% and 5.4% drops respectively.
 
-    Additional metrics appearing ONLY in the legacy root index.html blurb (NOT corroborated on the detail page): "DTW-based SMOTE-TS data augmentation" (detail page calls it "DTW-based SMOTE", not "SMOTE-TS") # VERIFY; "45.3ms inference" # VERIFY; "Novelda X4 radar data from 700 recordings across 7 volunteers" # VERIFY. The 94.3% accuracy and 0.969 AUC are corroborated by BOTH sources.
-
-    Citation: Ju O Kim and Deokwoo Lee, "Overcoming Data Scarcity in Non-Contact Respiratory Monitoring: A DTW-Enhanced CNN-LSTM Approach," Electronics (MDPI), vol. 14, no. 20, p. 4120, October 2025. DOI: 10.3390/electronics14204120. Impact Factor: 2.9 (SCIE). Authors: Ju O Kim, Deokwoo Lee (Keimyung University).
+    Citation: Ju O Kim and Deokwoo Lee, "Overcoming Data Scarcity in Non-Contact Respiratory Monitoring: A DTW-Enhanced CNN-LSTM Approach," Electronics (MDPI), vol. 14, no. 20, p. 4120, October 2025. DOI: 10.3390/electronics14204120. Impact Factor: 2.9 (SCIE).
   figures:
     - src: publications/electronics2025/electronics2025_system.jpg
       alt: overview
@@ -53,11 +50,9 @@
 
     Methodology: three-stage pipeline of (1) vanishing point detection from thermal images, (2) geometric constraint establishment from detected vanishing points, and (3) multi-view calibration optimization. Vanishing point detection uses a robust RANSAC-based line fitting algorithm: dominant line segments are detected, clustered by orientation, and intersected to compute vanishing points corresponding to principal scene directions (horizontal, vertical, depth). The method operates with as few as three to five correspondence points per image pair.
 
-    Key results (verbatim from detail page): mean reprojection error across all three camera viewpoints is less than 0.8 pixels. Comparison table (Method / Reprojection Error px / Required Correspondences / Wide-Baseline Support): Zhang's Method (OpenCV) 0.5-1.0, >20 per view, Limited; Bouguet Toolbox 0.6-1.2, >15 per view, Limited; COLMAP (SfM) 0.8-1.5, Dense features, Moderate; Ours (VP-based) <0.8, 3-5 per view, >180 degrees supported.
+    Key results: mean reprojection error across all three camera viewpoints is less than 0.8 pixels. Comparison table (Method / Reprojection Error px / Required Correspondences / Wide-Baseline Support): Zhang's Method (OpenCV) 0.5-1.0, >20 per view, Limited; Bouguet Toolbox 0.6-1.2, >15 per view, Limited; COLMAP (SfM) 0.8-1.5, Dense features, Moderate; Ours (VP-based) <0.8, 3-5 per view, >180 degrees supported.
 
-    Metrics appearing ONLY in the legacy root index.html blurb (NOT on the detail page): "VDSR super-resolution for low-quality thermal images" — the detail page does NOT mention VDSR or super-resolution anywhere # VERIFY; "0.58-0.66 pixel reprojection error" — the detail page only states "<0.8 pixels", not the 0.58-0.66 range # VERIFY; blurb claims calibration "without correspondence matching" while the detail page states the method needs 3-5 correspondences per view # VERIFY (reconcile wording).
-
-    Citation: Ju O Kim, Jieun Kim, and Deokwoo Lee, "Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences," Journal of Signal Processing Systems (Springer), vol. 96, no. 3, pp. 191-202, 2024. DOI: 10.1007/s11265-023-01837-z. Impact Factor: 1.8 (SCI). Authors: Ju O Kim, Jieun Kim, Deokwoo Lee (Keimyung University).
+    Citation: Ju O Kim, Jieun Kim, and Deokwoo Lee, "Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences," Journal of Signal Processing Systems (Springer), vol. 96, no. 3, pp. 191-202, 2024. DOI: 10.1007/s11265-023-01837-z. Impact Factor: 1.8 (SCI).
   figures:
     - src: publications/springer2024/springer2024_hardware.jpg
       alt: hardware
@@ -88,11 +83,9 @@
   abstract: |-
     We propose Z-domain and filter-based approaches for detecting abnormal respiration from single and multiple UWB radar signals with 93% accuracy. The method combines time-domain and frequency-domain analysis for robust detection. Ultra-wideband (UWB) radar technology has emerged as a promising non-contact method for respiratory monitoring. This paper presents a novel approach that processes multiple respiratory signals simultaneously using advanced signal processing techniques. By employing Z-domain transformation and sophisticated filtering methods, our system can effectively distinguish between normal and abnormal breathing patterns, including apnea events, with high accuracy. The proposed method demonstrates robust performance across various experimental conditions and shows potential for real-world applications in healthcare monitoring and sleep disorder detection.
 
-    Key results (verbatim from detail page): detection accuracy improves from 67% (single input) to 93% (triple inputs). Z-domain feature space separates normal breathing, shallow breathing, and apnea into distinct clusters, achieving up to 93% accuracy with triple inputs. Custom filter bank combines bandpass filtering in the respiratory frequency range (0.1-0.5 Hz) with adaptive notch filters for interference rejection. Hardware: a single Novelda X4 UWB radar sensor positioned 30-50 cm from the chest, with multiple signal acquisitions for improved accuracy.
+    Key results: detection accuracy improves from 67% (single input) to 93% (triple inputs). Z-domain feature space separates normal breathing, shallow breathing, and apnea into distinct clusters, achieving up to 93% accuracy with triple inputs. Custom filter bank combines bandpass filtering in the respiratory frequency range (0.1-0.5 Hz) with adaptive notch filters for interference rejection. Hardware: a single Novelda X4 UWB radar sensor positioned 30-50 cm from the chest, with multiple signal acquisitions for improved accuracy.
 
-    Metrics appearing ONLY in the legacy root index.html blurb (NOT on the detail page): "Novelda X4, 8.2 GHz" — the 8.2 GHz operating frequency is not stated on the detail page (which only names the Novelda X4 at 30-50 cm) # VERIFY; the blurb characterizes the method as "Z-domain pole-zero analysis" while the detail page says only "Z-domain transformation" (pole-zero not stated on detail page) # VERIFY. The 93% accuracy and Novelda X4 sensor are corroborated by both sources.
-
-    Citation: Ju O Kim and Deokwoo Lee, "Detection of Abnormal Respiration from Multiple-Input Respiratory Signals," Sensors (MDPI), vol. 20, no. 10, p. 2977, 2020. DOI: 10.3390/s20102977. Impact Factor: 3.9 (SCIE). Authors: Ju O Kim, Deokwoo Lee (Keimyung University).
+    Citation: Ju O Kim and Deokwoo Lee, "Detection of Abnormal Respiration from Multiple-Input Respiratory Signals," Sensors (MDPI), vol. 20, no. 10, p. 2977, 2020. DOI: 10.3390/s20102977. Impact Factor: 3.9 (SCIE).
   figures:
     - src: publications/sensors2020/sensors2020_respiration.jpg
       alt: overview
