@@ -10,7 +10,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "src/assets/js": "assets/js" });
   eleventyConfig.addPassthroughCopy({ "src/assets/img/favicon": "assets/img/favicon" });
-  eleventyConfig.addPassthroughCopy({ "src/assets/img/KimJuO.jpg": "assets/img/KimJuO.jpg" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/img/favicon/favicon.ico": "favicon.ico" }); // vanity root favicon
+  eleventyConfig.addPassthroughCopy({ "src/assets/img/KimJuO.jpg": "assets/img/KimJuO.jpg" }); // og:image source
   eleventyConfig.addPassthroughCopy({ "src/data": "data" }); // CV pdf + 18 .bib
   eleventyConfig.addPassthroughCopy({ "src/.nojekyll": ".nojekyll" });
 

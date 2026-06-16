@@ -1,0 +1,8 @@
+# SEO-preserving redirect stubs for the 3 publication pages that moved from the
+# repo root to /publications/<slug>/. Keep indefinitely (old inbound + Scholar links persist).
+- from: /electronics2025/
+  to: /publications/electronics2025/
+- from: /springer2024/
+  to: /publications/springer2024/
+- from: /sensors2020/
+  to: /publications/sensors2020/

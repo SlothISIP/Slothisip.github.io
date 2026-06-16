@@ -18,7 +18,12 @@
   <meta name="twitter:title" content="{{ ogTitle or title or site.title }}">
   <meta name="twitter:image" content="{{ site.url }}/{{ ogImage or 'assets/img/KimJuO.jpg' }}">
 
-  <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/img/favicon/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/img/favicon/site.webmanifest">
+  <meta name="theme-color" content="#1772d0">
   <link rel="stylesheet" href="/assets/css/main.css">
   {% if isHome %}{% include "partials/jsonld.njk" %}{% endif %}
 </head>
