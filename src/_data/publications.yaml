@@ -9,12 +9,63 @@
   paper_url: https://www.mdpi.com/2076-3417/16/12/5997
   bib: KimAPPLSCI2026
   highlight: false
-  abstract: |-
-    We introduce the Helmholtz Neural Operator (HNO), a physics-informed, FFT-free branch-trunk operator in the DeepONet family for the 2D Helmholtz wave-scattering problem on high-contrast inhomogeneous media. HNO pairs a hybrid SIREN + learnable-Fourier trunk (local smoothness plus global periodicity) with a dual-path, rank-32 hypernetwork branch that emits a bounded multiplicative gate on the per-mode coefficients, so the operator adapts to each input medium by re-weighting a fixed hybrid basis rather than adding spectral modes. This targets the mode-saturation failure of Fourier Neural Operators (FNO), whose fixed Fourier bases must spend modes uniformly across the spectrum to resolve sharp material interfaces and therefore show diminishing returns on high-contrast media.
-
-    Key results (parameter-matched at ~1.05M params, 5 random seeds): HNO attains a 19.6% out-of-distribution generalization gap -- 2.6x lower than FNO (50.6%, p = 1.7x10^-3, Cohen's d = 5.1), 5.1x lower than vanilla DeepONet (99.9%), and 6.0x lower than MscaleFNO (117.4%); MscaleFNO's gap worsens monotonically with branch capacity (148.0% at 4.2x more parameters), ruling out per-branch capacity starvation. Being FFT-free, HNO runs 4.6x / 16.4x faster at inference than FNO / MscaleFNO and 64-245x faster than a multi-threaded FD-PML direct solver (183-698x versus the single-thread scipy pipeline that generated the ground truth). An architecture ablation attributes essentially all of the OOD improvement to the hybrid wave-tailored trunk, with the bounded coefficient gate being accuracy-neutral -- a stability guard rather than the accuracy driver. Reported honestly: absolute accuracy on extreme-contrast (15:1) OOD samples is limited (relative L2 ~ 1.04), so HNO is positioned as a fast many-query forward surrogate or a warm start for refinement loops, not a stand-alone replacement for direct solvers; and HNO underperforms FNO on the elliptic Darcy Flow benchmark (229.8% vs. 70.6% gap), confirming specialization for hyperbolic / wave equations rather than universal operator learning.
-
-    Citation: Ju O Kim and Deokwoo Lee, "FFT-Free Neural Operators for Helmholtz Scattering via Adaptive Coefficient Modulation," Applied Sciences (MDPI), vol. 16, no. 12, article 5997, 2026. DOI: 10.3390/app16125997. Open Access (CC BY).
+  tldr: >-
+    A physics-informed neural operator (HNO) that solves 2-D Helmholtz wave-scattering
+    roughly 5-16x faster than Fourier Neural Operators (FNO and MscaleFNO) and generalizes
+    far better to unseen high-contrast media -- by re-weighting a fixed, wave-tailored
+    basis for each input medium instead of spending a fixed budget of Fourier modes.
+  problem: >-
+    Fourier Neural Operators (FNO) must spread a fixed budget of Fourier modes uniformly
+    across the spectrum, so they saturate and degrade on high-contrast media with sharp
+    material interfaces -- exactly the wave-scattering regime that matters. The question
+    is whether an FFT-free operator can adapt its basis to each input medium instead.
+  approach:
+    - >-
+      FFT-free branch-trunk operator in the DeepONet family: a hybrid SIREN +
+      learnable-Fourier trunk captures local smoothness and global periodicity without any
+      global transform.
+    - >-
+      A dual-path, rank-32 hypernetwork branch emits a bounded multiplicative gate on the
+      per-mode coefficients, so the operator re-weights a fixed hybrid basis per input
+      medium rather than adding spectral modes.
+    - >-
+      Evaluated parameter-matched (~1.05M parameters, 5 random seeds) against vanilla
+      DeepONet, FNO, and MscaleFNO on 2-D Helmholtz scattering in high-contrast
+      inhomogeneous media.
+  results:
+    - >-
+      19.6% out-of-distribution generalization gap -- 2.6x lower than FNO (50.6%, p =
+      1.7x10^-3, Cohen's d = 5.1), 5.1x lower than vanilla DeepONet (99.9%), and 6.0x lower
+      than MscaleFNO (117.4%); MscaleFNO worsens with branch capacity (148.0% at 4.2x more
+      parameters), ruling out capacity starvation.
+    - >-
+      Being FFT-free, HNO runs 4.6x / 16.4x faster at inference than FNO / MscaleFNO and
+      64-245x faster than a multi-threaded FD-PML direct solver.
+    - >-
+      An architecture ablation attributes essentially all of the OOD gain to the hybrid
+      wave-tailored trunk; the bounded coefficient gate is an accuracy-neutral stability
+      guard, not the accuracy driver.
+    - >-
+      Reported honestly: absolute accuracy on extreme-contrast (15:1) OOD samples is
+      limited (relative L2 ~ 1.04), so HNO is positioned as a fast many-query surrogate or
+      a warm start for refinement loops, not a solver replacement; it also underperforms
+      FNO on the elliptic Darcy Flow benchmark (229.8% vs. 70.6% gap), confirming
+      specialization for wave / hyperbolic equations.
+  abstract: >-
+    We introduce the Helmholtz Neural Operator (HNO), a physics-informed, FFT-free
+    branch-trunk operator in the DeepONet family for the 2D Helmholtz wave-scattering
+    problem on high-contrast inhomogeneous media. HNO pairs a hybrid SIREN +
+    learnable-Fourier trunk (local smoothness plus global periodicity) with a dual-path,
+    rank-32 hypernetwork branch that emits a bounded multiplicative gate on the per-mode
+    coefficients, so the operator adapts to each input medium by re-weighting a fixed
+    hybrid basis rather than adding spectral modes. This targets the mode-saturation
+    failure of Fourier Neural Operators (FNO), whose fixed Fourier bases must spend modes
+    uniformly across the spectrum to resolve sharp material interfaces and therefore show
+    diminishing returns on high-contrast media.
+  citation: >-
+    Ju O Kim and Deokwoo Lee, "FFT-Free Neural Operators for Helmholtz Scattering via
+    Adaptive Coefficient Modulation," Applied Sciences (MDPI), vol. 16, no. 12, article
+    5997, 2026. DOI: 10.3390/app16125997. Open Access (CC BY).
   figures:
     - src: publications/applsci2026/applsci2026_architecture.jpg
       alt: HNO architecture overview
@@ -45,12 +96,53 @@
   paper_url: https://www.mdpi.com/2079-9292/14/20/4120
   bib: KimELECTRONICS2025
   highlight: true
-  abstract: |-
-    We propose a CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation for UWB radar respiratory monitoring, achieving 94.3% accuracy with minimal training data. This approach addresses the challenge of limited labeled datasets in medical monitoring applications. Our system demonstrates robust performance in distinguishing normal breathing from apnea events using non-contact ultra-wideband (UWB) radar technology. The integration of Dynamic Time Warping (DTW) with Synthetic Minority Over-sampling Technique (SMOTE) enables effective data augmentation for time-series respiratory signals, while the CNN-LSTM architecture efficiently captures both spatial and temporal patterns in the radar data. Experimental results show that our method significantly outperforms traditional machine learning approaches and standard deep learning models when training data is scarce, making it particularly suitable for real-world medical monitoring scenarios where collecting large labeled datasets is challenging and expensive.
-
-    Key results: 94.3% classification accuracy distinguishing normal breathing from apnea events; AUC of 0.969 on ROC analysis. Baseline comparisons: non-augmented CNN-LSTM 82.3%; traditional ML (SVM, Random Forest) 82-85%; LSTM-only 88.9%; CNN-only 86.2%. Ablation: removing DTW from SMOTE reduces accuracy ~5.2% (94.3% to 89.1%); CNN-only and LSTM-only cause 8.1% and 5.4% drops respectively.
-
-    Citation: Ju O Kim and Deokwoo Lee, "Overcoming Data Scarcity in Non-Contact Respiratory Monitoring: A DTW-Enhanced CNN-LSTM Approach," Electronics (MDPI), vol. 14, no. 20, p. 4120, October 2025. DOI: 10.3390/electronics14204120. Impact Factor: 2.9 (SCIE).
+  tldr: >-
+    A compact CNN-LSTM that detects apnea events from non-contact UWB radar, using a
+    DTW-based augmentation that preserves breathing rhythm to reach 94.3% accuracy despite
+    scarce labeled training data.
+  problem: >-
+    Medical time-series such as respiration are expensive to label, so deep models usually
+    starve for data. Standard SMOTE augmentation relies on Euclidean distance, which
+    distorts the timing of breathing cycles -- can rhythm-aware augmentation make a compact
+    CNN-LSTM viable on a small radar dataset?
+  approach:
+    - >-
+      Replace Euclidean distance in SMOTE with Dynamic Time Warping so synthetic
+      respiration samples preserve realistic breathing cadence (DTW-SMOTE-TS).
+    - >-
+      A hybrid CNN-LSTM: 1-D convolutional blocks extract local waveform morphology and
+      stacked LSTM layers model temporal dynamics (~104.6K parameters).
+    - >-
+      Fully non-contact sensing with a UWB radar (Xethru X4M300), with no body-worn
+      electrodes.
+  results:
+    - >-
+      94.3% accuracy (AUC 0.969) distinguishing normal breathing from apnea events on
+      non-contact radar.
+    - >-
+      Outperforms the non-augmented CNN-LSTM (82.3%), LSTM-only (88.9%), CNN-only (86.2%),
+      and traditional ML such as SVM / Random Forest (82-85%).
+    - >-
+      Ablation: removing DTW from SMOTE costs ~5.2% accuracy (94.3% to 89.1%); using
+      CNN-only or LSTM-only drops accuracy by 8.1% and 5.4% respectively.
+  abstract: >-
+    We propose a CNN-LSTM hybrid architecture with DTW-based SMOTE data augmentation for
+    UWB radar respiratory monitoring, achieving 94.3% accuracy with minimal training data.
+    This approach addresses the challenge of limited labeled datasets in medical monitoring
+    applications. Our system demonstrates robust performance in distinguishing normal
+    breathing from apnea events using non-contact ultra-wideband (UWB) radar technology.
+    The integration of Dynamic Time Warping (DTW) with Synthetic Minority Over-sampling
+    Technique (SMOTE) enables effective data augmentation for time-series respiratory
+    signals, while the CNN-LSTM architecture efficiently captures both spatial and temporal
+    patterns in the radar data. Experimental results show that our method significantly
+    outperforms traditional machine learning approaches and standard deep learning models
+    when training data is scarce, making it particularly suitable for real-world medical
+    monitoring scenarios where collecting large labeled datasets is challenging and
+    expensive.
+  citation: >-
+    Ju O Kim and Deokwoo Lee, "Overcoming Data Scarcity in Non-Contact Respiratory
+    Monitoring: A DTW-Enhanced CNN-LSTM Approach," Electronics (MDPI), vol. 14, no. 20, p.
+    4120, October 2025. DOI: 10.3390/electronics14204120. Impact Factor: 2.9 (SCIE).
   figures:
     - src: publications/electronics2025/electronics2025_system.jpg
       alt: System architecture overview
@@ -81,14 +173,49 @@
   paper_url: https://link.springer.com/article/10.1007/s11265-023-01837-z
   bib: KimSPRINGER2024
   highlight: false
-  abstract: |-
-    We propose vanishing point-based calibration for a three-viewpoint thermal camera system with greater than 180-degree separation and minimal overlap between views. This method enables accurate calibration with limited feature correspondences. The proposed approach is particularly suited for thermal imaging systems where traditional calibration methods struggle due to the lack of distinctive features and minimal overlap between camera viewpoints. Our vanishing point-based method achieves reliable calibration by exploiting geometric constraints inherent in the camera configuration, making it practical for wide-baseline multi-view thermal camera systems used in surveillance and monitoring applications.
-
-    Methodology: three-stage pipeline of (1) vanishing point detection from thermal images, (2) geometric constraint establishment from detected vanishing points, and (3) multi-view calibration optimization. Vanishing point detection uses a robust RANSAC-based line fitting algorithm: dominant line segments are detected, clustered by orientation, and intersected to compute vanishing points corresponding to principal scene directions (horizontal, vertical, depth). The method operates with as few as three to five correspondence points per image pair.
-
-    Key results: mean reprojection error across all three camera viewpoints is less than 0.8 pixels. Comparison table (Method / Reprojection Error px / Required Correspondences / Wide-Baseline Support): Zhang's Method (OpenCV) 0.5-1.0, >20 per view, Limited; Bouguet Toolbox 0.6-1.2, >15 per view, Limited; COLMAP (SfM) 0.8-1.5, Dense features, Moderate; Ours (VP-based) <0.8, 3-5 per view, >180 degrees supported.
-
-    Citation: Ju O Kim, Jieun Kim, and Deokwoo Lee, "Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences," Journal of Signal Processing Systems (Springer), vol. 96, no. 3, pp. 191-202, 2024. DOI: 10.1007/s11265-023-01837-z. Impact Factor: 1.8 (SCI).
+  tldr: >-
+    A vanishing-point calibration method for a wide-baseline (>180-degree) three-viewpoint
+    thermal camera that reaches sub-0.8-pixel accuracy from just 3-5 correspondences --
+    where feature-hungry classical calibration fails on near-featureless thermal imagery.
+  problem: >-
+    Thermal cameras lack the rich texture that standard calibration relies on, and a
+    three-view rig separated by more than 180 degrees has almost no overlap between views,
+    so methods like Zhang's or structure-from-motion need dense correspondences that simply
+    do not exist here.
+  approach:
+    - >-
+      A three-stage pipeline: vanishing-point detection, geometric-constraint
+      establishment, and multi-view calibration optimization.
+    - >-
+      RANSAC-based line fitting detects dominant line segments, clusters them by
+      orientation, and intersects them to recover vanishing points along the principal
+      scene directions (horizontal, vertical, depth).
+    - >-
+      VDSR super-resolution enhances the low-quality thermal checkerboard images before
+      corner detection; the method operates with as few as three to five correspondences
+      per image pair.
+  results:
+    - >-
+      Mean reprojection error below 0.8 pixels across all three viewpoints (about 0.58-0.66
+      pixels in practice).
+    - >-
+      Needs only 3-5 correspondences per view -- versus more than 15-20 for Zhang's method
+      or the Bouguet toolbox, and dense features for COLMAP -- while supporting >180-degree
+      wide baselines those methods handle poorly.
+  abstract: >-
+    We propose vanishing point-based calibration for a three-viewpoint thermal camera
+    system with greater than 180-degree separation and minimal overlap between views. This
+    method enables accurate calibration with limited feature correspondences. The proposed
+    approach is particularly suited for thermal imaging systems where traditional
+    calibration methods struggle due to the lack of distinctive features and minimal
+    overlap between camera viewpoints. Our vanishing point-based method achieves reliable
+    calibration by exploiting geometric constraints inherent in the camera configuration,
+    making it practical for wide-baseline multi-view thermal camera systems used in
+    surveillance and monitoring applications.
+  citation: >-
+    Ju O Kim, Jieun Kim, and Deokwoo Lee, "Calibrating a Three-Viewpoints Thermal Camera
+    with Few Correspondences," Journal of Signal Processing Systems (Springer), vol. 96, no.
+    3, pp. 191-202, 2024. DOI: 10.1007/s11265-023-01837-z. Impact Factor: 1.8 (SCI).
   figures:
     - src: publications/springer2024/springer2024_hardware.jpg
       alt: Three-viewpoint thermal camera hardware
@@ -116,12 +243,46 @@
   paper_url: https://www.mdpi.com/1424-8220/20/10/2977
   bib: KimSENSORS2020
   highlight: false
-  abstract: |-
-    We propose Z-domain and filter-based approaches for detecting abnormal respiration from single and multiple UWB radar signals with 93% accuracy. The method combines time-domain and frequency-domain analysis for robust detection. Ultra-wideband (UWB) radar technology has emerged as a promising non-contact method for respiratory monitoring. This paper presents a novel approach that processes multiple respiratory signals simultaneously using advanced signal processing techniques. By employing Z-domain transformation and sophisticated filtering methods, our system can effectively distinguish between normal and abnormal breathing patterns, including apnea events, with high accuracy. The proposed method demonstrates robust performance across various experimental conditions and shows potential for real-world applications in healthcare monitoring and sleep disorder detection.
-
-    Key results: detection accuracy improves from 67% (single input) to 93% (triple inputs). Z-domain feature space separates normal breathing, shallow breathing, and apnea into distinct clusters, achieving up to 93% accuracy with triple inputs. Custom filter bank combines bandpass filtering in the respiratory frequency range (0.1-0.5 Hz) with adaptive notch filters for interference rejection. Hardware: a single Novelda X4 UWB radar sensor positioned 30-50 cm from the chest, with multiple signal acquisitions for improved accuracy.
-
-    Citation: Ju O Kim and Deokwoo Lee, "Detection of Abnormal Respiration from Multiple-Input Respiratory Signals," Sensors (MDPI), vol. 20, no. 10, p. 2977, 2020. DOI: 10.3390/s20102977. Impact Factor: 3.9 (SCIE).
+  tldr: >-
+    A non-contact UWB-radar method that detects abnormal breathing (apnea) from the
+    pole-zero signature of respiration in the Z-domain, lifting accuracy from 67% with a
+    single input to 93% by fusing multiple acquisitions.
+  problem: >-
+    Reliable non-contact apnea detection from a single radar trace is noisy and
+    error-prone. The question is whether combining a Z-domain (pole-zero) view of the
+    signal with multi-input fusion can make abnormal-respiration detection robust.
+  approach:
+    - >-
+      Z-domain analysis: transform the respiration signals and read the pole-zero positions
+      of the B(z)/A(z) ratio to separate normal from abnormal status.
+    - >-
+      A custom filter bank combines 0.1-0.5 Hz bandpass filtering with adaptive high-pass
+      filtering of varying cutoff, exposing apnea events as transient bursts.
+    - >-
+      Multi-input fusion sums several acquisitions from a single Novelda X4 UWB sensor
+      (30-50 cm from the chest) to suppress noise.
+  results:
+    - >-
+      Detection accuracy improves from 67% with a single input to 93% with triple inputs.
+    - >-
+      In the Z-domain, normal, shallow, and apnea breathing occupy distinct regions of the
+      pole-zero representation, enabling simple decision rules.
+  abstract: >-
+    We propose Z-domain and filter-based approaches for detecting abnormal respiration from
+    single and multiple UWB radar signals with 93% accuracy. The method combines
+    time-domain and frequency-domain analysis for robust detection. Ultra-wideband (UWB)
+    radar technology has emerged as a promising non-contact method for respiratory
+    monitoring. This paper presents a novel approach that processes multiple respiratory
+    signals simultaneously using advanced signal processing techniques. By employing
+    Z-domain transformation and sophisticated filtering methods, our system can effectively
+    distinguish between normal and abnormal breathing patterns, including apnea events, with
+    high accuracy. The proposed method demonstrates robust performance across various
+    experimental conditions and shows potential for real-world applications in healthcare
+    monitoring and sleep disorder detection.
+  citation: >-
+    Ju O Kim and Deokwoo Lee, "Detection of Abnormal Respiration from Multiple-Input
+    Respiratory Signals," Sensors (MDPI), vol. 20, no. 10, p. 2977, 2020. DOI:
+    10.3390/s20102977. Impact Factor: 3.9 (SCIE).
   figures:
     - src: publications/sensors2020/sensors2020_respiration.jpg
       alt: Experiment setup

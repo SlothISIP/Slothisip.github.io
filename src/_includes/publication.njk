@@ -13,10 +13,26 @@ layout: base.njk
     </p>
   </header>
 
-  {% if pub.abstract %}
+  {% if pub.tldr %}<div class="tldr"><strong>TL;DR.</strong> {{ pub.tldr }}</div>{% endif %}
+
+  {% if pub.problem %}
   <section class="proj-section">
-    <h2>Abstract</h2>
-    <p>{{ pub.abstract }}</p>
+    <h2>Problem</h2>
+    <p>{{ pub.problem }}</p>
+  </section>
+  {% endif %}
+
+  {% if pub.approach and pub.approach.length %}
+  <section class="proj-section">
+    <h2>Approach</h2>
+    <ul class="bullets">{% for a in pub.approach %}<li>{{ a }}</li>{% endfor %}</ul>
+  </section>
+  {% endif %}
+
+  {% if pub.results and pub.results.length %}
+  <section class="proj-section">
+    <h2>Key results</h2>
+    <ul class="bullets">{% for r in pub.results %}<li>{{ r }}</li>{% endfor %}</ul>
   </section>
   {% endif %}
 
@@ -31,6 +47,20 @@ layout: base.njk
       </figure>
     {% endfor %}
     </div>
+  </section>
+  {% endif %}
+
+  {% if pub.abstract %}
+  <section class="proj-section">
+    <h2>Abstract</h2>
+    <p>{{ pub.abstract }}</p>
+  </section>
+  {% endif %}
+
+  {% if pub.citation %}
+  <section class="proj-section">
+    <h2>Citation</h2>
+    <p class="pub-citation">{{ pub.citation }}</p>
   </section>
   {% endif %}
 
