@@ -2,6 +2,7 @@
 layout: base.njk
 permalink: "/index.html"
 canonical: "https://slothisip.github.io/"
+isHome: true
 ---
 <section class="profile">
   <div class="profile-photo">
@@ -14,35 +15,83 @@ canonical: "https://slothisip.github.io/"
       <a href="mailto:{{ site.email }}">{{ site.email }}</a> &middot;
       <a href="{{ site.socials.scholar }}">Scholar</a> &middot;
       <a href="{{ site.socials.linkedin }}">LinkedIn</a> &middot;
+      <a href="{{ site.socials.github }}">GitHub</a> &middot;
       <a href="/data/CV_JuO_Kim.pdf">CV</a>
     </p>
-    <p>{{ site.description }}</p>
+    <p class="bio">{{ home.bio }}</p>
   </div>
 </section>
 
-<section id="publications">
-  <h2>Publications</h2>
-  <ul class="pub-list">
-  {% for p in publications %}
+<section id="education">
+  <h2>Education</h2>
+  <ul class="cv-list">
+  {% for e in home.education %}
     <li>
-      {% if p.detail %}<a href="/publications/{{ p.slug }}/"><span class="papertitle">{{ p.title }}</span></a>
-      {% elif p.paper_url and p.paper_url != "#" %}<a href="{{ p.paper_url }}"><span class="papertitle">{{ p.title }}</span></a>
-      {% else %}<span class="papertitle">{{ p.title }}</span>{% endif %}
-      {% if p.badge %}<span class="pub-badge pub-badge-{{ p.badge }}">{{ p.badge | upper }}</span>{% endif %}
-      <br><span class="pub-venue">{{ p.venue }}, {{ p.year }}</span>
+      <div class="cv-line"><strong>{{ e.degree }}</strong> <span class="cv-period">{{ e.period }}</span></div>
+      <div class="cv-org">{{ e.institution }}</div>
+      {% if e.note %}<div class="cv-note">{{ e.note }}</div>{% endif %}
     </li>
   {% endfor %}
   </ul>
 </section>
 
-<section id="projects">
-  <h2>Projects</h2>
-  <ul class="project-list">
-  {% for pr in projects %}
+<section id="experience">
+  <h2>Experience</h2>
+  <ul class="cv-list">
+  {% for x in home.experience %}
     <li>
-      <a href="/projects/{{ pr.slug }}/"><span class="papertitle">{{ pr.title }}</span></a>
-      {% if pr.tagline %}<br><span>{{ pr.tagline }}</span>{% endif %}
+      <div class="cv-line"><strong>{{ x.role }}</strong> <span class="cv-period">{{ x.period }}</span></div>
+      <div class="cv-org">{{ x.org }}</div>
+      {% if x.detail %}<div class="cv-note">{{ x.detail }}</div>{% endif %}
     </li>
   {% endfor %}
   </ul>
+</section>
+
+<section id="skills">
+  <h2>Technical Skills</h2>
+  <dl class="skills">
+  {% for s in home.skills %}
+    <dt>{{ s.category }}</dt>
+    <dd>{{ s.items | join(", ") }}</dd>
+  {% endfor %}
+  </dl>
+</section>
+
+<section id="publications">
+  <h2>Publications <span class="count">({{ publications | length }})</span></h2>
+  <ol class="pub-list">
+  {% for p in publications %}
+    <li class="pub-item{% if p.highlight %} highlight{% endif %}">
+      <div class="pub-title">
+        {% if p.detail %}<a href="/publications/{{ p.slug }}/"><span class="papertitle">{{ p.title }}</span></a>
+        {% elif p.paper_url %}<a href="{{ p.paper_url }}"><span class="papertitle">{{ p.title }}</span></a>
+        {% else %}<span class="papertitle">{{ p.title }}</span>{% endif %}
+        <span class="pub-badge pub-badge-{{ p.badge }}">{{ p.badge | upper }}</span>
+      </div>
+      <div class="pub-authors">{{ p.authors | replace("Ju O Kim", "<strong>Ju O Kim</strong>") | safe }}</div>
+      <div class="pub-meta">{{ p.venue }}, {{ p.year }}</div>
+      <div class="pub-links">
+        {% if p.detail %}<a href="/publications/{{ p.slug }}/">Details</a>{% endif %}
+        {% if p.paper_url %}<a href="{{ p.paper_url }}">Paper</a>{% endif %}
+        <a href="/data/{{ p.bib }}.bib">BibTeX</a>
+      </div>
+    </li>
+  {% endfor %}
+  </ol>
+</section>
+
+<section id="projects">
+  <h2>Projects <span class="count">({{ projects | length }})</span></h2>
+  <div class="project-grid">
+  {% for pr in projects %}
+    <a class="project-card" href="/projects/{{ pr.slug }}/">
+      <div class="project-card-thumb">{% thumb pr.thumb, pr.title %}</div>
+      <div class="project-card-body">
+        <h3 class="project-card-title">{{ pr.title }}</h3>
+        <p class="project-card-tagline">{{ pr.tagline }}</p>
+      </div>
+    </a>
+  {% endfor %}
+  </div>
 </section>

@@ -1,21 +1,182 @@
-# PLACEHOLDER DATA (Phase 1 scaffold only).
-# Phase 2 replaces this with all 18 publications using canonical titles/venues
-# from data/Kim*.bib + JSON-LD, plus the bib-URL fixes. Do not treat as final.
+# Single source for all publications. Order = render order = JSON-LD itemListElement position.
+# Generated Phase 2 from index.html + data/Kim*.bib + JSON-LD; verified 8/8 (canonical titles/venues + bib-URL fixes applied).
 - slug: electronics2025
-  title: "Overcoming Data Scarcity in Respiratory Monitoring: DTW-Enhanced CNN-LSTM"
-  authors: "Ju O Kim, et al."
-  venue: "Electronics (MDPI)"
+  title: 'Overcoming Data Scarcity in Non-Contact Respiratory Monitoring: A DTW-Enhanced CNN-LSTM Approach'
+  authors: Ju O Kim, Deokwoo Lee
+  venue: Electronics (MDPI)
   year: 2025
   badge: scie
   detail: true
-  paper_url: "https://www.mdpi.com/journal/electronics"
+  paper_url: https://www.mdpi.com/2079-9292/14/20/4120
   bib: KimELECTRONICS2025
+  highlight: true
+- slug: springer2024
+  title: Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences
+  authors: Ju O Kim, Jieun Kim, Deokwoo Lee
+  venue: Journal of Signal Processing Systems (Springer)
+  year: 2024
+  badge: sci
+  detail: true
+  paper_url: https://link.springer.com/article/10.1007/s11265-023-01837-z
+  bib: KimSPRINGER2024
+  highlight: false
+- slug: sensors2020
+  title: Detection of Abnormal Respiration from Multiple-Input Respiratory Signals
+  authors: Ju O Kim, Deokwoo Lee
+  venue: SENSORS (MDPI)
+  year: 2020
+  badge: scie
+  detail: true
+  paper_url: https://www.mdpi.com/1424-8220/20/10/2977
+  bib: KimSENSORS2020
+  highlight: false
+- slug: iceic2021
+  title: Mathematical Model for a Calibration of Multiple-View Thermal Camera
+  authors: Ju O Kim, Deokwoo Lee
+  venue: ICEIC 2021 (IEEE)
+  year: 2021
+  badge: conf
+  detail: false
+  paper_url: https://ieeexplore.ieee.org/document/9369719
+  bib: KimICEIC2021
+  highlight: false
 - slug: kais2021
-  title: "Thermal Camera Calibration using Images with Improved Quality"
-  authors: "Ju O Kim, et al."
-  venue: "JKAIS"
+  title: Thermal Camera Calibration using Images with Improved Quality
+  authors: Ju O Kim, Deokwoo Lee
+  venue: Journal of the Korea Academia-Industrial cooperation Society (JKAIS)
   year: 2021
   badge: kci
   detail: false
-  paper_url: "#"
+  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10549758
   bib: KimKAIS2021
+  highlight: false
+- slug: kics2020
+  title: Classification of Respiration Status using Signal Analysis in Z-Domain
+  authors: Ju O Kim, Deokwoo Lee
+  venue: The Journal of the Korean Institute of Communications and Information Sciences (KICS)
+  year: 2020
+  badge: kci
+  detail: false
+  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10508537
+  bib: KimKICS2020
+  highlight: false
+- slug: kais2020
+  title: Classification of Respiration Signal based on Image Information using Deep Learning
+  authors: Ju O Kim, Deokwoo Lee
+  venue: Journal of the Korea Academia-Industrial cooperation Society (KAIS)
+  year: 2020
+  badge: kci
+  detail: false
+  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10500831
+  bib: KimKAIS2020
+  highlight: false
+- slug: jic2020
+  title: Boundary and Corner Detection for Multi-Thermal Camera Calibration
+  authors: Ju O Kim, Deokwoo Lee
+  venue: Journal of Information and Control
+  year: 2020
+  badge: kci
+  detail: false
+  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10492661
+  bib: KimJIC2020
+  highlight: false
+- slug: ksae2020
+  title: Detection of Abnormal Respiration Status from Mixed Signals Using High Pass Filter
+  authors: Ju O Kim, Deokwoo Lee
+  venue: Transactions of KSAE
+  year: 2020
+  badge: conf
+  detail: false
+  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10504746
+  bib: KimKSAE2020
+  highlight: false
+- slug: kicswinter2020
+  title: Classification of Respiratory Status using UWB Radar based on a Learning Algorithm
+  authors: Ju O Kim, Deokwoo Lee, Cheol-Hyeong Park
+  venue: Proceedings of the KICS Winter Conference
+  year: 2020
+  badge: conf
+  detail: false
+  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE09346529
+  bib: KimKICSWinter2020
+  highlight: false
+- slug: kicssummer2020
+  title: Accuracy Improvement of Non-contact Respiration Measurement through Sensor Fusion of UWB Radar and Thermal Camera
+  authors: Ju O Kim, Deokwoo Lee
+  venue: KICS Summer Conference
+  year: 2020
+  badge: conf
+  detail: false
+  paper_url: null
+  bib: KimKICSSummer2020
+  highlight: false
+- slug: icros2020
+  title: Edge and Corner Detection for Multiple Thermal Camera Calibration
+  authors: Ju O Kim, Deokwoo Lee
+  venue: ICROS Annual Conference
+  year: 2020
+  badge: conf
+  detail: false
+  paper_url: null
+  bib: KimICROS2020
+  highlight: false
+- slug: ieie2020
+  title: Production of Heat-Box based Checkerboard for Thermal Camera Calibration
+  authors: Ju O Kim, Deokwoo Lee
+  venue: IEIE Summer Conference
+  year: 2020
+  badge: conf
+  detail: false
+  paper_url: null
+  bib: KimIEIE2020
+  highlight: false
+- slug: kais2019
+  title: Modeling of Polygon-shaped Filter in Frequency Domain for Realistic Image Filtering Methods
+  authors: Ju O Kim, Ji Su Kim, Cheol Hyeong Park, Deokwoo Lee
+  venue: Journal of the Korea Academia-Industrial cooperation Society (JKAIS)
+  year: 2019
+  badge: kci
+  detail: false
+  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07997660
+  bib: KimKAIS2019
+  highlight: false
+- slug: ijasc2019
+  title: Occlusion Handled Block-Based Stereo Matching with Image Segmentation
+  authors: Ji Su Kim, Cheol Hyeong Park, Ju O Kim, Deokwoo Lee
+  venue: International Journal of Advanced Smart Convergence (IJASC)
+  year: 2019
+  badge: kci
+  detail: false
+  paper_url: https://doi.org/10.7236/IJASC.2019.8.1.18
+  bib: KimIJASC2019
+  highlight: false
+- slug: ieie2018a
+  title: Polygon-shaped Filters for Analysis of Images in Frequency Domain
+  authors: Ju O Kim, Ji-Su Kim, Cheol-Hyeong Park, Deokwoo Lee
+  venue: Proceedings of the IEIE Conference
+  year: 2018
+  badge: conf
+  detail: false
+  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07624922
+  bib: KimIEIE2018a
+  highlight: false
+- slug: ieie2018b
+  title: Application to Detection and Classification of Respiratory Status based on a Signal Correlation
+  authors: Su-Yeol Kim, Chae-Hwan Hwang, Ju O Kim, Cheol-Hyeong Park, Deokwoo Lee
+  venue: Proceedings of the IEIE Conference
+  year: 2018
+  badge: conf
+  detail: false
+  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07624936
+  bib: KimIEIE2018b
+  highlight: false
+- slug: ieie2018c
+  title: Application to Camera Calibration using Learning Based Corner and Edge Detection
+  authors: Cheol-Hyeong Park, Ji-Su Kim, Ju O Kim, Deokwoo Lee
+  venue: Proceedings of the IEIE Conference
+  year: 2018
+  badge: conf
+  detail: false
+  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07624880
+  bib: KimIEIE2018c
+  highlight: false

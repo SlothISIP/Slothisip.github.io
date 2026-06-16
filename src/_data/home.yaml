@@ -1,0 +1,88 @@
+# Home-page narrative content (inline org/advisor links restored; award split into its own field).
+bio: I'm an AI Research Engineer at <a href="https://js-system.co.kr/">JS SYSTEM</a>'s R&D Division, working at the intersection of physics-informed machine learning and industrial systems. My research spans neural operators, acoustic tomography, and physics-informed Bayesian optimization; my engineering work spans multimodal sensing, anomaly detection, production scheduling, and on-prem AI systems with deterministic safeguards. I received my Master of Engineering in Computer Engineering (Artificial Intelligence) from <a href="https://www.kmu.ac.kr/">Keimyung University</a> in 2025 and am now pursuing a Ph.D. there under <a href="https://sites.google.com/view/dwoolee/deokwoo-lee">Prof. Deokwoo Lee</a>. I am first author of five SCI/SCIE journal papers.
+education:
+  - degree: Doctor of Philosophy (Ph.D.) in Computer Engineering (Artificial Intelligence)
+    institution: <a href="https://www.kmu.ac.kr/">Keimyung University</a>, Daegu, South Korea
+    period: 2026 - Present
+    note: 'Advisor: <a href="https://sites.google.com/view/dwoolee/deokwoo-lee">Prof. Deokwoo Lee</a>.'
+  - degree: Master of Engineering in Computer Engineering (Artificial Intelligence)
+    institution: <a href="https://www.kmu.ac.kr/">Keimyung University</a>, Daegu, South Korea
+    period: 2020 - 2025
+    note: 'GPA: 4.12 / 4.5. Advisor: <a href="https://sites.google.com/view/dwoolee/deokwoo-lee">Prof. Deokwoo Lee</a>. Thesis: Deep Learning Approaches for Non-Contact Biomedical Signal Processing.'
+  - degree: Bachelor of Engineering in Computer Engineering
+    institution: <a href="https://www.kmu.ac.kr/">Keimyung University</a>, Daegu, South Korea
+    period: 2014 - 2020
+    note: Including mandatory military service (2014-2016).
+experience:
+  - role: AI Research Engineer, R&D Division
+    org: <a href="https://js-system.co.kr/">JS SYSTEM</a> (Manufacturing AI Solutions)
+    period: Feb 2025 - Present
+    detail: 'Develop end-to-end AI systems spanning model development, data pipelines, APIs, deployment, and technical coordination. Developed an AutoML workflow combining model screening, hyperparameter optimization, and ensemble construction. Built acoustic anomaly-detection and on-prem multi-agent systems with deterministic guardrails and human-in-the-loop control.'
+  - role: Researcher, R&D Department
+    org: Seongwoo Instruments
+    period: Feb 2023 - Mar 2024
+    detail: 'Built a real-time micro-seismic monitoring system for superconducting seismic-wave detection under a government-funded national R&D program, in international collaboration with the University of Maryland (UMD) Physics Lab, including a 6-month on-site assignment at UMD, USA. Designed digital filters for extreme-sensitivity superconducting sensors, developed SVM and Random Forest classifiers for seismic-vs-noise discrimination, and built a high-throughput real-time data-streaming pipeline on a hybrid MATLAB-Python framework.'
+  - role: Commissioned Researcher
+    org: <a href="https://www.dgist.ac.kr/">DGIST</a> (Daegu Gyeongbuk Institute of Science and Technology)
+    period: Mar 2020 - Dec 2021
+    detail: Developed vanishing-point-based calibration for a three-viewpoint thermal camera with wide-baseline (>180° / ~240°) view separation. Reduced reprojection error to 0.58-0.66 pixels without correspondence matching. Research published in the SCI-indexed Journal of Signal Processing Systems (Springer).
+  - role: Graduate Researcher, NRF Research Project
+    org: <a href="https://www.kmu.ac.kr/">Keimyung University</a>, Daegu, South Korea
+    period: 2020 - 2022
+    detail: 'Deep-learning-based depth-camera calibration: designed a DNN architecture for distortion correction that overcomes the limits of traditional geometric models for UAV/AMR perception, with training pipelines built on real-world datasets spanning varied weather and lighting conditions.'
+skills:
+  - category: Scientific & Industrial ML
+    core:
+      - PyTorch
+      - Neural Operators
+      - Gaussian Processes
+    items:
+      - BoTorch
+      - GPyTorch
+      - XGBoost
+      - Optuna
+      - Ray
+  - category: Signal & Sensing
+    core:
+      - Acoustic, Thermal, UWB Radar
+      - Beamforming (MVDR/DAS/MUSIC)
+      - GCC-PHAT/TDOA
+    items:
+      - Audio Spectrogram Transformer
+      - FFT
+      - Wavelet
+      - Kalman Filter
+      - OpenCV
+  - category: Systems
+    core:
+      - Python
+      - FastAPI
+      - Docker
+    items:
+      - Celery
+      - Redis
+      - PostgreSQL
+      - TimescaleDB
+      - ONNX
+  - category: Agents & XAI
+    core:
+      - LangGraph
+      - MCP
+      - Ollama
+    items:
+      - Deterministic Guardrails
+      - Human-in-the-Loop
+      - SHAP
+      - DoWhy
+      - causal-learn
+  - category: Programming & Languages
+    core:
+      - Python
+    items:
+      - TypeScript
+      - SQL
+      - MATLAB
+      - Korean (Native)
+      - English (Professional Working Proficiency)
+awards:
+  - Best Paper Award, Korean Signal Processing Society (2023)

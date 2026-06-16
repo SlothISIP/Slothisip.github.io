@@ -1,0 +1,38 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": {{ site.author | dump | safe }},
+  "jobTitle": {{ site.person.jobTitle | dump | safe }},
+  "worksFor": { "@type": "Organization", "name": {{ site.person.worksFor | dump | safe }} },
+  "url": {{ site.url | dump | safe }},
+  "email": {{ ("mailto:" + site.email) | dump | safe }},
+  "image": {{ (site.url + "/" + site.person.image) | dump | safe }},
+  "sameAs": {{ site.person.sameAs | dump | safe }},
+  "knowsAbout": {{ site.person.knowsAbout | dump | safe }}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Publications",
+  "numberOfItems": {{ publications | length }},
+  "itemListElement": [
+  {%- for p in publications %}
+    {
+      "@type": "ListItem",
+      "position": {{ loop.index }},
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": {{ p.title | dump | safe }},
+        "datePublished": "{{ p.year }}",
+        "author": {{ p.authors | dump | safe }},
+        "isPartOf": { "@type": "Periodical", "name": {{ p.venue | dump | safe }} }{% if p.paper_url %},
+        "url": {{ p.paper_url | dump | safe }}{% endif %}
+      }
+    }{% if not loop.last %},{% endif %}
+  {%- endfor %}
+  ]
+}
+</script>

@@ -20,7 +20,7 @@
 
   <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/assets/css/main.css">
-  {% if jsonld %}<script type="application/ld+json">{{ jsonld | dump | safe }}</script>{% endif %}
+  {% if isHome %}{% include "partials/jsonld.njk" %}{% endif %}
 </head>
 <body>
   {% include "partials/nav.njk" %}

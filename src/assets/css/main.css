@@ -159,10 +159,68 @@ span.highlight, .highlight { background-color: var(--highlight); }
 .site-footer-inner a { color: var(--muted); }
 .site-footer-inner a:hover, .site-footer-inner a:focus { color: var(--accent-hover); }
 
+.bio { margin: .5rem 0 0; }
+h2 .count { color: var(--muted); font-weight: 400; font-size: 16px; }
+
+/* ---------- CV lists (education / experience) ---------- */
+.cv-list { list-style: none; padding: 0; margin: 0; }
+.cv-list li { margin: 0 0 1.1rem; }
+.cv-line { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.cv-period { color: var(--muted); white-space: nowrap; font-size: 13px; }
+.cv-org { color: var(--accent); }
+.cv-note { color: var(--muted); font-size: 13px; margin-top: .15rem; }
+
+/* ---------- Skills ---------- */
+.skills { display: grid; grid-template-columns: max-content 1fr; gap: .35rem 1rem; margin: 0; }
+.skills dt { font-weight: 700; }
+.skills dd { margin: 0; color: #333; }
+
+/* ---------- Publication list ---------- */
+.pub-list { padding-left: 1.4rem; }
+.pub-item { margin: 0 0 1.25rem; padding: .35rem .5rem; border-radius: 6px; }
+.pub-item.highlight { background-color: var(--highlight); }
+.pub-title { margin-bottom: .1rem; }
+.pub-authors { font-size: 13px; }
+.pub-meta { color: var(--muted); font-size: 13px; }
+.pub-links { margin-top: .25rem; font-size: 12px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ---------- Project grid ---------- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.project-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  color: inherit;
+  background: #fff;
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+.project-card:hover, .project-card:focus {
+  box-shadow: 0 6px 22px rgba(0,0,0,.10);
+  transform: translateY(-2px);
+  color: inherit;
+}
+.project-card-thumb { background: var(--surface); aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.project-card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.project-card-body { padding: 14px 16px 18px; }
+.project-card-title { margin: 0 0 .4rem; font-size: 16px; }
+.project-card-tagline {
+  margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+}
+.detail-actions { margin: .5rem 0; display: flex; gap: 10px; flex-wrap: wrap; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .profile { flex-direction: column; gap: 16px; }
   .profile-photo img { width: 140px; height: 140px; }
+  .skills { grid-template-columns: 1fr; gap: .15rem; }
+  .skills dt { margin-top: .5rem; }
 }
 @media (max-width: 480px) {
   .site-nav { padding: 8px 12px; }

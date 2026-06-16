@@ -4,12 +4,11 @@ layout: base.njk
 <article class="detail project-detail">
   <header class="detail-head">
     <h1>{{ project.title }}</h1>
-    {% if project.tagline %}<p class="lead">{{ project.tagline }}</p>{% endif %}
   </header>
 
-  {% if project.tldr %}<div class="tldr"><strong>TL;DR.</strong> {{ project.tldr | safe }}</div>{% endif %}
+  <div class="tldr"><strong>TL;DR.</strong> {{ project.tagline }}</div>
 
-  {# Phase 5 fleshes out: Problem -> Design Decisions -> Engineering Foothold -> Tech Stack #}
+  {# Phase 5 adds the rich body: Problem -> Design Decisions -> Engineering Foothold -> Tech Stack #}
 
   <p class="detail-back"><a href="/#projects">&larr; All projects</a></p>
 </article>
