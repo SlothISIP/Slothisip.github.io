@@ -1,103 +1,146 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 z" fill="#79c0ff"/>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
     </marker>
-    <style>
-      .layer { fill:#161b22; stroke:#30363d; stroke-width:1; }
-      .title { fill:#79c0ff; font-size:14px; font-weight:600; letter-spacing:.5px; }
-      .box   { fill:#21262d; stroke:#30363d; stroke-width:1; rx:6; ry:6; }
-      .boxT  { fill:#e6edf3; font-size:13px; }
-      .boxS  { fill:#8b949e; font-size:11px; }
-      .flow  { stroke:#79c0ff; stroke-width:1.5; fill:none; }
-    </style>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
   </defs>
 
-  <rect width="1200" height="520" fill="#0d1117"/>
+  <rect width="1100" height="720" fill="#ffffff"/>
 
-  <!-- Layer 1: Data -->
-  <rect class="layer" x="30"  y="40" width="200" height="440"/>
-  <text class="title" x="50" y="70">DATA LAYER</text>
-  <rect class="box" x="50"  y="90"  width="160" height="50"/>
-  <text class="boxT" x="70" y="110">Connectors</text>
-  <text class="boxS" x="70" y="128">CSV . DB . OPC-UA . MQTT</text>
-  <rect class="box" x="50"  y="160" width="160" height="50"/>
-  <text class="boxT" x="70" y="180">ETL Pipeline</text>
-  <text class="boxS" x="70" y="198">schema . validate . preprocess</text>
-  <rect class="box" x="50"  y="230" width="160" height="50"/>
-  <text class="boxT" x="70" y="250">Data Registry</text>
-  <text class="boxS" x="70" y="268">versioned datasets . quality</text>
-  <rect class="box" x="50"  y="310" width="160" height="50"/>
-  <text class="boxT" x="70" y="330">Synthetic DGP</text>
-  <text class="boxS" x="70" y="348">12 vars . 13 edges . 3 tiers</text>
+  <!-- Title -->
+  <text x="40" y="48" font-size="23" font-weight="700" fill="#0f172a">Causal RCA Platform &#183; System Architecture</text>
+  <rect x="40" y="58" width="234" height="3" rx="1.5" fill="#1772d0"/>
+  <text x="40" y="82" font-size="13" fill="#64748b">Ensemble causal discovery &#8594; DoWhy ATE inference &#8594; composite root-cause ranking, served end to end</text>
 
-  <!-- Layer 2: Discovery -->
-  <rect class="layer" x="260" y="40" width="220" height="440"/>
-  <text class="title" x="280" y="70">CAUSAL DISCOVERY</text>
-  <rect class="box" x="280" y="90"  width="180" height="50"/>
-  <text class="boxT" x="300" y="110">PC . GES . NOTEARS . FCI</text>
-  <text class="boxS" x="300" y="128">causal-learn + custom NOTEARS</text>
-  <rect class="box" x="280" y="160" width="180" height="50"/>
-  <text class="boxT" x="300" y="180">Ensemble Voting</text>
-  <text class="boxS" x="300" y="198">weighted consensus</text>
-  <rect class="box" x="280" y="230" width="180" height="50"/>
-  <text class="boxT" x="300" y="250">Bootstrap Stability</text>
-  <text class="boxS" x="300" y="268">joblib parallel . edge CI</text>
-  <rect class="box" x="280" y="310" width="180" height="50"/>
-  <text class="boxT" x="300" y="330">Temporal / Dynamic</text>
-  <text class="boxS" x="300" y="348">Granger . regime detection</text>
+  <!-- ===================== SECTION BANDS ===================== -->
+  <!-- Data -->
+  <rect x="40" y="104" width="196" height="476" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="58" y="126" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">DATA LAYER</text>
+  <!-- Discovery -->
+  <rect x="252" y="104" width="196" height="476" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="270" y="126" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">CAUSAL DISCOVERY</text>
+  <!-- Inference / RCA -->
+  <rect x="464" y="104" width="196" height="476" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="482" y="126" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">INFERENCE &amp; RCA</text>
+  <!-- MLOps -->
+  <rect x="676" y="104" width="196" height="476" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="694" y="126" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">MLOPS / ENTERPRISE</text>
+  <!-- Delivery -->
+  <rect x="888" y="104" width="172" height="476" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="906" y="126" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">DELIVERY</text>
 
-  <!-- Layer 3: Inference + RCA -->
-  <rect class="layer" x="510" y="40" width="240" height="440"/>
-  <text class="title" x="530" y="70">INFERENCE &amp; RCA</text>
-  <rect class="box" x="530" y="90"  width="200" height="50"/>
-  <text class="boxT" x="550" y="110">DoWhy ATE</text>
-  <text class="boxS" x="550" y="128">estimation + refutation</text>
-  <rect class="box" x="530" y="160" width="200" height="50"/>
-  <text class="boxT" x="550" y="180">Intervention Simulator</text>
-  <text class="boxS" x="550" y="198">what-if . sweeps . optimization</text>
-  <rect class="box" x="530" y="230" width="200" height="50"/>
-  <text class="boxT" x="550" y="250">RCA Ranking</text>
-  <text class="boxS" x="550" y="268">|ATE| x confidence x stability</text>
-  <rect class="box" x="530" y="310" width="200" height="50"/>
-  <text class="boxT" x="550" y="330">Advanced RCA</text>
-  <text class="boxS" x="550" y="348">mediation . multi-hop . CF</text>
+  <!-- ===================== DATA LAYER (green = data/compute) ===================== -->
+  <g>
+    <rect x="56" y="142" width="164" height="58" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="68" y="166" font-size="13.5" font-weight="600" fill="#065f46">Connectors</text>
+    <text x="68" y="186" font-size="11" fill="#64748b">CSV &#183; DB &#183; OPC-UA &#183; MQTT</text>
 
-  <!-- Layer 4: MLOps + Enterprise -->
-  <rect class="layer" x="780" y="40" width="180" height="440"/>
-  <text class="title" x="800" y="70">MLOPS / ENTERPRISE</text>
-  <rect class="box" x="800" y="90"  width="140" height="50"/>
-  <text class="boxT" x="820" y="110">Model Registry</text>
-  <text class="boxS" x="820" y="128">stage lifecycle</text>
-  <rect class="box" x="800" y="160" width="140" height="50"/>
-  <text class="boxT" x="820" y="180">Drift Detection</text>
-  <text class="boxS" x="820" y="198">KS . PSI . ATE drift</text>
-  <rect class="box" x="800" y="230" width="140" height="50"/>
-  <text class="boxT" x="820" y="250">Auth . RBAC . Audit</text>
-  <text class="boxS" x="820" y="268">API key . JSONL</text>
-  <rect class="box" x="800" y="310" width="140" height="50"/>
-  <text class="boxT" x="820" y="330">Prometheus . Grafana</text>
-  <text class="boxS" x="820" y="348">metrics . dashboards</text>
+    <rect x="56" y="214" width="164" height="58" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="68" y="238" font-size="13.5" font-weight="600" fill="#065f46">ETL Pipeline</text>
+    <text x="68" y="258" font-size="11" fill="#64748b">schema &#183; validate &#183; prep</text>
 
-  <!-- Layer 5: Delivery -->
-  <rect class="layer" x="990" y="40" width="180" height="440"/>
-  <text class="title" x="1010" y="70">DELIVERY</text>
-  <rect class="box" x="1010" y="90"  width="140" height="50"/>
-  <text class="boxT" x="1030" y="110">FastAPI</text>
-  <text class="boxS" x="1030" y="128">45+ endpoints . SSE</text>
-  <rect class="box" x="1010" y="160" width="140" height="50"/>
-  <text class="boxT" x="1030" y="180">React SPA</text>
-  <text class="boxS" x="1030" y="198">D3.js causal graph</text>
-  <rect class="box" x="1010" y="230" width="140" height="50"/>
-  <text class="boxT" x="1030" y="250">Streamlit</text>
-  <text class="boxS" x="1030" y="268">operational dashboard</text>
-  <rect class="box" x="1010" y="310" width="140" height="50"/>
-  <text class="boxT" x="1030" y="330">Neo4j . Ollama</text>
-  <text class="boxS" x="1030" y="348">lineage . LLM chat</text>
+    <rect x="56" y="286" width="164" height="58" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="68" y="310" font-size="13.5" font-weight="600" fill="#065f46">Data Registry</text>
+    <text x="68" y="330" font-size="11" fill="#64748b">versioned sets &#183; quality</text>
 
-  <!-- Arrows between layers (center horizontal flow) -->
-  <line class="flow" x1="230" y1="260" x2="260" y2="260" marker-end="url(#arrow)"/>
-  <line class="flow" x1="480" y1="260" x2="510" y2="260" marker-end="url(#arrow)"/>
-  <line class="flow" x1="750" y1="260" x2="780" y2="260" marker-end="url(#arrow)"/>
-  <line class="flow" x1="960" y1="260" x2="990" y2="260" marker-end="url(#arrow)"/>
+    <rect x="56" y="358" width="164" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <text x="68" y="382" font-size="13.5" font-weight="600" fill="#475569">Synthetic DGP</text>
+    <text x="68" y="402" font-size="11" fill="#64748b">12 vars &#183; 13 edges &#183; 3 tiers</text>
+    <text x="68" y="430" font-size="10.5" font-style="italic" fill="#94a3b8">mock generator for eval</text>
+  </g>
+
+  <!-- ===================== CAUSAL DISCOVERY (blue = primary) ===================== -->
+  <g>
+    <rect x="268" y="142" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="280" y="166" font-size="13.5" font-weight="600" fill="#1e3a8a">PC &#183; GES &#183; NOTEARS &#183; FCI</text>
+    <text x="280" y="186" font-size="11" fill="#64748b">causal-learn + custom NOTEARS</text>
+
+    <rect x="268" y="214" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="280" y="238" font-size="13.5" font-weight="600" fill="#1e3a8a">Ensemble Voting</text>
+    <text x="280" y="258" font-size="11" fill="#64748b">weighted consensus</text>
+
+    <rect x="268" y="286" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="280" y="310" font-size="13.5" font-weight="600" fill="#1e3a8a">Bootstrap Stability</text>
+    <text x="280" y="330" font-size="11" fill="#64748b">joblib parallel &#183; edge CI</text>
+
+    <rect x="268" y="358" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="280" y="382" font-size="13.5" font-weight="600" fill="#1e3a8a">Temporal / Dynamic</text>
+    <text x="280" y="402" font-size="11" fill="#64748b">Granger &#183; regime detection</text>
+  </g>
+
+  <!-- ===================== INFERENCE & RCA (amber = analysis/attention) ===================== -->
+  <g>
+    <rect x="480" y="142" width="164" height="58" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="492" y="166" font-size="13.5" font-weight="600" fill="#78350f">DoWhy ATE</text>
+    <text x="492" y="186" font-size="11" fill="#64748b">estimation + refutation</text>
+
+    <rect x="480" y="214" width="164" height="58" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="492" y="238" font-size="13.5" font-weight="600" fill="#78350f">Intervention Simulator</text>
+    <text x="492" y="258" font-size="11" fill="#64748b">what-if &#183; sweeps &#183; do-calc</text>
+
+    <rect x="480" y="286" width="164" height="58" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="492" y="310" font-size="13.5" font-weight="600" fill="#78350f">RCA Ranking</text>
+    <text x="492" y="330" font-size="11" fill="#64748b">|ATE| &#215; conf &#215; stability</text>
+
+    <rect x="480" y="358" width="164" height="58" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="492" y="382" font-size="13.5" font-weight="600" fill="#78350f">Advanced RCA</text>
+    <text x="492" y="402" font-size="11" fill="#64748b">mediation &#183; multi-hop &#183; CF</text>
+  </g>
+
+  <!-- ===================== MLOPS / ENTERPRISE (purple = observability/aux) ===================== -->
+  <g>
+    <rect x="692" y="142" width="164" height="58" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="704" y="166" font-size="13.5" font-weight="600" fill="#5b21b6">Model Registry</text>
+    <text x="704" y="186" font-size="11" fill="#64748b">4-stage lifecycle</text>
+
+    <rect x="692" y="214" width="164" height="58" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="704" y="238" font-size="13.5" font-weight="600" fill="#5b21b6">Drift Detection</text>
+    <text x="704" y="258" font-size="11" fill="#64748b">KS &#183; PSI &#183; ATE drift</text>
+
+    <rect x="692" y="286" width="164" height="58" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="704" y="310" font-size="13.5" font-weight="600" fill="#5b21b6">Auth &#183; RBAC &#183; Audit</text>
+    <text x="704" y="330" font-size="11" fill="#64748b">API key &#183; JSONL log</text>
+
+    <rect x="692" y="358" width="164" height="58" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="704" y="382" font-size="13.5" font-weight="600" fill="#5b21b6">Prometheus &#183; Grafana</text>
+    <text x="704" y="402" font-size="11" fill="#64748b">metrics &#183; dashboards</text>
+  </g>
+
+  <!-- ===================== DELIVERY (ink/neutral) ===================== -->
+  <g>
+    <rect x="904" y="142" width="140" height="58" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+    <text x="916" y="166" font-size="13.5" font-weight="600" fill="#0f172a">FastAPI</text>
+    <text x="916" y="186" font-size="11" fill="#64748b">45+ endpoints &#183; SSE</text>
+
+    <rect x="904" y="214" width="140" height="58" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+    <text x="916" y="238" font-size="13.5" font-weight="600" fill="#0f172a">React SPA</text>
+    <text x="916" y="258" font-size="11" fill="#64748b">D3.js causal graph</text>
+
+    <rect x="904" y="286" width="140" height="58" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+    <text x="916" y="310" font-size="13.5" font-weight="600" fill="#0f172a">Streamlit</text>
+    <text x="916" y="330" font-size="11" fill="#64748b">ops dashboard</text>
+
+    <rect x="904" y="358" width="140" height="58" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+    <text x="916" y="382" font-size="13.5" font-weight="600" fill="#0f172a">Neo4j &#183; Ollama</text>
+    <text x="916" y="402" font-size="11" fill="#64748b">lineage &#183; LLM chat</text>
+  </g>
+
+  <!-- ===================== HORIZONTAL FLOW ARROWS (between layers) ===================== -->
+  <line x1="236" y1="313" x2="266" y2="313" stroke="#2563eb" stroke-width="2" marker-end="url(#arrBlue)"/>
+  <line x1="448" y1="313" x2="478" y2="313" stroke="#2563eb" stroke-width="2" marker-end="url(#arrBlue)"/>
+  <line x1="660" y1="313" x2="690" y2="313" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="872" y1="313" x2="902" y2="313" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== ORCHESTRATION BAND ===================== -->
+  <rect x="40" y="606" width="1020" height="80" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="58" y="628" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">PHASE-BASED ORCHESTRATION</text>
+  <text x="58" y="652" font-size="12.5" fill="#475569">9 phase orchestrators sharing a common base class &#8212; ingestion &#8594; discovery &#8594; inference &#8594; RCA &#8594; delivery</text>
+  <text x="58" y="674" font-size="11.5" fill="#64748b">Multi-process registry: injection_molding &#183; extrusion &#183; cnc_machining &#160;&#160;|&#160;&#160; 700+ tests &#183; Docker Compose &#183; GitHub Actions CI/CD</text>
+
+  <!-- dashed link: orchestration drives all layers -->
+  <line x1="318" y1="580" x2="318" y2="606" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3" marker-start="url(#arr)"/>
+  <line x1="780" y1="580" x2="780" y2="606" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3" marker-start="url(#arr)"/>
 </svg>

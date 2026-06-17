@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Title block -->
+  <text x="40" y="48" font-size="23" font-weight="700" fill="#0f172a">Target-vs-achieved scorecard</text>
+  <rect x="40" y="58" width="240" height="3.5" rx="1.75" fill="#1772d0"/>
+  <text x="40" y="82" font-size="13" fill="#64748b">Validation results against pre-set targets, measured on held-out test data (CPU inference).</text>
+
+  <!-- Column headers -->
+  <text x="40" y="118" font-size="12" font-weight="600" fill="#64748b">METRIC</text>
+  <text x="430" y="118" font-size="12" font-weight="600" fill="#64748b">ACHIEVED &#160;/&#160; TARGET</text>
+  <text x="1060" y="118" font-size="12" font-weight="600" fill="#64748b" text-anchor="end">STATUS</text>
+  <line x1="40" y1="128" x2="1060" y2="128" stroke="#cbd5e1" stroke-width="1"/>
+
+  <!-- ROW 1: Meta-classifier F1 -->
+  <text x="40" y="160" font-size="14.5" font-weight="600" fill="#0f172a">Meta-classifier F1-score</text>
+  <text x="40" y="180" font-size="12" fill="#64748b">XGBoost fusion, 236-sample hold-out</text>
+  <!-- track 0..1 mapped to x 430..880 -->
+  <rect x="430" y="148" width="450" height="22" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <!-- target marker at 0.75 -> 430 + 0.75*450 = 767.5 -->
+  <line x1="767.5" y1="143" x2="767.5" y2="175" stroke="#f59e0b" stroke-width="2"/>
+  <text x="767.5" y="139" font-size="10.5" fill="#78350f" text-anchor="middle">&#8805; 0.75</text>
+  <!-- achieved 0.9462 -> 430 + 0.9462*450 = 855.8 -->
+  <rect x="430" y="148" width="425.8" height="22" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="446" y="163.5" font-size="13" font-weight="700" fill="#1e3a8a">0.9462</text>
+  <rect x="905" y="149" width="155" height="22" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="982.5" y="164.5" font-size="12.5" font-weight="700" fill="#065f46" text-anchor="middle">PASS &#160;+26%</text>
+
+  <!-- ROW 2: end-to-end /predict latency -->
+  <text x="40" y="218" font-size="14.5" font-weight="600" fill="#0f172a">End-to-end /predict latency</text>
+  <text x="40" y="238" font-size="12" fill="#64748b">RF + YOLO + meta + API, mean of 10 runs</text>
+  <!-- latency track 0..150 ms mapped to x 430..880 (lower is better) -->
+  <rect x="430" y="206" width="450" height="22" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <!-- target <120 -> 430 + (120/150)*450 = 790 ; bar to the LEFT of target is good -->
+  <line x1="790" y1="201" x2="790" y2="233" stroke="#f59e0b" stroke-width="2"/>
+  <text x="790" y="197" font-size="10.5" fill="#78350f" text-anchor="middle">&lt; 120 ms</text>
+  <!-- achieved 67.3 -> 430 + (67.3/150)*450 = 631.9 -->
+  <rect x="430" y="206" width="201.9" height="22" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="446" y="221.5" font-size="13" font-weight="700" fill="#1e3a8a">67.3 ms</text>
+  <rect x="905" y="207" width="155" height="22" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="982.5" y="222.5" font-size="12.5" font-weight="700" fill="#065f46" text-anchor="middle">PASS &#160;&#8722;44%</text>
+
+  <!-- ROW 3: defect recall -->
+  <text x="40" y="276" font-size="14.5" font-weight="600" fill="#0f172a">Defect (FAIL) recall</text>
+  <text x="40" y="296" font-size="12" fill="#64748b">211 of 220 FAIL caught</text>
+  <!-- percent track 0..100 mapped to x 430..880 -->
+  <rect x="430" y="264" width="450" height="22" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <!-- achieved 95.91 -> 430 + 0.9591*450 = 861.6 -->
+  <rect x="430" y="264" width="431.6" height="22" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="446" y="279.5" font-size="13" font-weight="700" fill="#1e3a8a">95.91%</text>
+  <text x="905" y="279.5" font-size="12" fill="#64748b">no fixed target</text>
+
+  <!-- ROW 4: SHAP /explain latency -->
+  <text x="40" y="334" font-size="14.5" font-weight="600" fill="#0f172a">/explain SHAP latency</text>
+  <text x="40" y="354" font-size="12" fill="#64748b">Per-request feature attribution, 100% success</text>
+  <rect x="430" y="322" width="450" height="22" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <!-- 15.6 ms on 0..150 -> 430 + (15.6/150)*450 = 476.8 -->
+  <rect x="430" y="322" width="46.8" height="22" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="488" y="337.5" font-size="13" font-weight="700" fill="#1e3a8a">15.6 ms</text>
+  <text x="905" y="337.5" font-size="12" fill="#64748b">no fixed target</text>
+
+  <!-- ROW 5: YOLOv8m mAP@50 -->
+  <text x="40" y="392" font-size="14.5" font-weight="600" fill="#0f172a">YOLOv8m mAP@50</text>
+  <text x="40" y="412" font-size="12" fill="#64748b">Visual detector on open DeepPCB</text>
+  <rect x="430" y="380" width="450" height="22" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <!-- 93.51 -> 430 + 0.9351*450 = 850.8 -->
+  <rect x="430" y="380" width="420.8" height="22" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="446" y="395.5" font-size="13" font-weight="700" fill="#1e3a8a">93.51%</text>
+  <text x="905" y="395.5" font-size="12" fill="#64748b">benchmark</text>
+
+  <line x1="40" y1="436" x2="1060" y2="436" stroke="#cbd5e1" stroke-width="1"/>
+
+  <!-- Latency-percentile strip -->
+  <text x="40" y="470" font-size="14.5" font-weight="600" fill="#0f172a">/predict latency distribution</text>
+  <text x="40" y="490" font-size="12" fill="#64748b">10-run percentile spread on CPU</text>
+
+  <!-- P50 chip (the focus node: brand orange highlight) -->
+  <rect x="430" y="452" width="190" height="46" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="525" y="471" font-size="12" font-weight="600" fill="#78350f" text-anchor="middle">P50 (median)</text>
+  <text x="525" y="490" font-size="16" font-weight="700" fill="#78350f" text-anchor="middle">66.5 ms</text>
+
+  <rect x="640" y="452" width="190" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="735" y="471" font-size="12" font-weight="600" fill="#475569" text-anchor="middle">P95</text>
+  <text x="735" y="490" font-size="16" font-weight="700" fill="#0f172a" text-anchor="middle">78.2 ms</text>
+
+  <rect x="850" y="452" width="210" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="955" y="471" font-size="12" font-weight="600" fill="#475569" text-anchor="middle">P99</text>
+  <text x="955" y="490" font-size="16" font-weight="700" fill="#0f172a" text-anchor="middle">101.0 ms</text>
+
+  <!-- Legend -->
+  <line x1="40" y1="528" x2="1060" y2="528" stroke="#cbd5e1" stroke-width="1"/>
+  <rect x="40" y="544" width="22" height="12" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="70" y="554" font-size="12" fill="#475569">achieved value</text>
+  <line x1="232" y1="540" x2="232" y2="560" stroke="#f59e0b" stroke-width="2"/>
+  <text x="244" y="554" font-size="12" fill="#475569">pre-set target threshold</text>
+  <rect x="442" y="544" width="22" height="12" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="472" y="554" font-size="12" fill="#475569">target met</text>
+
+  <!-- Footnote -->
+  <text x="40" y="590" font-size="12" fill="#64748b">Validated on the open SECOM sensor dataset + the open DeepPCB image benchmark; the sensor-image pairing is synthetic (statistical matching).</text>
+</svg>

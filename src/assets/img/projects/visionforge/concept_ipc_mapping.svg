@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <!-- Title -->
+  <text x="40" y="48" font-size="23" font-weight="700" fill="#0f172a">IPC-A-610 class mapping</text>
+  <rect x="40" y="58" width="190" height="3" rx="1.5" fill="#1772d0"/>
+  <text x="40" y="82" font-size="13" fill="#64748b">The same detected defect grades differently per acceptability class &#8212; output is a compliance category, not a raw model label.</text>
+
+  <!-- Column header band (classes) -->
+  <text x="40" y="128" font-size="13" font-weight="600" fill="#64748b">Detected defect type</text>
+
+  <!-- Class 1 -->
+  <rect x="490" y="108" width="180" height="34" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="580" y="130" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">Class 1</text>
+  <!-- Class 2 -->
+  <rect x="682" y="108" width="180" height="34" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="772" y="130" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">Class 2</text>
+  <!-- Class 3 (the node the figure is about: emphasized) -->
+  <rect x="874" y="108" width="180" height="34" rx="6" fill="#fff7ed" stroke="#f09228" stroke-width="2"/>
+  <text x="964" y="130" font-size="15" font-weight="700" fill="#9a3412" text-anchor="middle">Class 3</text>
+
+  <!-- stricter arrow -->
+  <text x="772" y="166" font-size="11.5" fill="#94a3b8" text-anchor="middle" font-style="italic">stricter acceptability &#8594;</text>
+
+  <!-- ===================== ROW 1: Insufficient solder ===================== -->
+  <rect x="40" y="184" width="430" height="60" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="60" y="212" font-size="15" font-weight="600" fill="#0f172a">Insufficient solder</text>
+  <text x="60" y="232" font-size="11.5" fill="#64748b">solder_insufficient</text>
+
+  <rect x="490" y="184" width="180" height="60" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="580" y="210" font-size="13" font-weight="700" fill="#78350f" text-anchor="middle">PROCESS</text>
+  <text x="580" y="227" font-size="13" font-weight="700" fill="#78350f" text-anchor="middle">INDICATOR</text>
+
+  <rect x="682" y="184" width="180" height="60" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="772" y="219" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">DEFECT</text>
+
+  <rect x="874" y="184" width="180" height="60" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="964" y="211" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">NON-</text>
+  <text x="964" y="228" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">CONFORMING</text>
+
+  <!-- ===================== ROW 2: Solder bridge ===================== -->
+  <rect x="40" y="256" width="430" height="60" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="60" y="284" font-size="15" font-weight="600" fill="#0f172a">Solder bridge</text>
+  <text x="60" y="304" font-size="11.5" fill="#64748b">solder_bridge</text>
+
+  <rect x="490" y="256" width="180" height="60" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="580" y="291" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">DEFECT</text>
+
+  <rect x="682" y="256" width="180" height="60" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="772" y="291" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">DEFECT</text>
+
+  <rect x="874" y="256" width="180" height="60" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="964" y="283" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">NON-</text>
+  <text x="964" y="300" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">CONFORMING</text>
+
+  <!-- ===================== ROW 3: Component misalignment ===================== -->
+  <rect x="40" y="328" width="430" height="60" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="60" y="356" font-size="15" font-weight="600" fill="#0f172a">Component misalignment</text>
+  <text x="60" y="376" font-size="11.5" fill="#64748b">component_misalignment</text>
+
+  <rect x="490" y="328" width="180" height="60" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="580" y="363" font-size="13" font-weight="700" fill="#065f46" text-anchor="middle">ACCEPTABLE</text>
+
+  <rect x="682" y="328" width="180" height="60" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="772" y="355" font-size="13" font-weight="700" fill="#78350f" text-anchor="middle">PROCESS</text>
+  <text x="772" y="372" font-size="13" font-weight="700" fill="#78350f" text-anchor="middle">INDICATOR</text>
+
+  <rect x="874" y="328" width="180" height="60" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="964" y="363" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">DEFECT</text>
+
+  <!-- ===================== Legend ===================== -->
+  <text x="40" y="432" font-size="13" font-weight="600" fill="#64748b">Graded outcome</text>
+
+  <rect x="40" y="444" width="16" height="16" rx="3" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="64" y="456" font-size="12.5" fill="#475569">ACCEPTABLE</text>
+
+  <rect x="190" y="444" width="16" height="16" rx="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="214" y="456" font-size="12.5" fill="#475569">PROCESS_INDICATOR</text>
+
+  <rect x="400" y="444" width="16" height="16" rx="3" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="424" y="456" font-size="12.5" fill="#475569">NONCONFORMING / DEFECT</text>
+
+  <!-- Note -->
+  <rect x="40" y="488" width="1020" height="48" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="60" y="510" font-size="12.5" fill="#64748b" font-style="italic">Evaluated on the open PKU-Market PCB defect dataset (6 classes). Outcomes encoded per IPC class in PCB_Vision/core/ipc_standards.py;</text>
+  <text x="60" y="528" font-size="12.5" fill="#64748b" font-style="italic">the four categories shown are illustrative of the mapping, not measured per-defect accuracy.</text>
+</svg>

@@ -1,105 +1,129 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
   <defs>
-    <linearGradient id="apex-grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a0a2e;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#2d1b4e;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="apex-phase1" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#d63031;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="apex-phase2" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#00b894;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#00a085;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="apex-phase3" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#6c5ce7;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#5f4bd0;stop-opacity:1" />
-    </linearGradient>
-    <filter id="apex-glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
+    <marker id="ax-arr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="ax-arr-grn" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
+    </marker>
   </defs>
 
-  <rect width="800" height="380" fill="url(#apex-grad1)"/>
+  <rect width="1100" height="720" fill="#ffffff"/>
 
   <!-- Title -->
-  <text x="400" y="30" text-anchor="middle" fill="#f8f8f2" font-family="Arial, sans-serif" font-size="16" font-weight="bold">APEX-ML - 3-Phase AutoML Pipeline</text>
+  <text x="40" y="46" font-size="23" font-weight="700" fill="#0f172a">APEX-ML &#183; GPU-accelerated AutoML platform</text>
+  <rect x="40" y="56" width="138" height="4" rx="2" fill="#1772d0"/>
+  <text x="40" y="80" font-size="13" fill="#64748b">3-phase pipeline over ~85 algorithms (~15 categories) &#183; Optuna TPE &#183; Ray GPU scheduling &#183; imbalanced tabular classification</text>
 
-  <!-- Input -->
-  <rect x="30" y="130" width="100" height="100" rx="8" fill="#2d1b4e" stroke="#bd93f9" stroke-width="2"/>
-  <text x="80" y="165" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Input Data</text>
-  <text x="80" y="185" text-anchor="middle" fill="#bd93f9" font-family="Arial, sans-serif" font-size="9">Features</text>
-  <text x="80" y="200" text-anchor="middle" fill="#8be9fd" font-family="Arial, sans-serif" font-size="8">Preprocessing</text>
-  <text x="80" y="215" text-anchor="middle" fill="#6272a4" font-family="Arial, sans-serif" font-size="8">Validation Split</text>
+  <!-- ============ INPUT BAND ============ -->
+  <rect x="40" y="100" width="1020" height="84" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="56" y="120" font-size="11" letter-spacing="1.5" fill="#64748b">DATA &amp; ALGORITHM REGISTRY</text>
 
-  <!-- Phase 1: Rapid Screening -->
-  <rect x="170" y="60" width="160" height="130" rx="8" fill="url(#apex-phase1)" stroke="#ff6b35" stroke-width="2" filter="url(#apex-glow)"/>
-  <text x="250" y="85" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Phase 1</text>
-  <text x="250" y="105" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10">Rapid Screening</text>
-  <line x1="190" y1="115" x2="310" y2="115" stroke="#fff" stroke-width="1" opacity="0.3"/>
-  <text x="250" y="135" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="9">81 Algorithms</text>
-  <text x="250" y="152" text-anchor="middle" fill="#ffe4d6" font-family="Arial, sans-serif" font-size="8">Parallel Execution</text>
-  <text x="250" y="167" text-anchor="middle" fill="#ffe4d6" font-family="Arial, sans-serif" font-size="8">Quick Evaluation</text>
-  <text x="250" y="182" text-anchor="middle" fill="#ffe4d6" font-family="Arial, sans-serif" font-size="8">Top-K Selection</text>
+  <!-- Input data -->
+  <rect x="56" y="128" width="220" height="44" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="166" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Input Dataset</text>
+  <text x="166" y="164" text-anchor="middle" font-size="10.5" fill="#1e3a8a">imbalanced tabular &#183; preprocessing &#183; CV split</text>
 
-  <!-- Phase 2: Bayesian Optimization -->
-  <rect x="370" y="60" width="160" height="130" rx="8" fill="url(#apex-phase2)" stroke="#00b894" stroke-width="2" filter="url(#apex-glow)"/>
-  <text x="450" y="85" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Phase 2</text>
-  <text x="450" y="105" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10">Bayesian Optimization</text>
-  <line x1="390" y1="115" x2="510" y2="115" stroke="#fff" stroke-width="1" opacity="0.3"/>
-  <text x="450" y="135" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="9">Optuna Engine</text>
-  <text x="450" y="152" text-anchor="middle" fill="#d6fff5" font-family="Arial, sans-serif" font-size="8">Hyperparameter Tuning</text>
-  <text x="450" y="167" text-anchor="middle" fill="#d6fff5" font-family="Arial, sans-serif" font-size="8">Cross-Validation</text>
-  <text x="450" y="182" text-anchor="middle" fill="#d6fff5" font-family="Arial, sans-serif" font-size="8">Early Stopping</text>
+  <!-- Algorithm factory -->
+  <rect x="300" y="128" width="300" height="44" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="450" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Algorithm Factory &#183; ~85 algorithms</text>
+  <text x="450" y="164" text-anchor="middle" font-size="10.5" fill="#065f46">~15 categories: Tree &#183; Deep Tabular &#183; GNN &#183; Foundation &#183; Meta &#183; Ensemble</text>
 
-  <!-- Phase 3: Ensemble -->
-  <rect x="570" y="60" width="160" height="130" rx="8" fill="url(#apex-phase3)" stroke="#6c5ce7" stroke-width="2" filter="url(#apex-glow)"/>
-  <text x="650" y="85" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Phase 3</text>
-  <text x="650" y="105" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10">Ensemble Construction</text>
-  <line x1="590" y1="115" x2="710" y2="115" stroke="#fff" stroke-width="1" opacity="0.3"/>
-  <text x="650" y="135" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="9">Model Stacking</text>
-  <text x="650" y="152" text-anchor="middle" fill="#e8e0ff" font-family="Arial, sans-serif" font-size="8">Weight Optimization</text>
-  <text x="650" y="167" text-anchor="middle" fill="#e8e0ff" font-family="Arial, sans-serif" font-size="8">Feature Importance</text>
-  <text x="650" y="182" text-anchor="middle" fill="#e8e0ff" font-family="Arial, sans-serif" font-size="8">Final Selection</text>
+  <!-- Benchmark -->
+  <rect x="624" y="128" width="420" height="44" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="834" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#78350f">Public Credit Card Fraud benchmark</text>
+  <text x="834" y="164" text-anchor="middle" font-size="10.5" fill="#78350f">284,807 samples &#183; 0.17% positives &#183; open/public data only</text>
 
-  <!-- GPU Cluster -->
-  <rect x="270" y="220" width="260" height="60" rx="8" fill="#2d1b4e" stroke="#50fa7b" stroke-width="2"/>
-  <text x="400" y="245" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">GPU Acceleration Layer</text>
-  <text x="400" y="265" text-anchor="middle" fill="#50fa7b" font-family="Arial, sans-serif" font-size="9">Ray Cluster | RTX 4090 | 60-80% Utilization</text>
+  <!-- ============ PIPELINE BAND ============ -->
+  <rect x="40" y="208" width="1020" height="262" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="56" y="228" font-size="11" letter-spacing="1.5" fill="#64748b">3-PHASE PROGRESSIVE PIPELINE</text>
 
-  <!-- Output -->
-  <rect x="570" y="220" width="160" height="60" rx="8" fill="#2d1b4e" stroke="#f1fa8c" stroke-width="2"/>
-  <text x="650" y="245" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Final Model</text>
-  <text x="650" y="265" text-anchor="middle" fill="#f1fa8c" font-family="Arial, sans-serif" font-size="10">99.7% Accuracy</text>
+  <!-- Phase 1 -->
+  <rect x="56" y="244" width="304" height="208" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <rect x="56" y="244" width="304" height="34" rx="6" fill="#dbeafe"/>
+  <rect x="56" y="262" width="304" height="16" fill="#dbeafe"/>
+  <text x="72" y="266" font-size="11" letter-spacing="1" fill="#1e3a8a">PHASE 1 &#183; SCREEN</text>
+  <text x="208" y="304" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Rapid Screening</text>
+  <line x1="80" y1="318" x2="336" y2="318" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="208" y="342" text-anchor="middle" font-size="11.5" fill="#475569">Evaluate candidates on 10% data sample</text>
+  <text x="208" y="362" text-anchor="middle" font-size="11.5" fill="#475569">Eliminate weak algorithms &#183; Top-K select</text>
+  <text x="208" y="382" text-anchor="middle" font-size="11.5" fill="#475569">81 classification-capable algorithms</text>
+  <rect x="80" y="398" width="256" height="38" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+  <text x="208" y="415" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">92.8% Phase 1 success rate</text>
+  <text x="208" y="430" text-anchor="middle" font-size="10.5" fill="#1e3a8a">~5&#8211;15 min</text>
 
-  <!-- Arrows -->
-  <defs>
-    <marker id="apex-arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#bd93f9"/>
-    </marker>
-    <marker id="apex-arrow-green" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#50fa7b"/>
-    </marker>
-  </defs>
+  <!-- Phase 2 -->
+  <rect x="398" y="244" width="304" height="208" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <rect x="398" y="244" width="304" height="34" rx="6" fill="#ecfdf5"/>
+  <rect x="398" y="262" width="304" height="16" fill="#ecfdf5"/>
+  <text x="414" y="266" font-size="11" letter-spacing="1" fill="#065f46">PHASE 2 &#183; TUNE</text>
+  <text x="550" y="304" text-anchor="middle" font-size="15" font-weight="700" fill="#065f46">Focused Optimization</text>
+  <line x1="422" y1="318" x2="678" y2="318" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="550" y="342" text-anchor="middle" font-size="11.5" fill="#475569">Optuna Bayesian tuning (TPE sampler)</text>
+  <text x="550" y="362" text-anchor="middle" font-size="11.5" fill="#475569">Concentrated on surviving top candidates</text>
+  <text x="550" y="382" text-anchor="middle" font-size="11.5" fill="#475569">Cross-validation &#183; early stopping</text>
+  <rect x="422" y="398" width="256" height="38" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1"/>
+  <text x="550" y="415" text-anchor="middle" font-size="11" font-weight="700" fill="#065f46">Tree-structured Parzen Estimator</text>
+  <text x="550" y="430" text-anchor="middle" font-size="10.5" fill="#065f46">~15&#8211;45 min</text>
 
-  <line x1="130" y1="180" x2="165" y2="125" stroke="#bd93f9" stroke-width="2" marker-end="url(#apex-arrow)"/>
-  <line x1="330" y1="125" x2="365" y2="125" stroke="#bd93f9" stroke-width="2" marker-end="url(#apex-arrow)"/>
-  <line x1="530" y1="125" x2="565" y2="125" stroke="#bd93f9" stroke-width="2" marker-end="url(#apex-arrow)"/>
+  <!-- Phase 3 -->
+  <rect x="740" y="244" width="304" height="208" rx="6" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.5"/>
+  <rect x="740" y="244" width="304" height="34" rx="6" fill="#f3e8ff"/>
+  <rect x="740" y="262" width="304" height="16" fill="#f3e8ff"/>
+  <text x="756" y="266" font-size="11" letter-spacing="1" fill="#5b21b6">PHASE 3 &#183; ENSEMBLE</text>
+  <text x="892" y="304" text-anchor="middle" font-size="15" font-weight="700" fill="#5b21b6">Self-Evolution</text>
+  <line x1="764" y1="318" x2="1020" y2="318" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="892" y="342" text-anchor="middle" font-size="11.5" fill="#475569">Genetic algorithm: crossover &#183; mutation</text>
+  <text x="892" y="362" text-anchor="middle" font-size="11.5" fill="#475569">Model stacking &#183; dynamic weighting</text>
+  <text x="892" y="382" text-anchor="middle" font-size="11.5" fill="#475569">Caruana &#183; Stacking &#183; Blending</text>
+  <rect x="764" y="398" width="256" height="38" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="892" y="415" text-anchor="middle" font-size="11" font-weight="700" fill="#5b21b6">Optimized ensemble model</text>
+  <text x="892" y="430" text-anchor="middle" font-size="10.5" fill="#5b21b6">~10&#8211;30 min</text>
 
-  <!-- GPU connections -->
-  <line x1="250" y1="195" x2="300" y2="215" stroke="#50fa7b" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <line x1="450" y1="195" x2="400" y2="215" stroke="#50fa7b" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <line x1="650" y1="195" x2="650" y2="215" stroke="#50fa7b" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <!-- phase-to-phase arrows -->
+  <line x1="360" y1="348" x2="396" y2="348" stroke="#64748b" stroke-width="1.5" marker-end="url(#ax-arr)"/>
+  <line x1="702" y1="348" x2="738" y2="348" stroke="#64748b" stroke-width="1.5" marker-end="url(#ax-arr)"/>
 
-  <!-- Phase Labels -->
-  <text x="250" y="50" text-anchor="middle" fill="#ff6b35" font-family="Arial, sans-serif" font-size="9" font-weight="bold">SCREEN</text>
-  <text x="450" y="50" text-anchor="middle" fill="#00b894" font-family="Arial, sans-serif" font-size="9" font-weight="bold">TUNE</text>
-  <text x="650" y="50" text-anchor="middle" fill="#6c5ce7" font-family="Arial, sans-serif" font-size="9" font-weight="bold">ENSEMBLE</text>
+  <!-- input -> phase1 -->
+  <line x1="166" y1="172" x2="166" y2="242" stroke="#64748b" stroke-width="1.5" marker-end="url(#ax-arr)"/>
+  <!-- factory -> phase1 (feeds candidate algorithms) -->
+  <path d="M300 150 L210 150 L210 242" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ax-arr)"/>
 
-  <!-- Tech Stack -->
-  <rect x="30" y="310" width="300" height="50" rx="6" fill="#2d1b4e" stroke="#44475a" stroke-width="1"/>
-  <text x="180" y="332" text-anchor="middle" fill="#6272a4" font-family="Arial, sans-serif" font-size="9">Tech Stack</text>
-  <text x="180" y="350" text-anchor="middle" fill="#8be9fd" font-family="Arial, sans-serif" font-size="10">Python 3.10+ | PyTorch | scikit-learn | Optuna | Ray</text>
+  <!-- ============ COMPUTE / GPU BAND ============ -->
+  <rect x="40" y="494" width="660" height="118" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="56" y="514" font-size="11" letter-spacing="1.5" fill="#64748b">DISTRIBUTED GPU ACCELERATION LAYER</text>
+
+  <rect x="56" y="524" width="312" height="74" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="212" y="548" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Ray cluster &#183; GPU scheduling</text>
+  <text x="212" y="568" text-anchor="middle" font-size="11" fill="#065f46">@ray.remote num_gpus &#183; RayClusterManager</text>
+  <text x="212" y="585" text-anchor="middle" font-size="11" fill="#065f46">checkpoint-based fault tolerance &#183; multi-node</text>
+
+  <rect x="388" y="524" width="296" height="74" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="536" y="548" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">Full-CUDA pipeline</text>
+  <text x="536" y="568" text-anchor="middle" font-size="11" fill="#065f46">dynamic batch &#183; memory-pressure mgmt</text>
+  <text x="536" y="585" text-anchor="middle" font-size="11" fill="#065f46">70&#8211;80% GPU-util target &#183; RTX 4090 ref</text>
+
+  <!-- compute feeds all three phases -->
+  <line x1="212" y1="522" x2="208" y2="454" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ax-arr-grn)"/>
+  <line x1="430" y1="522" x2="540" y2="454" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ax-arr-grn)"/>
+  <line x1="620" y1="522" x2="870" y2="454" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ax-arr-grn)"/>
+
+  <!-- ============ SERVING / OUTPUT BAND ============ -->
+  <rect x="720" y="494" width="340" height="118" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="736" y="514" font-size="11" letter-spacing="1.5" fill="#64748b">API &amp; OUTPUT</text>
+
+  <rect x="736" y="524" width="308" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="890" y="546" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">FastAPI backend (port 8010) &#183; dashboard</text>
+
+  <rect x="736" y="564" width="308" height="34" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="890" y="586" text-anchor="middle" font-size="12" font-weight="700" fill="#78350f">Final model &#183; 99.7% accuracy on benchmark</text>
+
+  <!-- phase3 -> serving -->
+  <path d="M892 454 L892 478 L890 478 L890 522" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#ax-arr)"/>
+
+  <!-- ============ FOOTER / STACK + HONESTY ============ -->
+  <rect x="40" y="630" width="1020" height="62" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="56" y="652" font-size="11" letter-spacing="1.5" fill="#64748b">STACK</text>
+  <text x="56" y="672" font-size="11.5" fill="#475569">Python 3.10+ &#183; PyTorch &#183; scikit-learn &#183; XGBoost / LightGBM / CatBoost &#183; TabNet / FT-Transformer / TabPFN &#183; Optuna (TPE) &#183; Ray &#183; FastAPI + Plotly.js</text>
+  <text x="56" y="688" font-size="11" font-style="italic" fill="#64748b">Solo-built R&amp;D project validated on open/public datasets &#8212; not deployed at any client; metrics are benchmark figures.</text>
 </svg>

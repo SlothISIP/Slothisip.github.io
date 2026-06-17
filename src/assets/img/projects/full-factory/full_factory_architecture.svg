@@ -1,149 +1,119 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
   <defs>
-    <linearGradient id="ffPresGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="ffAppGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#1abc9c;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#16a085;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="ffAIGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#9b59b6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="ffDataGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#e67e22;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#d35400;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="ffSimGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="ffBusGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#34495e;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:1" />
-    </linearGradient>
-    <marker id="ffArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555" />
+    <marker id="ffArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
     </marker>
-    <marker id="ffArrowBus" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#34495e" />
+    <marker id="ffArrPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b5cf6" />
     </marker>
   </defs>
 
-  <!-- Background -->
-  <rect width="1100" height="700" fill="#ffffff" />
+  <rect width="1100" height="760" fill="#ffffff" />
 
   <!-- Title -->
-  <text x="550" y="32" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="20" font-weight="700" fill="#1a1f2e">Full AI Factory — 5-Layer Architecture</text>
-  <text x="550" y="52" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="12" fill="#666">Modular monolith · Redis Streams event bus · 19 backend modules · 14 logical agents · Dual Mode (Sensor / Camera-First)</text>
+  <text x="40" y="40" font-size="23" font-weight="700" fill="#0f172a">Full AI Factory &#183; 5-Layer Architecture</text>
+  <rect x="40" y="50" width="190" height="4" rx="2" fill="#1772d0" />
+  <text x="40" y="74" font-size="13" fill="#64748b">Modular monolith &#183; Redis Streams event bus &#183; 19 backend modules &#183; 14 logical agents &#183; Dual Mode (Sensor / Camera-First)</text>
 
-  <!-- ============= LAYER 1: PRESENTATION ============= -->
-  <g>
-    <rect x="40" y="80" width="840" height="92" rx="8" fill="url(#ffPresGrad)" />
-    <text x="60" y="108" font-family="-apple-system,Segoe UI,sans-serif" font-size="15" font-weight="700" fill="#fff">L1 · Presentation</text>
-    <text x="60" y="128" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#e8f4fc">React 18 + TypeScript + Vite + TailwindCSS + shadcn/ui + React Three Fiber</text>
-    <text x="60" y="148" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#e8f4fc">20 pages · 111 components · Zustand 7 stores (5 domain + 2 infra) · i18n ko/en · 1920×1080+</text>
-    <text x="60" y="166" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#e8f4fc">Surfaces — Command Center · SCADA · MES · ERP · QMS · SPC · WMS · APS · CMMS · Digital Twin (3D)</text>
-  </g>
+  <!-- ================= EVENT BUS (right rail) ================= -->
+  <rect x="888" y="92" width="184" height="560" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5" />
+  <text x="980" y="116" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">Redis Streams</text>
+  <text x="980" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">Event Bus</text>
+  <line x1="904" y1="144" x2="1056" y2="144" stroke="#cbd5e1" stroke-width="1" />
+  <text x="980" y="162" text-anchor="middle" font-size="10" fill="#5b21b6">sensor:{lineId}</text>
+  <text x="980" y="178" text-anchor="middle" font-size="10" fill="#5b21b6">event:production:{lineId}</text>
+  <text x="980" y="194" text-anchor="middle" font-size="10" fill="#5b21b6">event:quality:{lineId}</text>
+  <text x="980" y="210" text-anchor="middle" font-size="10" fill="#5b21b6">event:maintenance</text>
+  <text x="980" y="226" text-anchor="middle" font-size="10" fill="#5b21b6">event:safety</text>
+  <text x="980" y="242" text-anchor="middle" font-size="10" fill="#5b21b6">event:energy</text>
+  <text x="980" y="258" text-anchor="middle" font-size="10" fill="#5b21b6">camera:{lineId}</text>
+  <text x="980" y="274" text-anchor="middle" font-size="10" fill="#5b21b6">agent:request:*</text>
+  <text x="980" y="290" text-anchor="middle" font-size="10" fill="#5b21b6">agent:response:*</text>
+  <line x1="904" y1="304" x2="1056" y2="304" stroke="#cbd5e1" stroke-width="1" />
+  <text x="980" y="324" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">Invariants</text>
+  <text x="980" y="342" text-anchor="middle" font-size="9.5" fill="#475569">No direct module import</text>
+  <text x="980" y="358" text-anchor="middle" font-size="9.5" fill="#475569">WS channels = 10 (fixed)</text>
+  <text x="980" y="374" text-anchor="middle" font-size="9.5" fill="#475569">Zustand stores = 7 (fixed)</text>
+  <text x="980" y="390" text-anchor="middle" font-size="9.5" fill="#475569">audit_log on every CUD</text>
+  <text x="980" y="406" text-anchor="middle" font-size="9.5" fill="#475569">TimescaleDB source field</text>
+  <text x="980" y="422" text-anchor="middle" font-size="9.5" fill="#475569">i18n ko / en key parity</text>
+  <line x1="904" y1="436" x2="1056" y2="436" stroke="#cbd5e1" stroke-width="1" />
+  <text x="980" y="456" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">Enforced by</text>
+  <text x="980" y="474" text-anchor="middle" font-size="10" fill="#475569">arch_check.sh</text>
+  <text x="980" y="489" text-anchor="middle" font-size="10" fill="#475569">on every Edit / Write</text>
+  <line x1="904" y1="502" x2="1056" y2="502" stroke="#cbd5e1" stroke-width="1" />
+  <text x="980" y="522" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">W42 audit</text>
+  <text x="980" y="540" text-anchor="middle" font-size="10" fill="#065f46">arch 0 violations</text>
+  <text x="980" y="556" text-anchor="middle" font-size="10" fill="#065f46">tsc 0 errors</text>
+  <text x="980" y="572" text-anchor="middle" font-size="10" fill="#065f46">vitest 18 / 54 pass</text>
+  <text x="980" y="588" text-anchor="middle" font-size="10" fill="#065f46">health 35 / 35 live</text>
+  <line x1="904" y1="602" x2="1056" y2="602" stroke="#cbd5e1" stroke-width="1" />
+  <text x="980" y="622" text-anchor="middle" font-size="9.5" fill="#64748b" font-style="italic">single-machine demo</text>
+  <text x="980" y="637" text-anchor="middle" font-size="9.5" fill="#64748b" font-style="italic">synthetic data</text>
 
-  <!-- ============= LAYER 2: APPLICATION ============= -->
-  <g>
-    <rect x="40" y="200" width="840" height="92" rx="8" fill="url(#ffAppGrad)" />
-    <text x="60" y="228" font-family="-apple-system,Segoe UI,sans-serif" font-size="15" font-weight="700" fill="#fff">L2 · Application Modules</text>
-    <text x="60" y="248" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#eafaf5">FastAPI + Python 3.12 + SQLAlchemy 2 + Alembic (7 revisions) · 156 REST endpoints · WS 10 channels · gRPC client</text>
-    <text x="60" y="268" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#eafaf5">19 modules — same shape (router · service · models · schemas · events) — direct import forbidden, Redis Streams only</text>
-    <text x="60" y="286" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#eafaf5">MES · ERP · SPC · QMS · WMS · APS · CMMS · Energy · Safety · Tracking · Camera · Predictive · Document · Notification · Audit · …</text>
-  </g>
+  <!-- ================= L1 PRESENTATION (blue) ================= -->
+  <rect x="40" y="92" width="824" height="98" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+  <text x="56" y="110" font-size="11" letter-spacing="1.5" fill="#64748b">L1 &#183; PRESENTATION</text>
+  <rect x="56" y="120" width="792" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+  <text x="68" y="138" font-size="11.5" font-weight="700" fill="#1e3a8a">React 18 + TypeScript + Vite + TailwindCSS + shadcn/ui + React Three Fiber</text>
+  <text x="68" y="154" font-size="10.5" fill="#1e3a8a">20 pages &#183; 111 components &#183; Zustand 7 stores (5 domain + 2 infra) &#183; i18n ko/en &#183; 1920&#215;1080+</text>
+  <text x="68" y="170" font-size="10.5" fill="#1e3a8a">Surfaces &#8212; Command Center &#183; SCADA &#183; MES &#183; ERP &#183; QMS &#183; SPC &#183; WMS &#183; APS &#183; CMMS &#183; Digital Twin (3D)</text>
 
-  <!-- ============= LAYER 3: AI ENGINE + AGENTS ============= -->
-  <g>
-    <rect x="40" y="320" width="840" height="92" rx="8" fill="url(#ffAIGrad)" />
-    <text x="60" y="348" font-family="-apple-system,Segoe UI,sans-serif" font-size="15" font-weight="700" fill="#fff">L3 · AI Engine + Multi-Agent</text>
-    <text x="60" y="368" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#f4eaf9">PyTorch / ONNX (FP16) + gRPC serving · LangGraph + Ollama (Qwen 2.5 3B) · ChromaDB RAG · MCP 16 tools</text>
-    <text x="60" y="388" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#f4eaf9">Vision — PatchCore / EfficientAD · YOLOv8n × 4 · Pose · ArcFace      Predictive — LSTM-Attention · CNN-GRU · TimesFM · LSTM-AE</text>
-    <text x="60" y="406" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#f4eaf9">14 logical agents = 8 classes × line_id parametrization (LineMonitor × L1..L7 + Quality · Maintenance · Planning · Energy · Safety · Coordinator · Document)</text>
-  </g>
+  <!-- L1 to L2 edge -->
+  <line x1="452" y1="190" x2="452" y2="218" stroke="#64748b" stroke-width="1.8" marker-end="url(#ffArr)" marker-start="url(#ffArr)" />
+  <text x="462" y="208" font-size="10" fill="#475569">WS 10ch + REST</text>
 
-  <!-- ============= LAYER 4: DATA ============= -->
-  <g>
-    <rect x="40" y="440" width="840" height="92" rx="8" fill="url(#ffDataGrad)" />
-    <text x="60" y="468" font-family="-apple-system,Segoe UI,sans-serif" font-size="15" font-weight="700" fill="#fff">L4 · Data Platform</text>
-    <text x="60" y="488" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#fdf3e7">PostgreSQL 16 (operational, ~48 tables) · TimescaleDB 2.17 (4 hypertables, source field required) · Redis 7 · ChromaDB embedded · MinIO FS fallback</text>
-    <text x="60" y="508" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#fdf3e7">Hypertables — sensor_data · spc_measurements · energy_readings · camera_detections     RAG corpus — synthetic SOPs / manuals indexed in ChromaDB</text>
-    <text x="60" y="526" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#fdf3e7">audit_log on every CUD · timezone-aware UTC · enforced by pre-commit arch_check.sh</text>
-  </g>
+  <!-- ================= L2 APPLICATION (green) ================= -->
+  <rect x="40" y="218" width="824" height="98" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+  <text x="56" y="236" font-size="11" letter-spacing="1.5" fill="#64748b">L2 &#183; APPLICATION MODULES</text>
+  <rect x="56" y="246" width="792" height="58" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5" />
+  <text x="68" y="264" font-size="11.5" font-weight="700" fill="#065f46">FastAPI + Python 3.12 + SQLAlchemy 2 + Alembic (7 rev) &#183; 156 REST endpoints &#183; WS 10 channels &#183; gRPC client</text>
+  <text x="68" y="280" font-size="10.5" fill="#065f46">19 modules, same shape (router &#183; service &#183; models &#183; schemas &#183; events) &#8212; direct import forbidden, Redis Streams only</text>
+  <text x="68" y="296" font-size="10.5" fill="#065f46">MES &#183; ERP &#183; SPC &#183; QMS &#183; WMS &#183; APS &#183; CMMS &#183; Energy &#183; Safety &#183; Tracking &#183; Camera &#183; Predictive &#183; Document &#183; Notification &#183; Audit</text>
 
-  <!-- ============= LAYER 5: SIMULATOR ============= -->
-  <g>
-    <rect x="40" y="560" width="840" height="92" rx="8" fill="url(#ffSimGrad)" />
-    <text x="60" y="588" font-family="-apple-system,Segoe UI,sans-serif" font-size="15" font-weight="700" fill="#fff">L5 · Synthetic Factory Simulator</text>
-    <text x="60" y="608" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#fce9e6">7 lines — L1 Injection · L2 Press · L3 Assembly · L4 Painting · L5 Welding · L6 CNC · L7 Final Inspection</text>
-    <text x="60" y="628" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#fce9e6">Dual Mode — A: Full Sensor (PLC values) | B: Camera-First (signal-tower / line-counting / WIP / OCR → same downstream events)</text>
-    <text x="60" y="646" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" fill="#fce9e6">4 physics-based scenarios — heater_degradation (L1, 72h quadratic drift) · die_wear · electrode_wear · safety_intrusion</text>
-  </g>
+  <!-- L2 to L3 edge -->
+  <line x1="452" y1="316" x2="452" y2="344" stroke="#64748b" stroke-width="1.8" marker-end="url(#ffArr)" marker-start="url(#ffArr)" />
+  <text x="462" y="334" font-size="10" fill="#475569">gRPC 5s + Redis Streams</text>
 
-  <!-- ============= EVENT BUS (right side, vertical) ============= -->
-  <g>
-    <rect x="900" y="80" width="160" height="572" rx="10" fill="url(#ffBusGrad)" />
-    <text x="980" y="110" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="14" font-weight="700" fill="#fff">Redis Streams</text>
-    <text x="980" y="128" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="14" font-weight="700" fill="#fff">Event Bus</text>
-    <line x1="920" y1="142" x2="1040" y2="142" stroke="#7f8fa6" stroke-width="1" />
-    <text x="980" y="166" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#bdc3c7">sensor:{lineId}</text>
-    <text x="980" y="184" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#bdc3c7">event:production:{lineId}</text>
-    <text x="980" y="202" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#bdc3c7">event:quality:{lineId}</text>
-    <text x="980" y="220" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#bdc3c7">event:maintenance</text>
-    <text x="980" y="238" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#bdc3c7">event:safety</text>
-    <text x="980" y="256" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#bdc3c7">event:energy</text>
-    <text x="980" y="274" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#bdc3c7">camera:{lineId}</text>
-    <text x="980" y="292" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#bdc3c7">agent:request:*</text>
-    <text x="980" y="310" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#bdc3c7">agent:response:*</text>
-    <line x1="920" y1="326" x2="1040" y2="326" stroke="#7f8fa6" stroke-width="1" />
+  <!-- ================= L3 AI ENGINE + AGENTS (amber) ================= -->
+  <rect x="40" y="344" width="824" height="106" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+  <text x="56" y="362" font-size="11" letter-spacing="1.5" fill="#64748b">L3 &#183; AI ENGINE + MULTI-AGENT</text>
+  <rect x="56" y="372" width="792" height="66" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" />
+  <text x="68" y="390" font-size="11.5" font-weight="700" fill="#78350f">PyTorch / ONNX (FP16) + gRPC serving &#183; LangGraph + Ollama (Qwen 2.5 3B) &#183; ChromaDB RAG &#183; MCP 16 tools</text>
+  <text x="68" y="406" font-size="10.5" fill="#78350f">Vision &#8212; PatchCore / EfficientAD &#183; YOLOv8n &#215; 4 &#183; Pose &#183; ArcFace    Predictive &#8212; LSTM-Attention &#183; CNN-GRU &#183; TimesFM &#183; LSTM-AE</text>
+  <text x="68" y="422" font-size="10.5" fill="#78350f">14 logical agents = 8 classes &#215; line_id (LineMonitor &#215; L1..L7 + Quality &#183; Maintenance &#183; Planning &#183; Energy &#183; Safety &#183; Coordinator &#183; Document)</text>
 
-    <text x="980" y="356" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="700" fill="#fff">Invariants</text>
-    <text x="980" y="378" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#bdc3c7">No direct module import</text>
-    <text x="980" y="394" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#bdc3c7">WS channels = 10 (fixed)</text>
-    <text x="980" y="410" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#bdc3c7">Zustand stores = 7 (fixed)</text>
-    <text x="980" y="426" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#bdc3c7">audit_log on every CUD</text>
-    <text x="980" y="442" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#bdc3c7">TimescaleDB source field</text>
-    <text x="980" y="458" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="9.5" fill="#bdc3c7">i18n ko↔en key parity</text>
-    <line x1="920" y1="476" x2="1040" y2="476" stroke="#7f8fa6" stroke-width="1" />
+  <!-- L3 to L4 edge -->
+  <line x1="452" y1="450" x2="452" y2="478" stroke="#64748b" stroke-width="1.8" marker-end="url(#ffArr)" marker-start="url(#ffArr)" />
+  <text x="462" y="468" font-size="10" fill="#475569">SQLAlchemy / ChromaDB / MinIO</text>
 
-    <text x="980" y="500" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="700" fill="#fff">Enforced by</text>
-    <text x="980" y="520" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">arch_check.sh</text>
-    <text x="980" y="536" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">on every Edit / Write</text>
-    <text x="980" y="556" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="700" fill="#fff">W42 audit</text>
-    <text x="980" y="576" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">arch 0 violations</text>
-    <text x="980" y="592" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">tsc 0 errors</text>
-    <text x="980" y="608" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">vitest 18 / 54 pass</text>
-    <text x="980" y="624" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#9fd3c7">health 35 / 35 live</text>
-  </g>
+  <!-- ================= L4 DATA PLATFORM (green) ================= -->
+  <rect x="40" y="478" width="824" height="98" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+  <text x="56" y="496" font-size="11" letter-spacing="1.5" fill="#64748b">L4 &#183; DATA PLATFORM</text>
+  <rect x="56" y="506" width="792" height="58" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5" />
+  <text x="68" y="524" font-size="11" font-weight="700" fill="#065f46">PostgreSQL 16 (~48 tables) &#183; TimescaleDB 2.17 (4 hypertables, source required) &#183; Redis 7 &#183; ChromaDB embedded &#183; MinIO FS fallback</text>
+  <text x="68" y="540" font-size="10.5" fill="#065f46">Hypertables &#8212; sensor_data &#183; spc_measurements &#183; energy_readings &#183; camera_detections    RAG corpus &#8212; synthetic SOPs / manuals in ChromaDB</text>
+  <text x="68" y="556" font-size="10.5" fill="#065f46">audit_log on every CUD &#183; timezone-aware UTC &#183; enforced by pre-commit arch_check.sh</text>
 
-  <!-- ============= INTER-LAYER ARROWS ============= -->
-  <!-- L1 ↔ L2: WS 10ch + REST -->
-  <line x1="460" y1="172" x2="460" y2="200" stroke="#555" stroke-width="2" marker-end="url(#ffArrow)" marker-start="url(#ffArrow)" />
-  <text x="468" y="190" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#555">WS 10ch + REST</text>
+  <!-- L4 to L5 edge -->
+  <line x1="452" y1="576" x2="452" y2="604" stroke="#64748b" stroke-width="1.8" marker-end="url(#ffArr)" marker-start="url(#ffArr)" />
+  <text x="462" y="594" font-size="10" fill="#475569">writes synthetic events</text>
 
-  <!-- L2 ↔ L3: gRPC 5s + Redis Streams -->
-  <line x1="460" y1="292" x2="460" y2="320" stroke="#555" stroke-width="2" marker-end="url(#ffArrow)" marker-start="url(#ffArrow)" />
-  <text x="468" y="310" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#555">gRPC 5s + Redis Streams</text>
+  <!-- ================= L5 SIMULATOR (red / honesty) ================= -->
+  <rect x="40" y="604" width="824" height="100" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+  <text x="56" y="622" font-size="11" letter-spacing="1.5" fill="#64748b">L5 &#183; SYNTHETIC FACTORY SIMULATOR</text>
+  <rect x="56" y="632" width="792" height="60" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 4" />
+  <text x="68" y="650" font-size="10.5" fill="#991b1b">7 lines &#8212; L1 Injection &#183; L2 Press &#183; L3 Assembly &#183; L4 Painting &#183; L5 Welding &#183; L6 CNC &#183; L7 Final Inspection</text>
+  <text x="68" y="666" font-size="10.5" fill="#991b1b">Dual Mode &#8212; A: Full Sensor (PLC values) | B: Camera-First (signal-tower / line-counting / WIP / OCR &#8594; same downstream events)</text>
+  <text x="68" y="682" font-size="10.5" fill="#991b1b">4 physics-based scenarios &#8212; heater_degradation (L1, 72h quadratic drift) &#183; die_wear &#183; electrode_wear &#183; safety_intrusion</text>
 
-  <!-- L3 ↔ L4 -->
-  <line x1="460" y1="412" x2="460" y2="440" stroke="#555" stroke-width="2" marker-end="url(#ffArrow)" marker-start="url(#ffArrow)" />
-  <text x="468" y="430" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#555">SQLAlchemy / ChromaDB / MinIO</text>
-
-  <!-- L4 ↔ L5 -->
-  <line x1="460" y1="532" x2="460" y2="560" stroke="#555" stroke-width="2" marker-end="url(#ffArrow)" marker-start="url(#ffArrow)" />
-  <text x="468" y="550" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#555">writes synthetic events</text>
-
-  <!-- All layers → Bus -->
-  <line x1="880" y1="126" x2="900" y2="126" stroke="#34495e" stroke-width="2" marker-end="url(#ffArrowBus)" marker-start="url(#ffArrowBus)" />
-  <line x1="880" y1="246" x2="900" y2="246" stroke="#34495e" stroke-width="2" marker-end="url(#ffArrowBus)" marker-start="url(#ffArrowBus)" />
-  <line x1="880" y1="366" x2="900" y2="366" stroke="#34495e" stroke-width="2" marker-end="url(#ffArrowBus)" marker-start="url(#ffArrowBus)" />
-  <line x1="880" y1="486" x2="900" y2="486" stroke="#34495e" stroke-width="2" marker-end="url(#ffArrowBus)" marker-start="url(#ffArrowBus)" />
-  <line x1="880" y1="606" x2="900" y2="606" stroke="#34495e" stroke-width="2" marker-end="url(#ffArrowBus)" marker-start="url(#ffArrowBus)" />
+  <!-- ================= Layer to Bus connectors ================= -->
+  <line x1="864" y1="149" x2="888" y2="149" stroke="#8b5cf6" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ffArrPurple)" marker-start="url(#ffArrPurple)" />
+  <line x1="864" y1="275" x2="888" y2="275" stroke="#8b5cf6" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ffArrPurple)" marker-start="url(#ffArrPurple)" />
+  <line x1="864" y1="405" x2="888" y2="405" stroke="#8b5cf6" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ffArrPurple)" marker-start="url(#ffArrPurple)" />
+  <line x1="864" y1="535" x2="888" y2="535" stroke="#8b5cf6" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ffArrPurple)" marker-start="url(#ffArrPurple)" />
+  <line x1="864" y1="662" x2="888" y2="662" stroke="#8b5cf6" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ffArrPurple)" marker-start="url(#ffArrPurple)" />
 
   <!-- Footer -->
-  <text x="550" y="685" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif" font-size="10" fill="#888">Solo developer · 42 weeks (38 roadmap + 4 hardening) · synthetic data · single-machine demo · not deployed in a live factory</text>
+  <text x="40" y="730" font-size="10.5" fill="#64748b" font-style="italic">Solo developer &#183; 42 weeks (38 roadmap + 4 hardening) &#183; synthetic data calibrated against open datasets &#183; single-machine demo &#183; not deployed in a live factory</text>
 </svg>

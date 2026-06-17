@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="pp-ev" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,8 L9,4 z" fill="#16a34a"/>
+    </marker>
+    <marker id="pp-n" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,8 L9,4 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <style>
+    .pp-title{font-size:24px;font-weight:700;fill:#0f172a}
+    .pp-sub{font-size:14px;fill:#64748b}
+    .pp-h{font-size:15px;font-weight:700}
+    .pp-b{font-size:12.5px;fill:#475569}
+    .pp-cap{font-size:11px;fill:#64748b;letter-spacing:.5px;font-weight:700}
+    .pp-chip{font-size:13px;font-weight:600;fill:#065f46}
+  </style>
+
+  <text x="40" y="44" class="pp-title">Where this sits</text>
+  <rect x="40" y="54" width="132" height="3" rx="1.5" fill="#1772d0"/>
+  <text x="40" y="82" class="pp-sub">Manufacturing QC between two unsatisfying extremes — and the position this project takes.</text>
+
+  <!-- Left extreme: rule-based -->
+  <rect x="40" y="120" width="300" height="150" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="62" y="150" class="pp-h" fill="#991b1b">Rule-based systems</text>
+  <text x="62" y="178" class="pp-b">Hand-written thresholds and</text>
+  <text x="62" y="196" class="pp-b">if/else defect rules.</text>
+  <text x="62" y="228" class="pp-b" font-style="italic" fill="#991b1b">Go brittle as defect modes</text>
+  <text x="62" y="246" class="pp-b" font-style="italic" fill="#991b1b">multiply.</text>
+
+  <!-- Right extreme: end-to-end ML -->
+  <rect x="760" y="120" width="300" height="150" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="782" y="150" class="pp-h" fill="#78350f">End-to-end ML</text>
+  <text x="782" y="178" class="pp-b">One model emits a single</text>
+  <text x="782" y="196" class="pp-b">pass / fail verdict.</text>
+  <text x="782" y="228" class="pp-b" font-style="italic" fill="#78350f">An operator cannot audit</text>
+  <text x="782" y="246" class="pp-b" font-style="italic" fill="#78350f">why it decided.</text>
+
+  <!-- Center: this project -->
+  <rect x="380" y="104" width="340" height="182" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="550" y="138" text-anchor="middle" class="pp-h" fill="#1e3a8a" font-size="16">This project</text>
+  <text x="550" y="168" text-anchor="middle" class="pp-b">Use narrow ML tools, but treat</text>
+  <text x="550" y="186" text-anchor="middle" class="pp-b">their outputs as evidence to be</text>
+  <text x="550" y="204" text-anchor="middle" class="pp-b"><tspan font-weight="700" fill="#1e3a8a">cross-examined</tspan>, not ground truth.</text>
+  <text x="550" y="234" text-anchor="middle" class="pp-b">Escalate on disagreement instead</text>
+  <text x="550" y="252" text-anchor="middle" class="pp-b">of silently picking a tiebreaker.</text>
+
+  <!-- Extremes converge toward the center -->
+  <line x1="342" y1="195" x2="374" y2="195" stroke="#64748b" stroke-width="1.5" marker-end="url(#pp-n)"/>
+  <line x1="758" y1="195" x2="726" y2="195" stroke="#64748b" stroke-width="1.5" marker-end="url(#pp-n)"/>
+
+  <!-- Evidence tools feeding the center -->
+  <text x="550" y="332" text-anchor="middle" class="pp-cap">NARROW ML TOOLS — EVIDENCE, NOT GROUND TRUTH</text>
+  <rect x="300" y="352" width="150" height="46" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="375" y="380" text-anchor="middle" class="pp-chip">PatchCore</text>
+  <rect x="475" y="352" width="150" height="46" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="550" y="380" text-anchor="middle" class="pp-chip">AnomalyCLIP</text>
+  <rect x="650" y="352" width="150" height="46" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="725" y="380" text-anchor="middle" class="pp-chip">XGBoost RUL</text>
+  <line x1="375" y1="352" x2="472" y2="292" stroke="#16a34a" stroke-width="1.5" marker-end="url(#pp-ev)"/>
+  <line x1="550" y1="352" x2="550" y2="292" stroke="#16a34a" stroke-width="1.5" marker-end="url(#pp-ev)"/>
+  <line x1="725" y1="352" x2="628" y2="292" stroke="#16a34a" stroke-width="1.5" marker-end="url(#pp-ev)"/>
+
+  <!-- Takeaway rail -->
+  <rect x="40" y="432" width="1020" height="64" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="62" y="462" class="pp-b" font-weight="700" fill="#0f172a">The gap this fills</text>
+  <text x="62" y="483" class="pp-b">A system that cross-examines multiple ML tools and escalates to a human when they disagree — instead of going brittle (rules) or unauditable (end-to-end ML).</text>
+</svg>

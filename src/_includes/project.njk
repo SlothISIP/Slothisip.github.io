@@ -1,6 +1,14 @@
 ---
 layout: base.njk
 ---
+{% set figs = project.figures or [] %}
+{% set leadFig = figs | figuresLead %}
+{% set problemFigs = figs | figuresIn("problem") %}
+{% set resultsFigs = figs | figuresIn("results") %}
+{% set footholdFigs = figs | figuresIn("foothold") %}
+{% set stackFigs = figs | figuresIn("stack") %}
+{% set residualFigs = figs | figuresResidual %}
+
 <article class="detail project-detail">
   <header class="detail-head">
     <h1>{{ project.title }}</h1>
@@ -8,13 +16,29 @@ layout: base.njk
 
   {% if project.tldr %}<div class="tldr"><strong>TL;DR.</strong> {{ project.tldr }}</div>{% endif %}
 
+  {# ---- LEAD / HERO (architecture or hero image, bleeds wide, eager) ---- #}
+  {% if leadFig %}
+  <figure class="proj-figure figure-hero">
+    {% image leadFig.src, leadFig.alt, [768, 1280], "(max-width: 960px) 92vw, 920px", "", true %}
+    {% if leadFig.caption %}<figcaption>{{ leadFig.caption }}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+
+  {# ---- PROBLEM (+ optional positioning figure as a full-width band) ---- #}
   {% if project.problem %}
   <section class="proj-section">
     <h2>Problem</h2>
     <p>{{ project.problem }}</p>
+    {% for f in problemFigs %}
+    <figure class="proj-figure figure-band">
+      {% image f.src, f.alt, [768, 1280], "(max-width: 960px) 92vw, 920px" %}
+      {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
   </section>
   {% endif %}
 
+  {# ---- WHAT I BUILT ---- #}
   {% if project.contributions and project.contributions.length %}
   <section class="proj-section">
     <h2>What I built</h2>
@@ -22,17 +46,67 @@ layout: base.njk
   </section>
   {% endif %}
 
+  {# ---- APPROACH (optional figure-led "how it works at a glance" band) ---- #}
+  {% set approachFigs = figs | figuresIn("approach") %}
+  {% if approachFigs.length %}
+  <section class="proj-section">
+    <h2>Approach</h2>
+    {% for f in approachFigs %}
+    <figure class="proj-figure figure-band">
+      {% image f.src, f.alt, [768, 1280], "(max-width: 960px) 92vw, 920px" %}
+      {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {# ---- DESIGN DECISIONS (figures interleaved per decision, alternating sides) ---- #}
   {% if project.design_decisions and project.design_decisions.length %}
   <section class="proj-section">
     <h2>Design decisions</h2>
     <ol class="decisions">
     {% for d in project.design_decisions %}
-      <li><span class="decision-title">{{ d.title }}</span><p>{{ d.detail }}</p></li>
+      {% set key = d.id or d.title %}
+      {% set dfigs = figs | figuresBy("decision", key) %}
+      <li class="decision">
+        <div class="decision-row{% if dfigs.length %} has-figure{% endif %}">
+          <div class="decision-body">
+            <span class="decision-title">{{ d.title }}</span>
+            <p>{{ d.detail }}</p>
+          </div>
+          {% if dfigs.length %}
+          <div class="decision-figs">
+            {% for f in dfigs %}
+            <figure class="proj-figure">
+              {% image f.src, f.alt, [640, 1024], "(max-width: 768px) 92vw, 320px" %}
+              {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+            </figure>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </li>
     {% endfor %}
     </ol>
   </section>
   {% endif %}
 
+  {# ---- RESULTS / IN OPERATION (outcome screenshots in a grid) ---- #}
+  {% if resultsFigs.length %}
+  <section class="proj-section">
+    <h2>In operation</h2>
+    <div class="results-grid">
+    {% for f in resultsFigs %}
+      <figure class="proj-figure">
+        {% image f.src, f.alt, [640, 1024], "(max-width: 768px) 92vw, 300px" %}
+        {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+      </figure>
+    {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {# ---- ENGINEERING FOOTHOLD (claim/evidence table + evidence figures under it) ---- #}
   {% if project.foothold and project.foothold.length %}
   <section class="proj-section">
     <h2>Engineering foothold</h2>
@@ -44,23 +118,20 @@ layout: base.njk
       {% endfor %}
       </tbody>
     </table>
-  </section>
-  {% endif %}
-
-  {% if project.figures and project.figures.length %}
-  <section class="proj-section">
-    <h2>Gallery</h2>
-    <div class="gallery">
-    {% for fig in project.figures %}
-      <figure>
-        {% image fig.src, fig.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
-        {% if fig.caption %}<figcaption>{{ fig.caption }}</figcaption>{% endif %}
+    {% if footholdFigs.length %}
+    <div class="foothold-evidence">
+      {% for f in footholdFigs %}
+      <figure class="proj-figure">
+        {% image f.src, f.alt, [640, 1024], "(max-width: 768px) 92vw, 300px" %}
+        {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
       </figure>
-    {% endfor %}
+      {% endfor %}
     </div>
+    {% endif %}
   </section>
   {% endif %}
 
+  {# ---- TECH STACK (+ optional stack/deploy figure) ---- #}
   {% if project.stack and project.stack.length %}
   <section class="proj-section">
     <h2>Tech stack</h2>
@@ -69,6 +140,27 @@ layout: base.njk
       <dt>{{ s.category }}</dt><dd>{{ s.items | join(", ") }}</dd>
     {% endfor %}
     </dl>
+    {% for f in stackFigs %}
+    <figure class="proj-figure">
+      {% image f.src, f.alt, [640, 1024], "(max-width: 768px) 92vw, 360px" %}
+      {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {# ---- RESIDUAL GALLERY (any figure not bound to a section; preserves today's behaviour) ---- #}
+  {% if residualFigs.length %}
+  <section class="proj-section">
+    <h2>Gallery</h2>
+    <div class="gallery">
+    {% for f in residualFigs %}
+      <figure>
+        {% image f.src, f.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
+        {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+      </figure>
+    {% endfor %}
+    </div>
   </section>
   {% endif %}
 

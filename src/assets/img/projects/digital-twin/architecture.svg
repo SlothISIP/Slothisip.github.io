@@ -1,99 +1,135 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
   <defs>
-    <linearGradient id="dt-grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0f0f23;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1a1a3e;stop-opacity:1" />
-    </linearGradient>
-    <filter id="dt-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.5"/>
-    </filter>
-  </defs>
-
-  <rect width="800" height="400" fill="url(#dt-grad1)"/>
-
-  <!-- Title -->
-  <text x="400" y="28" text-anchor="middle" fill="#00d4ff" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Digital Twin Factory - Microservices Architecture</text>
-
-  <!-- API Gateway (Center) -->
-  <rect x="320" y="150" width="160" height="80" rx="10" fill="#1e3a5f" stroke="#00d4ff" stroke-width="3" filter="url(#dt-shadow)"/>
-  <text x="400" y="180" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="13" font-weight="bold">API Gateway</text>
-  <text x="400" y="200" text-anchor="middle" fill="#00d4ff" font-family="Arial, sans-serif" font-size="10">FastAPI</text>
-  <text x="400" y="218" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="9">Load Balancing | Auth</text>
-
-  <!-- Vision AI Service -->
-  <rect x="30" y="55" width="140" height="70" rx="8" fill="#1e3a5f" stroke="#ff6b6b" stroke-width="2" filter="url(#dt-shadow)"/>
-  <text x="100" y="80" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Vision AI</text>
-  <text x="100" y="98" text-anchor="middle" fill="#ff6b6b" font-family="Arial, sans-serif" font-size="9">Defect Detection</text>
-  <text x="100" y="113" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">YOLOv8 | OpenCV</text>
-
-  <!-- Digital Twin Service -->
-  <rect x="30" y="165" width="140" height="70" rx="8" fill="#1e3a5f" stroke="#4ecdc4" stroke-width="2" filter="url(#dt-shadow)"/>
-  <text x="100" y="190" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Digital Twin</text>
-  <text x="100" y="208" text-anchor="middle" fill="#4ecdc4" font-family="Arial, sans-serif" font-size="9">SimPy Simulation</text>
-  <text x="100" y="223" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">What-If Analysis</text>
-
-  <!-- Predictive Maintenance -->
-  <rect x="30" y="275" width="140" height="70" rx="8" fill="#1e3a5f" stroke="#ffd93d" stroke-width="2" filter="url(#dt-shadow)"/>
-  <text x="100" y="300" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Predictive</text>
-  <text x="100" y="318" text-anchor="middle" fill="#ffd93d" font-family="Arial, sans-serif" font-size="9">Maintenance AI</text>
-  <text x="100" y="333" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">Anomaly Detection</text>
-
-  <!-- Scheduling Service -->
-  <rect x="630" y="55" width="140" height="70" rx="8" fill="#1e3a5f" stroke="#a8e6cf" stroke-width="2" filter="url(#dt-shadow)"/>
-  <text x="700" y="80" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Scheduling</text>
-  <text x="700" y="98" text-anchor="middle" fill="#a8e6cf" font-family="Arial, sans-serif" font-size="9">Production Optimizer</text>
-  <text x="700" y="113" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">Resource Allocation</text>
-
-  <!-- Monitoring Service -->
-  <rect x="630" y="165" width="140" height="70" rx="8" fill="#1e3a5f" stroke="#dda0dd" stroke-width="2" filter="url(#dt-shadow)"/>
-  <text x="700" y="190" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Monitoring</text>
-  <text x="700" y="208" text-anchor="middle" fill="#dda0dd" font-family="Arial, sans-serif" font-size="9">Real-time KPIs</text>
-  <text x="700" y="223" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">OEE Tracking</text>
-
-  <!-- React Dashboard -->
-  <rect x="550" y="275" width="220" height="70" rx="8" fill="#1e3a5f" stroke="#00d4ff" stroke-width="2" filter="url(#dt-shadow)"/>
-  <text x="660" y="300" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="bold">React Dashboard</text>
-  <text x="660" y="318" text-anchor="middle" fill="#00d4ff" font-family="Arial, sans-serif" font-size="9">Interactive Visualization</text>
-  <text x="660" y="333" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="8">Alerts | Reports | Analytics</text>
-
-  <!-- Database Layer -->
-  <rect x="230" y="290" width="140" height="55" rx="8" fill="#1e3a5f" stroke="#95e1d3" stroke-width="2"/>
-  <text x="300" y="315" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Data Layer</text>
-  <text x="300" y="332" text-anchor="middle" fill="#95e1d3" font-family="Arial, sans-serif" font-size="9">PostgreSQL | Redis</text>
-
-  <!-- Message Queue -->
-  <rect x="430" y="290" width="100" height="55" rx="8" fill="#1e3a5f" stroke="#f38181" stroke-width="2"/>
-  <text x="480" y="315" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Queue</text>
-  <text x="480" y="332" text-anchor="middle" fill="#f38181" font-family="Arial, sans-serif" font-size="9">RabbitMQ</text>
-
-  <!-- Arrows -->
-  <defs>
-    <marker id="dt-arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#00d4ff"/>
+    <marker id="dt-ar" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="dt-ar-b" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/>
+    </marker>
+    <marker id="dt-ar-g" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
     </marker>
   </defs>
 
-  <!-- Left services to API Gateway -->
-  <line x1="170" y1="90" x2="315" y2="170" stroke="#ff6b6b" stroke-width="1.5" marker-end="url(#dt-arrow)"/>
-  <line x1="170" y1="200" x2="315" y2="190" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#dt-arrow)"/>
-  <line x1="170" y1="310" x2="315" y2="210" stroke="#ffd93d" stroke-width="1.5" marker-end="url(#dt-arrow)"/>
+  <rect width="1100" height="720" fill="#ffffff"/>
 
-  <!-- Right services to API Gateway -->
-  <line x1="630" y1="90" x2="485" y2="170" stroke="#a8e6cf" stroke-width="1.5" marker-end="url(#dt-arrow)"/>
-  <line x1="630" y1="200" x2="485" y2="190" stroke="#dda0dd" stroke-width="1.5" marker-end="url(#dt-arrow)"/>
+  <!-- Title -->
+  <text x="40" y="44" font-size="23" font-weight="700" fill="#0f172a">AI Digital Twin Factory &#183; Microservices Architecture</text>
+  <rect x="40" y="54" width="232" height="4" rx="2" fill="#1772d0"/>
+  <text x="40" y="80" font-size="13" fill="#64748b">Five core ML services behind a central FastAPI gateway &#183; React + Three.js dashboard &#183; Docker / Kubernetes</text>
 
-  <!-- API Gateway to Dashboard -->
-  <line x1="480" y1="190" x2="545" y2="300" stroke="#00d4ff" stroke-width="2" marker-end="url(#dt-arrow)"/>
+  <!-- ============ CLIENT BAND ============ -->
+  <rect x="40" y="100" width="1020" height="92" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="56" y="120" font-size="11" font-weight="700" fill="#64748b" letter-spacing="1.5">CLIENT</text>
 
-  <!-- API Gateway to Data Layer -->
-  <line x1="370" y1="230" x2="320" y2="285" stroke="#95e1d3" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <line x1="430" y1="230" x2="460" y2="285" stroke="#f38181" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <rect x="430" y="128" width="240" height="52" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="550" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">React Dashboard</text>
+  <text x="550" y="168" text-anchor="middle" font-size="10.5" fill="#475569">TypeScript &#183; Three.js / R3F 3D &#183; OEE / KPIs &#183; alerts</text>
 
-  <!-- Infrastructure Badge -->
-  <rect x="30" y="365" width="200" height="25" rx="4" fill="#1e3a5f" stroke="#44556f" stroke-width="1"/>
-  <text x="130" y="382" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="9">Infrastructure: Docker | Kubernetes</text>
+  <!-- ============ GATEWAY BAND ============ -->
+  <rect x="40" y="216" width="1020" height="92" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="56" y="236" font-size="11" font-weight="700" fill="#64748b" letter-spacing="1.5">API GATEWAY</text>
 
-  <!-- Test Badge -->
-  <rect x="250" y="365" width="150" height="25" rx="4" fill="#1e3a5f" stroke="#44556f" stroke-width="1"/>
-  <text x="325" y="382" text-anchor="middle" fill="#4ecdc4" font-family="Arial, sans-serif" font-size="9">172 Tests | 87% Complete</text>
+  <rect x="370" y="244" width="360" height="52" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="550" y="266" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">FastAPI API Gateway</text>
+  <text x="550" y="284" text-anchor="middle" font-size="10.5" fill="#475569">Routing &#183; JWT auth &#183; rate limiting &#183; Swagger / OpenAPI</text>
+
+  <!-- Client <-> Gateway -->
+  <line x1="550" y1="180" x2="550" y2="242" stroke="#2563eb" stroke-width="1.5" marker-end="url(#dt-ar-b)"/>
+  <text x="566" y="208" font-size="10" fill="#64748b">WebSocket &#183; 2s stream</text>
+
+  <!-- ============ CORE SERVICES BAND ============ -->
+  <rect x="40" y="332" width="1020" height="172" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="56" y="352" font-size="11" font-weight="700" fill="#64748b" letter-spacing="1.5">CORE ML SERVICES &#183; INDEPENDENTLY DEPLOYABLE</text>
+
+  <!-- Vision AI -->
+  <rect x="56" y="366" width="186" height="120" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="149" y="390" text-anchor="middle" font-size="12.5" font-weight="700" fill="#78350f">Vision AI</text>
+  <text x="149" y="409" text-anchor="middle" font-size="10.5" fill="#475569">Defect detection</text>
+  <text x="149" y="426" text-anchor="middle" font-size="10" fill="#64748b">Swin Transformer</text>
+  <text x="149" y="441" text-anchor="middle" font-size="10" fill="#64748b">ONNX / GPU &#183; Grad-CAM</text>
+  <text x="149" y="466" text-anchor="middle" font-size="9.5" font-style="italic" fill="#64748b">MVTec AD</text>
+
+  <!-- Digital Twin -->
+  <rect x="256" y="366" width="186" height="120" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="349" y="390" text-anchor="middle" font-size="12.5" font-weight="700" fill="#065f46">Digital Twin</text>
+  <text x="349" y="409" text-anchor="middle" font-size="10.5" fill="#475569">SimPy discrete-event sim</text>
+  <text x="349" y="426" text-anchor="middle" font-size="10" fill="#64748b">What-if &#183; bottleneck ID</text>
+  <text x="349" y="441" text-anchor="middle" font-size="10" fill="#64748b">Physics ROM feedback</text>
+  <text x="349" y="466" text-anchor="middle" font-size="9.5" font-style="italic" fill="#64748b">6 synthetic scenarios</text>
+
+  <!-- Predictive Maintenance -->
+  <rect x="456" y="366" width="186" height="120" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="549" y="390" text-anchor="middle" font-size="12.5" font-weight="700" fill="#991b1b">Predictive Maint.</text>
+  <text x="549" y="409" text-anchor="middle" font-size="10.5" fill="#475569">Failure + RUL prediction</text>
+  <text x="549" y="426" text-anchor="middle" font-size="10" fill="#64748b">XGBoost + LSTM</text>
+  <text x="549" y="441" text-anchor="middle" font-size="10" fill="#64748b">Hybrid ensemble</text>
+  <text x="549" y="466" text-anchor="middle" font-size="9.5" font-style="italic" fill="#64748b">C-MAPSS &#183; PHM2010</text>
+
+  <!-- Scheduling -->
+  <rect x="656" y="366" width="186" height="120" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="749" y="390" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5b21b6">Scheduling</text>
+  <text x="749" y="409" text-anchor="middle" font-size="10.5" fill="#475569">Production optimizer</text>
+  <text x="749" y="426" text-anchor="middle" font-size="10" fill="#64748b">OR-Tools CP-SAT</text>
+  <text x="749" y="441" text-anchor="middle" font-size="10" fill="#64748b">RL: Ray RLlib / Gym</text>
+  <text x="749" y="466" text-anchor="middle" font-size="9.5" font-style="italic" fill="#64748b">+56% vs random</text>
+
+  <!-- Integration / Monitoring -->
+  <rect x="856" y="366" width="186" height="120" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="949" y="390" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Integration</text>
+  <text x="949" y="409" text-anchor="middle" font-size="10.5" fill="#475569">Real-time KPIs / OEE</text>
+  <text x="949" y="426" text-anchor="middle" font-size="10" fill="#64748b">Metrics aggregation</text>
+  <text x="949" y="441" text-anchor="middle" font-size="10" fill="#64748b">Dashboard data feed</text>
+
+  <!-- Gateway -> each service -->
+  <line x1="430" y1="296" x2="180" y2="364" stroke="#64748b" stroke-width="1.5" marker-end="url(#dt-ar)"/>
+  <line x1="475" y1="296" x2="360" y2="364" stroke="#64748b" stroke-width="1.5" marker-end="url(#dt-ar)"/>
+  <line x1="550" y1="296" x2="549" y2="364" stroke="#64748b" stroke-width="1.5" marker-end="url(#dt-ar)"/>
+  <line x1="625" y1="296" x2="735" y2="364" stroke="#64748b" stroke-width="1.5" marker-end="url(#dt-ar)"/>
+  <line x1="670" y1="296" x2="920" y2="364" stroke="#64748b" stroke-width="1.5" marker-end="url(#dt-ar)"/>
+  <text x="690" y="324" font-size="10" fill="#64748b" text-anchor="middle">each service optional &#183; graceful degradation</text>
+
+  <!-- ============ DATA & MESSAGING BAND ============ -->
+  <rect x="40" y="528" width="1020" height="104" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="56" y="548" font-size="11" font-weight="700" fill="#64748b" letter-spacing="1.5">DATA &amp; MESSAGING</text>
+
+  <!-- PostgreSQL/TimescaleDB -->
+  <rect x="120" y="558" width="210" height="58" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="225" y="582" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">PostgreSQL / TimescaleDB</text>
+  <text x="225" y="600" text-anchor="middle" font-size="10" fill="#475569">Time-series persistence</text>
+
+  <!-- Redis -->
+  <rect x="350" y="558" width="180" height="58" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="440" y="582" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">Redis</text>
+  <text x="440" y="600" text-anchor="middle" font-size="10" fill="#475569">Cache &#183; pub/sub</text>
+
+  <!-- RabbitMQ -->
+  <rect x="550" y="558" width="190" height="58" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="645" y="582" text-anchor="middle" font-size="12" font-weight="700" fill="#78350f">RabbitMQ broker</text>
+  <text x="645" y="600" text-anchor="middle" font-size="10" fill="#475569">Async message bus</text>
+
+  <!-- Celery -->
+  <rect x="760" y="558" width="200" height="58" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="860" y="582" text-anchor="middle" font-size="12" font-weight="700" fill="#78350f">Celery workers</text>
+  <text x="860" y="600" text-anchor="middle" font-size="10" fill="#475569">Background / periodic tasks</text>
+
+  <!-- Services -> data (green, persistence) -->
+  <line x1="349" y1="486" x2="280" y2="556" stroke="#16a34a" stroke-width="1.5" marker-end="url(#dt-ar-g)"/>
+  <line x1="549" y1="486" x2="470" y2="556" stroke="#16a34a" stroke-width="1.5" marker-end="url(#dt-ar-g)"/>
+  <!-- Services -> messaging (dashed async) -->
+  <line x1="660" y1="486" x2="650" y2="556" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#dt-ar)"/>
+  <line x1="740" y1="616" x2="740" y2="558" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="700" y="544" font-size="9.5" fill="#64748b" text-anchor="middle">async tasks (dashed)</text>
+
+  <!-- ============ INFRA + TEST FOOTER ============ -->
+  <rect x="40" y="652" width="660" height="44" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="56" y="670" font-size="11" font-weight="700" fill="#64748b" letter-spacing="1.5">INFRASTRUCTURE</text>
+  <text x="56" y="688" font-size="10.5" fill="#475569">Docker (multi-stage) &#183; Kubernetes (HPA backend 3-10, frontend 2-5, ingress) &#183; Prometheus + Grafana</text>
+
+  <rect x="712" y="652" width="348" height="44" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="728" y="670" font-size="11" font-weight="700" fill="#065f46" letter-spacing="1.5">TESTS</text>
+  <text x="728" y="688" font-size="10.5" fill="#475569">Backend 1,178/1,189 (99.07%, 85% cov) &#183; Frontend 542/546</text>
+
+  <!-- Honesty caveat -->
+  <text x="40" y="714" font-size="10" font-style="italic" fill="#64748b">Self-directed R&amp;D / portfolio project &#8212; validated on open benchmark datasets (MVTec AD, NASA C-MAPSS, CWRU, PHM2010, SECOM) and synthetic demos; not deployed to a live factory or cloud.</text>
 </svg>
