@@ -58,6 +58,45 @@ module.exports = function (eleventyConfig) {
     catch (e) { return ""; }
   });
 
+  // ---------- Figure placement filters (Option A: figures bind to narrative beats) ----------
+  // A figure may carry: section (lead|problem|decision|results|foothold|stack), beat (matches a
+  // design_decision id/title or foothold id/claim), order. Un-keyed figures fall to the gallery,
+  // so a project with no placement keys renders exactly as before.
+  const FIG_SECTIONS = ["lead", "problem", "approach", "decision", "results", "foothold", "stack"];
+  eleventyConfig.addFilter("figuresIn", (figs, section) =>
+    (figs || []).filter((f) => f.section === section));
+  eleventyConfig.addFilter("figuresLead", (figs) =>
+    (figs || []).find((f) => f.section === "lead") || null);
+  eleventyConfig.addFilter("figuresBy", (figs, section, beat) =>
+    (figs || [])
+      .filter((f) => f.section === section && f.beat === beat)
+      .sort((a, b) => (a.order || 0) - (b.order || 0)));
+  eleventyConfig.addFilter("figuresResidual", (figs) =>
+    (figs || []).filter((f) => !FIG_SECTIONS.includes(f.section)));
+
+  // Build-time guard: a figure bound to a decision/foothold beat that does not resolve would
+  // silently vanish from the page. Warn loudly instead.
+  eleventyConfig.on("eleventy.before", () => {
+    try {
+      const fs = require("node:fs");
+      const projects = yaml.load(fs.readFileSync("src/_data/projects.yaml", "utf8"));
+      for (const p of projects || []) {
+        const beats = new Set();
+        (p.design_decisions || []).forEach((d) => { if (d.id) beats.add(d.id); if (d.title) beats.add(d.title); });
+        (p.foothold || []).forEach((f) => { if (f.id) beats.add(f.id); if (f.claim) beats.add(f.claim); });
+        (p.figures || []).forEach((f) => {
+          // A decision figure must resolve to a beat. A beat set on any figure must resolve.
+          // (foothold figures without a beat render generally under the table — that's fine.)
+          if (f.beat !== undefined && !beats.has(f.beat)) {
+            console.warn(`[figure-beat] ${p.slug}: figure ${f.src} -> unknown beat '${f.beat}'`);
+          } else if (f.section === "decision" && f.beat === undefined) {
+            console.warn(`[figure-beat] ${p.slug}: decision figure ${f.src} has no beat`);
+          }
+        });
+      }
+    } catch (e) { /* non-fatal: never block a build on the guard */ }
+  });
+
   // ---------- Directory config ----------
   return {
     dir: { input: "src", output: "_site", includes: "_includes", data: "_data" },

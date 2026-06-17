@@ -18,6 +18,8 @@
   --maxw: 800px;
   --maxw-wide: 960px;
   --font: 'Lato', Verdana, Helvetica, sans-serif;
+  --fig-bleed: 60px;   /* (920 container-inner - 800 text) / 2 — how far a band breaks out each side */
+  --fig-radius: 8px;
 }
 
 * { box-sizing: border-box; }
@@ -272,4 +274,89 @@ table.foothold td code { font-size: 12px; color: #333; overflow-wrap: anywhere; 
   .site-nav-links { gap: 12px; }
   .site-nav-links a { font-size: 12px; }
   .name { font-size: 26px; }
+}
+
+/* ============================================================
+   Redesigned project detail: figures interleaved with narrative
+   (Pattern A full-width band, B side-by-side decision, C inline)
+   ============================================================ */
+
+/* Pattern C — inline figure (default) */
+.proj-figure { margin: 1.5rem 0; }
+.proj-figure :is(img, picture) {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--line); border-radius: var(--fig-radius);
+  background: var(--surface);
+}
+.proj-figure picture img { border: 0; border-radius: 0; }   /* border lives on the <picture> */
+.proj-figure figcaption { margin-top: .4rem; font-size: 12px; color: var(--muted); line-height: 1.5; }
+.proj-figure--narrow { max-width: 520px; margin-inline: auto; }
+
+/* Lead hero + Pattern A band */
+.figure-hero { margin: .5rem 0 1.5rem; }
+.figure-band {
+  margin: 1.75rem 0; padding: 22px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+}
+.figure-band :is(img, picture) { border: 0; border-radius: 6px; background: #fff; }
+.figure-band figcaption, .figure-hero figcaption { max-width: var(--maxw); }  /* keep caption at reading measure */
+
+/* Pattern B — per-decision figure column */
+.decision-row .proj-figure { margin: 0; }
+.decision-figs { display: grid; gap: 14px; }
+
+/* Results / foothold evidence — auto-fit grids instead of a 1-col stack */
+.results-grid, .foothold-evidence {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;
+}
+.results-grid { margin: 1.25rem 0; }
+.foothold-evidence { margin-top: 1.25rem; }
+.results-grid .proj-figure, .foothold-evidence .proj-figure { margin: 0; }
+
+/* Tablet+ : side-by-side decision rows, alternating sides by decision position */
+@media (min-width: 769px) {
+  .decision-row.has-figure {
+    display: grid; grid-template-columns: 1fr 320px; gap: 26px; align-items: start;
+  }
+  .decision-row.has-figure .decision-body { min-width: 0; }   /* prevent overflow */
+  .decisions > li:nth-of-type(even) .decision-row.has-figure { grid-template-columns: 320px 1fr; }
+  .decisions > li:nth-of-type(even) .decision-row.has-figure .decision-body { order: 2; }
+  .decisions > li:nth-of-type(even) .decision-row.has-figure .decision-figs { order: 1; }
+}
+
+/* Wide only (>= 961px): the gutter exists, so hero/band may break out to the container edge.
+   Below this the gutter is < --fig-bleed and bleeding would force horizontal scroll. */
+@media (min-width: 961px) {
+  .figure-hero, .figure-band {
+    margin-left: calc(-1 * var(--fig-bleed));
+    margin-right: calc(-1 * var(--fig-bleed));
+  }
+}
+
+/* ---------- Publication: evidence stat strip (headline numbers under the TL;DR) ---------- */
+.stat-strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px; margin: 1.25rem 0;
+}
+.stat-card {
+  border: 1px solid var(--line); border-radius: var(--fig-radius);
+  background: var(--surface); padding: 14px 16px;
+}
+.stat-value { display: block; font-size: 26px; font-weight: 700; color: var(--accent); line-height: 1.15; }
+.stat-label { display: block; font-size: 13px; font-weight: 700; color: var(--ink); margin-top: .25rem; }
+.stat-sub   { display: block; font-size: 12px; color: var(--muted); margin-top: .15rem; line-height: 1.45; }
+
+/* ---------- Publication: collapsed reference (citation / BibTeX / acknowledgements) ---------- */
+.pub-reference { border-top: 1px solid var(--line); margin-top: 2.25rem; }
+.pub-reference > summary {
+  cursor: pointer; font-weight: 700; font-size: 17px; padding: .8rem 0; color: var(--ink);
+}
+.pub-reference > summary:hover { color: var(--accent); }
+.pub-reference[open] > summary { color: var(--muted); }
+.pub-reference h3 { font-size: 15px; margin: 0 0 .35rem; }
+.pub-reference .proj-section { margin: 1rem 0; }
+@media print {
+  /* never hide reference material in a printed / PDF copy */
+  .pub-reference > :not(summary) { display: revert !important; }
+  .pub-reference > summary { list-style: none; }
 }

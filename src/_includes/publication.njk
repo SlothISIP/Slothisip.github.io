@@ -1,6 +1,13 @@
 ---
 layout: base.njk
 ---
+{% set figs = pub.figures or [] %}
+{% set leadFig = figs | figuresLead %}
+{% set problemFigs = figs | figuresIn("problem") %}
+{% set approachFigs = figs | figuresIn("approach") %}
+{% set resultsFigs = figs | figuresIn("results") %}
+{% set residualFigs = figs | figuresResidual %}
+
 <article class="detail pub-detail">
   <header class="detail-head">
     <h1>{{ pub.title }}</h1>
@@ -15,41 +22,89 @@ layout: base.njk
 
   {% if pub.tldr %}<div class="tldr"><strong>TL;DR.</strong> {{ pub.tldr }}</div>{% endif %}
 
+  {# ---- EVIDENCE STRIP (headline numbers, verbatim from results; live selectable text) ---- #}
+  {% if pub.stats and pub.stats.length %}
+  <div class="stat-strip">
+  {% for s in pub.stats %}
+    <div class="stat-card">
+      <span class="stat-value">{{ s.value }}</span>
+      <span class="stat-label">{{ s.label }}</span>
+      {% if s.sub %}<span class="stat-sub">{{ s.sub }}</span>{% endif %}
+    </div>
+  {% endfor %}
+  </div>
+  {% endif %}
+
+  {# ---- LEAD / HERO explainer (the new method-flow diagram, bleeds wide, eager) ---- #}
+  {% if leadFig %}
+  <figure class="proj-figure figure-hero">
+    {% image leadFig.src, leadFig.alt, [768, 1280], "(max-width: 960px) 92vw, 920px", "", true %}
+    {% if leadFig.caption %}<figcaption>{{ leadFig.caption }}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+
+  {# ---- PROBLEM (+ its figure interleaved) ---- #}
   {% if pub.problem %}
   <section class="proj-section">
     <h2>Problem</h2>
     <p>{{ pub.problem }}</p>
+    {% for f in problemFigs %}
+    <figure class="proj-figure">
+      {% image f.src, f.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
+      {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
   </section>
   {% endif %}
 
+  {# ---- APPROACH (+ method figures interleaved) ---- #}
   {% if pub.approach and pub.approach.length %}
   <section class="proj-section">
     <h2>Approach</h2>
     <ul class="bullets">{% for a in pub.approach %}<li>{{ a }}</li>{% endfor %}</ul>
+    {% for f in approachFigs %}
+    <figure class="proj-figure">
+      {% image f.src, f.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
+      {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
   </section>
   {% endif %}
 
+  {# ---- KEY RESULTS (+ result/quantitative figures in a grid) ---- #}
   {% if pub.results and pub.results.length %}
   <section class="proj-section">
     <h2>Key results</h2>
     <ul class="bullets">{% for r in pub.results %}<li>{{ r }}</li>{% endfor %}</ul>
+    {% if resultsFigs.length %}
+    <div class="results-grid">
+    {% for f in resultsFigs %}
+      <figure class="proj-figure">
+        {% image f.src, f.alt, [640, 1024], "(max-width: 768px) 92vw, 300px" %}
+        {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+      </figure>
+    {% endfor %}
+    </div>
+    {% endif %}
   </section>
   {% endif %}
 
-  {% if pub.figures and pub.figures.length %}
+  {# ---- MORE FIGURES (any figure not bound to a section; never drops a figure) ---- #}
+  {% if residualFigs.length %}
   <section class="proj-section">
-    <h2>Figures</h2>
+    <h2>More figures</h2>
     <div class="gallery">
-    {% for fig in pub.figures %}
+    {% for f in residualFigs %}
       <figure>
-        {% image fig.src, fig.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
-        {% if fig.caption %}<figcaption>{{ fig.caption }}</figcaption>{% endif %}
+        {% image f.src, f.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
+        {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
       </figure>
     {% endfor %}
     </div>
   </section>
   {% endif %}
 
+  {# ---- ABSTRACT (kept visible — academic readers expect it) ---- #}
   {% if pub.abstract %}
   <section class="proj-section">
     <h2>Abstract</h2>
@@ -57,24 +112,29 @@ layout: base.njk
   </section>
   {% endif %}
 
-  {% if pub.citation %}
-  <section class="proj-section">
-    <h2>Citation</h2>
-    <p class="pub-citation">{{ pub.citation }}</p>
-  </section>
-  {% endif %}
+  {# ---- REFERENCE (collapsed: citation, BibTeX, acknowledgements) ---- #}
+  <details class="pub-reference">
+    <summary>Citation, BibTeX &amp; acknowledgements</summary>
 
-  <section class="proj-section">
-    <h2>BibTeX <button class="copy-btn" data-copy="#bibtex">Copy</button></h2>
-    <textarea id="bibtex" class="bibtex" readonly rows="11">{{ pub.bib | bibtex }}</textarea>
-  </section>
+    {% if pub.citation %}
+    <section class="proj-section">
+      <h3>Citation</h3>
+      <p class="pub-citation">{{ pub.citation }}</p>
+    </section>
+    {% endif %}
 
-  {% if pub.acknowledgements %}
-  <section class="proj-section">
-    <h2>Acknowledgements</h2>
-    <p>{{ pub.acknowledgements }}</p>
-  </section>
-  {% endif %}
+    <section class="proj-section">
+      <h3>BibTeX <button class="copy-btn" data-copy="#bibtex">Copy</button></h3>
+      <textarea id="bibtex" class="bibtex" readonly rows="11">{{ pub.bib | bibtex }}</textarea>
+    </section>
+
+    {% if pub.acknowledgements %}
+    <section class="proj-section">
+      <h3>Acknowledgements</h3>
+      <p>{{ pub.acknowledgements }}</p>
+    </section>
+    {% endif %}
+  </details>
 
   <p class="detail-back"><a href="/#publications">&larr; All publications</a></p>
 </article>
