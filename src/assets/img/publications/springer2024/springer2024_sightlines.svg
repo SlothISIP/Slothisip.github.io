@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 360" font-family="Lato, system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <style>
+    .ink{fill:#1a1a1a}.muted{fill:#61686f}.accent{fill:#1772d0}
+    .t-title{font-size:19px;font-weight:700}.t-sub{font-size:12px}
+    .t-lab{font-size:12px;font-weight:700}.t-cap{font-size:11.5px}
+    .lead{stroke:#61686f;stroke-width:1;fill:none}
+  </style>
+  <rect x="0.5" y="0.5" width="779" height="359" rx="12" fill="#ffffff" stroke="#e9ecef"/>
+
+  <text class="ink t-title" x="28" y="40">A wide-baseline 3-view rig shares almost no scene</text>
+  <text class="muted t-sub" x="28" y="60">Three-Viewpoints Thermal Camera (&gt;180&#176; separation) &#8212; springer2024</text>
+
+  <!-- FOV cones: only the right view sees the calibration board (accent); the other two see disjoint scenes (grey) -->
+  <polygon points="390,165 509.3,152.5 453.6,266.8" fill="#eaf2fb" stroke="#1772d0" stroke-width="1.5"/>
+  <polygon points="390,165 453.6,266.8 326.4,266.8" fill="#f8f9fa" stroke="#cfd6dd" stroke-width="1.5"/>
+  <polygon points="390,165 326.4,266.8 270.7,152.5" fill="#f8f9fa" stroke="#cfd6dd" stroke-width="1.5"/>
+
+  <!-- combined-span arc (> 180 degrees) just beyond the cone tips -->
+  <path d="M539.2,149.3 A150,150 0 1 1 240.8,149.3" fill="none" stroke="#1772d0" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text class="accent t-lab" x="390" y="342" text-anchor="middle">combined view span &gt; 180&#176;</text>
+
+  <!-- the rig at the fan apex -->
+  <rect x="373" y="151" width="34" height="26" rx="5" fill="#1a1a1a"/>
+  <circle cx="383" cy="164" r="2.4" fill="#ffffff"/><circle cx="390" cy="164" r="2.4" fill="#ffffff"/><circle cx="397" cy="164" r="2.4" fill="#ffffff"/>
+  <text class="muted t-cap" x="390" y="143" text-anchor="middle">3-viewpoint thermal rig</text>
+
+  <!-- checkerboard glyph inside the single (accent) view -->
+  <g>
+    <rect x="447" y="185" width="30" height="30" fill="#ffffff" stroke="#1a1a1a" stroke-width="1"/>
+    <rect x="447" y="185" width="7.5" height="7.5" class="ink"/><rect x="462" y="185" width="7.5" height="7.5" class="ink"/>
+    <rect x="454.5" y="192.5" width="7.5" height="7.5" class="ink"/><rect x="469.5" y="192.5" width="7.5" height="7.5" class="ink"/>
+    <rect x="447" y="200" width="7.5" height="7.5" class="ink"/><rect x="462" y="200" width="7.5" height="7.5" class="ink"/>
+    <rect x="454.5" y="207.5" width="7.5" height="7.5" class="ink"/><rect x="469.5" y="207.5" width="7.5" height="7.5" class="ink"/>
+  </g>
+  <text class="accent t-cap" x="493" y="204">only 1 of 3 views</text>
+  <text class="accent t-cap" x="493" y="218">captures the board</text>
+
+  <!-- minimal-overlap callout to a shared cone edge -->
+  <text class="ink t-lab" x="150" y="250">minimal overlap</text>
+  <text class="muted t-cap" x="150" y="266">adjacent views barely</text>
+  <text class="muted t-cap" x="150" y="280">share features</text>
+  <path class="lead" d="M243,256 C290,250 320,240 360,225"/>
+
+  <!-- consequence line -->
+  <text class="ink t-cap" x="28" y="312">&#8594; no shared features for stereo / SfM / Zhang to match; this method recovers the</text>
+  <text class="ink t-cap" x="28" y="328">&#160;&#160;&#160;geometry from vanishing points instead &#8212; no correspondence matching needed.</text>
+</svg>

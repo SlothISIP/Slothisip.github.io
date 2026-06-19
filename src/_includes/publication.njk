@@ -6,6 +6,8 @@ layout: base.njk
 {% set problemFigs = figs | figuresIn("problem") %}
 {% set approachFigs = figs | figuresIn("approach") %}
 {% set resultsFigs = figs | figuresIn("results") %}
+{% set featuredFigs = figs | figuresFeatured %}
+{% set gridFigs = figs | figuresGrid %}
 {% set residualFigs = figs | figuresResidual %}
 
 <article class="detail pub-detail">
@@ -38,6 +40,7 @@ layout: base.njk
   {# ---- LEAD / HERO explainer (the new method-flow diagram, bleeds wide, eager) ---- #}
   {% if leadFig %}
   <figure class="proj-figure figure-hero">
+    {% if leadFig.title %}<p class="fig-title">{{ leadFig.title }}</p>{% endif %}
     {% image leadFig.src, leadFig.alt, [768, 1280], "(max-width: 960px) 92vw, 920px", "", true %}
     {% if leadFig.caption %}<figcaption>{{ leadFig.caption }}</figcaption>{% endif %}
   </figure>
@@ -50,6 +53,7 @@ layout: base.njk
     <p>{{ pub.problem }}</p>
     {% for f in problemFigs %}
     <figure class="proj-figure">
+      {% if f.title %}<p class="fig-title">{{ f.title }}</p>{% endif %}
       {% image f.src, f.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
       {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
     </figure>
@@ -64,6 +68,7 @@ layout: base.njk
     <ul class="bullets">{% for a in pub.approach %}<li>{{ a }}</li>{% endfor %}</ul>
     {% for f in approachFigs %}
     <figure class="proj-figure">
+      {% if f.title %}<p class="fig-title">{{ f.title }}</p>{% endif %}
       {% image f.src, f.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
       {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
     </figure>
@@ -71,15 +76,25 @@ layout: base.njk
   </section>
   {% endif %}
 
-  {# ---- KEY RESULTS (+ result/quantitative figures in a grid) ---- #}
+  {# ---- KEY RESULTS (headline/dense figures full-width, the rest in a grid) ---- #}
   {% if pub.results and pub.results.length %}
   <section class="proj-section">
     <h2>Key results</h2>
     <ul class="bullets">{% for r in pub.results %}<li>{{ r }}</li>{% endfor %}</ul>
-    {% if resultsFigs.length %}
+    {# featured: dense, headline evidence rendered at text-column/hero width so it stays legible #}
+    {% for f in featuredFigs %}
+    <figure class="proj-figure figure-feature">
+      {% if f.title %}<p class="fig-title">{{ f.title }}</p>{% endif %}
+      {% image f.src, f.alt, [768, 1280], "(max-width: 960px) 92vw, 920px" %}
+      {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
+    {# the remaining sparse, grid-survivable result figures #}
+    {% if gridFigs.length %}
     <div class="results-grid">
-    {% for f in resultsFigs %}
+    {% for f in gridFigs %}
       <figure class="proj-figure">
+        {% if f.title %}<p class="fig-title">{{ f.title }}</p>{% endif %}
         {% image f.src, f.alt, [640, 1024], "(max-width: 768px) 92vw, 300px" %}
         {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
       </figure>
@@ -96,6 +111,7 @@ layout: base.njk
     <div class="gallery">
     {% for f in residualFigs %}
       <figure>
+        {% if f.title %}<p class="fig-title">{{ f.title }}</p>{% endif %}
         {% image f.src, f.alt, [768, 1280], "(max-width: 760px) 100vw, 720px" %}
         {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
       </figure>

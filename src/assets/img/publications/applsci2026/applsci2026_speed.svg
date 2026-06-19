@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 380" font-family="Lato, system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <style>
+    .ink{fill:#1a1a1a}.muted{fill:#61686f}.accent{fill:#1772d0}
+    .t-title{font-size:19px;font-weight:700}.t-sub{font-size:12px}
+    .t-val{font-size:13px;font-weight:700}.t-lab{font-size:12px}.t-cap{font-size:11.5px}
+    .axis{stroke:#cfd6dd;stroke-width:1}.grid{stroke:#eef1f4;stroke-width:1}
+  </style>
+  <rect x="0.5" y="0.5" width="699" height="379" rx="12" fill="#ffffff" stroke="#e9ecef"/>
+  <text class="ink t-title" x="28" y="42">Fast and accurate &#8212; not one or the other</text>
+  <text class="muted t-sub" x="28" y="62">Param-matched (~1.05M, 5 seeds) &#8212; inference time vs OOD gap, both lower = better &#8212; applsci2026</text>
+  <line class="axis" x1="92" y1="104" x2="92" y2="300"/>
+  <line class="axis" x1="92" y1="300" x2="670" y2="300"/>
+  <text class="muted t-cap" x="84" y="304.0" text-anchor="end">0%</text>
+  <line class="grid" x1="92" y1="238.8" x2="670" y2="238.8"/>
+  <text class="muted t-cap" x="84" y="242.8" text-anchor="end">50%</text>
+  <line class="grid" x1="92" y1="177.5" x2="670" y2="177.5"/>
+  <text class="muted t-cap" x="84" y="181.5" text-anchor="end">100%</text>
+  <line class="grid" x1="92" y1="116.3" x2="670" y2="116.3"/>
+  <text class="muted t-cap" x="84" y="120.3" text-anchor="end">150%</text>
+  <text class="muted t-cap" x="92.0" y="318" text-anchor="middle">0</text>
+  <text class="muted t-cap" x="212.4" y="318" text-anchor="middle">20</text>
+  <text class="muted t-cap" x="332.8" y="318" text-anchor="middle">40</text>
+  <text class="muted t-cap" x="453.3" y="318" text-anchor="middle">60</text>
+  <text class="muted t-cap" x="573.7" y="318" text-anchor="middle">80</text>
+  <text class="muted t-cap" x="381" y="336" text-anchor="middle">inference time per forward pass (ms, Table 1)</text>
+  <text class="muted t-cap" x="22" y="202" text-anchor="middle" transform="rotate(-90 22 202.0)">out-of-distribution gap (%)</text>
+  <text class="accent t-cap" x="124.1" y="306.0">&#8592; fast &amp; accurate corner</text>
+  <circle cx="110.4" cy="276.0" r="8" fill="#1772d0"/>
+  <text class="accent t-val" x="120.4" y="281.0" text-anchor="start">HNO (ours)</text>
+  <circle cx="116.2" cy="177.6" r="6" fill="#9aa3ab"/>
+  <text class="ink t-lab" x="126.2" y="181.6" text-anchor="start">DeepONet</text>
+  <circle cx="176.2" cy="238.0" r="6" fill="#9aa3ab"/>
+  <text class="ink t-lab" x="186.2" y="242.0" text-anchor="start">FNO</text>
+  <circle cx="395.9" cy="156.2" r="6" fill="#9aa3ab"/>
+  <text class="ink t-lab" x="387.9" y="146.2" text-anchor="end">MscaleFNO</text>
+  <circle cx="637.2" cy="118.7" r="6" fill="#9aa3ab"/>
+  <text class="ink t-lab" x="629.2" y="108.7" text-anchor="end">MscaleFNO-wide</text>
+  <text class="muted t-cap" x="670" y="98" text-anchor="end">classical FD-PML solver: exact, but 64&#8211;245&#215; slower than HNO</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" font-family="Lato, system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <style>
+    .ink{fill:#1a1a1a}.muted{fill:#61686f}.accent{fill:#1772d0}
+    .t-title{font-size:19px;font-weight:700}.t-sub{font-size:12px}
+    .t-val{font-size:13px;font-weight:700}.t-lab{font-size:12px}.t-cap{font-size:11.5px}
+    .axis{stroke:#cfd6dd;stroke-width:1}.grid{stroke:#eef1f4;stroke-width:1}
+  </style>
+  <rect x="0.5" y="0.5" width="719" height="299" rx="12" fill="#ffffff" stroke="#e9ecef"/>
+  <text class="ink t-title" x="28" y="42">Calibrating without correspondence matching</text>
+  <text class="muted t-sub" x="28" y="62">Three-Viewpoints Thermal Camera &#8212; springer2024</text>
+  <text class="muted t-cap" x="378" y="102" text-anchor="middle" font-weight="700">works without</text>
+  <text class="muted t-cap" x="378" y="116" text-anchor="middle" font-weight="700">view overlap</text>
+  <text class="muted t-cap" x="512" y="102" text-anchor="middle" font-weight="700">works without</text>
+  <text class="muted t-cap" x="512" y="116" text-anchor="middle" font-weight="700">feature matching</text>
+  <text class="muted t-cap" x="645" y="102" text-anchor="middle" font-weight="700">handles >180&#176;</text>
+  <text class="muted t-cap" x="645" y="116" text-anchor="middle" font-weight="700">thermal rig</text>
+  <line class="axis" x1="28" y1="124" x2="692" y2="124"/>
+  <rect x="20" y="128" width="680" height="40" rx="8" fill="#eaf2fb"/>
+  <text class="accent t-val" x="40" y="153">This work (vanishing points)</text>
+  <text class="accent t-val" x="378" y="153" text-anchor="middle">&#10003;</text>
+  <text class="accent t-val" x="512" y="153" text-anchor="middle">&#10003;</text>
+  <text class="accent t-val" x="645" y="153" text-anchor="middle">&#10003;</text>
+  <text class="ink t-lab" x="40" y="205">Stereo / SfM / Zhang (correspondences)</text>
+  <text class="muted t-val" x="378" y="205" text-anchor="middle">&#10007;</text>
+  <text class="muted t-val" x="512" y="205" text-anchor="middle">&#10007;</text>
+  <text class="muted t-val" x="645" y="205" text-anchor="middle">&#10007;</text>
+  <text class="muted t-cap" x="28" y="260">Recovers the geometry from vanishing points and ~5 2D&#8211;3D point pairs &#8212; no feature matching.</text>
+  <text class="muted t-cap" x="28" y="278">Reprojection error &lt; 0.8 px (0.58&#8211;0.66 px across the three views).</text>
+</svg>

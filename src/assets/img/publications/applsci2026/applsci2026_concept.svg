@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 340" font-family="Lato, system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <style>
+    .ink{fill:#1a1a1a}.muted{fill:#61686f}.accent{fill:#1772d0}
+    .t-title{font-size:20px;font-weight:700}.t-sub{font-size:12px}
+    .t-head{font-size:15px;font-weight:700}.t-chip{font-size:11.5px;font-weight:700}
+    .t-lab{font-size:11px}.t-cap{font-size:12.5px}
+  </style>
+  <rect x="0.5" y="0.5" width="779" height="339" rx="12" fill="#ffffff" stroke="#e9ecef"/>
+
+  <text class="ink t-title" x="28" y="42">Fixed Fourier budget&#160;&#160;vs.&#160;&#160;adaptive basis re-weighting</text>
+  <text class="muted t-sub" x="28" y="62">Helmholtz Neural Operator (HNO) — applsci2026</text>
+
+  <!-- Panel A: FNO -->
+  <rect x="28" y="82" width="353" height="240" rx="10" fill="#ffffff" stroke="#e9ecef"/>
+  <text class="muted t-head" x="46" y="114">FNO&#160;·&#160;Fourier Neural Operator</text>
+  <rect x="267" y="100" width="96" height="21" rx="10.5" fill="#f8f9fa"/>
+  <text class="muted t-chip" x="315" y="114.5" text-anchor="middle">OOD gap 50.6%</text>
+  <g fill="#61686f" fill-opacity="0.5">
+    <rect x="46" y="158" width="13" height="34" rx="2"/><rect x="65" y="158" width="13" height="34" rx="2"/>
+    <rect x="84" y="158" width="13" height="34" rx="2"/><rect x="103" y="158" width="13" height="34" rx="2"/>
+    <rect x="122" y="158" width="13" height="34" rx="2"/><rect x="141" y="158" width="13" height="34" rx="2"/>
+    <rect x="160" y="158" width="13" height="34" rx="2"/><rect x="179" y="158" width="13" height="34" rx="2"/>
+  </g>
+  <text class="muted t-lab" x="46" y="214">K Fourier modes — fixed budget,</text>
+  <text class="muted t-lab" x="46" y="229">spent uniformly across the spectrum</text>
+  <text class="ink t-cap" x="46" y="258">Spends a fixed budget of Fourier modes uniformly,</text>
+  <text class="ink t-cap" x="46" y="276">so it saturates at sharp material interfaces in</text>
+  <text class="ink t-cap" x="46" y="294">high-contrast media — error concentrates exactly</text>
+  <text class="ink t-cap" x="46" y="312">where the physics is hardest.</text>
+
+  <!-- Panel B: HNO -->
+  <rect x="399" y="82" width="353" height="240" rx="10" fill="#ffffff" stroke="#e9ecef"/>
+  <text class="accent t-head" x="417" y="114">HNO&#160;·&#160;ours</text>
+  <rect x="540" y="100" width="194" height="21" rx="10.5" fill="#eaf2fb"/>
+  <text class="accent t-chip" x="637" y="114.5" text-anchor="middle">OOD gap 19.6%&#160;·&#160;4.6–16.4× faster</text>
+  <g fill="#1772d0">
+    <rect x="417" y="176" width="13" height="16" rx="2"/><rect x="436" y="158" width="13" height="34" rx="2"/>
+    <rect x="455" y="170" width="13" height="22" rx="2"/><rect x="474" y="150" width="13" height="42" rx="2"/>
+    <rect x="493" y="166" width="13" height="26" rx="2"/><rect x="512" y="154" width="13" height="38" rx="2"/>
+    <rect x="531" y="174" width="13" height="18" rx="2"/><rect x="550" y="162" width="13" height="30" rx="2"/>
+  </g>
+  <text class="muted t-lab" x="417" y="214">same fixed basis (SIREN + learnable Fourier)</text>
+  <text class="muted t-lab" x="417" y="229">×&#160;bounded gate Δφ ∈ [−0.5, 0.5]</text>
+  <text class="ink t-cap" x="417" y="258">Keeps a fixed wave-tailored basis and a rank-32</text>
+  <text class="ink t-cap" x="417" y="276">hypernetwork emits a bounded per-mode gate that</text>
+  <text class="ink t-cap" x="417" y="294">RE-WEIGHTS the coefficients per input medium —</text>
+  <text class="ink t-cap" x="417" y="312">no added modes, no global transform (FFT-free).</text>
+</svg>

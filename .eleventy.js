@@ -73,6 +73,12 @@ module.exports = function (eleventyConfig) {
       .sort((a, b) => (a.order || 0) - (b.order || 0)));
   eleventyConfig.addFilter("figuresResidual", (figs) =>
     (figs || []).filter((f) => !FIG_SECTIONS.includes(f.section)));
+  // A results figure may carry featured:true to render full-width ABOVE the grid (dense,
+  // headline evidence that would be illegible at grid-cell width); the rest stay in the grid.
+  eleventyConfig.addFilter("figuresFeatured", (figs) =>
+    (figs || []).filter((f) => f.section === "results" && f.featured));
+  eleventyConfig.addFilter("figuresGrid", (figs) =>
+    (figs || []).filter((f) => f.section === "results" && !f.featured));
 
   // Build-time guard: a figure bound to a decision/foothold beat that does not resolve would
   // silently vanish from the page. Warn loudly instead.

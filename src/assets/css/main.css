@@ -292,6 +292,10 @@ table.foothold td code { font-size: 12px; color: #333; overflow-wrap: anywhere; 
 .proj-figure figcaption { margin-top: .4rem; font-size: 12px; color: var(--muted); line-height: 1.5; }
 .proj-figure--narrow { max-width: 520px; margin-inline: auto; }
 
+/* Short title above a figure (figures lifted from the papers, which carry no title of their own) */
+.fig-title { margin: 0 0 .5rem; font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+.results-grid .fig-title { font-size: 13.5px; }
+
 /* Lead hero + Pattern A band */
 .figure-hero { margin: .5rem 0 1.5rem; }
 .figure-band {
@@ -300,6 +304,11 @@ table.foothold td code { font-size: 12px; color: #333; overflow-wrap: anywhere; 
 }
 .figure-band :is(img, picture) { border: 0; border-radius: 6px; background: #fff; }
 .figure-band figcaption, .figure-hero figcaption { max-width: var(--maxw); }  /* keep caption at reading measure */
+
+/* Featured result — a single dense/headline figure promoted out of the grid to full width
+   so its labels/brackets stay legible (the grid would otherwise shrink it to ~300px). */
+.figure-feature { margin: 1.25rem 0; }
+.figure-feature figcaption { max-width: var(--maxw); }
 
 /* Pattern B — per-decision figure column */
 .decision-row .proj-figure { margin: 0; }
@@ -327,7 +336,7 @@ table.foothold td code { font-size: 12px; color: #333; overflow-wrap: anywhere; 
 /* Wide only (>= 961px): the gutter exists, so hero/band may break out to the container edge.
    Below this the gutter is < --fig-bleed and bleeding would force horizontal scroll. */
 @media (min-width: 961px) {
-  .figure-hero, .figure-band {
+  .figure-hero, .figure-band, .figure-feature {
     margin-left: calc(-1 * var(--fig-bleed));
     margin-right: calc(-1 * var(--fig-bleed));
   }
