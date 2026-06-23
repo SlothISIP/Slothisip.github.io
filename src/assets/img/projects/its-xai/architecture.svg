@@ -6,15 +6,12 @@
     <marker id="ax-arrow-green" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
     </marker>
-    <marker id="ax-arrow-purple" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#8b5cf6"/>
-    </marker>
   </defs>
 
   <rect width="1100" height="660" fill="#ffffff"/>
 
   <!-- Title -->
-  <text x="40" y="44" font-size="23" font-weight="700" fill="#0f172a">ITS AI XAI &#183; Explainable PCB Defect-Detection Pipeline</text>
+  <text x="40" y="44" font-size="23" font-weight="800" fill="#0f172a">ITS AI XAI &#183; Explainable PCB Defect-Detection Pipeline</text>
   <rect x="40" y="54" width="118" height="4" rx="2" fill="#1772d0"/>
   <text x="40" y="78" font-size="13" fill="#64748b">Two-stream sensor + vision fusion with an XGBoost meta-classifier and SHAP explanations &#183; F1 0.9462 &#183; 67.3 ms end-to-end (CPU)</text>
 
@@ -50,11 +47,11 @@
   <text x="328" y="126" font-size="11" font-weight="700" letter-spacing="1.5" fill="#64748b">PER-STREAM MODELS</text>
 
   <!-- Feature reduction -->
-  <rect x="328" y="142" width="244" height="86" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-  <text x="344" y="165" font-size="13" font-weight="700" fill="#78350f">Feature reduction</text>
+  <rect x="328" y="142" width="244" height="86" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="344" y="165" font-size="13" font-weight="700" fill="#0f172a">Feature reduction</text>
   <text x="344" y="185" font-size="11" fill="#475569">tiered missing-value handling +</text>
   <text x="344" y="202" font-size="11" fill="#475569">importance-based selection</text>
-  <text x="344" y="220" font-size="11" font-weight="700" fill="#78350f">603 &#8594; 164 features (&#8722;72.8%)</text>
+  <text x="344" y="220" font-size="11" font-weight="700" fill="#1772d0">603 &#8594; 164 features (&#8722;72.8%)</text>
 
   <!-- Random Forest -->
   <rect x="328" y="240" width="244" height="86" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
@@ -77,13 +74,13 @@
   <text x="628" y="126" font-size="11" font-weight="700" letter-spacing="1.5" fill="#64748b">FUSION &#183; DECISION</text>
 
   <!-- XGBoost meta-classifier -->
-  <rect x="628" y="142" width="216" height="150" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="736" y="166" font-size="14" font-weight="700" fill="#1e3a8a" text-anchor="middle">XGBoost</text>
-  <text x="736" y="184" font-size="13" font-weight="700" fill="#1e3a8a" text-anchor="middle">meta-classifier</text>
+  <rect x="628" y="142" width="216" height="150" rx="6" fill="#fef3c7" stroke="#f09228" stroke-width="2.5"/>
+  <text x="736" y="166" font-size="14" font-weight="800" fill="#78350f" text-anchor="middle">XGBoost</text>
+  <text x="736" y="184" font-size="13" font-weight="800" fill="#78350f" text-anchor="middle">meta-classifier</text>
   <text x="736" y="208" font-size="11" fill="#475569" text-anchor="middle">fuses RF + YOLO streams</text>
   <text x="736" y="225" font-size="11" fill="#475569" text-anchor="middle">into 8 fusion features</text>
-  <line x1="652" y1="240" x2="820" y2="240" stroke="#bfdbfe"/>
-  <text x="736" y="260" font-size="12" font-weight="700" fill="#1e3a8a" text-anchor="middle">F1 0.9462</text>
+  <line x1="652" y1="240" x2="820" y2="240" stroke="#fde68a"/>
+  <text x="736" y="260" font-size="12" font-weight="700" fill="#b45309" text-anchor="middle">F1 0.9462</text>
   <text x="736" y="278" font-size="11" fill="#64748b" text-anchor="middle">defect recall 95.91%</text>
 
   <!-- Decision output -->
@@ -94,8 +91,8 @@
   <text x="736" y="378" font-size="11" fill="#64748b" text-anchor="middle">67.3 ms end-to-end /predict (CPU)</text>
 
   <!-- Explainability layer -->
-  <rect x="628" y="408" width="216" height="72" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
-  <text x="736" y="431" font-size="13" font-weight="700" fill="#5b21b6" text-anchor="middle">Explainability (XAI)</text>
+  <rect x="628" y="408" width="216" height="72" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="736" y="431" font-size="13" font-weight="700" fill="#1e3a8a" text-anchor="middle">Explainability (XAI)</text>
   <text x="736" y="450" font-size="11" fill="#475569" text-anchor="middle">SHAP waterfall &#183; counterfactual</text>
   <text x="736" y="467" font-size="11" fill="#64748b" text-anchor="middle">/explain 15.6 ms &#183; Pearson &gt; 0.95</text>
 
@@ -104,20 +101,20 @@
   <text x="900" y="126" font-size="11" font-weight="700" letter-spacing="1.5" fill="#64748b">SERVING</text>
 
   <!-- FastAPI -->
-  <rect x="900" y="142" width="144" height="150" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-  <text x="972" y="165" font-size="13" font-weight="700" fill="#78350f" text-anchor="middle">FastAPI</text>
+  <rect x="900" y="142" width="144" height="150" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="972" y="165" font-size="13" font-weight="700" fill="#1e3a8a" text-anchor="middle">FastAPI</text>
   <text x="972" y="183" font-size="11" fill="#475569" text-anchor="middle">REST API</text>
   <text x="972" y="200" font-size="11" fill="#475569" text-anchor="middle">Uvicorn &#183; 7 endpoints</text>
-  <line x1="916" y1="214" x2="1028" y2="214" stroke="#fde68a"/>
+  <line x1="916" y1="214" x2="1028" y2="214" stroke="#bfdbfe"/>
   <text x="972" y="234" font-size="11" fill="#64748b" text-anchor="middle">/predict</text>
   <text x="972" y="251" font-size="11" fill="#64748b" text-anchor="middle">/explain</text>
   <text x="972" y="268" font-size="11" fill="#64748b" text-anchor="middle">/health</text>
 
   <!-- Streamlit dashboard -->
-  <rect x="900" y="308" width="144" height="172" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
-  <text x="972" y="331" font-size="13" font-weight="700" fill="#5b21b6" text-anchor="middle">Streamlit</text>
+  <rect x="900" y="308" width="144" height="172" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="972" y="331" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Streamlit</text>
   <text x="972" y="349" font-size="11" fill="#475569" text-anchor="middle">dashboard + Plotly</text>
-  <line x1="916" y1="362" x2="1028" y2="362" stroke="#e9d5ff"/>
+  <line x1="916" y1="362" x2="1028" y2="362" stroke="#e2e8f0"/>
   <text x="972" y="383" font-size="11" fill="#64748b" text-anchor="middle">Overview</text>
   <text x="972" y="401" font-size="11" fill="#64748b" text-anchor="middle">API Health</text>
   <text x="972" y="419" font-size="11" fill="#64748b" text-anchor="middle">XAI Insights</text>
@@ -140,8 +137,8 @@
   <!-- XGBoost -> Decision -->
   <line x1="736" y1="292" x2="736" y2="304" stroke="#64748b" stroke-width="1.5" marker-end="url(#ax-arrow)"/>
   <!-- XGBoost -> XAI (dashed) -->
-  <line x1="612" y1="217" x2="600" y2="444" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ax-arrow-purple)"/>
-  <line x1="600" y1="444" x2="624" y2="444" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ax-arrow-purple)"/>
+  <line x1="612" y1="217" x2="600" y2="444" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="600" y1="444" x2="624" y2="444" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ax-arrow)"/>
 
   <!-- Decision -> FastAPI -->
   <line x1="844" y1="334" x2="896" y2="220" stroke="#64748b" stroke-width="1.5" marker-end="url(#ax-arrow)"/>

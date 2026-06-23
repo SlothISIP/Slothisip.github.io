@@ -98,6 +98,10 @@ module.exports = function (eleventyConfig) {
   // diagrams illegible at the ~320px side-column width); the rest stay in the side column.
   eleventyConfig.addFilter("onlyBand", (figs) => (figs || []).filter((f) => f.band));
   eleventyConfig.addFilter("notBand", (figs) => (figs || []).filter((f) => !f.band));
+  // A results OR foothold figure may carry featured:true to render full-width ABOVE its grid
+  // (dense headline-evidence that would be illegible at ~300px grid-cell width).
+  eleventyConfig.addFilter("onlyFeatured", (figs) => (figs || []).filter((f) => f.featured));
+  eleventyConfig.addFilter("notFeatured", (figs) => (figs || []).filter((f) => !f.featured));
 
   // Build-time guard: a figure bound to a decision/foothold beat that does not resolve would
   // silently vanish from the page. Warn loudly instead.

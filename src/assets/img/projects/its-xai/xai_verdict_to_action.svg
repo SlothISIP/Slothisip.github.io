@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 470" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="xai-ah" markerWidth="10" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#94a3b8"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="470" fill="#ffffff"/>
+
+  <!-- ===== TITLE ===== -->
+  <text x="40" y="46" font-size="23" font-weight="800" fill="#0f172a" letter-spacing="-.3">Every verdict comes with a faithful explanation</text>
+  <rect x="40" y="55" width="300" height="3.5" rx="1.75" fill="#1772d0"/>
+  <text x="40" y="79" font-size="13" fill="#64748b">Prediction &#8594; SHAP attribution &#8594; a counterfactual the engineer can act on.</text>
+
+  <!-- ===== STAGE LABELS ===== -->
+  <g font-size="11.5" font-weight="700" fill="#94a3b8" letter-spacing="0.6" text-anchor="middle">
+    <text x="190" y="124">STAGE 1 &#183; VERDICT</text>
+    <text x="550" y="124">STAGE 2 &#183; SHAP ATTRIBUTION</text>
+    <text x="930" y="124">STAGE 3 &#183; COUNTERFACTUAL</text>
+  </g>
+
+  <!-- ============ STAGE 1: VERDICT ============ -->
+  <rect x="60" y="150" width="260" height="200" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="190" y="178" font-size="12" font-weight="700" fill="#64748b" text-anchor="middle">classification</text>
+
+  <!-- PASS chip (calm green, smaller / dimmed) -->
+  <rect x="86" y="196" width="92" height="34" rx="17" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
+  <circle cx="108" cy="213" r="5" fill="#16a34a"/>
+  <text x="146" y="218" font-size="13.5" font-weight="700" fill="#475569" text-anchor="middle">PASS</text>
+
+  <!-- DEFECT chip (the active verdict) -->
+  <rect x="186" y="196" width="108" height="34" rx="17" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+  <circle cx="210" cy="213" r="5" fill="#dc2626"/>
+  <text x="248" y="218" font-size="13.5" font-weight="800" fill="#dc2626" text-anchor="middle">DEFECT</text>
+
+  <text x="190" y="266" font-size="12" fill="#64748b" text-anchor="middle">model F1</text>
+  <text x="190" y="290" font-size="22" font-weight="800" fill="#0f172a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace">F1 0.9462</text>
+  <text x="190" y="324" font-size="11.5" fill="#94a3b8" text-anchor="middle">a label is not enough &#8212; why?</text>
+
+  <!-- arrow 1 -> 2 -->
+  <line x1="324" y1="250" x2="416" y2="250" stroke="#94a3b8" stroke-width="2" marker-end="url(#xai-ah)"/>
+
+  <!-- ============ STAGE 2: SHAP ATTRIBUTION (waterfall) ============ -->
+  <rect x="424" y="150" width="252" height="200" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="550" y="178" font-size="12" font-weight="700" fill="#64748b" text-anchor="middle">feature contributions</text>
+
+  <!-- baseline axis -->
+  <line x1="550" y1="196" x2="550" y2="324" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3 3"/>
+  <text x="550" y="338" font-size="10" fill="#94a3b8" text-anchor="middle">base value</text>
+
+  <!-- waterfall bars: red push toward DEFECT (right), blue pull toward PASS (left) -->
+  <g font-size="11" fill="#64748b">
+    <!-- f1 strong red -->
+    <rect x="550" y="200" width="86" height="15" rx="2.5" fill="#dc2626"/>
+    <text x="444" y="211" text-anchor="start">etch&#160;rate</text>
+    <!-- f2 mid red -->
+    <rect x="550" y="222" width="58" height="15" rx="2.5" fill="#dc2626" opacity="0.78"/>
+    <text x="444" y="233" text-anchor="start">pressure</text>
+    <!-- f3 small blue (left) -->
+    <rect x="514" y="244" width="36" height="15" rx="2.5" fill="#2563eb"/>
+    <text x="500" y="255" text-anchor="end">flow</text>
+    <!-- f4 small red -->
+    <rect x="550" y="266" width="42" height="15" rx="2.5" fill="#dc2626" opacity="0.6"/>
+    <text x="444" y="277" text-anchor="start">temp</text>
+    <!-- f5 tiny blue -->
+    <rect x="528" y="288" width="22" height="15" rx="2.5" fill="#2563eb" opacity="0.7"/>
+    <text x="514" y="299" text-anchor="end">bias</text>
+  </g>
+  <!-- legend -->
+  <rect x="436" y="316" width="9" height="9" rx="2" fill="#2563eb"/><text x="449" y="324" font-size="9.5" fill="#94a3b8">&#8592; toward PASS</text>
+  <rect x="630" y="316" width="9" height="9" rx="2" fill="#dc2626"/><text x="643" y="324" font-size="9.5" fill="#94a3b8" text-anchor="end" transform="translate(0,0)">toward DEFECT &#8594;</text>
+
+  <!-- ===== ORANGE FOCAL BADGE (attached to STAGE 2) ===== -->
+  <g>
+    <rect x="424" y="360" width="252" height="60" rx="8" fill="#fef3c7" stroke="#f09228" stroke-width="1.8"/>
+    <rect x="424" y="360" width="5" height="60" rx="2.5" fill="#f09228"/>
+    <text x="550" y="382" font-size="12.5" font-weight="800" fill="#78350f" text-anchor="middle">validated vs the model&#8217;s own importances</text>
+    <text x="550" y="402" font-size="14" font-weight="800" fill="#b45309" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace">Pearson &gt; 0.95</text>
+    <text x="550" y="416" font-size="10.5" font-style="italic" fill="#b45309" text-anchor="middle">faithful, not decorative</text>
+  </g>
+
+  <!-- arrow 2 -> 3 -->
+  <line x1="680" y1="250" x2="772" y2="250" stroke="#94a3b8" stroke-width="2" marker-end="url(#xai-ah)"/>
+
+  <!-- ============ STAGE 3: COUNTERFACTUAL ============ -->
+  <rect x="780" y="150" width="260" height="200" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="910" y="178" font-size="12" font-weight="700" fill="#64748b" text-anchor="middle">minimal change that flips it</text>
+
+  <!-- counterfactual delta card -->
+  <rect x="804" y="194" width="212" height="64" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="820" y="216" font-size="12.5" font-weight="700" fill="#0f172a">etch&#160;rate</text>
+  <g font-size="13" font-weight="700">
+    <text x="820" y="240" fill="#dc2626">high</text>
+    <line x1="862" y1="235" x2="894" y2="235" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#xai-ah)"/>
+    <text x="906" y="240" fill="#16a34a">lower</text>
+  </g>
+  <rect x="958" y="226" width="48" height="20" rx="10" fill="#bbf7d0"/>
+  <text x="982" y="240" font-size="11" font-weight="800" fill="#166534" text-anchor="middle">PASS</text>
+  <text x="820" y="276" font-size="10.5" font-style="italic" fill="#94a3b8">the smallest change that flips the verdict</text>
+
+  <!-- actionable process tweak -->
+  <rect x="804" y="290" width="212" height="48" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2"/>
+  <text x="820" y="310" font-size="11" font-weight="700" fill="#1e3a8a" letter-spacing="0.4">PROCESS TWEAK</text>
+  <text x="820" y="328" font-size="11.5" fill="#475569">lower the etch step &#8212; an engineer can do this</text>
+
+  <!-- ===== HONESTY FOOTER ===== -->
+  <rect x="40" y="430" width="1020" height="30" rx="8" fill="#f8f9fa"/>
+  <text x="56" y="449" font-size="11" font-style="italic" fill="#64748b">Open <tspan font-family="ui-monospace, Menlo, Consolas, monospace" font-style="normal">SECOM</tspan> + <tspan font-family="ui-monospace, Menlo, Consolas, monospace" font-style="normal">DeepPCB</tspan> (synthetic pairing) &#183; <tspan font-family="ui-monospace, Menlo, Consolas, monospace" font-style="normal">/explain</tspan> SHAP at 15.6 ms.</text>
+</svg>

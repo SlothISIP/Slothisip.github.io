@@ -9,13 +9,13 @@
     <marker id="ah-green" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
     </marker>
-    <marker id="ah-purple" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#8b5cf6"/>
+    <marker id="ah-blue2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/>
     </marker>
   </defs>
 
   <!-- Title -->
-  <text x="40" y="46" font-size="23" font-weight="700" fill="#0f172a">Acoustic Vision System (AVS) &#183; multimodal anomaly-detection pipeline</text>
+  <text x="40" y="46" font-size="23" font-weight="800" fill="#0f172a">Acoustic Vision System (AVS) &#183; multimodal anomaly-detection pipeline</text>
   <rect x="40" y="56" width="248" height="4" rx="2" fill="#1772d0"/>
   <text x="40" y="82" font-size="13" fill="#64748b">Microphone-array beamforming + computer vision + AST/LoRA deep learning, validated on DCASE 2020 Task 2</text>
 
@@ -31,8 +31,8 @@
   <text x="174" y="217" text-anchor="middle" font-size="10.5" fill="#64748b">Array geometric calibration</text>
 
   <!-- RGB camera -->
-  <rect x="304" y="138" width="220" height="88" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-  <text x="414" y="164" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">RGB Camera</text>
+  <rect x="304" y="138" width="220" height="88" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="414" y="164" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">RGB Camera</text>
   <text x="414" y="184" text-anchor="middle" font-size="11" fill="#475569">Acoustic-visual overlay</text>
   <text x="414" y="201" text-anchor="middle" font-size="11" fill="#475569">Scene imagery</text>
   <text x="414" y="217" text-anchor="middle" font-size="10.5" fill="#64748b">Frame capture</text>
@@ -67,8 +67,8 @@
   <text x="342" y="397" text-anchor="middle" font-size="10.5" fill="#64748b">torchaudio / librosa</text>
 
   <!-- Vision branch -->
-  <rect x="448" y="298" width="184" height="124" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-  <text x="540" y="324" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">Vision Branch</text>
+  <rect x="448" y="298" width="184" height="124" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="540" y="324" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Vision Branch</text>
   <text x="540" y="344" text-anchor="middle" font-size="11" fill="#475569">YOLOv8 (yolov8n)</text>
   <text x="540" y="361" text-anchor="middle" font-size="10.5" fill="#64748b">Object detection</text>
   <text x="540" y="379" text-anchor="middle" font-size="10.5" fill="#64748b">Ultralytics</text>
@@ -88,8 +88,8 @@
   <text x="197" y="612" text-anchor="middle" font-size="10.5" fill="#64748b">Self-attention &#183; patch embedding</text>
 
   <!-- Multimodal fusion -->
-  <rect x="350" y="498" width="282" height="130" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
-  <text x="491" y="524" text-anchor="middle" font-size="15" font-weight="700" fill="#5b21b6">Multimodal Fusion</text>
+  <rect x="350" y="498" width="282" height="130" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="491" y="524" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Multimodal Fusion</text>
   <text x="491" y="544" text-anchor="middle" font-size="11" fill="#475569">Audio + visual features</text>
   <text x="491" y="561" text-anchor="middle" font-size="10.5" fill="#64748b">Cross-modal attention</text>
   <text x="491" y="578" text-anchor="middle" font-size="10.5" fill="#64748b">K-NN / Mahalanobis ensemble</text>
@@ -110,7 +110,7 @@
   <!-- DCASE results -->
   <rect x="700" y="462" width="336" height="184" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
   <text x="716" y="484" font-size="11" letter-spacing="1.5" fill="#64748b">DCASE 2020 TASK 2 RESULTS</text>
-  <rect x="724" y="498" width="288" height="130" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <rect x="724" y="498" width="288" height="130" rx="6" fill="#fef3c7" stroke="#f09228" stroke-width="2.5"/>
   <text x="868" y="524" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">Mean AUC &#8776; 0.94</text>
   <text x="868" y="546" text-anchor="middle" font-size="11" fill="#475569">vs 2020 winners mean &#8776; 0.92</text>
   <text x="868" y="568" text-anchor="middle" font-size="11" fill="#475569">Fan 0.88 &#183; Pump 0.93</text>
@@ -123,7 +123,7 @@
   <!-- Mic -> Spectrogram -->
   <path d="M204 226 L204 252 L342 252 L342 296" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#ah-blue)"/>
   <!-- Camera -> Vision branch -->
-  <path d="M450 226 L450 254 L540 254 L540 296" fill="none" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#ah)"/>
+  <path d="M450 226 L450 254 L540 254 L540 296" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#ah)"/>
 
   <!-- Beamforming -> Spectrogram (refined audio) -->
   <line x1="236" y1="360" x2="254" y2="360" stroke="#2563eb" stroke-width="1.5" marker-end="url(#ah-blue)"/>
@@ -131,12 +131,12 @@
   <!-- Spectrogram -> AST (down into DL band) -->
   <path d="M342 422 L342 446 L197 446 L197 496" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#ah-green)"/>
   <!-- Vision branch -> Fusion -->
-  <path d="M540 422 L540 446 L491 446 L491 496" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ah-purple)"/>
+  <path d="M540 422 L540 446 L491 446 L491 496" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ah)"/>
   <!-- AST -> Fusion -->
   <line x1="330" y1="563" x2="348" y2="563" stroke="#16a34a" stroke-width="1.5" marker-end="url(#ah-green)"/>
 
   <!-- Fusion -> Anomaly decision (up to right column) -->
-  <path d="M632 540 L666 540 L666 360 L698 360" fill="none" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#ah-purple)"/>
+  <path d="M632 540 L666 540 L666 360 L698 360" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#ah-blue2)"/>
   <!-- Fusion -> DCASE results -->
   <path d="M632 590 L678 590 L678 540 L698 540" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ah)"/>
 

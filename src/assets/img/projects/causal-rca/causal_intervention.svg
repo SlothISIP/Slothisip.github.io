@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 470" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="ci-ahm" markerWidth="10" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#94a3b8"/></marker>
+    <marker id="ci-aho" markerWidth="10" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#f09228"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="470" fill="#ffffff"/>
+
+  <!-- ===== TITLE ===== -->
+  <text x="40" y="46" font-size="23" font-weight="800" fill="#0f172a" letter-spacing="-.3">Screen a change before it touches the line</text>
+  <rect x="40" y="55" width="312" height="3.5" rx="1.75" fill="#1772d0"/>
+  <text x="40" y="79" font-size="13" fill="#64748b">A do-intervention on the learned graph returns the expected outcome and its delta.</text>
+
+  <!-- ===== GRAPH PANEL (left) ===== -->
+  <rect x="40" y="112" width="600" height="248" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="64" y="140" font-size="12" font-weight="700" fill="#64748b" letter-spacing=".4">LEARNED CAUSAL GRAPH</text>
+
+  <!-- do() operator wrapper around Mold Temp (ORANGE FOCAL) -->
+  <rect x="84" y="180" width="248" height="132" rx="12" fill="#fef3c7" stroke="#f09228" stroke-width="2.5"/>
+  <text x="104" y="208" font-size="14" font-weight="800" fill="#b45309" font-family="ui-monospace, Menlo, Consolas, monospace">do(</text>
+  <text x="308" y="208" font-size="14" font-weight="800" fill="#b45309" font-family="ui-monospace, Menlo, Consolas, monospace" text-anchor="end">)</text>
+
+  <!-- Mold Temp node (forced) -->
+  <rect x="124" y="222" width="168" height="64" rx="10" fill="#fde68a" stroke="#f09228" stroke-width="2"/>
+  <text x="208" y="248" font-size="15" font-weight="800" fill="#78350f" text-anchor="middle">Mold Temp</text>
+  <text x="208" y="270" font-size="13" font-weight="700" fill="#b45309" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace">Mold Temp = 45</text>
+
+  <!-- forced label -->
+  <text x="208" y="304" font-size="11" font-style="italic" fill="#b45309" text-anchor="middle" letter-spacing=".3">value held fixed by intervention</text>
+
+  <!-- causal arrow -->
+  <line x1="332" y1="254" x2="452" y2="254" stroke="#f09228" stroke-width="2.5" marker-end="url(#ci-aho)"/>
+  <text x="392" y="244" font-size="11" font-weight="700" fill="#b45309" text-anchor="middle">causes</text>
+
+  <!-- Shrinkage node (outcome) -->
+  <rect x="456" y="222" width="156" height="64" rx="10" fill="#ffffff" stroke="#1772d0" stroke-width="2"/>
+  <text x="534" y="248" font-size="15" font-weight="800" fill="#0f172a" text-anchor="middle">Shrinkage</text>
+  <text x="534" y="270" font-size="11.5" font-weight="700" fill="#64748b" text-anchor="middle">outcome</text>
+
+  <!-- ===== RESULT PANEL (right) ===== -->
+  <rect x="664" y="112" width="396" height="248" rx="10" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="688" y="140" font-size="12" font-weight="700" fill="#64748b" letter-spacing=".4">PREDICTED OUTCOME</text>
+
+  <!-- expected row -->
+  <text x="688" y="180" font-size="13" font-weight="700" fill="#475569">expected Shrinkage</text>
+  <rect x="900" y="162" width="140" height="30" rx="7" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="970" y="183" font-size="16" font-weight="800" fill="#166534" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace">&#8211;6.15</text>
+
+  <!-- baseline row -->
+  <text x="688" y="226" font-size="13" font-weight="700" fill="#475569">baseline</text>
+  <rect x="900" y="208" width="140" height="30" rx="7" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="970" y="229" font-size="16" font-weight="700" fill="#64748b" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace">&#8211;0.001</text>
+
+  <!-- divider -->
+  <line x1="688" y1="252" x2="1036" y2="252" stroke="#cbd5e1" stroke-width="1"/>
+
+  <!-- effect row (delta, the payoff) -->
+  <text x="688" y="294" font-size="14" font-weight="800" fill="#0f172a">effect (&#916;)</text>
+  <rect x="876" y="270" width="164" height="38" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="958" y="296" font-size="20" font-weight="800" fill="#1e3a8a" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace">&#8211;6.15</text>
+
+  <!-- ===== NOTE LINE (payoff) ===== -->
+  <text x="40" y="394" font-size="12.5" font-weight="700" fill="#475569">Screen a candidate process change against the model before applying it on the line.</text>
+
+  <!-- ===== HONESTY FOOTER ===== -->
+  <rect x="40" y="412" width="1020" height="44" rx="8" fill="#f8f9fa"/>
+  <text x="56" y="431" font-size="11" font-style="italic" fill="#64748b">Synthetic injection-molding dataset (12 vars, 13 edges); do-calculus via DoWhy /</text>
+  <text x="56" y="448" font-size="11" font-style="italic" fill="#64748b"><tspan font-family="ui-monospace, Menlo, Consolas, monospace" font-style="normal">intervention_simulator.py</tspan>.</text>
+</svg>

@@ -16,23 +16,23 @@
   <text x="44" y="132" font-size="15" font-weight="600" fill="#475569">score  =</text>
 
   <!-- Factor 1: |ATE| -->
-  <rect x="138" y="108" width="196" height="62" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="236" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">| ATE |</text>
-  <text x="236" y="153" text-anchor="middle" font-size="11.5" fill="#1e3a8a">absolute causal effect</text>
+  <rect x="138" y="108" width="196" height="62" rx="6" fill="#f8fafc" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="236" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#2563eb">| ATE |</text>
+  <text x="236" y="153" text-anchor="middle" font-size="11.5" fill="#2563eb">absolute causal effect</text>
 
   <text x="350" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#64748b">&#215;</text>
 
   <!-- Factor 2: edge confidence -->
-  <rect x="370" y="108" width="196" height="62" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-  <text x="468" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#065f46">edge_confidence</text>
-  <text x="468" y="153" text-anchor="middle" font-size="11.5" fill="#065f46">ensemble vote share</text>
+  <rect x="370" y="108" width="196" height="62" rx="6" fill="#f8fafc" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="468" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">edge_confidence</text>
+  <text x="468" y="153" text-anchor="middle" font-size="11.5" fill="#166534">ensemble vote share</text>
 
   <text x="582" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#64748b">&#215;</text>
 
   <!-- Factor 3: bootstrap stability -->
-  <rect x="602" y="108" width="206" height="62" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-  <text x="705" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#78350f">bootstrap_stability</text>
-  <text x="705" y="153" text-anchor="middle" font-size="11.5" fill="#78350f">edge survival across resamples</text>
+  <rect x="602" y="108" width="206" height="62" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="705" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#475569">bootstrap_stability</text>
+  <text x="705" y="153" text-anchor="middle" font-size="11.5" fill="#475569">edge survival across resamples</text>
 
   <text x="824" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#64748b">=</text>
 
@@ -44,12 +44,13 @@
   <!-- Worked example header -->
   <text x="44" y="224" font-size="15" font-weight="700" fill="#0f172a">Worked example &#8212; target: Shrinkage</text>
   <text x="44" y="244" font-size="12.5" fill="#64748b">Same confidence (82%) and stability (100%) for the top two, so the larger absolute effect wins the rank.</text>
+  <text x="44" y="261" font-size="11.5" font-style="italic" fill="#94a3b8">Note: | ATE | is min-max normalized across candidates before multiplying, so the raw product won&#8217;t match the score.</text>
 
   <!-- Column headers for the worked table -->
   <text x="60"  y="282" font-size="11.5" font-weight="600" fill="#64748b">cause</text>
-  <text x="318" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#2563eb">| ATE |</text>
+  <text x="318" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#2563eb">norm | ATE |</text>
   <text x="452" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#16a34a">conf</text>
-  <text x="586" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#f59e0b">stab</text>
+  <text x="586" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#64748b">stab</text>
   <text x="692" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#64748b">&#8594;</text>
   <text x="760" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">score</text>
   <line x1="44" y1="292" x2="836" y2="292" stroke="#cbd5e1" stroke-width="1"/>
@@ -59,11 +60,11 @@
   <circle cx="76" cy="322" r="11" fill="#fef3c7" stroke="#f09228" stroke-width="1.5"/>
   <text x="76" y="326" text-anchor="middle" font-size="12" font-weight="700" fill="#78350f">1</text>
   <text x="98" y="327" font-size="13" font-weight="700" fill="#0f172a">Cooling Time</text>
-  <text x="318" y="327" text-anchor="middle" font-size="13" fill="#1e3a8a">0.065</text>
+  <text x="318" y="327" text-anchor="middle" font-size="13" fill="#2563eb">0.065</text>
   <text x="364" y="327" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="452" y="327" text-anchor="middle" font-size="13" fill="#065f46">0.82</text>
+  <text x="452" y="327" text-anchor="middle" font-size="13" fill="#16a34a">0.82</text>
   <text x="520" y="327" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="586" y="327" text-anchor="middle" font-size="13" fill="#78350f">1.00</text>
+  <text x="586" y="327" text-anchor="middle" font-size="13" fill="#475569">1.00</text>
   <text x="692" y="327" text-anchor="middle" font-size="13" fill="#64748b">&#8594;</text>
   <text x="760" y="327" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">0.62</text>
 
@@ -72,11 +73,11 @@
   <circle cx="76" cy="370" r="11" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
   <text x="76" y="374" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">2</text>
   <text x="98" y="375" font-size="13" font-weight="600" fill="#0f172a">Mold Temp</text>
-  <text x="318" y="375" text-anchor="middle" font-size="13" fill="#1e3a8a">0.030</text>
+  <text x="318" y="375" text-anchor="middle" font-size="13" fill="#2563eb">0.030</text>
   <text x="364" y="375" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="452" y="375" text-anchor="middle" font-size="13" fill="#065f46">0.82</text>
+  <text x="452" y="375" text-anchor="middle" font-size="13" fill="#16a34a">0.82</text>
   <text x="520" y="375" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="586" y="375" text-anchor="middle" font-size="13" fill="#78350f">1.00</text>
+  <text x="586" y="375" text-anchor="middle" font-size="13" fill="#475569">1.00</text>
   <text x="692" y="375" text-anchor="middle" font-size="13" fill="#64748b">&#8594;</text>
   <text x="760" y="375" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">0.29</text>
 
@@ -85,11 +86,11 @@
   <circle cx="76" cy="418" r="11" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
   <text x="76" y="422" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">3</text>
   <text x="98" y="423" font-size="13" font-weight="600" fill="#0f172a">Resin Temp</text>
-  <text x="318" y="423" text-anchor="middle" font-size="13" fill="#1e3a8a">0.013</text>
+  <text x="318" y="423" text-anchor="middle" font-size="13" fill="#2563eb">0.013</text>
   <text x="364" y="423" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="452" y="423" text-anchor="middle" font-size="13" fill="#065f46">0.60</text>
+  <text x="452" y="423" text-anchor="middle" font-size="13" fill="#16a34a">0.60</text>
   <text x="520" y="423" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="586" y="423" text-anchor="middle" font-size="13" fill="#78350f">1.00</text>
+  <text x="586" y="423" text-anchor="middle" font-size="13" fill="#475569">1.00</text>
   <text x="692" y="423" text-anchor="middle" font-size="13" fill="#64748b">&#8594;</text>
   <text x="760" y="423" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">~0.09</text>
 

@@ -16,8 +16,8 @@
   <!-- IN: registered algorithms -->
   <rect x="28" y="150" width="118" height="150" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
   <text x="87" y="208" font-size="34" font-weight="700" fill="#0f172a" text-anchor="middle">~85</text>
-  <text x="87" y="234" font-size="13" fill="#475569" text-anchor="middle">registered</text>
-  <text x="87" y="252" font-size="13" fill="#475569" text-anchor="middle">algorithms</text>
+  <text x="87" y="234" font-size="13" fill="#64748b" text-anchor="middle">registered</text>
+  <text x="87" y="252" font-size="13" fill="#64748b" text-anchor="middle">algorithms</text>
   <text x="87" y="132" font-size="12" font-weight="600" fill="#64748b" text-anchor="middle">IN</text>
 
   <!-- Funnel taper guides: a translucent narrowing band behind the phases -->
@@ -29,33 +29,33 @@
   <line x1="146" y1="225" x2="172" y2="225" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
 
   <!-- Phase 1: Rapid Screening (widest) -->
-  <rect x="178" y="158" width="226" height="184" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-  <text x="291" y="184" font-size="12" font-weight="700" fill="#065f46" text-anchor="middle">PHASE 1</text>
-  <text x="291" y="206" font-size="15" font-weight="700" fill="#065f46" text-anchor="middle">Rapid Screening</text>
-  <text x="291" y="231" font-size="12.5" fill="#475569" text-anchor="middle">Evaluate every candidate</text>
-  <text x="291" y="248" font-size="12.5" fill="#475569" text-anchor="middle">on a 10% data sample</text>
-  <text x="291" y="265" font-size="12.5" fill="#475569" text-anchor="middle">to drop weak algorithms</text>
+  <rect x="178" y="158" width="226" height="184" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="291" y="184" font-size="12" font-weight="700" fill="#16a34a" text-anchor="middle">PHASE 1</text>
+  <text x="291" y="206" font-size="15" font-weight="700" fill="#16a34a" text-anchor="middle">Rapid Screening</text>
+  <text x="291" y="231" font-size="12.5" fill="#0f172a" text-anchor="middle">Evaluate every candidate</text>
+  <text x="291" y="248" font-size="12.5" fill="#0f172a" text-anchor="middle">on a 10% data sample</text>
+  <text x="291" y="265" font-size="12.5" fill="#0f172a" text-anchor="middle">to drop weak algorithms</text>
   <rect x="206" y="284" width="170" height="44" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
-  <text x="291" y="302" font-size="12" fill="#065f46" text-anchor="middle">5-15 min</text>
-  <text x="291" y="320" font-size="12.5" font-weight="700" fill="#065f46" text-anchor="middle">92.8% survive</text>
+  <text x="291" y="302" font-size="12" fill="#16a34a" text-anchor="middle">5-15 min</text>
+  <text x="291" y="320" font-size="12.5" font-weight="700" fill="#16a34a" text-anchor="middle">Phase 1 success 92.8%</text>
 
   <!-- Phase 1 -> Phase 2 -->
   <line x1="404" y1="225" x2="430" y2="225" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
 
   <!-- Phase 2: Focused Optimization (narrower) -->
   <rect x="436" y="176" width="222" height="148" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="547" y="202" font-size="12" font-weight="700" fill="#1e3a8a" text-anchor="middle">PHASE 2</text>
-  <text x="547" y="224" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">Focused Optimization</text>
-  <text x="547" y="248" font-size="12.5" fill="#1e3a8a" text-anchor="middle">Optuna TPE Bayesian tuning</text>
-  <text x="547" y="265" font-size="12.5" fill="#1e3a8a" text-anchor="middle">on the surviving top candidates</text>
+  <text x="547" y="202" font-size="12" font-weight="700" fill="#1772d0" text-anchor="middle">PHASE 2</text>
+  <text x="547" y="224" font-size="15" font-weight="700" fill="#1772d0" text-anchor="middle">Focused Optimization</text>
+  <text x="547" y="248" font-size="12.5" fill="#1772d0" text-anchor="middle">Optuna TPE Bayesian tuning</text>
+  <text x="547" y="265" font-size="12.5" fill="#1772d0" text-anchor="middle">on the surviving top candidates</text>
   <rect x="476" y="282" width="142" height="28" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="547" y="301" font-size="12" font-weight="700" fill="#1e3a8a" text-anchor="middle">15-45 min</text>
+  <text x="547" y="301" font-size="12" font-weight="700" fill="#1772d0" text-anchor="middle">15-45 min</text>
 
   <!-- Phase 2 -> Phase 3 -->
   <line x1="658" y1="225" x2="684" y2="225" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
 
   <!-- Phase 3: Self-Evolution (narrowest) -->
-  <rect x="690" y="194" width="206" height="112" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="690" y="194" width="206" height="112" rx="6" fill="#fef3c7" stroke="#f09228" stroke-width="2"/>
   <text x="793" y="218" font-size="12" font-weight="700" fill="#78350f" text-anchor="middle">PHASE 3</text>
   <text x="793" y="240" font-size="15" font-weight="700" fill="#78350f" text-anchor="middle">Self-Evolution</text>
   <text x="793" y="262" font-size="12" fill="#78350f" text-anchor="middle">Genetic algorithm (crossover /</text>
@@ -66,11 +66,11 @@
   <line x1="896" y1="250" x2="934" y2="250" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
 
   <!-- OUT: one optimized ensemble (emphasized node) -->
-  <rect x="942" y="206" width="130" height="88" rx="8" fill="#dbeafe" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="942" y="206" width="130" height="88" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
   <text x="1007" y="186" font-size="12" font-weight="600" fill="#64748b" text-anchor="middle">OUT</text>
-  <text x="1007" y="240" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">1 optimized</text>
-  <text x="1007" y="260" font-size="15" font-weight="700" fill="#1e3a8a" text-anchor="middle">ensemble</text>
-  <text x="1007" y="282" font-size="11.5" fill="#475569" text-anchor="middle">dynamic weighting</text>
+  <text x="1007" y="240" font-size="15" font-weight="700" fill="#1772d0" text-anchor="middle">1 optimized</text>
+  <text x="1007" y="260" font-size="15" font-weight="700" fill="#1772d0" text-anchor="middle">ensemble</text>
+  <text x="1007" y="282" font-size="11.5" fill="#64748b" text-anchor="middle">dynamic weighting</text>
 
   <!-- Narrowing cue: small width labels under each phase -->
   <text x="291" y="372" font-size="11.5" fill="#94a3b8" text-anchor="middle">full candidate set</text>
@@ -80,5 +80,5 @@
   <!-- Bottom note strip -->
   <rect x="28" y="430" width="1044" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
   <text x="48" y="456" font-size="13.5" font-weight="700" fill="#0f172a">Why a funnel</text>
-  <text x="48" y="476" font-size="13" fill="#475569">Concentrate compute where it pays off, instead of tuning the full candidate set — each phase keeps fewer algorithms and spends more on each.</text>
+  <text x="48" y="476" font-size="13" fill="#64748b">Concentrate compute where it pays off, instead of tuning the full candidate set — each phase keeps fewer algorithms and spends more on each.</text>
 </svg>

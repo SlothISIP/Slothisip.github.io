@@ -34,16 +34,16 @@
 
   <!-- ===================== DATA LAYER (green = data/compute) ===================== -->
   <g>
-    <rect x="56" y="142" width="164" height="58" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-    <text x="68" y="166" font-size="13.5" font-weight="600" fill="#065f46">Connectors</text>
+    <rect x="56" y="142" width="164" height="58" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="68" y="166" font-size="13.5" font-weight="600" fill="#166534">Connectors</text>
     <text x="68" y="186" font-size="11" fill="#64748b">CSV &#183; DB &#183; OPC-UA &#183; MQTT</text>
 
-    <rect x="56" y="214" width="164" height="58" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-    <text x="68" y="238" font-size="13.5" font-weight="600" fill="#065f46">ETL Pipeline</text>
+    <rect x="56" y="214" width="164" height="58" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="68" y="238" font-size="13.5" font-weight="600" fill="#166534">ETL Pipeline</text>
     <text x="68" y="258" font-size="11" fill="#64748b">schema &#183; validate &#183; prep</text>
 
-    <rect x="56" y="286" width="164" height="58" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-    <text x="68" y="310" font-size="13.5" font-weight="600" fill="#065f46">Data Registry</text>
+    <rect x="56" y="286" width="164" height="58" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="68" y="310" font-size="13.5" font-weight="600" fill="#166534">Data Registry</text>
     <text x="68" y="330" font-size="11" fill="#64748b">versioned sets &#183; quality</text>
 
     <rect x="56" y="358" width="164" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
@@ -58,9 +58,9 @@
     <text x="280" y="166" font-size="13.5" font-weight="600" fill="#1e3a8a">PC &#183; GES &#183; NOTEARS &#183; FCI</text>
     <text x="280" y="186" font-size="11" fill="#64748b">causal-learn + custom NOTEARS</text>
 
-    <rect x="268" y="214" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="280" y="238" font-size="13.5" font-weight="600" fill="#1e3a8a">Ensemble Voting</text>
-    <text x="280" y="258" font-size="11" fill="#64748b">weighted consensus</text>
+    <rect x="268" y="214" width="164" height="58" rx="6" fill="#fef3c7" stroke="#f09228" stroke-width="2.5"/>
+    <text x="280" y="238" font-size="13.5" font-weight="700" fill="#78350f">Ensemble Voting</text>
+    <text x="280" y="258" font-size="11" fill="#b45309">weighted consensus</text>
 
     <rect x="268" y="286" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
     <text x="280" y="310" font-size="13.5" font-weight="600" fill="#1e3a8a">Bootstrap Stability</text>
@@ -71,41 +71,41 @@
     <text x="280" y="402" font-size="11" fill="#64748b">Granger &#183; regime detection</text>
   </g>
 
-  <!-- ===================== INFERENCE & RCA (amber = analysis/attention) ===================== -->
+  <!-- ===================== INFERENCE & RCA (blue = analysis) ===================== -->
   <g>
-    <rect x="480" y="142" width="164" height="58" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="492" y="166" font-size="13.5" font-weight="600" fill="#78350f">DoWhy ATE</text>
+    <rect x="480" y="142" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="492" y="166" font-size="13.5" font-weight="600" fill="#1e3a8a">DoWhy ATE</text>
     <text x="492" y="186" font-size="11" fill="#64748b">estimation + refutation</text>
 
-    <rect x="480" y="214" width="164" height="58" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="492" y="238" font-size="13.5" font-weight="600" fill="#78350f">Intervention Simulator</text>
+    <rect x="480" y="214" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="492" y="238" font-size="13.5" font-weight="600" fill="#1e3a8a">Intervention Simulator</text>
     <text x="492" y="258" font-size="11" fill="#64748b">what-if &#183; sweeps &#183; do-calc</text>
 
-    <rect x="480" y="286" width="164" height="58" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="492" y="310" font-size="13.5" font-weight="600" fill="#78350f">RCA Ranking</text>
+    <rect x="480" y="286" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="492" y="310" font-size="13.5" font-weight="600" fill="#1e3a8a">RCA Ranking</text>
     <text x="492" y="330" font-size="11" fill="#64748b">|ATE| &#215; conf &#215; stability</text>
 
-    <rect x="480" y="358" width="164" height="58" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="492" y="382" font-size="13.5" font-weight="600" fill="#78350f">Advanced RCA</text>
+    <rect x="480" y="358" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="492" y="382" font-size="13.5" font-weight="600" fill="#1e3a8a">Advanced RCA</text>
     <text x="492" y="402" font-size="11" fill="#64748b">mediation &#183; multi-hop &#183; CF</text>
   </g>
 
-  <!-- ===================== MLOPS / ENTERPRISE (purple = observability/aux) ===================== -->
+  <!-- ===================== MLOPS / ENTERPRISE (grey = observability/aux) ===================== -->
   <g>
-    <rect x="692" y="142" width="164" height="58" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
-    <text x="704" y="166" font-size="13.5" font-weight="600" fill="#5b21b6">Model Registry</text>
+    <rect x="692" y="142" width="164" height="58" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="704" y="166" font-size="13.5" font-weight="600" fill="#334155">Model Registry</text>
     <text x="704" y="186" font-size="11" fill="#64748b">4-stage lifecycle</text>
 
-    <rect x="692" y="214" width="164" height="58" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
-    <text x="704" y="238" font-size="13.5" font-weight="600" fill="#5b21b6">Drift Detection</text>
+    <rect x="692" y="214" width="164" height="58" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="704" y="238" font-size="13.5" font-weight="600" fill="#334155">Drift Detection</text>
     <text x="704" y="258" font-size="11" fill="#64748b">KS &#183; PSI &#183; ATE drift</text>
 
-    <rect x="692" y="286" width="164" height="58" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
-    <text x="704" y="310" font-size="13.5" font-weight="600" fill="#5b21b6">Auth &#183; RBAC &#183; Audit</text>
+    <rect x="692" y="286" width="164" height="58" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="704" y="310" font-size="13.5" font-weight="600" fill="#334155">Auth &#183; RBAC &#183; Audit</text>
     <text x="704" y="330" font-size="11" fill="#64748b">API key &#183; JSONL log</text>
 
-    <rect x="692" y="358" width="164" height="58" rx="6" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
-    <text x="704" y="382" font-size="13.5" font-weight="600" fill="#5b21b6">Prometheus &#183; Grafana</text>
+    <rect x="692" y="358" width="164" height="58" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="704" y="382" font-size="13.5" font-weight="600" fill="#334155">Prometheus &#183; Grafana</text>
     <text x="704" y="402" font-size="11" fill="#64748b">metrics &#183; dashboards</text>
   </g>
 

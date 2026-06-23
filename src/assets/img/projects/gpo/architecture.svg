@@ -1,128 +1,108 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12">
-  <style>
-    .layer { fill: #fafbfc; stroke: #d0d7de; stroke-width: 1; }
-    .layer-label { fill: #57606a; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
-    .box { stroke: #1f6feb; stroke-width: 1.5; fill: #ddf4ff; }
-    .box-data { stroke: #9a6700; stroke-width: 1.5; fill: #fff8c5; }
-    .box-compute { stroke: #1a7f37; stroke-width: 1.5; fill: #dafbe1; }
-    .box-obs { stroke: #8250df; stroke-width: 1.5; fill: #fbefff; }
-    .title { font-weight: 700; font-size: 13px; fill: #1f2328; }
-    .subtitle { font-size: 11px; fill: #57606a; }
-    .arrow { fill: none; stroke: #57606a; stroke-width: 1.5; marker-end: url(#arrowhead); }
-    .arrow-ws { fill: none; stroke: #1a7f37; stroke-width: 1.5; stroke-dasharray: 4,3; marker-end: url(#arrowhead-ws); }
-    .port { font-size: 10px; fill: #57606a; font-family: 'SF Mono', Menlo, Consolas, monospace; }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
   <defs>
-    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
-    </marker>
-    <marker id="arrowhead-ws" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 z" fill="#1a7f37"/>
-    </marker>
+    <marker id="ga-ahm" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#64748b"/></marker>
+    <marker id="ga-ahb" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1772d0"/></marker>
+    <marker id="ga-aho" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#f09228"/></marker>
   </defs>
 
-  <!-- Client Layer -->
-  <rect class="layer" x="10" y="10" width="940" height="70" rx="6"/>
-  <text class="layer-label" x="20" y="28">CLIENT</text>
-  <rect class="box" x="360" y="34" width="240" height="40" rx="4"/>
-  <text class="title" x="480" y="51" text-anchor="middle">Browser</text>
-  <text class="subtitle" x="480" y="66" text-anchor="middle">React + Vite + Plotly (13 components)</text>
+  <rect x="0" y="0" width="1100" height="720" fill="#ffffff"/>
 
-  <!-- Arrow down: Browser -> Web -->
-  <path class="arrow" d="M 480 74 L 480 108"/>
-  <text class="port" x="490" y="95">HTTPS / WSS</text>
+  <!-- ===== TITLE ===== -->
+  <text x="40" y="46" font-size="23" font-weight="800" fill="#0f172a" letter-spacing="-.3">System architecture</text>
+  <rect x="40" y="55" width="232" height="3.5" rx="1.75" fill="#1772d0"/>
+  <text x="40" y="79" font-size="13" fill="#64748b">FastAPI is the synchronous control plane; long BO runs go to a GPU Celery worker.</text>
 
-  <!-- Web Layer -->
-  <rect class="layer" x="10" y="110" width="940" height="60" rx="6"/>
-  <text class="layer-label" x="20" y="128">WEB</text>
-  <rect class="box" x="360" y="128" width="240" height="36" rx="4"/>
-  <text class="title" x="480" y="144" text-anchor="middle">gpo-web (nginx)</text>
-  <text class="subtitle" x="480" y="158" text-anchor="middle">reverse proxy &#183; :3000</text>
+  <!-- ===== LEGEND CHIP (top-right) ===== -->
+  <rect x="700" y="30" width="360" height="28" rx="14" fill="#f1f5f9" stroke="#e2e8f0"/>
+  <line x1="716" y1="44" x2="742" y2="44" stroke="#64748b" stroke-width="1.6" marker-end="url(#ga-ahm)"/>
+  <text x="748" y="48" font-size="11.5" font-weight="700" fill="#475569">HTTP / sync</text>
+  <line x1="852" y1="44" x2="878" y2="44" stroke="#1772d0" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ga-ahb)"/>
+  <text x="884" y="48" font-size="11.5" font-weight="700" fill="#475569">pub/sub &#183; WebSocket</text>
 
-  <!-- Arrow down: Web -> API -->
-  <path class="arrow" d="M 480 164 L 480 202"/>
+  <!-- ===== CLIENT ===== -->
+  <rect x="370" y="108" width="360" height="58" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="550" y="134" font-size="14.5" font-weight="800" fill="#0f172a" text-anchor="middle">Browser &#8212; React client</text>
+  <text x="550" y="153" font-size="11.5" fill="#64748b" text-anchor="middle">single-page UI</text>
 
-  <!-- API Layer -->
-  <rect class="layer" x="10" y="200" width="940" height="95" rx="6"/>
-  <text class="layer-label" x="20" y="218">API</text>
-  <rect class="box" x="180" y="222" width="600" height="64" rx="4"/>
-  <text class="title" x="480" y="240" text-anchor="middle">gpo-api (FastAPI :8000)</text>
-  <text class="subtitle" x="480" y="256" text-anchor="middle">9 routers &#183; JWT auth &#183; WebSocket relay</text>
-  <text class="subtitle" x="480" y="272" text-anchor="middle">auth &#183; oauth &#183; experiments &#183; data &#183; billing &#183; usage &#183; webhooks &#183; websocket &#183; metrics</text>
+  <!-- Client <-> nginx -->
+  <line x1="530" y1="166" x2="530" y2="200" stroke="#64748b" stroke-width="1.6" marker-end="url(#ga-ahm)"/>
+  <text x="516" y="187" font-size="10.5" fill="#64748b" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">HTTPS</text>
 
-  <!-- Arrows from API to Data Layer -->
-  <path class="arrow" d="M 280 286 L 170 326"/>
-  <path class="arrow" d="M 480 286 L 480 326"/>
-  <path class="arrow" d="M 680 286 L 770 326"/>
+  <!-- ===== WEB (nginx) ===== -->
+  <rect x="370" y="202" width="360" height="54" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="550" y="226" font-size="14.5" font-weight="800" fill="#0f172a" text-anchor="middle">nginx &#8212; web</text>
+  <text x="550" y="245" font-size="11.5" fill="#64748b" text-anchor="middle">reverse proxy / static serving</text>
 
-  <!-- Data + Compute Layer -->
-  <rect class="layer" x="10" y="320" width="940" height="110" rx="6"/>
-  <text class="layer-label" x="20" y="338">DATA &amp; COMPUTE</text>
+  <!-- nginx -> API -->
+  <line x1="550" y1="256" x2="550" y2="298" stroke="#64748b" stroke-width="1.6" marker-end="url(#ga-ahm)"/>
 
-  <!-- Postgres -->
-  <rect class="box-data" x="60" y="342" width="220" height="66" rx="4"/>
-  <text class="title" x="170" y="361" text-anchor="middle">PostgreSQL</text>
-  <text class="subtitle" x="170" y="376" text-anchor="middle">+ TimescaleDB (pg16)</text>
-  <text class="subtitle" x="170" y="392" text-anchor="middle">experiments, GP checkpoints,</text>
-  <text class="subtitle" x="170" y="404" text-anchor="middle">Alembic migrations &#183; :5433</text>
+  <!-- ===== API (FastAPI) ===== -->
+  <rect x="330" y="300" width="440" height="76" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="550" y="328" font-size="15.5" font-weight="800" fill="#1e3a8a" text-anchor="middle">FastAPI &#8212; API</text>
+  <text x="550" y="349" font-size="11.5" fill="#475569" text-anchor="middle">synchronous control plane</text>
+  <text x="550" y="366" font-size="11" fill="#64748b" text-anchor="middle">routes requests &#183; enqueues jobs &#183; relays progress over WebSocket</text>
 
-  <!-- Redis (center) -->
-  <rect class="box-data" x="370" y="342" width="220" height="66" rx="4"/>
-  <text class="title" x="480" y="361" text-anchor="middle">Redis (7-alpine)</text>
-  <text class="subtitle" x="480" y="376" text-anchor="middle">Celery broker &#183; pub/sub</text>
-  <text class="subtitle" x="480" y="392" text-anchor="middle">progress stream &#183; 2 GB cache</text>
-  <text class="subtitle" x="480" y="404" text-anchor="middle">:6380</text>
+  <!-- API -> Postgres / Redis / Worker -->
+  <line x1="440" y1="376" x2="200" y2="438" stroke="#64748b" stroke-width="1.6" marker-end="url(#ga-ahm)"/>
+  <line x1="550" y1="376" x2="550" y2="438" stroke="#64748b" stroke-width="1.6" marker-end="url(#ga-ahm)"/>
 
-  <!-- Celery Worker -->
-  <rect class="box-compute" x="680" y="342" width="220" height="66" rx="4"/>
-  <text class="title" x="790" y="361" text-anchor="middle">Celery Worker (GPU)</text>
-  <text class="subtitle" x="790" y="376" text-anchor="middle">BoTorch / GPyTorch</text>
-  <text class="subtitle" x="790" y="392" text-anchor="middle">CUDA 12.4 &#183; prefork &#215;2</text>
-  <text class="subtitle" x="790" y="404" text-anchor="middle">async BO iterations</text>
+  <!-- ===== DATA + COMPUTE ROW ===== -->
+  <!-- PostgreSQL + TimescaleDB -->
+  <rect x="60" y="440" width="280" height="92" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="200" y="470" font-size="14.5" font-weight="800" fill="#0f172a" text-anchor="middle">PostgreSQL</text>
+  <text x="200" y="491" font-size="12" fill="#475569" text-anchor="middle">+ TimescaleDB</text>
+  <text x="200" y="512" font-size="11" fill="#64748b" text-anchor="middle">experiments &amp; time-series storage</text>
 
-  <!-- Redis <-> Worker (pub/sub) -->
-  <path class="arrow-ws" d="M 590 375 L 680 375"/>
-  <text class="port" x="635" y="369" text-anchor="middle" fill="#1a7f37">pub/sub</text>
+  <!-- Redis -->
+  <rect x="410" y="440" width="280" height="92" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="550" y="470" font-size="14.5" font-weight="800" fill="#0f172a" text-anchor="middle">Redis</text>
+  <text x="550" y="491" font-size="12" fill="#475569" text-anchor="middle">Celery queue + pub/sub</text>
+  <text x="550" y="512" font-size="11" fill="#64748b" text-anchor="middle">brokers jobs &#183; streams progress</text>
 
-  <!-- WebSocket progress back to API (curved) -->
-  <path class="arrow-ws" d="M 480 342 Q 480 300 480 286"/>
+  <!-- GPU Celery Worker (ORANGE FOCAL) -->
+  <rect x="760" y="432" width="280" height="108" rx="12" fill="#fef3c7" stroke="#f09228" stroke-width="2.6"/>
+  <text x="900" y="466" font-size="15.5" font-weight="800" fill="#78350f" text-anchor="middle">GPU Celery worker</text>
+  <text x="900" y="488" font-size="12" fill="#b45309" text-anchor="middle" font-weight="700">runs long Bayesian-optimization jobs</text>
+  <text x="900" y="510" font-size="11" fill="#b45309" text-anchor="middle">where the heavy compute lives</text>
+  <text x="900" y="529" font-size="10.5" fill="#b45309" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace">GPU-enabled</text>
 
-  <!-- Observability Layer (separate box, right side) -->
-  <rect class="layer" x="10" y="450" width="940" height="100" rx="6"/>
-  <text class="layer-label" x="20" y="468">OBSERVABILITY</text>
+  <!-- Redis <-> Worker pub/sub (orange dashed) -->
+  <line x1="690" y1="478" x2="758" y2="478" stroke="#f09228" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ga-aho)"/>
+  <line x1="760" y1="500" x2="692" y2="500" stroke="#f09228" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ga-aho)"/>
+  <text x="725" y="463" font-size="10" fill="#b45309" text-anchor="middle" font-weight="700">queue</text>
+  <text x="725" y="518" font-size="10" fill="#b45309" text-anchor="middle" font-weight="700">progress</text>
 
-  <rect class="box-obs" x="200" y="472" width="170" height="60" rx="4"/>
-  <text class="title" x="285" y="490" text-anchor="middle">Prometheus</text>
-  <text class="subtitle" x="285" y="506" text-anchor="middle">metrics scrape</text>
-  <text class="subtitle" x="285" y="520" text-anchor="middle">:9090</text>
+  <!-- WebSocket: Redis pub/sub -> API -> client (blue dashed) -->
+  <path d="M 470 440 C 320 400, 300 270, 360 230" fill="none" stroke="#1772d0" stroke-width="1.8" stroke-dasharray="5 3"/>
+  <path d="M 690 158 C 760 150, 760 220, 660 230" fill="none" stroke="#1772d0" stroke-width="1.8" stroke-dasharray="5 3"/>
+  <path d="M 720 145 C 740 135, 730 122, 715 120" fill="none" stroke="#1772d0" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#ga-ahb)"/>
+  <text x="318" y="332" font-size="10.5" fill="#1772d0" font-weight="700" text-anchor="end">progress events</text>
+  <text x="772" y="186" font-size="10.5" fill="#1772d0" font-weight="700">WebSocket &#8594; client</text>
 
-  <rect class="box-obs" x="410" y="472" width="170" height="60" rx="4"/>
-  <text class="title" x="495" y="490" text-anchor="middle">Alertmanager</text>
-  <text class="subtitle" x="495" y="506" text-anchor="middle">alert routing</text>
-  <text class="subtitle" x="495" y="520" text-anchor="middle">:9093</text>
+  <!-- ===== OBSERVABILITY GROUP ===== -->
+  <rect x="60" y="572" width="980" height="86" rx="12" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.4"/>
+  <text x="80" y="594" font-size="11" font-weight="700" fill="#64748b" letter-spacing=".5">OBSERVABILITY</text>
 
-  <rect class="box-obs" x="620" y="472" width="170" height="60" rx="4"/>
-  <text class="title" x="705" y="490" text-anchor="middle">Grafana</text>
-  <text class="subtitle" x="705" y="506" text-anchor="middle">dashboards</text>
-  <text class="subtitle" x="705" y="520" text-anchor="middle">:3001</text>
+  <rect x="80" y="602" width="290" height="44" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="225" y="623" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">Prometheus</text>
+  <text x="225" y="639" font-size="10.5" fill="#64748b" text-anchor="middle">scrapes metrics</text>
 
-  <!-- Prometheus -> API (dashed up) -->
-  <path class="arrow" d="M 285 472 Q 285 440 285 300 Q 285 290 380 280" stroke-dasharray="3,3"/>
-  <text class="port" x="220" y="450">scrape /metrics</text>
+  <rect x="405" y="602" width="290" height="44" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="550" y="623" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">Alertmanager</text>
+  <text x="550" y="639" font-size="10.5" fill="#64748b" text-anchor="middle">routes alerts</text>
 
-  <!-- Prometheus -> Alertmanager -->
-  <path class="arrow" d="M 370 502 L 410 502"/>
-  <!-- Prometheus -> Grafana -->
-  <path class="arrow" d="M 370 518 Q 500 545 620 518"/>
+  <rect x="730" y="602" width="290" height="44" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="875" y="623" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">Grafana</text>
+  <text x="875" y="639" font-size="10.5" fill="#64748b" text-anchor="middle">dashboards</text>
 
-  <!-- Legend -->
-  <g transform="translate(790, 10)">
-    <rect x="0" y="0" width="160" height="60" rx="4" fill="#ffffff" stroke="#d0d7de"/>
-    <text class="subtitle" x="8" y="14" font-weight="600">Legend</text>
-    <line x1="10" y1="26" x2="30" y2="26" stroke="#57606a" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-    <text class="subtitle" x="36" y="30">HTTP / sync call</text>
-    <line x1="10" y1="42" x2="30" y2="42" stroke="#1a7f37" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowhead-ws)"/>
-    <text class="subtitle" x="36" y="46">pub/sub &#183; WebSocket</text>
-  </g>
+  <line x1="370" y1="624" x2="403" y2="624" stroke="#64748b" stroke-width="1.5" marker-end="url(#ga-ahm)"/>
+  <line x1="695" y1="624" x2="728" y2="624" stroke="#64748b" stroke-width="1.5" marker-end="url(#ga-ahm)"/>
+
+  <!-- Prometheus scrapes API (dashed up) -->
+  <path d="M 225 602 C 225 540, 240 420, 326 360" fill="none" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#ga-ahm)"/>
+  <text x="150" y="556" font-size="10.5" fill="#94a3b8" font-family="ui-monospace, Menlo, Consolas, monospace">scrape /metrics</text>
+
+  <!-- ===== HONESTY FOOTER ===== -->
+  <rect x="40" y="676" width="1020" height="32" rx="8" fill="#f8f9fa"/>
+  <text x="56" y="696" font-size="11" font-style="italic" fill="#64748b">Validated on open/synthetic process datasets (Branin/Hartmann-6, open injection-molding, Kaggle CNC &amp; 3D-printer) &#8212; a personal R&amp;D project, not a production deployment.</text>
 </svg>

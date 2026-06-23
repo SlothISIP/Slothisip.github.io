@@ -99,18 +99,28 @@ layout: base.njk
   </section>
   {% endif %}
 
-  {# ---- RESULTS / IN OPERATION (outcome screenshots in a grid) ---- #}
+  {# ---- RESULTS / IN OPERATION (featured full-width, then outcome screenshots in a grid) ---- #}
   {% if resultsFigs.length %}
+  {% set resultsFeatured = resultsFigs | onlyFeatured %}
+  {% set resultsGrid = resultsFigs | notFeatured %}
   <section class="proj-section">
     <h2>In operation</h2>
+    {% for f in resultsFeatured %}
+    <figure class="proj-figure figure-feature">
+      {% image f.src, f.alt, [768, 1280], "(max-width: 960px) 92vw, 920px" %}
+      {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
+    {% if resultsGrid.length %}
     <div class="results-grid">
-    {% for f in resultsFigs %}
+    {% for f in resultsGrid %}
       <figure class="proj-figure">
         {% image f.src, f.alt, [640, 1024], "(max-width: 768px) 92vw, 300px" %}
         {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
       </figure>
     {% endfor %}
     </div>
+    {% endif %}
   </section>
   {% endif %}
 
@@ -127,14 +137,24 @@ layout: base.njk
       </tbody>
     </table>
     {% if footholdFigs.length %}
+    {% set footholdFeatured = footholdFigs | onlyFeatured %}
+    {% set footholdGrid = footholdFigs | notFeatured %}
+    {% for f in footholdFeatured %}
+    <figure class="proj-figure figure-feature">
+      {% image f.src, f.alt, [768, 1280], "(max-width: 960px) 92vw, 920px" %}
+      {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
+    {% if footholdGrid.length %}
     <div class="foothold-evidence">
-      {% for f in footholdFigs %}
+      {% for f in footholdGrid %}
       <figure class="proj-figure">
         {% image f.src, f.alt, [640, 1024], "(max-width: 768px) 92vw, 300px" %}
         {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
       </figure>
       {% endfor %}
     </div>
+    {% endif %}
     {% endif %}
   </section>
   {% endif %}
