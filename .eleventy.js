@@ -79,6 +79,10 @@ module.exports = function (eleventyConfig) {
     (figs || []).filter((f) => f.section === "results" && f.featured));
   eleventyConfig.addFilter("figuresGrid", (figs) =>
     (figs || []).filter((f) => f.section === "results" && !f.featured));
+  // A decision figure may carry band:true to render full-width BELOW its decision (for wide
+  // diagrams illegible at the ~320px side-column width); the rest stay in the side column.
+  eleventyConfig.addFilter("onlyBand", (figs) => (figs || []).filter((f) => f.band));
+  eleventyConfig.addFilter("notBand", (figs) => (figs || []).filter((f) => !f.band));
 
   // Build-time guard: a figure bound to a decision/foothold beat that does not resolve would
   // silently vanish from the page. Warn loudly instead.

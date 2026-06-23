@@ -68,15 +68,17 @@ layout: base.njk
     {% for d in project.design_decisions %}
       {% set key = d.id or d.title %}
       {% set dfigs = figs | figuresBy("decision", key) %}
+      {% set dSideFigs = dfigs | notBand %}
+      {% set dBandFigs = dfigs | onlyBand %}
       <li class="decision">
-        <div class="decision-row{% if dfigs.length %} has-figure{% endif %}">
+        <div class="decision-row{% if dSideFigs.length %} has-figure{% endif %}">
           <div class="decision-body">
             <span class="decision-title">{{ d.title }}</span>
             <p>{{ d.detail }}</p>
           </div>
-          {% if dfigs.length %}
+          {% if dSideFigs.length %}
           <div class="decision-figs">
-            {% for f in dfigs %}
+            {% for f in dSideFigs %}
             <figure class="proj-figure">
               {% image f.src, f.alt, [640, 1024], "(max-width: 768px) 92vw, 320px" %}
               {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
@@ -85,6 +87,12 @@ layout: base.njk
           </div>
           {% endif %}
         </div>
+        {% for f in dBandFigs %}
+        <figure class="proj-figure figure-band decision-band">
+          {% image f.src, f.alt, [768, 1280], "(max-width: 960px) 92vw, 920px" %}
+          {% if f.caption %}<figcaption>{{ f.caption }}</figcaption>{% endif %}
+        </figure>
+        {% endfor %}
       </li>
     {% endfor %}
     </ol>

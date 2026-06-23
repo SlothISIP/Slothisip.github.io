@@ -342,6 +342,13 @@ table.foothold td code { font-size: 12px; color: #333; overflow-wrap: anywhere; 
   }
 }
 
+/* A decision figure promoted to a full-width band lives inside <ol class="decisions">, which
+   is indented (padding-left:1.3rem). Cancel that indent so the band aligns with section bands. */
+.decision-band { margin-left: -1.3rem; }
+@media (min-width: 961px) {
+  .decision-band { margin-left: calc(-1 * var(--fig-bleed) - 1.3rem); }
+}
+
 /* ---------- Publication: evidence stat strip (headline numbers under the TL;DR) ---------- */
 .stat-strip {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
