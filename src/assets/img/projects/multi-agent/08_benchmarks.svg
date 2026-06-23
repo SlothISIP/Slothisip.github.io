@@ -1,81 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 540" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <!-- Title -->
-  <text x="40" y="52" font-size="23" font-weight="700" fill="#0f172a">ML-tool benchmarks (honesty scoreboard)</text>
-  <rect x="40" y="62" width="252" height="3" rx="1.5" fill="#1772d0"/>
-  <text x="40" y="86" font-size="13" fill="#64748b">The orchestration layer is the engineering target — these underlying models are run on synthetic / open data, not a production line.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect x="0" y="0" width="960" height="500" fill="#ffffff"/>
 
-  <!-- Column headers -->
-  <text x="40"  y="128" font-size="12" font-weight="700" fill="#64748b" letter-spacing="0.4">TOOL</text>
-  <text x="232" y="128" font-size="12" font-weight="700" fill="#64748b" letter-spacing="0.4">METRIC</text>
-  <text x="332" y="128" font-size="12" font-weight="700" fill="#64748b" letter-spacing="0.4">VALUE</text>
-  <text x="448" y="128" font-size="12" font-weight="700" fill="#64748b" letter-spacing="0.4">SCORE (0–1)</text>
-  <text x="800" y="128" font-size="12" font-weight="700" fill="#64748b" letter-spacing="0.4">DATASET</text>
-  <line x1="40" y1="138" x2="1060" y2="138" stroke="#cbd5e1" stroke-width="1"/>
+  <!-- ===== TITLE ===== -->
+  <text x="36" y="44" font-size="27" font-weight="800" fill="#0f172a">ML-tool benchmarks</text>
+  <rect x="36" y="54" width="252" height="3.5" rx="1.75" fill="#1772d0"/>
+  <text x="36" y="80" font-size="15" fill="#64748b">Strong scores — but on synthetic / open data. They measure the tools, not the system.</text>
 
-  <!-- ============ ROW 1: PatchCore ============ -->
+  <!-- ===== COLUMN HEADERS ===== -->
+  <text x="36"  y="120" font-size="20" font-weight="700" fill="#94a3b8" letter-spacing="0.5">TOOL</text>
+  <text x="340" y="120" font-size="20" font-weight="700" fill="#94a3b8" letter-spacing="0.5">VALUE</text>
+  <text x="924" y="120" font-size="20" font-weight="700" fill="#94a3b8" letter-spacing="0.5" text-anchor="end">DATASET</text>
+  <line x1="36" y1="132" x2="924" y2="132" stroke="#cbd5e1" stroke-width="1.4"/>
+
+  <!-- ===== ROW 1 : PatchCore AUROC 1.0000 ===== -->
   <g>
-    <text x="40"  y="180" font-size="15" font-weight="600" fill="#0f172a">PatchCore</text>
-    <text x="232" y="180" font-size="13" fill="#475569">AUROC</text>
-    <text x="332" y="180" font-size="15" font-weight="700" fill="#065f46">1.0000</text>
-    <!-- bar track -->
-    <rect x="448" y="168" width="330" height="16" rx="4" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
-    <rect x="448" y="168" width="330" height="16" rx="4" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-    <!-- synthetic tag -->
-    <rect x="800" y="166" width="86" height="20" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
-    <text x="843" y="180" font-size="11" font-style="italic" fill="#64748b" text-anchor="middle">synthetic</text>
-    <text x="896" y="180" font-size="12.5" fill="#475569">casting set</text>
+    <text x="36"  y="178" font-size="29" font-weight="700" fill="#0f172a">PatchCore</text>
+    <text x="36"  y="200" font-size="18" font-weight="600" fill="#64748b">AUROC</text>
+    <text x="340" y="190" font-size="40" font-weight="800" fill="#166534">1.0000</text>
+    <rect x="560" y="166" width="170" height="24" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+    <rect x="754" y="162" width="170" height="32" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4" stroke-dasharray="5 4"/>
+    <text x="839" y="184" font-size="20" font-style="italic" fill="#64748b" text-anchor="middle">synthetic</text>
   </g>
+  <line x1="36" y1="216" x2="924" y2="216" stroke="#eef2f7" stroke-width="1.4"/>
 
-  <line x1="40" y1="204" x2="1060" y2="204" stroke="#eef2f7" stroke-width="1"/>
-
-  <!-- ============ ROW 2: AnomalyCLIP ============ -->
+  <!-- ===== ROW 2 : AnomalyCLIP AUROC 0.9850 ===== -->
   <g>
-    <text x="40"  y="246" font-size="15" font-weight="600" fill="#0f172a">AnomalyCLIP</text>
-    <text x="232" y="246" font-size="13" fill="#475569">AUROC</text>
-    <text x="332" y="246" font-size="15" font-weight="700" fill="#065f46">0.9850</text>
-    <rect x="448" y="234" width="330" height="16" rx="4" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
-    <rect x="448" y="234" width="325.05" height="16" rx="4" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-    <rect x="800" y="232" width="86" height="20" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
-    <text x="843" y="246" font-size="11" font-style="italic" fill="#64748b" text-anchor="middle">synthetic</text>
-    <text x="896" y="246" font-size="12.5" fill="#475569">casting set</text>
+    <text x="36"  y="262" font-size="29" font-weight="700" fill="#0f172a">AnomalyCLIP</text>
+    <text x="36"  y="284" font-size="18" font-weight="600" fill="#64748b">AUROC</text>
+    <text x="340" y="274" font-size="40" font-weight="800" fill="#166534">0.9850</text>
+    <rect x="560" y="250" width="170" height="24" rx="6" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.4"/>
+    <rect x="560" y="250" width="167.45" height="24" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+    <rect x="754" y="246" width="170" height="32" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4" stroke-dasharray="5 4"/>
+    <text x="839" y="268" font-size="20" font-style="italic" fill="#64748b" text-anchor="middle">synthetic</text>
   </g>
+  <line x1="36" y1="300" x2="924" y2="300" stroke="#eef2f7" stroke-width="1.4"/>
 
-  <line x1="40" y1="270" x2="1060" y2="270" stroke="#eef2f7" stroke-width="1"/>
-
-  <!-- ============ ROW 3: XGBoost ============ -->
+  <!-- ===== ROW 3 : XGBoost F1 0.9851 ===== -->
   <g>
-    <text x="40"  y="312" font-size="15" font-weight="600" fill="#0f172a">XGBoost</text>
-    <text x="232" y="312" font-size="13" fill="#475569">F1</text>
-    <text x="332" y="312" font-size="15" font-weight="700" fill="#065f46">0.9851</text>
-    <rect x="448" y="300" width="330" height="16" rx="4" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
-    <rect x="448" y="300" width="325.08" height="16" rx="4" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-    <rect x="800" y="298" width="60" height="20" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
-    <text x="830" y="312" font-size="11" font-weight="600" fill="#1e3a8a" text-anchor="middle">open</text>
-    <text x="870" y="312" font-size="12.5" fill="#475569">AI4I-2020</text>
+    <text x="36"  y="346" font-size="29" font-weight="700" fill="#0f172a">XGBoost</text>
+    <text x="36"  y="368" font-size="18" font-weight="600" fill="#64748b">F1</text>
+    <text x="340" y="358" font-size="40" font-weight="800" fill="#166534">0.9851</text>
+    <rect x="560" y="334" width="170" height="24" rx="6" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.4"/>
+    <rect x="560" y="334" width="167.47" height="24" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+    <rect x="754" y="330" width="170" height="32" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
+    <text x="839" y="352" font-size="19" font-weight="600" fill="#1e3a8a" text-anchor="middle">open AI4I-2020</text>
   </g>
+  <line x1="36" y1="384" x2="924" y2="384" stroke="#eef2f7" stroke-width="1.4"/>
 
-  <line x1="40" y1="336" x2="1060" y2="336" stroke="#eef2f7" stroke-width="1"/>
-
-  <!-- ============ ROW 4: Chronos-2 (RMSE — value chip, no 0..1 bar) ============ -->
+  <!-- ===== ROW 4 : Chronos-2 RMSE 40.29 (lower better, no 0-1 bar) ===== -->
   <g>
-    <text x="40"  y="378" font-size="15" font-weight="600" fill="#0f172a">Chronos-2</text>
-    <text x="232" y="378" font-size="13" fill="#475569">RMSE</text>
-    <text x="332" y="378" font-size="15" font-weight="700" fill="#78350f">40.29</text>
-    <!-- value chip instead of a 0..1 bar (different metric scale) -->
-    <rect x="448" y="364" width="150" height="22" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="523" y="379" font-size="12" font-weight="600" fill="#78350f" text-anchor="middle">RMSE 40.29 cycles</text>
-    <text x="610" y="378" font-size="11.5" font-style="italic" fill="#94a3b8">lower is better · not a 0–1 score</text>
-    <rect x="800" y="364" width="60" height="20" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
-    <text x="830" y="378" font-size="11" font-weight="600" fill="#1e3a8a" text-anchor="middle">open</text>
-    <text x="870" y="378" font-size="12.5" fill="#475569">NASA C-MAPSS FD001</text>
+    <text x="36"  y="424" font-size="29" font-weight="700" fill="#0f172a">Chronos-2</text>
+    <text x="340" y="404" font-size="18" font-weight="600" fill="#64748b">RMSE (lower better)</text>
+    <text x="340" y="432" font-size="36" font-weight="800" fill="#78350f">40.29</text>
+    <rect x="754" y="402" width="170" height="32" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
+    <text x="839" y="424" font-size="17" font-weight="600" fill="#1e3a8a" text-anchor="middle">open C-MAPSS FD001</text>
   </g>
-
-  <line x1="40" y1="402" x2="1060" y2="402" stroke="#cbd5e1" stroke-width="1"/>
-
-  <!-- Honesty footnote band -->
-  <rect x="40" y="426" width="1020" height="84" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
-  <rect x="56" y="446" width="3" height="48" rx="1.5" fill="#f09228"/>
-  <text x="74" y="460" font-size="13" font-weight="700" fill="#0f172a">These numbers measure the tools, not the system.</text>
-  <text x="74" y="481" font-size="12.5" fill="#475569">Source: results/phase1_kpi.json. PatchCore &amp; AnomalyCLIP run on a synthetic casting set; XGBoost &amp; Chronos-2 on open public datasets.</text>
-  <text x="74" y="499" font-size="12.5" fill="#475569">The contribution is the orchestration, guardrails, and human-in-the-loop trace that treat these outputs as evidence to cross-examine — not the model scores above.</text>
 </svg>

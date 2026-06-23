@@ -16,6 +16,19 @@ layout: base.njk
 
   {% if project.tldr %}<div class="tldr"><strong>TL;DR.</strong> {{ project.tldr }}</div>{% endif %}
 
+  {# ---- EVIDENCE STRIP (headline numbers near the top; verbatim from the foothold table) ---- #}
+  {% if project.stats and project.stats.length %}
+  <div class="stat-strip">
+  {% for s in project.stats %}
+    <div class="stat-card">
+      <span class="stat-value">{{ s.value }}</span>
+      <span class="stat-label">{{ s.label }}</span>
+      {% if s.sub %}<span class="stat-sub">{{ s.sub }}</span>{% endif %}
+    </div>
+  {% endfor %}
+  </div>
+  {% endif %}
+
   {# ---- LEAD / HERO (architecture or hero image, bleeds wide, eager) ---- #}
   {% if leadFig %}
   <figure class="proj-figure figure-hero">

@@ -1,82 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="arrow-dim" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,8 L9,4 z" fill="#94a3b8"/>
-    </marker>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect x="0" y="0" width="960" height="500" fill="#ffffff"/>
 
-  <text x="550" y="32" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">Goal-Driven Prompt Anatomy</text>
-  <text x="550" y="55" text-anchor="middle" font-size="13" fill="#64748b">Recognition agent — verbatim · 11 of 11 agents share this skeleton</text>
+  <!-- ===== TITLE ===== -->
+  <text x="36" y="46" font-size="27" font-weight="800" fill="#0f172a">Goal in the prompt, not the how-to</text>
+  <rect x="36" y="56" width="372" height="3" rx="1.5" fill="#1772d0"/>
+  <text x="36" y="84" font-size="15" fill="#64748b">Every agent prompt states the goal + constraints, never the control flow.</text>
 
-  <rect x="60" y="80" width="700" height="600" rx="10" fill="#0f172a"/>
-  <text x="80" y="105" font-size="11" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#94a3b8">agents/recognition/agent.py · SYSTEM_PROMPT</text>
+  <!-- ===== LEFT: stylized prompt card (label chips only) ===== -->
+  <rect x="36" y="116" width="404" height="346" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
 
-  <text x="80" y="135" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#e2e8f0">You are the Recognition Agent in a manufacturing</text>
-  <text x="80" y="151" font-size="12" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#e2e8f0">quality control system.</text>
+  <rect x="64" y="142" width="348" height="56" rx="9" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="64" y="142" width="7" height="56" rx="3.5" fill="#94a3b8"/>
+  <text x="92" y="178" font-size="28" font-weight="700" fill="#0f172a">Domain</text>
 
-  <rect x="75" y="170" width="670" height="80" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
-  <text x="85" y="187" font-size="10" font-weight="700" fill="#94a3b8">▸ DOMAIN  (context, no behavior)</text>
-  <text x="85" y="206" font-size="11" font-family="ui-monospace, monospace" fill="#cbd5e1">Domain: Inspect visual quality of parts produced in</text>
-  <text x="85" y="220" font-size="11" font-family="ui-monospace, monospace" fill="#cbd5e1">manufacturing processes. Primary defect types:</text>
-  <text x="85" y="234" font-size="11" font-family="ui-monospace, monospace" fill="#cbd5e1">scratch, crack, dent, stain. PatchCore score 0–1.</text>
+  <rect x="64" y="206" width="348" height="56" rx="9" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <rect x="64" y="206" width="7" height="56" rx="3.5" fill="#2563eb"/>
+  <text x="92" y="242" font-size="28" font-weight="700" fill="#1e3a8a">Goal</text>
 
-  <rect x="75" y="265" width="670" height="80" rx="6" fill="#172554" stroke="#3b82f6" stroke-width="1.5"/>
-  <text x="85" y="282" font-size="10" font-weight="700" fill="#60a5fa">▸ GOAL  (what to achieve, not how)</text>
-  <text x="85" y="301" font-size="11" font-family="ui-monospace, monospace" fill="#dbeafe">Goal: Detect and classify visual defects in product</text>
-  <text x="85" y="315" font-size="11" font-family="ui-monospace, monospace" fill="#dbeafe">images with high accuracy. When confidence is high,</text>
-  <text x="85" y="329" font-size="11" font-family="ui-monospace, monospace" fill="#dbeafe">a single tool suffices. When ambiguous, combine.</text>
+  <rect x="64" y="270" width="348" height="56" rx="9" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <rect x="64" y="270" width="7" height="56" rx="3.5" fill="#16a34a"/>
+  <text x="92" y="306" font-size="28" font-weight="700" fill="#14532d">Tools</text>
 
-  <rect x="75" y="360" width="670" height="100" rx="6" fill="#052e16" stroke="#10b981" stroke-width="1.5"/>
-  <text x="85" y="377" font-size="10" font-weight="700" fill="#34d399">▸ AVAILABLE TOOLS  (options the LLM may pick from)</text>
-  <text x="85" y="396" font-size="11" font-family="ui-monospace, monospace" fill="#d1fae5">Available tools:</text>
-  <text x="85" y="411" font-size="11" font-family="ui-monospace, monospace" fill="#d1fae5">- patchcore_score: PatchCore anomaly score (0–1)</text>
-  <text x="85" y="426" font-size="11" font-family="ui-monospace, monospace" fill="#d1fae5">- anomaly_clip_classify: zero-shot AnomalyCLIP</text>
-  <text x="85" y="441" font-size="11" font-family="ui-monospace, monospace" fill="#d1fae5">- grounded_sam2_segment: Grounded SAM2 segmentation</text>
+  <rect x="64" y="334" width="348" height="56" rx="9" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <rect x="64" y="334" width="7" height="56" rx="3.5" fill="#2563eb"/>
+  <text x="92" y="370" font-size="28" font-weight="700" fill="#1e3a8a">Constraints</text>
 
-  <rect x="75" y="475" width="670" height="135" rx="6" fill="#451a03" stroke="#f59e0b" stroke-width="1.5"/>
-  <text x="85" y="492" font-size="10" font-weight="700" fill="#fbbf24">▸ CONSTRAINTS  (semantic rules · validated outside the LLM)</text>
-  <text x="85" y="511" font-size="11" font-family="ui-monospace, monospace" fill="#fef3c7">Constraints:</text>
-  <text x="85" y="526" font-size="11" font-family="ui-monospace, monospace" fill="#fef3c7">- confidence &gt;= 0.70 required for any judgment</text>
-  <text x="85" y="541" font-size="11" font-family="ui-monospace, monospace" fill="#fef3c7">- Must use at least one tool before making a judgment</text>
-  <text x="85" y="556" font-size="11" font-family="ui-monospace, monospace" fill="#fef3c7">- Report defect_type, area_ratio, confidence</text>
-  <text x="85" y="571" font-size="11" font-family="ui-monospace, monospace" fill="#fef3c7">- Physical consistency: crack defects ⇒ area &gt;= 0.05%</text>
-  <text x="85" y="586" font-size="11" font-family="ui-monospace, monospace" fill="#fef3c7">- Respond with JSON: {"judgment": ..., "confidence": ...}</text>
+  <rect x="64" y="398" width="348" height="56" rx="9" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="64" y="398" width="7" height="56" rx="3.5" fill="#94a3b8"/>
+  <text x="92" y="434" font-size="28" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#0f172a">JSON</text>
 
-  <rect x="75" y="625" width="670" height="40" rx="6" fill="#3b0764" stroke="#a855f7" stroke-width="1.5"/>
-  <text x="85" y="642" font-size="10" font-weight="700" fill="#c084fc">▸ OUTPUT SCHEMA  (shape, not branching)</text>
-  <text x="85" y="658" font-size="11" font-family="ui-monospace, monospace" fill="#e9d5ff">JSON: judgment ∈ {DEFECT, NORMAL} · confidence · reasoning · metadata</text>
+  <!-- ===== CONNECTOR ===== -->
+  <line x1="456" y1="289" x2="540" y2="289" stroke="#cbd5e1" stroke-width="3.5"/>
 
-  <rect x="785" y="80" width="280" height="270" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 3"/>
-  <text x="925" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">What is NOT in the prompt</text>
-  <text x="800" y="130" font-size="11" fill="#7f1d1d">✗ "If score &gt; 0.5 then call SAM2"</text>
-  <text x="800" y="148" font-size="11" fill="#7f1d1d">✗ "First call A, then call B"</text>
-  <text x="800" y="166" font-size="11" fill="#7f1d1d">✗ "If confidence &gt; 0.9 return early"</text>
-  <text x="800" y="184" font-size="11" fill="#7f1d1d">✗ "Loop until consensus"</text>
-  <text x="800" y="202" font-size="11" fill="#7f1d1d">✗ "Catch errors and retry 3×"</text>
-  <text x="800" y="225" font-size="11" font-style="italic" fill="#7f1d1d">No procedural branching.</text>
-  <text x="800" y="242" font-size="11" font-style="italic" fill="#7f1d1d">No tool ordering. No control flow.</text>
-  <text x="800" y="265" font-size="11" fill="#7f1d1d">The LLM picks tools, sequence,</text>
-  <text x="800" y="282" font-size="11" fill="#7f1d1d">and stop point — guided only by</text>
-  <text x="800" y="299" font-size="11" fill="#7f1d1d">Goal + Constraints + observed</text>
-  <text x="800" y="316" font-size="11" fill="#7f1d1d">tool results.</text>
-  <text x="800" y="338" font-size="10" font-style="italic" fill="#991b1b">→ react_trace.png shows this in</text>
-  <text x="800" y="350" font-size="10" font-style="italic" fill="#991b1b">  action (Plan → Replan → Execute)</text>
+  <!-- ===== RIGHT: ORANGE FOCAL panel ===== -->
+  <rect x="556" y="116" width="368" height="346" rx="14" fill="#fef3c7" stroke="#f09228" stroke-width="2.5"/>
+  <rect x="556" y="116" width="368" height="62" rx="14" fill="#f09228"/>
+  <rect x="556" y="147" width="368" height="31" fill="#f09228"/>
+  <text x="740" y="156" text-anchor="middle" font-size="27" font-weight="800" fill="#ffffff">NOT in the prompt</text>
 
-  <rect x="785" y="370" width="280" height="200" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
-  <text x="925" y="395" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Verified across 11 agents</text>
-  <text x="800" y="420" font-size="11" fill="#14532d">Recognition · Prediction · SPC ·</text>
-  <text x="800" y="437" font-size="11" fill="#14532d">Automation · Learning · Optimization</text>
-  <text x="800" y="454" font-size="11" fill="#14532d">Safety · Scheduling · Supply Chain</text>
-  <text x="800" y="471" font-size="11" fill="#14532d">Communication · Generation</text>
-  <text x="800" y="495" font-size="11" font-weight="700" fill="#14532d">All share: Domain → Goal →</text>
-  <text x="800" y="511" font-size="11" font-weight="700" fill="#14532d">Tools → Constraints → JSON</text>
-  <text x="800" y="535" font-size="10" font-style="italic" fill="#14532d">One mild exception: Automation</text>
-  <text x="800" y="548" font-size="10" font-style="italic" fill="#14532d">"Must call X before Y" (1 line of</text>
-  <text x="800" y="561" font-size="10" font-style="italic" fill="#14532d">soft sequencing in 11 prompts).</text>
+  <g fill="#78350f" font-size="28" font-weight="600">
+    <text x="592" y="252" font-size="34" font-weight="800" fill="#dc2626">&#215;</text>
+    <text x="640" y="252">if/then tool calls</text>
 
-  <rect x="785" y="590" width="280" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="925" y="613" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Why this matters</text>
-  <text x="800" y="635" font-size="11" fill="#1e3a8a">When the toolchain shifts (PatchCore</text>
-  <text x="800" y="651" font-size="11" fill="#1e3a8a">→ FastFlow), only the Tools block</text>
-  <text x="800" y="667" font-size="11" fill="#1e3a8a">changes. Logic stays untouched.</text>
+    <text x="592" y="324" font-size="34" font-weight="800" fill="#dc2626">&#215;</text>
+    <text x="640" y="324">tool ordering</text>
+
+    <text x="592" y="396" font-size="34" font-weight="800" fill="#dc2626">&#215;</text>
+    <text x="640" y="396">control flow</text>
+  </g>
 </svg>
