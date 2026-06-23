@@ -1,52 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="gr-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L8,4.5 L0,9 z" fill="#94a3b8"/>
-    </marker>
-  </defs>
-  <rect x="0" y="0" width="960" height="560" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect x="0" y="0" width="960" height="500" fill="#ffffff"/>
 
-  <!-- ===== TITLE ===== -->
-  <text x="36" y="46" font-size="27" font-weight="800" fill="#0f172a" letter-spacing="-.3">A deterministic safety net</text>
-  <rect x="36" y="57" width="328" height="4" rx="2" fill="#1772d0"/>
-  <text x="36" y="86" font-size="15" fill="#64748b">5 Python rules sit outside the LLM &#8212; the LLM orchestrates, it never guards.</text>
+  <!-- ===== TITLE (top-left, one word blue) ===== -->
+  <text x="60" y="64" font-size="24" font-weight="700" fill="#0f172a" letter-spacing="-.2">Five rules. No <tspan fill="#1772d0">LLM</tspan> in the safety path.</text>
 
-  <!-- ===== COLUMN CAPTIONS ===== -->
-  <text x="280" y="138" text-anchor="middle" font-size="16" font-weight="700" fill="#94a3b8" letter-spacing="2">RULE</text>
-  <text x="800" y="138" text-anchor="middle" font-size="16" font-weight="700" fill="#94a3b8" letter-spacing="2">ACTION</text>
+  <!-- ===== ROW 1 : physical_inconsistency -> retry (gray) ===== -->
+  <text x="60" y="160" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" fill="#6b7280">physical_inconsistency</text>
+  <line x1="600" y1="152" x2="700" y2="152" stroke="#e6e9ee" stroke-width="1.5"/>
+  <text x="716" y="160" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" fill="#6b7280">retry</text>
 
-  <!-- ===== ROW 1 : physical_inconsistency -> retry ===== -->
-  <rect x="40" y="158" width="500" height="58" rx="11" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
-  <text x="64" y="195" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="600" fill="#0f172a">physical_inconsistency</text>
-  <line x1="552" y1="187" x2="636" y2="187" stroke="#94a3b8" stroke-width="2" marker-end="url(#gr-arrow)"/>
-  <rect x="652" y="158" width="268" height="58" rx="29" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-  <text x="786" y="196" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="29" font-weight="700" fill="#1e3a8a">retry</text>
+  <!-- ===== ROW 2 : cross_agent_contradiction -> deliberation  (BLUE FOCAL) ===== -->
+  <rect x="36" y="208" width="888" height="58" rx="12" fill="#1772d0" opacity="0.06"/>
+  <text x="60" y="246" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="30" font-weight="600" fill="#1772d0">cross_agent_contradiction</text>
+  <line x1="600" y1="237" x2="700" y2="237" stroke="#1772d0" stroke-width="2"/>
+  <text x="716" y="246" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="#1772d0">deliberation</text>
 
-  <!-- ===== ROW 2 : cross_agent_contradiction -> deliberation  (ORANGE FOCAL) ===== -->
-  <rect x="40" y="232" width="500" height="58" rx="11" fill="#fff7ed" stroke="#fde68a" stroke-width="1.8"/>
-  <text x="64" y="269" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="600" fill="#0f172a">cross_agent_contradiction</text>
-  <line x1="552" y1="261" x2="634" y2="261" stroke="#f09228" stroke-width="3" marker-end="url(#gr-arrow)"/>
-  <rect x="646" y="227" width="280" height="68" rx="34" fill="#fef3c7" stroke="#f09228" stroke-width="3"/>
-  <text x="786" y="270" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="30" font-weight="800" fill="#b45309">deliberation</text>
+  <!-- ===== ROW 3 : low_confidence -> hitl (ORANGE human beat) ===== -->
+  <text x="60" y="324" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" fill="#6b7280">low_confidence</text>
+  <line x1="600" y1="316" x2="700" y2="316" stroke="#e6e9ee" stroke-width="1.5"/>
+  <text x="716" y="324" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="600" fill="#e8833a">hitl</text>
 
-  <!-- ===== ROW 3 : low_confidence -> hitl ===== -->
-  <rect x="40" y="306" width="500" height="58" rx="11" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
-  <text x="64" y="343" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="600" fill="#0f172a">low_confidence</text>
-  <line x1="552" y1="335" x2="636" y2="335" stroke="#94a3b8" stroke-width="2" marker-end="url(#gr-arrow)"/>
-  <rect x="652" y="306" width="268" height="58" rx="29" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
-  <text x="786" y="344" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="29" font-weight="700" fill="#dc2626">hitl</text>
+  <!-- ===== ROW 4 : tool_anomaly -> force_stop (gray) ===== -->
+  <text x="60" y="402" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" fill="#6b7280">tool_anomaly</text>
+  <line x1="600" y1="394" x2="700" y2="394" stroke="#e6e9ee" stroke-width="1.5"/>
+  <text x="716" y="402" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" fill="#6b7280">force_stop</text>
 
-  <!-- ===== ROW 4 : tool_anomaly -> force_stop ===== -->
-  <rect x="40" y="380" width="500" height="58" rx="11" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
-  <text x="64" y="417" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="600" fill="#0f172a">tool_anomaly</text>
-  <line x1="552" y1="409" x2="636" y2="409" stroke="#94a3b8" stroke-width="2" marker-end="url(#gr-arrow)"/>
-  <rect x="652" y="380" width="268" height="58" rx="29" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.8"/>
-  <text x="786" y="418" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="29" font-weight="700" fill="#475569">force_stop</text>
-
-  <!-- ===== ROW 5 : cost_time_exceeded -> force_stop ===== -->
-  <rect x="40" y="454" width="500" height="58" rx="11" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
-  <text x="64" y="491" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="600" fill="#0f172a">cost_time_exceeded</text>
-  <line x1="552" y1="483" x2="636" y2="483" stroke="#94a3b8" stroke-width="2" marker-end="url(#gr-arrow)"/>
-  <rect x="652" y="454" width="268" height="58" rx="29" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.8"/>
-  <text x="786" y="492" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="29" font-weight="700" fill="#475569">force_stop</text>
+  <!-- ===== ROW 5 : cost_time_exceeded -> force_stop (gray) ===== -->
+  <text x="60" y="464" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" fill="#6b7280">cost_time_exceeded</text>
+  <line x1="600" y1="456" x2="700" y2="456" stroke="#e6e9ee" stroke-width="1.5"/>
+  <text x="716" y="464" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" fill="#6b7280">force_stop</text>
 </svg>

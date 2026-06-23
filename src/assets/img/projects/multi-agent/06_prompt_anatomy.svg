@@ -1,51 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <rect x="0" y="0" width="960" height="500" fill="#ffffff"/>
+<svg viewBox="0 0 960 450" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="960" height="450" fill="#ffffff"/>
 
-  <!-- ===== TITLE ===== -->
-  <text x="36" y="46" font-size="27" font-weight="800" fill="#0f172a">Goal in the prompt, not the how-to</text>
-  <rect x="36" y="56" width="372" height="3" rx="1.5" fill="#1772d0"/>
-  <text x="36" y="84" font-size="15" fill="#64748b">Every agent prompt states the goal + constraints, never the control flow.</text>
+  <!-- ============ TITLE (top-left label) ============ -->
+  <text x="64" y="62" font-size="24" font-weight="700" fill="#0f172a">Goal in the prompt, not the <tspan fill="#1772d0">how-to</tspan>.</text>
 
-  <!-- ===== LEFT: stylized prompt card (label chips only) ===== -->
-  <rect x="36" y="116" width="404" height="346" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <!-- ============ GRAY PROMPT SKELETON (vertical stack, hairline) ============ -->
+  <!-- spine -->
+  <line x1="150" y1="138" x2="150" y2="402" stroke="#e6e9ee" stroke-width="2"/>
 
-  <rect x="64" y="142" width="348" height="56" rx="9" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
-  <rect x="64" y="142" width="7" height="56" rx="3.5" fill="#94a3b8"/>
-  <text x="92" y="178" font-size="28" font-weight="700" fill="#0f172a">Domain</text>
+  <!-- Domain -->
+  <circle cx="150" cy="138" r="5" fill="#e6e9ee"/>
+  <text x="178" y="145" font-size="28" font-weight="600" fill="#6b7280">Domain</text>
 
-  <rect x="64" y="206" width="348" height="56" rx="9" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
-  <rect x="64" y="206" width="7" height="56" rx="3.5" fill="#2563eb"/>
-  <text x="92" y="242" font-size="28" font-weight="700" fill="#1e3a8a">Goal</text>
+  <!-- Goal : THE ONE BLUE FOCAL (oversized, filled) -->
+  <rect x="120" y="196" width="300" height="68" rx="12" fill="#1772d0"/>
+  <text x="146" y="240" font-size="34" font-weight="700" fill="#ffffff">Goal</text>
+  <line x1="150" y1="138" x2="150" y2="196" stroke="#e6e9ee" stroke-width="2"/>
 
-  <rect x="64" y="270" width="348" height="56" rx="9" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
-  <rect x="64" y="270" width="7" height="56" rx="3.5" fill="#16a34a"/>
-  <text x="92" y="306" font-size="28" font-weight="700" fill="#14532d">Tools</text>
+  <!-- Tools -->
+  <circle cx="150" cy="306" r="5" fill="#e6e9ee"/>
+  <text x="178" y="313" font-size="28" font-weight="600" fill="#6b7280">Tools</text>
+  <line x1="150" y1="264" x2="150" y2="306" stroke="#e6e9ee" stroke-width="2"/>
 
-  <rect x="64" y="334" width="348" height="56" rx="9" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
-  <rect x="64" y="334" width="7" height="56" rx="3.5" fill="#2563eb"/>
-  <text x="92" y="370" font-size="28" font-weight="700" fill="#1e3a8a">Constraints</text>
+  <!-- Constraints -->
+  <circle cx="150" cy="354" r="5" fill="#e6e9ee"/>
+  <text x="178" y="361" font-size="28" font-weight="600" fill="#6b7280">Constraints</text>
 
-  <rect x="64" y="398" width="348" height="56" rx="9" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
-  <rect x="64" y="398" width="7" height="56" rx="3.5" fill="#94a3b8"/>
-  <text x="92" y="434" font-size="28" font-weight="700" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace" fill="#0f172a">JSON</text>
+  <!-- JSON -->
+  <circle cx="150" cy="402" r="5" fill="#e6e9ee"/>
+  <text x="178" y="409" font-size="28" font-weight="600" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#6b7280">JSON</text>
 
-  <!-- ===== CONNECTOR ===== -->
-  <line x1="456" y1="289" x2="540" y2="289" stroke="#cbd5e1" stroke-width="3.5"/>
-
-  <!-- ===== RIGHT: ORANGE FOCAL panel ===== -->
-  <rect x="556" y="116" width="368" height="346" rx="14" fill="#fef3c7" stroke="#f09228" stroke-width="2.5"/>
-  <rect x="556" y="116" width="368" height="62" rx="14" fill="#f09228"/>
-  <rect x="556" y="147" width="368" height="31" fill="#f09228"/>
-  <text x="740" y="156" text-anchor="middle" font-size="27" font-weight="800" fill="#ffffff">NOT in the prompt</text>
-
-  <g fill="#78350f" font-size="28" font-weight="600">
-    <text x="592" y="252" font-size="34" font-weight="800" fill="#dc2626">&#215;</text>
-    <text x="640" y="252">if/then tool calls</text>
-
-    <text x="592" y="324" font-size="34" font-weight="800" fill="#dc2626">&#215;</text>
-    <text x="640" y="324">tool ordering</text>
-
-    <text x="592" y="396" font-size="34" font-weight="800" fill="#dc2626">&#215;</text>
-    <text x="640" y="396">control flow</text>
-  </g>
+  <!-- ============ ORANGE EXCLUSION (the one orange touch: what's deliberately absent) ============ -->
+  <line x1="600" y1="270" x2="700" y2="270" stroke="#e6e9ee" stroke-width="1.5" stroke-dasharray="4 5"/>
+  <text x="700" y="263" font-size="28" font-weight="600" fill="#e8833a">no control flow</text>
+  <line x1="697" y1="254" x2="897" y2="254" stroke="#e8833a" stroke-width="2.5"/>
+  <text x="700" y="295" font-size="15" fill="#6b7280" letter-spacing="0.2">no if/then, no tool ordering</text>
 </svg>

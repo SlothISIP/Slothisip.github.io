@@ -1,51 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="tt-ink" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#475569"/></marker>
-    <marker id="tt-green" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#16a34a"/></marker>
-    <marker id="tt-mute" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8"/></marker>
-  </defs>
+<svg viewBox="0 0 960 430" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="960" height="430" fill="#ffffff"/>
 
-  <rect x="0" y="0" width="960" height="420" fill="#ffffff"/>
+  <!-- ===== TITLE (top-left) ===== -->
+  <text x="60" y="62" font-size="24" font-weight="700" fill="#0f172a">The <tspan fill="#1772d0">cheap path</tspan> runs first.</text>
 
-  <!-- ===== TITLE BLOCK (top-left) ===== -->
-  <text x="36" y="46" font-size="27" font-weight="800" fill="#0f172a">Two-tier execution</text>
-  <rect x="36" y="56" width="256" height="4" rx="2" fill="#1772d0"/>
-  <text x="36" y="84" font-size="15" fill="#64748b">The cheap, deterministic path runs first; the LLM fires only for the rest.</text>
+  <!-- ===== INSPECTION ORIGIN (gray) ===== -->
+  <circle cx="118" cy="240" r="5" fill="#6b7280"/>
+  <text x="60" y="282" font-size="15" fill="#6b7280" letter-spacing="0.3">Inspection</text>
 
-  <!-- ===== INSPECTION NODE (center-left) ===== -->
-  <rect x="36" y="194" width="148" height="64" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="110" y="233" text-anchor="middle" font-size="22" font-weight="800" fill="#0f172a">Inspection</text>
+  <!-- ===== FAST PATH — primary blue lane (solid, straight, oversized) ===== -->
+  <path d="M124 240 L 360 240" fill="none" stroke="#1772d0" stroke-width="4"/>
+  <path d="M656 240 L 800 240" fill="none" stroke="#1772d0" stroke-width="4"/>
 
-  <!-- fork connectors -->
-  <path d="M184 218 C 218 218, 218 172, 252 172" fill="none" stroke="#475569" stroke-width="2.5" marker-end="url(#tt-ink)"/>
-  <path d="M184 234 C 218 234, 218 308, 252 308" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#tt-mute)"/>
-  <text x="222" y="286" text-anchor="middle" font-size="15" font-style="italic" fill="#94a3b8">unresolved</text>
+  <!-- the one lit node: Fast Path -->
+  <rect x="360" y="208" width="296" height="64" rx="32" fill="#1772d0"/>
+  <text x="508" y="247" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff" letter-spacing="0.3">Fast Path</text>
 
-  <!-- ===== TIER 1 — FAST PATH (orange focal, BIG) ===== -->
-  <rect x="256" y="126" width="430" height="92" rx="14" fill="#fef3c7" stroke="#f09228" stroke-width="3"/>
-  <text x="282" y="154" font-size="15" font-weight="800" fill="#b45309" letter-spacing="1.5">TIER 1</text>
-  <text x="282" y="192" font-size="30" font-weight="800" fill="#78350f">Fast Path</text>
-  <!-- merged chip: ms · no LLM -->
-  <rect x="498" y="157" width="170" height="34" rx="17" fill="#fde68a"/>
-  <text x="583" y="180" text-anchor="middle" font-size="17" font-weight="800" fill="#b45309" font-family="ui-monospace, Menlo, Consolas, monospace">ms &#183; no LLM</text>
+  <!-- verdict terminus (gray, quiet) -->
+  <circle cx="806" cy="240" r="5" fill="#6b7280"/>
+  <text x="824" y="245" font-size="16" fill="#6b7280" letter-spacing="0.3">verdict</text>
 
-  <!-- fast path -> verdict -->
-  <line x1="686" y1="172" x2="752" y2="172" stroke="#16a34a" stroke-width="2.5" marker-end="url(#tt-green)"/>
-  <rect x="760" y="148" width="142" height="48" rx="24" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
-  <text x="831" y="179" text-anchor="middle" font-size="20" font-weight="800" fill="#166534">verdict</text>
+  <!-- ===== SECONDARY LANE — fallback, hairline gray ===== -->
+  <!-- branch down off Inspection -->
+  <path d="M124 240 C 220 240, 220 348, 360 348" fill="none" stroke="#e6e9ee" stroke-width="1.5"/>
 
-  <!-- ===== TIER 2 — GOAL-DRIVEN ReAct (blue) ===== -->
-  <rect x="256" y="278" width="430" height="78" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-  <text x="282" y="306" font-size="15" font-weight="800" fill="#1772d0" letter-spacing="1.5">TIER 2</text>
-  <text x="282" y="340" font-size="24" font-weight="800" fill="#1e3a8a">Goal-Driven ReAct</text>
-  <rect x="556" y="301" width="112" height="34" rx="17" fill="#eff6ff" stroke="#bfdbfe"/>
-  <text x="612" y="324" text-anchor="middle" font-size="16" font-weight="700" fill="#1772d0">LLM loop</text>
+  <!-- Goal-Driven ReAct -> Deliberation -> Human, thin gray flow -->
+  <circle cx="360" cy="348" r="4" fill="#6b7280"/>
+  <text x="378" y="353" font-size="15" fill="#6b7280" letter-spacing="0.3">Goal-Driven ReAct</text>
 
-  <!-- ReAct dashed tail -> Deliberation -> Human (secondary) -->
-  <line x1="686" y1="317" x2="716" y2="317" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#tt-mute)"/>
-  <rect x="724" y="296" width="116" height="42" rx="21" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="782" y="322" text-anchor="middle" font-size="15" font-weight="600" fill="#64748b">Deliberation</text>
-  <line x1="840" y1="317" x2="858" y2="317" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#tt-mute)"/>
-  <rect x="866" y="296" width="80" height="42" rx="21" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
-  <text x="906" y="322" text-anchor="middle" font-size="15" font-weight="700" fill="#dc2626">Human</text>
+  <path d="M530 348 L 600 348" fill="none" stroke="#e6e9ee" stroke-width="1.5"/>
+  <circle cx="604" cy="348" r="4" fill="#6b7280"/>
+  <text x="622" y="353" font-size="15" fill="#6b7280" letter-spacing="0.3">Deliberation</text>
+
+  <path d="M734 348 L 800 348" fill="none" stroke="#e6e9ee" stroke-width="1.5"/>
+
+  <!-- Human — the one orange touch -->
+  <circle cx="806" cy="348" r="4.5" fill="#e8833a"/>
+  <text x="824" y="353" font-size="15" font-weight="600" fill="#e8833a" letter-spacing="0.3">Human</text>
+
+  <!-- editorial caption (gray, big air) -->
+  <text x="60" y="402" font-size="14" fill="#6b7280" letter-spacing="0.2">The LLM lane is the gray exception.</text>
 </svg>

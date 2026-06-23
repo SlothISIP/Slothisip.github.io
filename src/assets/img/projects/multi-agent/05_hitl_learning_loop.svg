@@ -1,60 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<svg viewBox="0 0 960 470" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
   <defs>
-    <marker id="hl-blue" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L8,4.5 L0,9 z" fill="#2563eb"/>
+    <marker id="m-blue" markerWidth="9" markerHeight="9" refX="6.2" refY="4.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4.5 L0,9 z" fill="#1772d0"/>
     </marker>
-    <marker id="hl-orange" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L8,4.5 L0,9 z" fill="#f09228"/>
+    <marker id="m-gray" markerWidth="9" markerHeight="9" refX="6.2" refY="4.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4.5 L0,9 z" fill="#9aa3af"/>
     </marker>
   </defs>
 
-  <rect x="0" y="0" width="960" height="520" fill="#ffffff"/>
+  <rect width="960" height="470" fill="#ffffff"/>
 
   <!-- ===== TITLE ===== -->
-  <text x="36" y="46" font-size="27" font-weight="800" fill="#0f172a" letter-spacing="-.3">The AI suggests, a human applies</text>
-  <rect x="36" y="56" width="392" height="3.5" rx="1.75" fill="#1772d0"/>
-  <text x="36" y="84" font-size="15" fill="#64748b">No model output ever writes a threshold.</text>
+  <text x="44" y="56" font-size="23" font-weight="800" fill="#0f172a" letter-spacing="-0.3">The AI suggests; a <tspan fill="#1772d0">human</tspan> applies.</text>
 
-  <!-- ===== FORWARD CHAIN: 5 nodes ===== -->
-  <!-- blue forward arrows -->
-  <line x1="180" y1="170" x2="206" y2="170" stroke="#2563eb" stroke-width="3" marker-end="url(#hl-blue)"/>
-  <line x1="376" y1="170" x2="402" y2="170" stroke="#2563eb" stroke-width="3" marker-end="url(#hl-blue)"/>
-  <line x1="556" y1="170" x2="582" y2="170" stroke="#2563eb" stroke-width="3" marker-end="url(#hl-blue)"/>
-  <line x1="736" y1="170" x2="762" y2="170" stroke="#2563eb" stroke-width="3" marker-end="url(#hl-blue)"/>
+  <!-- ===== GRAY LOOP: hairline ring through 5 nodes ===== -->
+  <!-- ring forward arcs (gray) -->
+  <g stroke="#e6e9ee" stroke-width="2.4" fill="none">
+    <path d="M308 150 C 372 134, 458 134, 520 150" marker-end="url(#m-gray)"/>
+    <path d="M636 196 C 676 232, 676 286, 644 326" marker-end="url(#m-gray)"/>
+    <path d="M530 360 C 466 380, 372 380, 300 360" marker-end="url(#m-gray)"/>
+    <path d="M196 312 C 168 274, 168 222, 188 184" marker-end="url(#m-gray)"/>
+  </g>
 
-  <!-- Node 1: Inspect -->
-  <rect x="36" y="138" width="144" height="64" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.8"/>
-  <text x="108" y="178" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Inspect</text>
+  <!-- ===== GRAY NODES ===== -->
+  <!-- Inspect (top-left) -->
+  <circle cx="244" cy="160" r="44" fill="#ffffff" stroke="#e6e9ee" stroke-width="2"/>
+  <text x="244" y="166" text-anchor="middle" font-size="17" font-weight="600" fill="#6b7280">Inspect</text>
 
-  <!-- Node 2: Guardrail -->
-  <rect x="207" y="138" width="169" height="64" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2.4"/>
-  <text x="291" y="178" text-anchor="middle" font-size="21" font-weight="800" fill="#1e3a8a">Guardrail</text>
+  <!-- Suggestion (top-right) -->
+  <circle cx="592" cy="160" r="44" fill="#ffffff" stroke="#e6e9ee" stroke-width="2"/>
+  <text x="592" y="166" text-anchor="middle" font-size="16" font-weight="600" fill="#6b7280">Suggestion</text>
 
-  <!-- Node 3: Human -->
-  <rect x="403" y="138" width="153" height="64" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.8"/>
-  <text x="479" y="178" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Human</text>
+  <!-- Learning (bottom-right) -->
+  <circle cx="592" cy="356" r="44" fill="#ffffff" stroke="#e6e9ee" stroke-width="2"/>
+  <text x="592" y="362" text-anchor="middle" font-size="17" font-weight="600" fill="#6b7280">Learning</text>
 
-  <!-- Node 4: Learning -->
-  <rect x="583" y="138" width="153" height="64" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.8"/>
-  <text x="659" y="178" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">Learning</text>
+  <!-- Human (bottom-left) -->
+  <circle cx="244" cy="356" r="44" fill="#ffffff" stroke="#e6e9ee" stroke-width="2"/>
+  <text x="244" y="362" text-anchor="middle" font-size="17" font-weight="600" fill="#6b7280">Human</text>
 
-  <!-- Node 5: Suggestion (ORANGE FOCAL) -->
-  <rect x="763" y="138" width="161" height="64" rx="12" fill="#fef3c7" stroke="#f09228" stroke-width="3"/>
-  <text x="843" y="178" text-anchor="middle" font-size="21" font-weight="800" fill="#b45309">Suggestion</text>
+  <!-- Guardrail (center hub, gray secondary node) -->
+  <circle cx="418" cy="258" r="50" fill="#ffffff" stroke="#e6e9ee" stroke-width="2"/>
+  <text x="418" y="264" text-anchor="middle" font-size="17" font-weight="600" fill="#6b7280">Guardrail</text>
 
-  <!-- ===== BLOCKED MACHINE PATH (centerpiece) ===== -->
-  <!-- grey auto path drops from Suggestion, runs left toward Guardrail, CUT by red break -->
-  <path d="M 843 202 L 843 300 L 470 300" stroke="#94a3b8" stroke-width="3" fill="none"/>
-  <!-- the red barrier -->
-  <line x1="470" y1="300" x2="300" y2="300" stroke="#dc2626" stroke-width="3" stroke-dasharray="4 11" stroke-linecap="round"/>
-  <rect x="318" y="276" width="222" height="48" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2.6"/>
-  <text x="429" y="308" text-anchor="middle" font-size="22" font-weight="800" fill="#dc2626">no auto-apply</text>
-  <!-- dead-end stub showing the auto path can't reach Guardrail -->
-  <line x1="300" y1="300" x2="291" y2="300" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
+  <!-- ===== ORANGE: the BLOCKED machine path (Suggestion -> Guardrail, broken) ===== -->
+  <!-- gray auto-path stub leaving Suggestion downward toward Guardrail, then BREAK -->
+  <path d="M592 204 L 592 234 L 504 234" stroke="#e6e9ee" stroke-width="2.4" fill="none"/>
+  <!-- the orange break mark across the path -->
+  <g stroke="#e8833a" stroke-width="3.4" stroke-linecap="round">
+    <line x1="492" y1="222" x2="508" y2="246"/>
+    <line x1="508" y1="222" x2="492" y2="246"/>
+  </g>
+  <text x="600" y="228" font-size="15" fill="#e8833a" font-weight="600" letter-spacing="0.2">no auto-apply</text>
 
-  <!-- ===== ALLOWED HUMAN PATH ===== -->
-  <!-- orange solid arrow from Human, around the bottom, back up into Guardrail -->
-  <path d="M 479 202 L 479 240 L 150 240 L 150 420 L 291 420 L 291 204" stroke="#f09228" stroke-width="3.4" fill="none" marker-end="url(#hl-orange)"/>
-  <rect x="206" y="396" width="218" height="48" rx="24" fill="#fef3c7" stroke="#f09228" stroke-width="2.6"/>
-  <text x="315" y="428" text-anchor="middle" font-size="22" font-weight="800" fill="#b45309">Human applies</text>
+  <!-- ===== BLUE FOCAL: the human-applies link (Human -> Guardrail) ===== -->
+  <path d="M285 326 C 322 300, 350 290, 376 276" stroke="#1772d0" stroke-width="4" fill="none" marker-end="url(#m-blue)"/>
+  <circle cx="334" cy="301" r="6" fill="#1772d0"/>
+  <text x="232" y="430" font-size="18" font-weight="700" fill="#1772d0" letter-spacing="0.2">human applies</text>
+
+  <!-- ===== EDITORIAL CAPTION ===== -->
+  <text x="44" y="92" font-size="14" fill="#6b7280" letter-spacing="0.2">No model output ever writes a threshold.</text>
 </svg>
