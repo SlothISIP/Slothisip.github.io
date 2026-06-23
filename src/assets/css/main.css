@@ -106,8 +106,8 @@ strong { font-weight: 700; }
   margin-top: 8px;
 }
 .profile-photo img {
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
   border-radius: 8px;
   object-fit: cover;
 }
@@ -265,7 +265,7 @@ table.foothold td code { font-size: 12px; color: #333; overflow-wrap: anywhere; 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .profile { flex-direction: column; gap: 16px; }
-  .profile-photo img { width: 140px; height: 140px; }
+  .profile-photo img { width: 160px; height: 160px; }
   .skills { grid-template-columns: 1fr; gap: .15rem; }
   .skills dt { margin-top: .5rem; }
 }
