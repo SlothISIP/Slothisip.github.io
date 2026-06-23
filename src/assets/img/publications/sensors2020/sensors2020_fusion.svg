@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 360" font-family="Lato, system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <style>
+    .ink{fill:#1a1a1a}.muted{fill:#61686f}.accent{fill:#1772d0}
+    .t-title{font-size:19px;font-weight:700}.t-sub{font-size:12px}
+    .t-val{font-size:13px;font-weight:700}.t-lab{font-size:12px}.t-cap{font-size:11.5px}
+    .axis{stroke:#cfd6dd;stroke-width:1}.grid{stroke:#eef1f4;stroke-width:1}
+  </style>
+  <rect x="0.5" y="0.5" width="619" height="359" rx="12" fill="#ffffff" stroke="#e9ecef"/>
+  <text class="ink t-title" x="28" y="42">Fusing more inputs lifts apnea detection</text>
+  <text class="muted t-sub" x="28" y="62">UWB-radar abnormal-respiration detection &#8212; accuracy &#8212; sensors2020</text>
+
+  <!-- gridlines + y labels (60-100%) -->
+  <line class="grid" x1="92" y1="300" x2="592" y2="300"/>
+  <text class="muted t-cap" x="84" y="304" text-anchor="end">60%</text>
+  <line class="grid" x1="92" y1="255" x2="592" y2="255"/>
+  <text class="muted t-cap" x="84" y="259" text-anchor="end">70%</text>
+  <line class="grid" x1="92" y1="210" x2="592" y2="210"/>
+  <text class="muted t-cap" x="84" y="214" text-anchor="end">80%</text>
+  <line class="grid" x1="92" y1="165" x2="592" y2="165"/>
+  <text class="muted t-cap" x="84" y="169" text-anchor="end">90%</text>
+  <line class="grid" x1="92" y1="120" x2="592" y2="120"/>
+  <text class="muted t-cap" x="84" y="124" text-anchor="end">100%</text>
+  <line class="axis" x1="92" y1="116" x2="92" y2="300"/>
+
+  <!-- single-input bar (67%) -->
+  <rect x="170" y="268.5" width="120" height="31.5" rx="3" fill="#cfd6dd"/>
+  <text class="ink t-val" x="230" y="259.5" text-anchor="middle">67%</text>
+  <text class="muted t-lab" x="230" y="320" text-anchor="middle">single input</text>
+  <text class="muted t-lab" x="230" y="335" text-anchor="middle">one acquisition</text>
+
+  <!-- triple-input bar (93%) -->
+  <rect x="400" y="151.5" width="120" height="148.5" rx="3" fill="#1772d0"/>
+  <text class="accent t-val" x="460" y="142.5" text-anchor="middle">93%</text>
+  <text class="accent t-lab" x="460" y="320" text-anchor="middle" font-weight="700">triple input</text>
+  <text class="accent t-lab" x="460" y="335" text-anchor="middle">summation fusion</text>
+
+  <!-- gain bracket -->
+  <path d="M230,250 L230,108 L460,108 L460,135" fill="none" stroke="#61686f" stroke-width="1.2"/>
+  <text class="ink t-val" x="345" y="101" text-anchor="middle">+26 pts with multi-input fusion</text>
+  <text class="accent t-cap" x="345" y="128" text-anchor="middle">summation + high-pass burst count</text>
+</svg>

@@ -115,6 +115,7 @@
     - src: publications/applsci2026/applsci2026_frequency.jpg
       title: 'Frequency robustness'
       section: results
+      featured: true
       alt: Frequency robustness across wavenumber
       caption: 'Frequency robustness: generalization gap across wavenumber k0. Both models train at k0 = 20 (dashed line); HNO (blue) holds lower, more consistent gaps than the FNO baseline (red) across the tested k0 in [10, 30] -- about 1.8x better average robustness with 56% lower variance (29.9% vs. 55.2% mean gap). The behavior is a property of the fixed-spectral-basis architecture rather than of capacity: the parameter-matched FNO-5m5L sweep widens the margin to 2.2x.'
     - src: publications/applsci2026/applsci2026_ablation.jpg
@@ -162,6 +163,9 @@
     - >-
       Fully non-contact sensing with a UWB radar (Xethru X4M300), with no body-worn
       electrodes.
+    - >-
+      Built for data scarcity: trained on a small radar corpus with a held-out 175-sample
+      test set -- the regime where standard deep models overfit.
   results:
     - >-
       94.3% accuracy (AUC 0.969) distinguishing normal breathing from apnea events on
@@ -205,6 +209,10 @@
       section: approach
       alt: Data augmentation techniques
       caption: 'Data augmentation on respiratory signals: (a) original signal, (b) time shifting, (c) amplitude scaling, (d) Gaussian-noise addition, (e) DTW alignment, and (f) the resulting DTW-SMOTE-TS synthetic sample generated between two parent signals.'
+    - src: publications/electronics2025/electronics2025_concept.svg
+      section: approach
+      alt: 'Why DTW-SMOTE preserves breathing rhythm where Euclidean SMOTE flattens it'
+      caption: 'Why DTW beats Euclidean SMOTE. Plain SMOTE interpolates point-by-point on time-misaligned breathing cycles, averaging them into a flattened, unnatural cadence; DTW-SMOTE-TS first aligns matching cycles with Dynamic Time Warping, so the synthetic apnea sample keeps a realistic rhythm -- the source of the +5.2-point accuracy gain.'
     - src: publications/electronics2025/electronics2025_ladder.svg
       section: results
       featured: true
@@ -262,13 +270,14 @@
       A three-stage pipeline: vanishing-point detection, geometric-constraint
       establishment, and multi-view calibration optimization.
     - >-
-      RANSAC-based line fitting detects dominant line segments, clusters them by
+      Line fitting detects dominant line segments, clusters them by
       orientation, and intersects them to recover vanishing points along the principal
       scene directions (horizontal, vertical, depth).
     - >-
       VDSR super-resolution enhances the low-quality thermal checkerboard images before
-      corner detection; the intrinsics are recovered from as few as five 2D-3D point pairs,
-      with no correspondence matching between views.
+      corner detection; the intrinsics are recovered from as few as five 2D-3D point pairs
+      (optimized with the Levenberg-Marquardt algorithm), with no correspondence matching
+      between views.
   results:
     - >-
       Mean reprojection error below 0.8 pixels across all three viewpoints (about 0.58-0.66
@@ -296,7 +305,7 @@
     - src: publications/springer2024/springer2024_flow.svg
       section: lead
       alt: 'Vanishing-point thermal-camera calibration pipeline overview'
-      caption: 'How calibration works: VDSR super-resolution sharpens the low-texture thermal checkerboard, RANSAC fits dominant lines, and their intersection yields vanishing points (highlighted) - the geometric constraint that replaces the dense feature correspondences a >180-degree, low-overlap three-view rig cannot provide - feeding a multi-view optimization to sub-0.8 px error.'
+      caption: 'How calibration works: VDSR super-resolution sharpens the low-texture thermal checkerboard, dominant lines are fit, and their intersection yields vanishing points (highlighted) - the geometric constraint that replaces the dense feature correspondences a >180-degree, low-overlap three-view rig cannot provide - feeding a multi-view optimization to sub-0.8 px error.'
     - src: publications/springer2024/springer2024_sightlines.svg
       section: problem
       alt: 'Top-down sightlines of a >180-degree three-view rig with minimal overlap'
@@ -332,6 +341,11 @@
       featured: true
       alt: Reprojection error per viewpoint
       caption: 'Reprojection error per viewpoint (a, b, c): the mean reprojection error stays below ~0.66 pixels across all three thermal camera views, confirming accurate calibration from only a few correspondences.'
+    - src: publications/springer2024/springer2024_rotation.svg
+      section: results
+      featured: true
+      alt: 'Average rotation error vs prior calibration work (Table 4): sub-degree without using correspondences'
+      caption: 'Rotation accuracy against prior calibration work (paper Table 4). The proposed vanishing-point method reaches a 0.43-degree average rotation error -- competitive and sub-degree -- while, unlike every method compared, requiring no correspondence matching. (Lecrosnier and Bazin report lower error but rely on correspondences or a known direction; Zhou & Deng''s 12.03 degrees is off the chart scale.)'
   acknowledgements: This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korean government. We thank the reviewers for their valuable feedback and suggestions that helped improve this work.
 - slug: sensors2020
   title: Detection of Abnormal Respiration from Multiple-Input Respiratory Signals
@@ -405,6 +419,11 @@
       section: problem
       alt: Abnormal (apnea) respiration examples
       caption: 'Two examples of abnormal (apnea) respiration measured by the UWB radar: regular breathing oscillations are interrupted by flat apnea intervals where chest-surface motion stops.'
+    - src: publications/sensors2020/sensors2020_fusion.svg
+      section: results
+      featured: true
+      alt: 'Detection accuracy rises from 67% (single input) to 93% (triple-input fusion)'
+      caption: 'The accuracy payoff of multi-input fusion. Reading the Z-domain pole-zero signature of a single acquisition detects apnea at 67%; summing two to three acquisitions -- with the adaptive high-pass filter turning apnea into countable transient bursts -- lifts detection to 93%, a +26-point gain and the paper''s headline result.'
     - src: publications/sensors2020/sensors2020_zdomain_uc.jpg
       title: 'Z-domain pole-zero classification'
       section: results
@@ -413,6 +432,7 @@
     - src: publications/sensors2020/sensors2020_filter.jpg
       title: 'High-pass filtered responses'
       section: results
+      featured: true
       alt: High-pass filtered responses (triple input)
       caption: 'High-pass-filtered responses for three combined inputs across breathing combinations, from (a) all-normal to (d) all-apnea. Apnea events appear as sharp transient bursts whose count grows with apnea content, enabling detection from the filtered peaks.'
   acknowledgements: This research was supported by Keimyung University. We thank the reviewers for their valuable feedback and suggestions.

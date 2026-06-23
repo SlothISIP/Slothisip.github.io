@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 390" font-family="Lato, system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <style>
+    .ink{fill:#1a1a1a}.muted{fill:#61686f}.accent{fill:#1772d0}
+    .t-title{font-size:19px;font-weight:700}.t-sub{font-size:12px}
+    .t-val{font-size:12.5px;font-weight:700}.t-lab{font-size:12px}.t-cap{font-size:11.5px}
+    .axis{stroke:#cfd6dd;stroke-width:1}.grid{stroke:#eef1f4;stroke-width:1}
+  </style>
+  <rect x="0.5" y="0.5" width="719" height="389" rx="12" fill="#ffffff" stroke="#e9ecef"/>
+  <text class="ink t-title" x="28" y="40">Sub-degree rotation accuracy &#8212; without correspondences</text>
+  <text class="muted t-sub" x="28" y="60">Average rotation error vs prior calibration work (degrees, lower is better) &#183; Table 4 &#183; springer2024</text>
+
+  <!-- gridlines 0-4 deg (x: 185 -> 660, 118.75 px/deg) -->
+  <line class="grid" x1="303.75" y1="84" x2="303.75" y2="344"/>
+  <line class="grid" x1="422.5" y1="84" x2="422.5" y2="344"/>
+  <line class="grid" x1="541.25" y1="84" x2="541.25" y2="344"/>
+  <line class="grid" x1="660" y1="84" x2="660" y2="344"/>
+  <line class="axis" x1="185" y1="84" x2="185" y2="344"/>
+  <text class="muted t-cap" x="185" y="358" text-anchor="middle">0</text>
+  <text class="muted t-cap" x="303.75" y="358" text-anchor="middle">1</text>
+  <text class="muted t-cap" x="422.5" y="358" text-anchor="middle">2</text>
+  <text class="muted t-cap" x="541.25" y="358" text-anchor="middle">3</text>
+  <text class="muted t-cap" x="660" y="358" text-anchor="middle">4&#176;</text>
+
+  <!-- Lecrosnier 0.15 -->
+  <rect x="185" y="90" width="17.8" height="22" rx="3" fill="#cfd6dd"/>
+  <text class="muted t-lab" x="176" y="105" text-anchor="end">Lecrosnier et al.</text>
+  <text class="ink t-val" x="209" y="105">0.15&#176;</text>
+  <!-- Bazin 0.3 -->
+  <rect x="185" y="127" width="35.6" height="22" rx="3" fill="#cfd6dd"/>
+  <text class="muted t-lab" x="176" y="142" text-anchor="end">Bazin et al.</text>
+  <text class="ink t-val" x="227" y="142">0.3&#176;</text>
+  <!-- Proposed 0.43 (ours) -->
+  <rect x="185" y="163" width="51.1" height="24" rx="3" fill="#1772d0"/>
+  <text class="accent t-lab" x="176" y="171" text-anchor="end" font-weight="700">Proposed (ours)</text>
+  <text class="accent t-cap" x="176" y="185" text-anchor="end">vanishing points</text>
+  <text class="accent t-val" x="243" y="179">0.43&#176;</text>
+  <!-- Wang 1.152 -->
+  <rect x="185" y="201" width="136.8" height="22" rx="3" fill="#cfd6dd"/>
+  <text class="muted t-lab" x="176" y="216" text-anchor="end">Wang et al.</text>
+  <text class="ink t-val" x="328" y="216">1.152&#176;</text>
+  <!-- Liu 1.51 -->
+  <rect x="185" y="238" width="179.3" height="22" rx="3" fill="#cfd6dd"/>
+  <text class="muted t-lab" x="176" y="253" text-anchor="end">Liu et al.</text>
+  <text class="ink t-val" x="371" y="253">1.51&#176;</text>
+  <!-- Chen 3.96 -->
+  <rect x="185" y="275" width="470.3" height="22" rx="3" fill="#cfd6dd"/>
+  <text class="muted t-lab" x="176" y="290" text-anchor="end">Chen et al.</text>
+  <text class="ink t-val" x="648" y="290" text-anchor="end">3.96&#176;</text>
+  <!-- Zhou and Deng 12.03 (off the 0-4 scale: broken bar with a gap) -->
+  <rect x="185" y="312" width="438" height="22" rx="3" fill="#cfd6dd"/>
+  <rect x="636" y="312" width="24" height="22" rx="3" fill="#cfd6dd"/>
+  <path d="M628,309 l-7,28 M636,309 l-7,28" stroke="#ffffff" stroke-width="3"/>
+  <text class="muted t-lab" x="176" y="327" text-anchor="end">Zhou &amp; Deng</text>
+  <text class="ink t-val" x="612" y="327" text-anchor="end">12.03&#176;</text>
+  <text class="muted t-cap" x="664" y="327">off scale</text>
+
+  <!-- honest framing footnote -->
+  <text class="accent t-cap" x="28" y="378">Competitive sub-degree accuracy &#8212; and unlike every method here, it needs no correspondence matching.</text>
+</svg>

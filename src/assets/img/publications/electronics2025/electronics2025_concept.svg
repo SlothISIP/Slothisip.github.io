@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 340" font-family="Lato, system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <style>
+    .ink{fill:#1a1a1a}.muted{fill:#61686f}.accent{fill:#1772d0}
+    .t-title{font-size:20px;font-weight:700}.t-sub{font-size:12px}
+    .t-head{font-size:15px;font-weight:700}.t-chip{font-size:11.5px;font-weight:700}
+    .t-lab{font-size:11px}.t-cap{font-size:12.5px}
+    .wave{fill:none;stroke-linecap:round}
+  </style>
+  <rect x="0.5" y="0.5" width="779" height="339" rx="12" fill="#ffffff" stroke="#e9ecef"/>
+
+  <text class="ink t-title" x="28" y="42">Euclidean SMOTE distorts rhythm&#160;&#160;vs.&#160;&#160;DTW keeps it</text>
+  <text class="muted t-sub" x="28" y="62">DTW-Enhanced CNN-LSTM &#8212; electronics2025</text>
+
+  <!-- ===== Panel A: plain SMOTE ===== -->
+  <rect x="28" y="82" width="353" height="240" rx="10" fill="#ffffff" stroke="#e9ecef"/>
+  <text class="muted t-head" x="46" y="114">Plain SMOTE &#183; Euclidean</text>
+  <rect x="270" y="99" width="94" height="21" rx="10.5" fill="#f8f9fa"/>
+  <text class="muted t-chip" x="317" y="113.5" text-anchor="middle">peaks misalign</text>
+
+  <!-- two phase-misaligned parents (thin grey) -->
+  <path class="wave" stroke="#9aa3ab" stroke-width="1.5" d="M46,176 q32,-40 64,0 q32,40 64,0 q32,-40 64,0 q32,40 64,0 q32,-40 64,0"/>
+  <path class="wave" stroke="#9aa3ab" stroke-width="1.5" stroke-opacity="0.7" d="M46,176 q32,40 64,0 q32,-40 64,0 q32,40 64,0 q32,-40 64,0 q32,40 64,0"/>
+  <!-- Euclidean-averaged synthetic: flattened -->
+  <path class="wave" stroke="#61686f" stroke-width="2.6" d="M46,176 q32,-13 64,0 q32,13 64,0 q32,-13 64,0 q32,13 64,0 q32,-13 64,0"/>
+  <text class="muted t-lab" x="200" y="214" text-anchor="middle">averaged synthetic &#8212; flattened, peaks lost</text>
+
+  <text class="ink t-cap" x="46" y="256">Interpolating point-by-point on time-</text>
+  <text class="ink t-cap" x="46" y="274">misaligned cycles averages the two</text>
+  <text class="ink t-cap" x="46" y="292">rhythms &#8212; peaks flatten into an</text>
+  <text class="ink t-cap" x="46" y="310">unnatural breathing cadence.</text>
+
+  <!-- ===== Panel B: DTW-SMOTE-TS ===== -->
+  <rect x="399" y="82" width="353" height="240" rx="10" fill="#ffffff" stroke="#e9ecef"/>
+  <text class="accent t-head" x="417" y="114">DTW-SMOTE-TS &#183; ours</text>
+  <rect x="640" y="99" width="96" height="21" rx="10.5" fill="#eaf2fb"/>
+  <text class="accent t-chip" x="688" y="113.5" text-anchor="middle">cadence kept</text>
+
+  <!-- DTW warp ties at the peaks -->
+  <g stroke="#1772d0" stroke-width="1" stroke-opacity="0.45" stroke-dasharray="3 3">
+    <line x1="449" y1="150" x2="449" y2="200"/>
+    <line x1="577" y1="150" x2="577" y2="200"/>
+    <line x1="705" y1="150" x2="705" y2="200"/>
+  </g>
+  <!-- two DTW-aligned parents (faint, in phase) -->
+  <path class="wave" stroke="#9aa3ab" stroke-width="1.4" stroke-opacity="0.45" d="M417,170 q32,-40 64,0 q32,40 64,0 q32,-40 64,0 q32,40 64,0 q32,-40 64,0"/>
+  <path class="wave" stroke="#9aa3ab" stroke-width="1.4" stroke-opacity="0.45" d="M417,182 q32,-40 64,0 q32,40 64,0 q32,-40 64,0 q32,40 64,0 q32,-40 64,0"/>
+  <!-- DTW synthetic: full amplitude, crisp -->
+  <path class="wave" stroke="#1772d0" stroke-width="2.6" d="M417,176 q32,-40 64,0 q32,40 64,0 q32,-40 64,0 q32,40 64,0 q32,-40 64,0"/>
+  <text class="accent t-lab" x="568" y="214" text-anchor="middle">synthetic apnea &#8212; full amplitude, real rhythm</text>
+
+  <text class="ink t-cap" x="417" y="256">DTW aligns matching breathing cycles</text>
+  <text class="ink t-cap" x="417" y="274">before interpolating, so the synthetic</text>
+  <text class="ink t-cap" x="417" y="292">apnea sample keeps a realistic rhythm</text>
+  <text class="ink t-cap" x="417" y="310">&#8212; the +5.2-pt accuracy gain.</text>
+</svg>
