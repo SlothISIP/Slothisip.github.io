@@ -1,10 +1,25 @@
 // .eleventy.js - Eleventy 3.x config (CommonJS)
 const path = require("node:path");
+const fs = require("node:fs");
+const crypto = require("node:crypto");
 const yaml = require("js-yaml");
 
 module.exports = function (eleventyConfig) {
   // ---------- YAML data files (.yaml/.yml are NOT parsed by default in 3.x) ----------
   eleventyConfig.addDataExtension("yaml,yml", (contents) => yaml.load(contents));
+
+  // ---------- CSS cache-busting ----------
+  // main.css is passthrough-copied (stable URL, not content-hashed like the webp),
+  // so browsers cache it and miss CSS/layout changes. Append a content hash as ?v=
+  // so every CSS edit forces a fresh fetch. Recomputed each build.
+  eleventyConfig.addGlobalData("cssHash", () => {
+    try {
+      const css = fs.readFileSync("src/assets/css/main.css");
+      return crypto.createHash("sha1").update(css).digest("hex").slice(0, 10);
+    } catch (e) {
+      return "0";
+    }
+  });
 
   // ---------- Passthrough copy (shared assets, one copy) ----------
   eleventyConfig.addPassthroughCopy({ "src/assets/css": "assets/css" });
