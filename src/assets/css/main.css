@@ -105,14 +105,19 @@ strong { font-weight: 700; }
   align-items: flex-start;
   margin-top: 8px;
 }
+.profile-photo {
+  padding: 24px 16px 16px;        /* larger top = visible headroom above the head */
+  background: #fff;
+  border: 1px solid #d6dadf;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.10);
+}
 .profile-photo img {
+  display: block;
   width: 220px;
   height: 220px;
-  border-radius: 10px;
+  border-radius: 6px;
   object-fit: cover;
-  box-sizing: border-box;
-  border: 1px solid #e2e5e9;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
 }
 .name { margin: 0 0 .25rem; font-size: 32px; font-weight: 400; }
 .role { margin: 0 0 .5rem; color: var(--muted); font-size: 15px; }
@@ -268,6 +273,7 @@ table.foothold td code { font-size: 12px; color: #333; overflow-wrap: anywhere; 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .profile { flex-direction: column; gap: 16px; }
+  .profile-photo { padding: 18px 12px 12px; }
   .profile-photo img { width: 160px; height: 160px; }
   .skills { grid-template-columns: 1fr; gap: .15rem; }
   .skills dt { margin-top: .5rem; }
