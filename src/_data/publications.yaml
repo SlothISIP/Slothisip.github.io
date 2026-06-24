@@ -9,6 +9,13 @@
   paper_url: https://www.mdpi.com/2076-3417/16/12/5997
   bib: KimAPPLSCI2026
   highlight: false
+  thumb: publications/applsci2026/applsci2026_thumb.jpg
+  compare:
+    title: 'High-contrast failure case: FNO vs HNO'
+    aria: 'Toggle between FNO and HNO wave-field reconstruction on the same scene'
+    before: { src: publications/applsci2026/applsci2026_ba_before.jpg, label: 'FNO', alt: 'FNO reconstruction collapses on the high-contrast scene' }
+    after: { src: publications/applsci2026/applsci2026_ba_after.jpg, label: 'HNO (ours)', alt: 'HNO reconstruction degrades gracefully on the same scene' }
+    caption: 'Same Level-4 high-contrast scene. FNO collapses with error massed at the material interfaces (rel L² 1.64); HNO degrades gracefully (1.18). Hover or tap to swap FFT-based ⇄ FFT-free.'
   stats:
     - value: '19.6%'
       label: 'OOD generalization gap'
@@ -135,6 +142,13 @@
   paper_url: https://www.mdpi.com/2079-9292/14/20/4120
   bib: KimELECTRONICS2025
   highlight: true
+  thumb: publications/electronics2025/electronics2025_thumb.jpg
+  compare:
+    title: 'DTW-SMOTE-TS augmentation: real vs synthetic cycle'
+    aria: 'Toggle between an original respiration cycle and a DTW-SMOTE-TS synthetic sample'
+    before: { src: publications/electronics2025/electronics2025_ba_before.jpg, label: 'Original', alt: 'Original measured respiration cycle' }
+    after: { src: publications/electronics2025/electronics2025_ba_after.jpg, label: 'DTW-SMOTE-TS', alt: 'Synthetic cycle from DTW-SMOTE-TS that preserves breathing rhythm' }
+    caption: 'A synthetic respiration cycle generated from two parents preserves realistic breathing cadence — the rhythm-aware augmentation behind the +5.2-point gain. Hover or tap to swap original ⇄ synthetic.'
   stats:
     - value: '94.3%'
       label: 'accuracy'
@@ -248,6 +262,7 @@
   paper_url: https://link.springer.com/article/10.1007/s11265-023-01837-z
   bib: KimSPRINGER2024
   highlight: false
+  thumb: publications/springer2024/springer2024_thumb.jpg
   stats:
     - value: '<0.8 px'
       label: 'reprojection error'
@@ -362,6 +377,13 @@
   paper_url: https://www.mdpi.com/1424-8220/20/10/2977
   bib: KimSENSORS2020
   highlight: false
+  thumb: publications/sensors2020/sensors2020_thumb.jpg
+  compare:
+    title: 'High-pass-filtered radar response: normal vs apnea'
+    aria: 'Toggle between an all-normal and an all-apnea filtered radar response'
+    before: { src: publications/sensors2020/sensors2020_ba_before.jpg, label: 'Normal', alt: 'All-normal filtered radar response stays flat' }
+    after: { src: publications/sensors2020/sensors2020_ba_after.jpg, label: 'Apnea', alt: 'All-apnea filtered radar response erupts into transient bursts' }
+    caption: 'Regular breathing keeps the high-pass-filtered response flat; apnea erupts into sharp transient bursts whose count grows with apnea content — the signature the detector keys on. Hover or tap to swap normal ⇄ apnea.'
   stats:
     - value: '67% -> 93%'
       label: 'accuracy'

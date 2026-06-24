@@ -25,9 +25,10 @@
   <link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
   <link rel="manifest" href="/assets/img/favicon/site.webmanifest">
   <meta name="theme-color" content="#1772d0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/main.css?v={{ cssHash }}">
-  {% if isPubDetail %}<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">{% endif %}
   {% if isHome %}{% include "partials/jsonld.njk" %}{% endif %}
 </head>
 <body class="{% if isPubDetail %}pub-page{% endif %}">

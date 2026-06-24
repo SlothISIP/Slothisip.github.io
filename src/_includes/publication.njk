@@ -96,6 +96,20 @@ isPubDetail: true
   <section class="proj-section">
     <h2>Key results</h2>
     <ul class="bullets">{% for r in pub.results %}<li>{{ r }}</li>{% endfor %}</ul>
+    {# ---- BEFORE / AFTER crossfade (interactive, only where a genuine two-state pair exists) ---- #}
+    {% if pub.compare %}
+    <figure class="proj-figure ba-figure">
+      {% if pub.compare.title %}<p class="fig-title">{{ pub.compare.title }}</p>{% endif %}
+      <div class="ba" tabindex="0" role="button" aria-label="{{ pub.compare.aria or 'Toggle the before and after comparison' }}">
+        {% image pub.compare.before.src, pub.compare.before.alt, [768], "(max-width: 560px) 92vw, 500px" %}
+        <div class="ba-after">{% image pub.compare.after.src, pub.compare.after.alt, [768], "(max-width: 560px) 92vw, 500px" %}</div>
+        <span class="ba-tag ba-tag-before">{{ pub.compare.before.label }}</span>
+        <span class="ba-tag ba-tag-after">{{ pub.compare.after.label }}</span>
+        <span class="ba-hint">hover / tap &#8644;</span>
+      </div>
+      {% if pub.compare.caption %}<figcaption>{{ pub.compare.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endif %}
     {# featured: dense, headline evidence rendered at text-column/hero width so it stays legible #}
     {% for f in featuredFigs %}
     <figure class="proj-figure figure-feature">

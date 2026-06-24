@@ -4,20 +4,19 @@
    design tokens, a clean container layout, and responsiveness)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
 :root {
-  --accent: #1772d0;
-  --accent-hover: #f09228;
-  --ink: #1a1a1a;
-  --muted: #61686f;
-  --line: #e9ecef;
-  --bg: #ffffff;
-  --highlight: #ffffd0;
+  --accent: #4f46e5;          /* indigo — unified site-wide with the detail skin */
+  --accent-hover: #4338ca;
+  --ink: #14181f;
+  --muted: #6b7280;
+  --line: #e3e6ea;
+  --bg: #eef0f3;              /* gray shell — same page bg as the detail pages */
+  --highlight: #ecebfd;       /* soft indigo tint for highlighted papers */
   --surface: #f8f9fa;
   --maxw: 800px;
   --maxw-wide: 960px;
-  --font: 'Lato', Verdana, Helvetica, sans-serif;
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --fig-bleed: 60px;   /* (920 container-inner - 800 text) / 2 — how far a band breaks out each side */
   --fig-radius: 8px;
 }
@@ -511,3 +510,123 @@ body.pub-page { background: #eef0f3; }
 .pub-detail .copy-btn { border-color: var(--pline2); color: var(--pa); font-family: var(--pmono); }
 .pub-detail .copy-btn:hover { background: var(--pa); color: #fff; border-color: var(--pa); }
 .pub-detail .detail-back a { font-size: .85rem; }
+
+/* ============================================================
+   BRIDGE — carry the detail "Technical" surface (Inter type,
+   indigo accent, gray shell, mono "#" section eyebrows) across
+   the HOME + PROJECT pages so the site reads as one. Layouts are
+   kept; only the surface changes. Scoped to body:not(.pub-page)
+   so the publication-detail card skin is untouched.
+   ============================================================ */
+
+/* Section headings → mono "# eyebrow" (mirrors .pub-detail), no underline */
+body:not(.pub-page) .container > section > h2,
+body:not(.pub-page) .proj-section > h2 {
+  font-family: var(--mono);
+  font-size: .74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--muted);
+  border: 0;
+  padding: 0;
+  margin: 2.4rem 0 1.1rem;
+}
+body:not(.pub-page) .container > section:first-of-type > h2 { margin-top: 1.2rem; }
+body:not(.pub-page) .container > section > h2::before,
+body:not(.pub-page) .proj-section > h2::before { content: "# "; color: var(--accent); }
+body:not(.pub-page) h2 .count {
+  font-family: var(--font); font-weight: 500; font-size: .8rem;
+  letter-spacing: 0; text-transform: none; color: #9aa3b2;
+}
+
+/* Home identity + project-detail title → Inter display weight */
+body:not(.pub-page) .name { font-weight: 800; letter-spacing: -.02em; color: var(--ink); }
+body:not(.pub-page) .detail-head h1 {
+  font-weight: 800; letter-spacing: -.022em; font-size: 1.95rem;
+  line-height: 1.18; color: var(--ink);
+}
+
+/* Section divider rhythm: a hairline above each section heading reads cleaner on the shell */
+body:not(.pub-page) .container > section + section > h2 {
+  border-top: 1px solid var(--line); padding-top: 1.9rem;
+}
+
+/* Wordmark + nav read as part of the technical skin */
+.site-nav-home { letter-spacing: -.01em; }
+
+/* ---- Home publication list: Barron-style thumbnails ---- */
+body:not(.pub-page) .pub-list { list-style: none; padding-left: 0; }
+.pub-item.has-thumb { display: flex; gap: 16px; align-items: flex-start; }
+.pub-thumb {
+  flex: 0 0 auto; width: 104px; height: 92px;
+  border-radius: 10px; overflow: hidden; background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(16,24,40,.06), 0 10px 24px -16px rgba(16,24,40,.25);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.pub-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pub-item.has-thumb:hover .pub-thumb {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(16,24,40,.08), 0 16px 30px -16px rgba(16,24,40,.3);
+}
+.pub-body { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 480px) {
+  .pub-thumb { width: 80px; height: 76px; }
+  .pub-item.has-thumb { gap: 12px; }
+}
+
+/* ============================================================
+   Before / after crossfade (.ba) — scoped to the publication
+   detail card. Default shows the "before" state; hover, keyboard
+   focus, or a tap (sticky .is-after, set by copy.js) reveals the
+   "after" state. Pairs are pre-cropped to identical dimensions.
+   ============================================================ */
+.pub-detail .ba-figure { margin: 1.5rem auto; max-width: 500px; }
+.pub-detail .ba {
+  position: relative; display: block; width: 100%;
+  border: 1px solid var(--pline); border-radius: 12px; overflow: hidden;
+  background: #fff; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 1px 2px rgba(16,24,40,.05), 0 18px 40px -24px rgba(16,24,40,.25);
+}
+.pub-detail .ba:focus-visible { outline: 2px solid var(--pa); outline-offset: 2px; }
+.pub-detail .ba :is(img, picture) {
+  display: block; width: 100%; height: auto; border: 0; border-radius: 0; box-shadow: none;
+}
+.pub-detail .ba-after {
+  position: absolute; inset: 0; opacity: 0; transition: opacity .35s ease;
+}
+.pub-detail .ba-after :is(img, picture) { width: 100%; height: 100%; }
+.pub-detail .ba-after img { object-fit: cover; }
+.pub-detail .ba:hover .ba-after,
+.pub-detail .ba:focus-visible .ba-after,
+.pub-detail .ba.is-after .ba-after { opacity: 1; }
+
+/* state tags (top-left, one visible at a time) */
+.pub-detail .ba-tag {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  font-family: var(--pmono); font-size: .62rem; font-weight: 700; letter-spacing: .03em;
+  padding: .26em .62em; border-radius: 5px; color: #fff;
+  transition: opacity .25s ease;
+}
+.pub-detail .ba-tag-before { background: rgba(11,15,26,.82); }
+.pub-detail .ba-tag-after { background: var(--pk); opacity: 0; }
+.pub-detail .ba:hover .ba-tag-before,
+.pub-detail .ba:focus-visible .ba-tag-before,
+.pub-detail .ba.is-after .ba-tag-before { opacity: 0; }
+.pub-detail .ba:hover .ba-tag-after,
+.pub-detail .ba:focus-visible .ba-tag-after,
+.pub-detail .ba.is-after .ba-tag-after { opacity: 1; }
+
+/* affordance hint (bottom-right) */
+.pub-detail .ba-hint {
+  position: absolute; right: 10px; bottom: 10px; z-index: 2;
+  font-family: var(--pmono); font-size: .58rem; font-weight: 600; color: #fff;
+  background: rgba(11,15,26,.55); padding: .24em .6em; border-radius: 999px;
+  pointer-events: none; transition: opacity .25s ease;
+}
+.pub-detail .ba:hover .ba-hint, .pub-detail .ba.is-after .ba-hint { opacity: .4; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pub-detail .ba-after, .pub-detail .ba-tag, .pub-detail .ba-hint { transition: none; }
+}
