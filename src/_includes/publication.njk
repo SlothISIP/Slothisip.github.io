@@ -1,5 +1,6 @@
 ---
 layout: base.njk
+isPubDetail: true
 ---
 {% set figs = pub.figures or [] %}
 {% set leadFig = figs | figuresLead %}
@@ -12,13 +13,16 @@ layout: base.njk
 
 <article class="detail pub-detail">
   <header class="detail-head">
+    <p class="eyebrow">{{ pub.venue }}{% if pub.year %} · {{ pub.year }}{% endif %}</p>
     <h1>{{ pub.title }}</h1>
     <p class="authors">{{ pub.authors | replace("Ju O Kim", "<strong>Ju O Kim</strong>") | safe }}</p>
-    <p class="venue">{{ pub.venue }}{% if pub.year %}, {{ pub.year }}{% endif %}
+    <p class="venue">{{ pub.venue }}{% if pub.year %} · {{ pub.year }}{% endif %}
       <span class="pub-badge pub-badge-{{ pub.badge }}">{{ pub.badge | upper }}</span></p>
     <p class="detail-actions">
-      {% if pub.paper_url %}<a class="paper-pill" href="{{ pub.paper_url }}">Paper</a>{% endif %}
-      <a class="paper-pill" href="/data/{{ pub.bib }}.bib">Download BibTeX</a>
+      {% if pub.paper_url %}<a class="paper-pill solid" href="{{ pub.paper_url }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3v5h5M7 3h8l4 4v14H7z"/></svg>Paper</a>{% endif %}
+      <a class="paper-pill" href="/data/{{ pub.bib }}.bib">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>BibTeX</a>
     </p>
   </header>
 
@@ -65,6 +69,17 @@ layout: base.njk
   {% if pub.approach and pub.approach.length %}
   <section class="proj-section">
     <h2>Approach</h2>
+    {% if pub.pipeline and pub.pipeline.length %}
+    <div class="flow" role="img" aria-label="Method pipeline">
+    {% for s in pub.pipeline %}
+      {% if not loop.first %}<div class="sep" aria-hidden="true"></div>{% endif %}
+      <div class="step{% if s.key %} key{% endif %}">
+        {% if s.key %}<span class="chip">novelty</span>{% endif %}
+        <b>{{ s.label }}</b>{% if s.sub %}<small>{{ s.sub }}</small>{% endif %}
+      </div>
+    {% endfor %}
+    </div>
+    {% endif %}
     <ul class="bullets">{% for a in pub.approach %}<li>{{ a }}</li>{% endfor %}</ul>
     {% for f in approachFigs %}
     <figure class="proj-figure">

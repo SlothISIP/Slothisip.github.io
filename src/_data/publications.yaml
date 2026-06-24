@@ -76,53 +76,54 @@
     Ju O Kim and Deokwoo Lee, "FFT-Free Neural Operators for Helmholtz Scattering via
     Adaptive Coefficient Modulation," Applied Sciences (MDPI), vol. 16, no. 12, article
     5997, 2026. DOI: 10.3390/app16125997. Open Access (CC BY).
+  pipeline:
+    - { label: 'Input medium', sub: 'n2(x)' }
+    - { label: 'Spatial encoder', sub: 'context z, S' }
+    - { label: 'Rank-32 gate', sub: 'hypernetwork branch', key: true }
+    - { label: 'Hybrid basis', sub: 'SIREN + Fourier' }
+    - { label: 'Wave field', sub: 'u-hat(x)' }
   figures:
     - src: publications/applsci2026/applsci2026_concept.svg
       section: problem
       alt: 'Fixed Fourier-mode budget (FNO) vs adaptive basis re-weighting (HNO) - the core mechanism'
-      caption: "The paper's core idea. FNO spends a fixed budget of Fourier modes uniformly across the spectrum, so it saturates at sharp material interfaces in high-contrast media (OOD gap 50.6%). HNO keeps the same fixed SIREN + learnable-Fourier basis and lets a rank-32 hypernetwork emit a bounded per-mode gate (delta-phi in [-0.5, 0.5]) that re-weights the coefficients per input medium - no added modes, no global transform (FFT-free) - cutting the OOD gap to 19.6% while running 4.6-16.4x faster."
-    - src: publications/applsci2026/applsci2026_flow.svg
-      section: lead
-      alt: 'HNO method overview - FFT-free branch-trunk operator that re-weights a fixed wave-tailored basis per input medium'
-      caption: 'How HNO works: a spatial encoder reads the input medium n2(x); a rank-32 hypernetwork branch emits a bounded per-mode gate dphi that re-weights a fixed SIREN + learnable-Fourier basis (no added Fourier modes, no global transform), and the gated coefficients reconstruct the wave field u-hat(x). The two highlighted blocks are the paper''s novelty: the dual-path branch + bounded gate, and the re-weighting of a fixed basis.'
+      caption: 'Core idea: where FNO spends a fixed Fourier-mode budget and saturates at sharp interfaces (50.6% OOD gap), HNO re-weights a fixed SIREN + Fourier basis per input medium - FFT-free - cutting the gap to 19.6%.'
     - src: publications/applsci2026/applsci2026_architecture.jpg
       title: 'HNO architecture'
       section: approach
       alt: HNO architecture overview
-      caption: 'Helmholtz Neural Operator (HNO) architecture (Abstract section header image). The SpatialFeatureEncoder maps the input medium n²(x) to a pooled context vector z and a spatial feature tensor S; the dual-path EnhancedModulator combines a rank-32 LoRA global path with a 1x1-convolution spatial path into a bounded per-mode multiplicative gate Δφ ∈ [-0.5, 0.5]; and the HybridBasisNetwork (SIREN + learnable Fourier, K = 64) supplies the trunk basis evaluated at coordinates x. The wave field is reconstructed as û = Σ_k α_k(n²)·φ_k(x)·(1 + Δφ_k). The architecture is FFT-free -- spectral structure is captured by learnable Fourier features rather than by a global transform (1,047,440 parameters total).'
+      caption: 'HNO architecture: a spatial encoder and a dual-path rank-32 modulator emit a bounded per-mode gate over a hybrid SIREN + Fourier basis. FFT-free, 1,047,440 parameters.'
     - src: publications/applsci2026/applsci2026_dataset.jpg
       title: 'Dataset and difficulty regimes'
       section: problem
       alt: Helmholtz dataset visualization
-      caption: 'Dataset visualization. Top row: input medium n²(x) and wave-field magnitude |u(x)|; bottom row: real and imaginary parts of the field. Level 1 (a,b,e,f) is a simple single-scatterer geometry (displayed sample ~2.3:1 contrast, dataset maximum 3:1); Level 4 (c,d,g,h) is a high-contrast multiple-scatterer regime (displayed sample ~12:1, dataset maximum 15:1). The red diamond S marks the point-source location. Models train only on random-blob Level 3 media and are evaluated out-of-distribution on Level 4, so the rising geometric and spectral complexity from Level 1 to Level 4 is exactly where fixed Fourier bases (FNO) struggle.'
+      caption: 'Dataset: input medium n²(x) and field magnitude |u(x)|. Difficulty rises from Level 1 (~3:1 contrast) to Level 4 (up to 15:1); models train on Level 3 and are tested out-of-distribution on Level 4.'
     - src: publications/applsci2026/applsci2026_oodgap.jpg
       title: 'Out-of-distribution generalization gap'
       section: results
       featured: true
       alt: Parameter-matched OOD generalization gap
-      caption: 'Parameter-matched comparison of the out-of-distribution generalization gap across DeepONet, FNO, MscaleFNO, and HNO (~1.05M parameters each, 5 seeds). HNO attains a 19.6% gap -- 2.6x better than FNO (p = 1.7x10^-3), 5.1x better than vanilla DeepONet (p = 8.2x10^-3), and 6.0x better than MscaleFNO (p = 2.4x10^-6). Adding parallel frequency-scaled branches (MscaleFNO) more than doubles the gap relative to FNO, and a 4.2x-larger MscaleFNO worsens further to 148.0%, confirming the collapse is architectural rather than capacity-related.'
+      caption: 'Param-matched OOD generalization gap (~1.05M params each, 5 seeds): HNO reaches 19.6% - 2.6x better than FNO, 5.1x better than DeepONet, and 6.0x better than MscaleFNO.'
     - src: publications/applsci2026/applsci2026_qualitative.jpg
       title: 'Qualitative wave-field comparison'
-      section: results
-      featured: true
+      section: lead
       alt: Qualitative wave-field comparison (HNO vs FNO)
-      caption: 'Qualitative comparison across difficulty (seed-42 models). Rows: an easy in-distribution Level 3 medium, a moderate-contrast Level 4 medium, and a high-contrast Level 4 failure case. Columns: input medium n², ground-truth |u|, HNO |û|, and FNO |û| (relative L² annotated). HNO degrades gracefully (0.74 / 1.14 / 1.18) while FNO collapses on the high-contrast case (0.81 / 1.13 / 1.64); FNO error concentrates at material interfaces -- the mode-saturation signature -- whereas HNO stays more uniform through medium-conditioned coefficient modulation. The dim HNO "Failure (Level-4)" panel (relative L2 1.18) is the visual analogue of the paper''s honest extreme-contrast limit -- on the full 15:1 OOD set HNO''s relative L2 is about 1.04.'
+      caption: 'HNO vs FNO wave fields across difficulty: HNO degrades gracefully (relative L2 0.74 / 1.14 / 1.18) while FNO collapses on the high-contrast case (up to 1.64), its error concentrating at material interfaces.'
     - src: publications/applsci2026/applsci2026_speed.svg
       section: results
       featured: true
       alt: 'Speed versus accuracy across models - inference time per forward pass vs out-of-distribution gap'
-      caption: 'Speed-accuracy trade-off (param-matched, Table 1). Each model''s mean inference time per forward pass against its out-of-distribution generalization gap -- both lower is better. HNO sits alone in the fast-and-accurate corner (3.05 ms, 19.6% gap) while DeepONet, FNO and MscaleFNO trade one for the other; the classical FD-PML reference solver is exact but 64-245x slower than HNO.'
+      caption: 'Speed-accuracy trade-off (param-matched): HNO sits alone in the fast-and-accurate corner (3.05 ms, 19.6% gap); the classical FD-PML solver is exact but 64-245x slower.'
     - src: publications/applsci2026/applsci2026_frequency.jpg
       title: 'Frequency robustness'
       section: results
       featured: true
       alt: Frequency robustness across wavenumber
-      caption: 'Frequency robustness: generalization gap across wavenumber k0. Both models train at k0 = 20 (dashed line); HNO (blue) holds lower, more consistent gaps than the FNO baseline (red) across the tested k0 in [10, 30] -- about 1.8x better average robustness with 56% lower variance (29.9% vs. 55.2% mean gap). The behavior is a property of the fixed-spectral-basis architecture rather than of capacity: the parameter-matched FNO-5m5L sweep widens the margin to 2.2x.'
+      caption: 'Frequency robustness: across wavenumber k0 in [10, 30], HNO holds lower, more consistent gaps than FNO (29.9% vs. 55.2% mean gap).'
     - src: publications/applsci2026/applsci2026_ablation.jpg
       title: 'Architecture ablation'
       section: results
       alt: Architecture ablation (basis type and modulator rank)
-      caption: 'Architecture ablation (3 seeds). (a) Basis type: the hybrid SIREN + Fourier trunk (19.9% gap) is 4.6x lower than SIREN-only and 2.2x lower than Fourier-only, identifying the wave-tailored trunk as the load-bearing component. (b) Modulator rank: rank 32 is the critical operating point, with both lower (8, 16) and higher (64) ranks degrading substantially. A five-seed re-run and a modulation-presence ablation attribute essentially all of the OOD improvement to the hybrid trunk, with the bounded coefficient gate acting as an accuracy-neutral stability mechanism.'
+      caption: 'Ablation: the hybrid SIREN + Fourier trunk drives the gain (19.9% gap, 4.6x lower than SIREN-only); modulator rank 32 is the sweet spot.'
   acknowledgements: This work was supported by the Basic Science Research Program through the National Research Foundation of Korea (NRF) funded by the Ministry of Education (No. 2022R1I1A3069352). We thank the academic editors and the anonymous reviewers for their valuable feedback.
 - slug: electronics2025
   title: 'Overcoming Data Scarcity in Non-Contact Respiratory Monitoring: A DTW-Enhanced CNN-LSTM Approach'
@@ -194,46 +195,48 @@
     Ju O Kim and Deokwoo Lee, "Overcoming Data Scarcity in Non-Contact Respiratory
     Monitoring: A DTW-Enhanced CNN-LSTM Approach," Electronics (MDPI), vol. 14, no. 20, p.
     4120, October 2025. DOI: 10.3390/electronics14204120. Impact Factor: 2.9 (SCIE).
+  pipeline:
+    - { label: 'UWB radar', sub: 'Xethru X4M300' }
+    - { label: 'Bandpass', sub: '0.1-1 Hz' }
+    - { label: 'DTW-SMOTE-TS', sub: 'rhythm-preserving', key: true }
+    - { label: 'CNN-LSTM', sub: '~104.6K params' }
+    - { label: 'Decision', sub: 'normal / apnea' }
   figures:
-    - src: publications/electronics2025/electronics2025_flow.svg
-      section: lead
-      alt: 'DTW-SMOTE CNN-LSTM apnea-detection pipeline overview'
-      caption: 'How the system works: a UWB radar captures chest motion, a 0.1-1 Hz bandpass isolates respiration, and DTW-SMOTE-TS augmentation (highlighted) synthesises minority apnea samples while preserving breathing cadence - the paper''s key idea - before a compact CNN-LSTM classifies normal vs apnea.'
     - src: publications/electronics2025/electronics2025_cnnlstm.jpg
       title: 'CNN-LSTM architecture'
       section: approach
       alt: CNN-LSTM hybrid architecture
-      caption: 'CNN-LSTM hybrid architecture: three 1-D convolutional blocks (32 -> 64 -> 128 filters) extract local signal morphology, two stacked LSTM layers (64 -> 32 units) model temporal dynamics, and a dense softmax head produces the normal/abnormal decision (104,578 parameters, ~410 KB).'
+      caption: 'CNN-LSTM: three 1-D conv blocks (32 -> 64 -> 128) and two stacked LSTMs (64 -> 32) with a dense softmax head (104,578 parameters).'
     - src: publications/electronics2025/electronics2025_augmentation.jpg
       title: 'Augmentation techniques'
       section: approach
       alt: Data augmentation techniques
-      caption: 'Data augmentation on respiratory signals: (a) original signal, (b) time shifting, (c) amplitude scaling, (d) Gaussian-noise addition, (e) DTW alignment, and (f) the resulting DTW-SMOTE-TS synthetic sample generated between two parent signals.'
+      caption: 'Augmentation on respiration signals: (a) original, (b) time-shift, (c) amplitude scale, (d) noise, (e) DTW alignment, and (f) the DTW-SMOTE-TS synthetic sample.'
     - src: publications/electronics2025/electronics2025_concept.svg
       section: approach
       alt: 'Why DTW-SMOTE preserves breathing rhythm where Euclidean SMOTE flattens it'
-      caption: 'Why DTW beats Euclidean SMOTE. Plain SMOTE interpolates point-by-point on time-misaligned breathing cycles, averaging them into a flattened, unnatural cadence; DTW-SMOTE-TS first aligns matching cycles with Dynamic Time Warping, so the synthetic apnea sample keeps a realistic rhythm -- the source of the +5.2-point accuracy gain.'
+      caption: 'Why DTW beats Euclidean SMOTE: plain SMOTE averages time-misaligned cycles into a flattened cadence; DTW aligns them first, keeping a realistic rhythm - the source of the +5.2-point gain.'
     - src: publications/electronics2025/electronics2025_ladder.svg
       section: results
       featured: true
       alt: 'Augmentation ladder - test accuracy with no / basic / full DTW-SMOTE-TS augmentation'
-      caption: 'The thesis in one chart. With scarce labeled data the CNN-LSTM overfits (no augmentation, 82.3%); plain SMOTE without DTW lifts it to 89.1%, and replacing Euclidean distance with Dynamic Time Warping (DTW-SMOTE-TS) -- which keeps realistic breathing cadence in the synthetic apnea samples -- adds the final +5.2 to reach 94.3%, a +12-point gain over the non-augmented baseline.'
+      caption: 'The thesis in one chart: no augmentation 82.3%, plain SMOTE 89.1%, DTW-SMOTE-TS 94.3% - a +12-point gain over the baseline.'
     - src: publications/electronics2025/electronics2025_confusion.jpg
       title: 'Confusion matrix'
-      section: results
+      section: lead
       alt: Confusion matrix
-      caption: 'Confusion matrix on the held-out test set (175 samples): 121/125 normal and 44/50 abnormal cases classified correctly -- 94.3% overall accuracy (normal precision 0.953 / recall 0.968; abnormal precision 0.917 / recall 0.880).'
+      caption: 'Held-out test set (175 samples): 121/125 normal and 44/50 apnea correct - 94.3% accuracy.'
     - src: publications/electronics2025/electronics2025_roc.jpg
       title: 'ROC and AUC comparison'
       section: results
       featured: true
       alt: ROC, precision-recall and AUC comparison
-      caption: 'Model comparison: (a) ROC curves, (b) precision-recall curves, and (c) AUC scores across model variants. The proposed CNN-LSTM (marked *) ranks highest, ahead of CNN-only, 1D-ResNet, Bi-LSTM, LSTM-only and GRU. The curve plotted here reads AUC 0.974, within the 5-fold range 0.961-0.978; the paper''s headline AUC is the 0.969 five-fold mean.'
+      caption: 'Model comparison (ROC, PR and AUC): the proposed CNN-LSTM (marked *) ranks highest across variants; headline AUC 0.969 (five-fold mean).'
     - src: publications/electronics2025/electronics2025_ablation.jpg
       title: 'Architecture ablation'
       section: results
       alt: Architecture ablation study
-      caption: 'Architecture ablation -- accuracy versus (a) number of CNN blocks, (b) LSTM unit width, (c) dropout rate, and (d) batch normalization. The chosen configuration (3 blocks, medium LSTM, 0.3 dropout, with BatchNorm) reaches 94.3%.'
+      caption: 'Ablation over CNN blocks, LSTM width, dropout and BatchNorm: the chosen config (3 blocks, medium LSTM, 0.3 dropout, BatchNorm) reaches 94.3%.'
   acknowledgements: This research was supported by the Basic Science Research Program through the National Research Foundation of Korea (NRF) funded by the Ministry of Education. We thank the anonymous reviewers for their valuable feedback and suggestions.
 - slug: springer2024
   title: Calibrating a Three-Viewpoints Thermal Camera with Few Correspondences
@@ -301,51 +304,53 @@
     Ju O Kim, Jieun Kim, and Deokwoo Lee, "Calibrating a Three-Viewpoints Thermal Camera
     with Few Correspondences," Journal of Signal Processing Systems (Springer), vol. 96, no.
     3, pp. 191-202, 2024. DOI: 10.1007/s11265-023-01837-z. Impact Factor: 1.8 (SCI).
+  pipeline:
+    - { label: 'Thermal board', sub: 'low-texture' }
+    - { label: 'VDSR', sub: 'super-resolution' }
+    - { label: 'Line fit', sub: 'dominant lines' }
+    - { label: 'Vanishing pts', sub: 'geometric constraint', key: true }
+    - { label: 'Multi-view calib', sub: '<0.8 px' }
   figures:
-    - src: publications/springer2024/springer2024_flow.svg
-      section: lead
-      alt: 'Vanishing-point thermal-camera calibration pipeline overview'
-      caption: 'How calibration works: VDSR super-resolution sharpens the low-texture thermal checkerboard, dominant lines are fit, and their intersection yields vanishing points (highlighted) - the geometric constraint that replaces the dense feature correspondences a >180-degree, low-overlap three-view rig cannot provide - feeding a multi-view optimization to sub-0.8 px error.'
     - src: publications/springer2024/springer2024_sightlines.svg
       section: problem
       alt: 'Top-down sightlines of a >180-degree three-view rig with minimal overlap'
-      caption: 'Why a wide-baseline three-view rig starves classical calibration. With the three views spanning more than 180 degrees (about 240 degrees between viewpoints), adjacent fields of view barely overlap, so any one scene -- the calibration board here -- is captured by only a single view. That leaves no shared features for Zhang''s method or structure-from-motion to match; this method instead recovers the geometry from vanishing points, with no correspondence matching needed.'
+      caption: 'Why a wide-baseline rig starves classical calibration: with views spanning about 240 degrees, each scene is captured by only one view - leaving no shared features for Zhang or structure-from-motion to match. This method uses vanishing points instead.'
     - src: publications/springer2024/springer2024_hardware.jpg
       title: 'Three-viewpoint thermal rig'
-      section: problem
+      section: lead
       alt: Three-viewpoint thermal camera hardware
-      caption: 'Three-viewpoint thermal camera hardware: (a) the fabricated wide-baseline rig and (b, c) its CAD model, with viewpoints separated by more than 180 degrees and minimal inter-view overlap.'
+      caption: 'Three-viewpoint thermal rig: (a) the fabricated wide-baseline hardware and (b, c) its CAD model, viewpoints separated by more than 180 degrees.'
     - src: publications/springer2024/springer2024_flow.jpg
       title: 'Calibration pipeline'
       section: approach
       alt: Calibration pipeline flowchart
-      caption: 'Calibration pipeline (paper flowchart): the method splits the problem -- intrinsic parameters come from corner detection on the VDSR super-resolved checkerboard, while the extrinsic parameters between the widely-separated views come from line detection and vanishing-point extraction. That split is what lets calibration succeed from only a few correspondences.'
+      caption: 'Calibration pipeline: intrinsics come from corner detection on the VDSR-enhanced checkerboard, extrinsics from line detection and vanishing points - succeeding from only a few correspondences.'
     - src: publications/springer2024/springer2024_vp.jpg
       title: 'Vanishing-point principle'
       section: approach
       alt: Vanishing-point principle
-      caption: 'Vanishing-point principle: parallel lines in the real world (A, B, C) project to a common vanishing point (VP) in the image, supplying the geometric constraint used to relate the camera viewpoints.'
+      caption: 'Vanishing-point principle: real-world parallel lines (A, B, C) project to a common vanishing point (VP), the geometric constraint that relates the viewpoints.'
     - src: publications/springer2024/springer2024_vp_detection.jpg
       title: 'Vanishing-point detection'
       section: approach
       alt: Vanishing-point detection
-      caption: 'Vanishing-point detection: dominant line segments are fit on the thermal checkerboard (a) and intersected (b); the intersection of the fitted lines yields the vanishing point used as a calibration constraint.'
+      caption: 'Vanishing-point detection: dominant lines are fit on the thermal checkerboard (a) and intersected (b) to yield the vanishing point.'
     - src: publications/springer2024/springer2024_compare.svg
       section: results
       featured: true
       alt: 'Capability comparison: vanishing-point calibration vs correspondence-based stereo / SfM / Zhang'
-      caption: 'Why correspondence-based calibration cannot be used here. Stereo, structure-from-motion and Zhang-style checkerboard calibration all rely on overlapping views and matched features -- neither of which exists on a >180-degree, non-overlapping, near-featureless thermal rig. This method sidesteps matching entirely, recovering the geometry from vanishing points (with about five 2D-3D point pairs) at under 0.8 px reprojection error.'
+      caption: 'Stereo, structure-from-motion and Zhang-style calibration all need overlapping views and matched features - absent on this rig. This method recovers the geometry from vanishing points at under 0.8 px error.'
     - src: publications/springer2024/springer2024_reprojection.jpg
       title: 'Reprojection error per viewpoint'
       section: results
       featured: true
       alt: Reprojection error per viewpoint
-      caption: 'Reprojection error per viewpoint (a, b, c): the mean reprojection error stays below ~0.66 pixels across all three thermal camera views, confirming accurate calibration from only a few correspondences.'
+      caption: 'Reprojection error per viewpoint (a, b, c): below ~0.66 px across all three thermal views.'
     - src: publications/springer2024/springer2024_rotation.svg
       section: results
       featured: true
       alt: 'Average rotation error vs prior calibration work (Table 4): sub-degree without using correspondences'
-      caption: 'Rotation accuracy against prior calibration work (paper Table 4). The proposed vanishing-point method reaches a 0.43-degree average rotation error -- competitive and sub-degree -- while, unlike every method compared, requiring no correspondence matching. (Lecrosnier and Bazin report lower error but rely on correspondences or a known direction; Zhou & Deng''s 12.03 degrees is off the chart scale.)'
+      caption: 'Rotation accuracy vs prior work (Table 4): 0.43-degree average error - sub-degree and, unlike the methods compared, with no correspondence matching.'
   acknowledgements: This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korean government. We thank the reviewers for their valuable feedback and suggestions that helped improve this work.
 - slug: sensors2020
   title: Detection of Abnormal Respiration from Multiple-Input Respiratory Signals
@@ -404,37 +409,39 @@
     Ju O Kim and Deokwoo Lee, "Detection of Abnormal Respiration from Multiple-Input
     Respiratory Signals," Sensors (MDPI), vol. 20, no. 10, p. 2977, 2020. DOI:
     10.3390/s20102977. Impact Factor: 3.9 (SCIE).
+  pipeline:
+    - { label: 'UWB radar', sub: 'Novelda X4' }
+    - { label: 'Filter bank', sub: 'BP + adaptive HPF' }
+    - { label: 'Z-domain', sub: 'pole-zero rule', key: true }
+    - { label: 'Multi-input fusion', sub: 'sum acquisitions' }
+    - { label: 'Decision', sub: '67% to 93%' }
   figures:
-    - src: publications/sensors2020/sensors2020_flow.svg
-      section: lead
-      alt: 'Z-domain multi-input respiration / apnea detection pipeline overview'
-      caption: 'How detection works: a UWB radar feeds a filter bank (0.1-0.5 Hz bandpass + adaptive high-pass); a Z-domain pole-zero analysis of B(z)/A(z) (highlighted) places normal and apnea breathing in distinct regions, and summing multiple acquisitions lifts accuracy from 67% (single input) to 93% (triple input).'
     - src: publications/sensors2020/sensors2020_flowchart.jpg
       title: 'Processing pipeline'
       section: approach
       alt: Overall processing pipeline
-      caption: 'Overall processing pipeline: respiration is acquired in the time domain. The single-input path reads pole-zero positions in the Z-domain; the multiple-input path sums acquisitions through a tunable high-pass filter that turns apnea into transient bursts. Combining the two paths is what lifts accuracy from 67% (single) to 93% (triple input).'
+      caption: 'Processing pipeline: a single-input path reads Z-domain pole-zero positions; a multi-input path sums acquisitions through a tunable high-pass filter - together lifting accuracy from 67% to 93%.'
     - src: publications/sensors2020/sensors2020_apnea.jpg
       title: 'Apnea in the radar signal'
       section: problem
       alt: Abnormal (apnea) respiration examples
-      caption: 'Two examples of abnormal (apnea) respiration measured by the UWB radar: regular breathing oscillations are interrupted by flat apnea intervals where chest-surface motion stops.'
+      caption: 'Two apnea examples from the UWB radar: regular breathing oscillations are interrupted by flat intervals where chest motion stops.'
     - src: publications/sensors2020/sensors2020_fusion.svg
       section: results
       featured: true
       alt: 'Detection accuracy rises from 67% (single input) to 93% (triple-input fusion)'
-      caption: 'The accuracy payoff of multi-input fusion. Reading the Z-domain pole-zero signature of a single acquisition detects apnea at 67%; summing two to three acquisitions -- with the adaptive high-pass filter turning apnea into countable transient bursts -- lifts detection to 93%, a +26-point gain and the paper''s headline result.'
+      caption: 'The payoff of multi-input fusion: a single acquisition detects apnea at 67%; summing two-to-three lifts it to 93%, a +26-point gain.'
     - src: publications/sensors2020/sensors2020_zdomain_uc.jpg
       title: 'Z-domain pole-zero classification'
-      section: results
+      section: lead
       alt: Z-domain pole-zero classification (unit-circle panels)
-      caption: 'Z-domain classification. Pole-zero plots of the transfer ratios B1(z)/A1(z) and B1(z)/A0(z) on the complex z-plane: the signal zeros trace the unit circle while the poles cluster near the origin -- the well-conditioned regime whose pole-zero positions the decision rule reads to tell normal from apnea respiration. (The numerically degenerate B0(z)/A(z) ratios from the original four-panel figure are omitted.)'
+      caption: 'Z-domain classification: in the pole-zero plots of B1(z)/A1(z) and B1(z)/A0(z), zeros trace the unit circle and poles cluster near the origin - the decision rule reads their positions to tell normal from apnea.'
     - src: publications/sensors2020/sensors2020_filter.jpg
       title: 'High-pass filtered responses'
       section: results
       featured: true
       alt: High-pass filtered responses (triple input)
-      caption: 'High-pass-filtered responses for three combined inputs across breathing combinations, from (a) all-normal to (d) all-apnea. Apnea events appear as sharp transient bursts whose count grows with apnea content, enabling detection from the filtered peaks.'
+      caption: 'High-pass-filtered responses for three combined inputs, from (a) all-normal to (d) all-apnea: apnea appears as sharp transient bursts whose count grows with apnea content.'
   acknowledgements: This research was supported by Keimyung University. We thank the reviewers for their valuable feedback and suggestions.
 - slug: iceic2021
   title: Mathematical Model for a Calibration of Multiple-View Thermal Camera
