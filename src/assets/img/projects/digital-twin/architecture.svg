@@ -41,5 +41,5 @@
   <text x="780" y="332" font-size="19" font-weight="600" fill="#6b7280" letter-spacing="0.3">Scheduling</text>
 
   <circle cx="762" cy="398" r="5" fill="#6b7280"/>
-  <text x="780" y="404" font-size="19" font-weight="600" fill="#6b7280" letter-spacing="0.3">Integration</text>
+  <text x="780" y="404" font-size="19" font-weight="600" fill="#6b7280" letter-spacing="0.3">Monitoring</text>
 </svg>
