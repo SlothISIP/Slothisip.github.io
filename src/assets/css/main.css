@@ -399,13 +399,11 @@ body.pub-page { background: #eef0f3; }
   --pink: #0b0f1a; --pbody: #39414f; --pmut: #6b7280; --pfaint: #9aa3b2;
   --pline: #eceef2; --pline2: #dfe3ea; --psurf: #f7f8fb;
   --pmono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
-  max-width: 768px; margin: 8px auto 0; padding: 40px 40px 46px;
-  background: #fff; color: var(--pbody);
-  border: 1px solid var(--pline); border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(16,24,40,.06), 0 30px 60px -30px rgba(16,24,40,.25);
+  /* match the project-detail frame: plain centered content on the gray shell, no white card */
+  max-width: var(--maxw); margin: 0 auto; padding: 0;
+  color: var(--pbody);
   font-family: 'Inter', var(--font); font-size: 15.5px;
 }
-@media (max-width: 620px) { .pub-detail { padding: 26px 20px 32px; border-radius: 12px; } }
 .pub-detail a { color: var(--pa); }
 .pub-detail a:hover, .pub-detail a:focus { color: var(--pa); text-decoration: underline; }
 
