@@ -1,116 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="arrow" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="10" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0 0 L10 4 L0 8 z" fill="#64748b"/>
-    </marker>
-  </defs>
+<svg viewBox="0 0 960 460" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="960" height="460" fill="#ffffff"/>
 
-  <rect width="1100" height="600" fill="#ffffff"/>
+  <!-- ===== TITLE (headline, top-left, one blue word) ===== -->
+  <text x="48" y="70" font-size="29" font-weight="800" fill="#0f172a" letter-spacing="-0.4">Three factors multiply into one <tspan fill="#1772d0">rank</tspan>.</text>
 
-  <!-- Title block -->
-  <text x="44" y="52" font-size="23" font-weight="700" fill="#0f172a">Composite root-cause score</text>
-  <rect x="44" y="62" width="232" height="3" rx="1.5" fill="#1772d0"/>
-  <text x="44" y="86" font-size="13" fill="#64748b">Three separately-exposed factors multiply into one rank &#8212; auditable, not a black box.</text>
+  <!-- ============ THREE INBOUND FACTORS: gray hairlines converging on the focal ============ -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M286 168 C 372 168, 392 250, 424 250"/>
+    <path d="M286 250 C 372 250, 392 250, 424 250"/>
+    <path d="M286 332 C 372 332, 392 250, 424 250"/>
+  </g>
+  <g fill="#e6e9ee">
+    <circle cx="282" cy="168" r="3"/>
+    <circle cx="282" cy="250" r="3"/>
+    <circle cx="282" cy="332" r="3"/>
+  </g>
+  <text x="60" y="174" font-size="19" font-weight="700" fill="#6b7280">| ATE |</text>
+  <text x="60" y="256" font-size="19" font-weight="700" fill="#6b7280">edge_confidence</text>
+  <text x="60" y="338" font-size="19" font-weight="700" fill="#6b7280">bootstrap_stability</text>
 
-  <!-- Formula row -->
-  <text x="44" y="132" font-size="15" font-weight="600" fill="#475569">score  =</text>
+  <!-- outbound hairlines to the two ranked outcomes -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M576 250 C 664 250, 690 196, 752 196"/>
+    <path d="M576 250 C 664 250, 690 312, 752 312"/>
+  </g>
 
-  <!-- Factor 1: |ATE| -->
-  <rect x="138" y="108" width="196" height="62" rx="6" fill="#f8fafc" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="236" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#2563eb">| ATE |</text>
-  <text x="236" y="153" text-anchor="middle" font-size="11.5" fill="#2563eb">absolute causal effect</text>
+  <!-- ============ THE ONE BLUE FOCAL: the composite score ============ -->
+  <circle cx="500" cy="250" r="104" fill="#1772d0" opacity="0.06"/>
+  <circle cx="500" cy="250" r="76" fill="#1772d0"/>
+  <text x="500" y="244" text-anchor="middle" font-size="29" font-weight="800" letter-spacing="0.3" fill="#ffffff">score</text>
+  <text x="500" y="274" text-anchor="middle" font-size="15" letter-spacing="0.2" fill="#cfe2f7">composite rank</text>
 
-  <text x="350" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#64748b">&#215;</text>
+  <!-- ============ TWO RANKED OUTCOMES (Cooling Time winner = lone orange) ============ -->
+  <circle cx="754" cy="196" r="6" fill="#e8833a"/>
+  <text x="772" y="190" font-size="20" font-weight="700" fill="#e8833a" letter-spacing="0.3">Cooling Time</text>
+  <text x="772" y="214" font-size="22" font-weight="800" fill="#e8833a">0.62</text>
 
-  <!-- Factor 2: edge confidence -->
-  <rect x="370" y="108" width="196" height="62" rx="6" fill="#f8fafc" stroke="#16a34a" stroke-width="1.5"/>
-  <text x="468" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">edge_confidence</text>
-  <text x="468" y="153" text-anchor="middle" font-size="11.5" fill="#166534">ensemble vote share</text>
-
-  <text x="582" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#64748b">&#215;</text>
-
-  <!-- Factor 3: bootstrap stability -->
-  <rect x="602" y="108" width="206" height="62" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="705" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#475569">bootstrap_stability</text>
-  <text x="705" y="153" text-anchor="middle" font-size="11.5" fill="#475569">edge survival across resamples</text>
-
-  <text x="824" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#64748b">=</text>
-
-  <!-- score chip (the node this figure is about) -->
-  <rect x="848" y="110" width="120" height="58" rx="8" fill="#f8fafc" stroke="#f09228" stroke-width="2"/>
-  <text x="908" y="134" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">score</text>
-  <text x="908" y="153" text-anchor="middle" font-size="11.5" fill="#64748b">composite rank</text>
-
-  <!-- Worked example header -->
-  <text x="44" y="224" font-size="15" font-weight="700" fill="#0f172a">Worked example &#8212; target: Shrinkage</text>
-  <text x="44" y="244" font-size="12.5" fill="#64748b">Same confidence (82%) and stability (100%) for the top two, so the larger absolute effect wins the rank.</text>
-  <text x="44" y="261" font-size="11.5" font-style="italic" fill="#94a3b8">Note: | ATE | is min-max normalized across candidates before multiplying, so the raw product won&#8217;t match the score.</text>
-
-  <!-- Column headers for the worked table -->
-  <text x="60"  y="282" font-size="11.5" font-weight="600" fill="#64748b">cause</text>
-  <text x="318" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#2563eb">norm | ATE |</text>
-  <text x="452" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#16a34a">conf</text>
-  <text x="586" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#64748b">stab</text>
-  <text x="692" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#64748b">&#8594;</text>
-  <text x="760" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">score</text>
-  <line x1="44" y1="292" x2="836" y2="292" stroke="#cbd5e1" stroke-width="1"/>
-
-  <!-- Row 1: Cooling Time (rank 1, emphasized) -->
-  <rect x="44" y="302" width="792" height="40" rx="6" fill="#f1f5f9" stroke="#f09228" stroke-width="2"/>
-  <circle cx="76" cy="322" r="11" fill="#fef3c7" stroke="#f09228" stroke-width="1.5"/>
-  <text x="76" y="326" text-anchor="middle" font-size="12" font-weight="700" fill="#78350f">1</text>
-  <text x="98" y="327" font-size="13" font-weight="700" fill="#0f172a">Cooling Time</text>
-  <text x="318" y="327" text-anchor="middle" font-size="13" fill="#2563eb">0.065</text>
-  <text x="364" y="327" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="452" y="327" text-anchor="middle" font-size="13" fill="#16a34a">0.82</text>
-  <text x="520" y="327" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="586" y="327" text-anchor="middle" font-size="13" fill="#475569">1.00</text>
-  <text x="692" y="327" text-anchor="middle" font-size="13" fill="#64748b">&#8594;</text>
-  <text x="760" y="327" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">0.62</text>
-
-  <!-- Row 2: Mold Temp -->
-  <rect x="44" y="350" width="792" height="40" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-  <circle cx="76" cy="370" r="11" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="76" y="374" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">2</text>
-  <text x="98" y="375" font-size="13" font-weight="600" fill="#0f172a">Mold Temp</text>
-  <text x="318" y="375" text-anchor="middle" font-size="13" fill="#2563eb">0.030</text>
-  <text x="364" y="375" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="452" y="375" text-anchor="middle" font-size="13" fill="#16a34a">0.82</text>
-  <text x="520" y="375" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="586" y="375" text-anchor="middle" font-size="13" fill="#475569">1.00</text>
-  <text x="692" y="375" text-anchor="middle" font-size="13" fill="#64748b">&#8594;</text>
-  <text x="760" y="375" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">0.29</text>
-
-  <!-- Row 3: Resin Temp -->
-  <rect x="44" y="398" width="792" height="40" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-  <circle cx="76" cy="418" r="11" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="76" y="422" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">3</text>
-  <text x="98" y="423" font-size="13" font-weight="600" fill="#0f172a">Resin Temp</text>
-  <text x="318" y="423" text-anchor="middle" font-size="13" fill="#2563eb">0.013</text>
-  <text x="364" y="423" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="452" y="423" text-anchor="middle" font-size="13" fill="#16a34a">0.60</text>
-  <text x="520" y="423" text-anchor="middle" font-size="14" fill="#94a3b8">&#215;</text>
-  <text x="586" y="423" text-anchor="middle" font-size="13" fill="#475569">1.00</text>
-  <text x="692" y="423" text-anchor="middle" font-size="13" fill="#64748b">&#8594;</text>
-  <text x="760" y="423" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">~0.09</text>
-
-  <!-- Ranked bar chart -->
-  <text x="44" y="486" font-size="13" font-weight="700" fill="#0f172a">Ranked score</text>
-  <line x1="200" y1="470" x2="200" y2="568" stroke="#cbd5e1" stroke-width="1"/>
-
-  <!-- scale: 0.62 -> 620px width factor ~ use 0.62 = 600px? keep within. max bar 600px for 0.62 -->
-  <!-- Cooling Time bar (emphasized) -->
-  <rect x="200" y="478" width="600" height="22" rx="4" fill="#fef3c7" stroke="#f09228" stroke-width="2"/>
-  <text x="208" y="494" font-size="12" font-weight="700" fill="#78350f">Cooling Time</text>
-  <text x="812" y="494" font-size="12.5" font-weight="700" fill="#0f172a">0.62</text>
-
-  <!-- Mold Temp bar -->
-  <rect x="200" y="508" width="281" height="22" rx="4" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="208" y="524" font-size="12" font-weight="600" fill="#475569">Mold Temp</text>
-  <text x="493" y="524" font-size="12.5" font-weight="700" fill="#475569">0.29</text>
-
-  <!-- Resin Temp bar -->
-  <rect x="200" y="538" width="87" height="22" rx="4" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="208" y="554" font-size="12" font-weight="600" fill="#475569">Resin Temp</text>
-  <text x="299" y="554" font-size="12.5" font-weight="700" fill="#475569">~0.09</text>
+  <circle cx="754" cy="312" r="5" fill="#6b7280"/>
+  <text x="772" y="306" font-size="20" font-weight="600" fill="#6b7280" letter-spacing="0.3">Mold Temp</text>
+  <text x="772" y="330" font-size="22" font-weight="800" fill="#6b7280">0.29</text>
 </svg>

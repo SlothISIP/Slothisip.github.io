@@ -1,65 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <!-- Title -->
-  <text x="40" y="52" font-size="23" font-weight="700" fill="#0f172a">Credit Card Fraud benchmark</text>
-  <rect x="40" y="64" width="186" height="4" rx="2" fill="#1772d0"/>
-  <text x="40" y="90" font-size="13" fill="#64748b">Public Kaggle dataset (not client data) — flagship validation run for the APEX-ML pipeline</text>
+<svg viewBox="0 0 960 440" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="960" height="440" fill="#ffffff"/>
 
-  <!-- Row 1 of stat cards -->
-  <!-- 284,807 samples -->
-  <g>
-    <rect x="40" y="116" width="328" height="120" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="64" y="150" font-size="13" fill="#64748b">Dataset size</text>
-    <text x="64" y="196" font-size="38" font-weight="700" fill="#0f172a">284,807</text>
-    <text x="64" y="222" font-size="14" fill="#475569">samples (transactions)</text>
+  <!-- ===== TITLE (top-left, one blue word) ===== -->
+  <text x="60" y="62" font-size="25" font-weight="800" fill="#0f172a" letter-spacing="-.3">A <tspan fill="#1772d0">Credit Card Fraud</tspan> benchmark run.</text>
+
+  <!-- ===== gray hairline baseline they all sit on ===== -->
+  <line x1="60" y1="300" x2="900" y2="300" stroke="#e6e9ee" stroke-width="1.5"/>
+
+  <!-- col 1 : Dataset size 284,807 (neutral) -->
+  <text x="170" y="216" text-anchor="middle" font-size="46" font-weight="800" fill="#0f172a">284,807</text>
+  <text x="170" y="252" text-anchor="middle" font-size="16" font-weight="700" fill="#6b7280">samples · transactions</text>
+
+  <!-- col 2 : Positive class 0.17% (neutral) -->
+  <text x="380" y="216" text-anchor="middle" font-size="46" font-weight="800" fill="#0f172a">0.17%</text>
+  <text x="380" y="252" text-anchor="middle" font-size="16" font-weight="700" fill="#6b7280">positives · fraud</text>
+
+  <!-- col 3 : Accuracy 99.7% (the one blue focal) -->
+  <text x="590" y="216" text-anchor="middle" font-size="46" font-weight="800" fill="#1772d0">99.7%</text>
+  <text x="590" y="252" text-anchor="middle" font-size="16" font-weight="700" fill="#1772d0">accuracy · full benchmark</text>
+
+  <!-- col 4 : Search space ~85 (neutral) -->
+  <text x="800" y="216" text-anchor="middle" font-size="46" font-weight="800" fill="#0f172a">~85</text>
+  <text x="800" y="252" text-anchor="middle" font-size="16" font-weight="700" fill="#6b7280">algorithms · ~15 categories</text>
+
+  <!-- thin gray divider ticks under the baseline -->
+  <g fill="#e6e9ee">
+    <circle cx="170" cy="300" r="3.5"/>
+    <circle cx="380" cy="300" r="3.5"/>
+    <circle cx="590" cy="300" r="3.5"/>
+    <circle cx="800" cy="300" r="3.5"/>
   </g>
 
-  <!-- 0.17% positives -->
-  <g>
-    <rect x="386" y="116" width="328" height="120" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="410" y="150" font-size="13" fill="#78350f">Positive class (fraud)</text>
-    <text x="410" y="196" font-size="38" font-weight="700" fill="#78350f">0.17%</text>
-    <text x="410" y="222" font-size="14" fill="#78350f">severe class imbalance</text>
-  </g>
-
-  <!-- 99.7% accuracy (emphasized node) -->
-  <g>
-    <rect x="732" y="116" width="328" height="120" rx="6" fill="#dbeafe" stroke="#f09228" stroke-width="2"/>
-    <text x="756" y="150" font-size="13" fill="#1e3a8a">Accuracy</text>
-    <text x="756" y="196" font-size="38" font-weight="700" fill="#1e3a8a">99.7%</text>
-    <text x="756" y="222" font-size="14" fill="#1e3a8a">on the full benchmark</text>
-  </g>
-
-  <!-- Row 2 of stat cards -->
-  <!-- 92.8% Phase-1 success -->
-  <g>
-    <rect x="40" y="252" width="328" height="120" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-    <text x="64" y="286" font-size="13" fill="#065f46">Phase 1 Rapid Screening</text>
-    <text x="64" y="332" font-size="38" font-weight="700" fill="#065f46">92.8%</text>
-    <text x="64" y="358" font-size="14" fill="#065f46">algorithm success rate</text>
-  </g>
-
-  <!-- ~6 h end-to-end -->
-  <g>
-    <rect x="386" y="252" width="328" height="120" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="410" y="286" font-size="13" fill="#64748b">Production-mode runtime</text>
-    <text x="410" y="332" font-size="38" font-weight="700" fill="#0f172a">~6 h</text>
-    <text x="410" y="358" font-size="14" fill="#475569">end-to-end (3 phases)</text>
-  </g>
-
-  <!-- ~85 algorithms across 15 categories -->
-  <g>
-    <rect x="732" y="252" width="328" height="120" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="756" y="286" font-size="13" fill="#64748b">Search space</text>
-    <text x="756" y="332" font-size="38" font-weight="700" fill="#0f172a">~85</text>
-    <text x="756" y="358" font-size="14" fill="#475569">algorithms across ~15 categories</text>
-  </g>
-
-  <!-- Honesty card (dashed) -->
-  <g>
-    <rect x="40" y="404" width="1020" height="124" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
-    <text x="64" y="438" font-size="14" font-weight="700" fill="#64748b" font-style="italic">Honesty note — why accuracy alone is misleading here</text>
-    <text x="64" y="466" font-size="14" fill="#475569" font-style="italic">At 0.17% positives, a model predicting "never fraud" already scores ~99.83% accuracy, so 99.7% accuracy is not the headline result.</text>
-    <text x="64" y="490" font-size="14" fill="#475569" font-style="italic">The project optimizes and reports F1 / precision / recall (per the configured metrics) rather than raw accuracy on this imbalanced benchmark.</text>
-    <text x="64" y="514" font-size="12.5" fill="#64748b" font-style="italic">Public benchmark, not client data; creditcard.csv is gitignored by size.</text>
-  </g>
+  <!-- ===== THE ONE ORANGE CAVEAT (honesty beat) ===== -->
+  <line x1="60" y1="372" x2="84" y2="372" stroke="#e8833a" stroke-width="3" stroke-linecap="round"/>
+  <text x="98" y="377" font-size="16" font-weight="600" fill="#e8833a">At 0.17% positives, accuracy alone is misleading — F1 is the real headline.</text>
 </svg>

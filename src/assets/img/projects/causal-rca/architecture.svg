@@ -1,146 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
-    </marker>
-    <marker id="arrBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
-    </marker>
-  </defs>
+<svg viewBox="0 0 960 470" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="960" height="470" fill="#ffffff"/>
 
-  <rect width="1100" height="720" fill="#ffffff"/>
+  <!-- ===== TITLE (headline, top-left, one blue word) ===== -->
+  <text x="48" y="72" font-size="29" font-weight="800" fill="#0f172a" letter-spacing="-0.4">Five stages converge on one <tspan fill="#1772d0">root cause</tspan>.</text>
 
-  <!-- Title -->
-  <text x="40" y="48" font-size="23" font-weight="700" fill="#0f172a">Causal RCA Platform &#183; System Architecture</text>
-  <rect x="40" y="58" width="234" height="3" rx="1.5" fill="#1772d0"/>
-  <text x="40" y="82" font-size="13" fill="#64748b">Ensemble causal discovery &#8594; DoWhy ATE inference &#8594; composite root-cause ranking, served end to end</text>
-
-  <!-- ===================== SECTION BANDS ===================== -->
-  <!-- Data -->
-  <rect x="40" y="104" width="196" height="476" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="58" y="126" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">DATA LAYER</text>
-  <!-- Discovery -->
-  <rect x="252" y="104" width="196" height="476" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="270" y="126" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">CAUSAL DISCOVERY</text>
-  <!-- Inference / RCA -->
-  <rect x="464" y="104" width="196" height="476" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="482" y="126" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">INFERENCE &amp; RCA</text>
-  <!-- MLOps -->
-  <rect x="676" y="104" width="196" height="476" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="694" y="126" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">MLOPS / ENTERPRISE</text>
-  <!-- Delivery -->
-  <rect x="888" y="104" width="172" height="476" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="906" y="126" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">DELIVERY</text>
-
-  <!-- ===================== DATA LAYER (green = data/compute) ===================== -->
-  <g>
-    <rect x="56" y="142" width="164" height="58" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
-    <text x="68" y="166" font-size="13.5" font-weight="600" fill="#166534">Connectors</text>
-    <text x="68" y="186" font-size="11" fill="#64748b">CSV &#183; DB &#183; OPC-UA &#183; MQTT</text>
-
-    <rect x="56" y="214" width="164" height="58" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
-    <text x="68" y="238" font-size="13.5" font-weight="600" fill="#166534">ETL Pipeline</text>
-    <text x="68" y="258" font-size="11" fill="#64748b">schema &#183; validate &#183; prep</text>
-
-    <rect x="56" y="286" width="164" height="58" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
-    <text x="68" y="310" font-size="13.5" font-weight="600" fill="#166534">Data Registry</text>
-    <text x="68" y="330" font-size="11" fill="#64748b">versioned sets &#183; quality</text>
-
-    <rect x="56" y="358" width="164" height="58" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
-    <text x="68" y="382" font-size="13.5" font-weight="600" fill="#475569">Synthetic DGP</text>
-    <text x="68" y="402" font-size="11" fill="#64748b">12 vars &#183; 13 edges &#183; 3 tiers</text>
-    <text x="68" y="430" font-size="10.5" font-style="italic" fill="#94a3b8">mock generator for eval</text>
+  <!-- ============ FIVE PIPELINE STAGES: gray hairlines converging on the core ============ -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M236 150 C 360 150, 392 264, 424 264"/>
+    <path d="M236 207 C 360 207, 392 264, 424 264"/>
+    <path d="M236 264 C 392 264, 392 264, 424 264"/>
+    <path d="M236 321 C 360 321, 392 264, 424 264"/>
+    <path d="M236 378 C 360 378, 392 264, 424 264"/>
   </g>
-
-  <!-- ===================== CAUSAL DISCOVERY (blue = primary) ===================== -->
-  <g>
-    <rect x="268" y="142" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="280" y="166" font-size="13.5" font-weight="600" fill="#1e3a8a">PC &#183; GES &#183; NOTEARS &#183; FCI</text>
-    <text x="280" y="186" font-size="11" fill="#64748b">causal-learn + custom NOTEARS</text>
-
-    <rect x="268" y="214" width="164" height="58" rx="6" fill="#fef3c7" stroke="#f09228" stroke-width="2.5"/>
-    <text x="280" y="238" font-size="13.5" font-weight="700" fill="#78350f">Ensemble Voting</text>
-    <text x="280" y="258" font-size="11" fill="#b45309">weighted consensus</text>
-
-    <rect x="268" y="286" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="280" y="310" font-size="13.5" font-weight="600" fill="#1e3a8a">Bootstrap Stability</text>
-    <text x="280" y="330" font-size="11" fill="#64748b">joblib parallel &#183; edge CI</text>
-
-    <rect x="268" y="358" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="280" y="382" font-size="13.5" font-weight="600" fill="#1e3a8a">Temporal / Dynamic</text>
-    <text x="280" y="402" font-size="11" fill="#64748b">Granger &#183; regime detection</text>
+  <g fill="#e6e9ee">
+    <circle cx="232" cy="150" r="3"/>
+    <circle cx="232" cy="207" r="3"/>
+    <circle cx="232" cy="264" r="3"/>
+    <circle cx="232" cy="321" r="3"/>
+    <circle cx="232" cy="378" r="3"/>
   </g>
+  <text x="56" y="156" font-size="18" font-weight="600" fill="#6b7280">Data layer</text>
+  <text x="56" y="213" font-size="18" font-weight="600" fill="#6b7280">Causal discovery</text>
+  <text x="56" y="270" font-size="18" font-weight="600" fill="#6b7280">Inference &amp; RCA</text>
+  <text x="56" y="327" font-size="18" font-weight="600" fill="#6b7280">MLOps / enterprise</text>
+  <text x="56" y="384" font-size="18" font-weight="600" fill="#6b7280">Delivery</text>
 
-  <!-- ===================== INFERENCE & RCA (blue = analysis) ===================== -->
-  <g>
-    <rect x="480" y="142" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="492" y="166" font-size="13.5" font-weight="600" fill="#1e3a8a">DoWhy ATE</text>
-    <text x="492" y="186" font-size="11" fill="#64748b">estimation + refutation</text>
+  <!-- outbound hairline to the outcome -->
+  <path d="M576 264 C 668 264, 700 264, 760 264" stroke="#e6e9ee" stroke-width="1.5" fill="none"/>
 
-    <rect x="480" y="214" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="492" y="238" font-size="13.5" font-weight="600" fill="#1e3a8a">Intervention Simulator</text>
-    <text x="492" y="258" font-size="11" fill="#64748b">what-if &#183; sweeps &#183; do-calc</text>
+  <!-- ============ THE ONE BLUE FOCAL: the ensemble / RCA core ============ -->
+  <circle cx="500" cy="264" r="104" fill="#1772d0" opacity="0.06"/>
+  <circle cx="500" cy="264" r="76" fill="#1772d0"/>
+  <text x="500" y="252" text-anchor="middle" font-size="22" font-weight="800" letter-spacing="0.2" fill="#ffffff">Ensemble</text>
+  <text x="500" y="280" text-anchor="middle" font-size="22" font-weight="800" letter-spacing="0.2" fill="#ffffff">+ DoWhy ATE</text>
 
-    <rect x="480" y="286" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="492" y="310" font-size="13.5" font-weight="600" fill="#1e3a8a">RCA Ranking</text>
-    <text x="492" y="330" font-size="11" fill="#64748b">|ATE| &#215; conf &#215; stability</text>
+  <!-- ============ ONE ORANGE BEAT: the weighted-consensus vote ============ -->
+  <circle cx="500" cy="160" r="6" fill="#e8833a"/>
+  <text x="500" y="146" text-anchor="middle" font-size="15" font-weight="700" fill="#e8833a">Ensemble Voting · weighted consensus</text>
 
-    <rect x="480" y="358" width="164" height="58" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="492" y="382" font-size="13.5" font-weight="600" fill="#1e3a8a">Advanced RCA</text>
-    <text x="492" y="402" font-size="11" fill="#64748b">mediation &#183; multi-hop &#183; CF</text>
-  </g>
-
-  <!-- ===================== MLOPS / ENTERPRISE (grey = observability/aux) ===================== -->
-  <g>
-    <rect x="692" y="142" width="164" height="58" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
-    <text x="704" y="166" font-size="13.5" font-weight="600" fill="#334155">Model Registry</text>
-    <text x="704" y="186" font-size="11" fill="#64748b">4-stage lifecycle</text>
-
-    <rect x="692" y="214" width="164" height="58" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
-    <text x="704" y="238" font-size="13.5" font-weight="600" fill="#334155">Drift Detection</text>
-    <text x="704" y="258" font-size="11" fill="#64748b">KS &#183; PSI &#183; ATE drift</text>
-
-    <rect x="692" y="286" width="164" height="58" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
-    <text x="704" y="310" font-size="13.5" font-weight="600" fill="#334155">Auth &#183; RBAC &#183; Audit</text>
-    <text x="704" y="330" font-size="11" fill="#64748b">API key &#183; JSONL log</text>
-
-    <rect x="692" y="358" width="164" height="58" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
-    <text x="704" y="382" font-size="13.5" font-weight="600" fill="#334155">Prometheus &#183; Grafana</text>
-    <text x="704" y="402" font-size="11" fill="#64748b">metrics &#183; dashboards</text>
-  </g>
-
-  <!-- ===================== DELIVERY (ink/neutral) ===================== -->
-  <g>
-    <rect x="904" y="142" width="140" height="58" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
-    <text x="916" y="166" font-size="13.5" font-weight="600" fill="#0f172a">FastAPI</text>
-    <text x="916" y="186" font-size="11" fill="#64748b">45+ endpoints &#183; SSE</text>
-
-    <rect x="904" y="214" width="140" height="58" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
-    <text x="916" y="238" font-size="13.5" font-weight="600" fill="#0f172a">React SPA</text>
-    <text x="916" y="258" font-size="11" fill="#64748b">D3.js causal graph</text>
-
-    <rect x="904" y="286" width="140" height="58" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
-    <text x="916" y="310" font-size="13.5" font-weight="600" fill="#0f172a">Streamlit</text>
-    <text x="916" y="330" font-size="11" fill="#64748b">ops dashboard</text>
-
-    <rect x="904" y="358" width="140" height="58" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
-    <text x="916" y="382" font-size="13.5" font-weight="600" fill="#0f172a">Neo4j &#183; Ollama</text>
-    <text x="916" y="402" font-size="11" fill="#64748b">lineage &#183; LLM chat</text>
-  </g>
-
-  <!-- ===================== HORIZONTAL FLOW ARROWS (between layers) ===================== -->
-  <line x1="236" y1="313" x2="266" y2="313" stroke="#2563eb" stroke-width="2" marker-end="url(#arrBlue)"/>
-  <line x1="448" y1="313" x2="478" y2="313" stroke="#2563eb" stroke-width="2" marker-end="url(#arrBlue)"/>
-  <line x1="660" y1="313" x2="690" y2="313" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
-  <line x1="872" y1="313" x2="902" y2="313" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
-
-  <!-- ===================== ORCHESTRATION BAND ===================== -->
-  <rect x="40" y="606" width="1020" height="80" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="58" y="628" font-size="11" font-weight="700" letter-spacing="1.2" fill="#64748b">PHASE-BASED ORCHESTRATION</text>
-  <text x="58" y="652" font-size="12.5" fill="#475569">9 phase orchestrators sharing a common base class &#8212; ingestion &#8594; discovery &#8594; inference &#8594; RCA &#8594; delivery</text>
-  <text x="58" y="674" font-size="11.5" fill="#64748b">Multi-process registry: injection_molding &#183; extrusion &#183; cnc_machining &#160;&#160;|&#160;&#160; 700+ tests &#183; Docker Compose &#183; GitHub Actions CI/CD</text>
-
-  <!-- dashed link: orchestration drives all layers -->
-  <line x1="318" y1="580" x2="318" y2="606" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3" marker-start="url(#arr)"/>
-  <line x1="780" y1="580" x2="780" y2="606" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3" marker-start="url(#arr)"/>
+  <!-- ============ OUTCOME ============ -->
+  <circle cx="762" cy="264" r="5" fill="#6b7280"/>
+  <text x="780" y="270" font-size="19" font-weight="700" fill="#6b7280" letter-spacing="0.3">RCA ranking</text>
+  <text x="780" y="292" font-size="14" fill="#6b7280">|ATE| × conf × stability</text>
 </svg>

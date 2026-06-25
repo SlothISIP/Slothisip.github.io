@@ -1,121 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="ffArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
-    </marker>
-    <marker id="ffArrBus" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
-    </marker>
-  </defs>
+<svg viewBox="0 0 960 470" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="960" height="470" fill="#ffffff"/>
 
-  <rect width="1100" height="760" fill="#ffffff" />
+  <!-- ===== HEADLINE (top-left, one blue word) ===== -->
+  <text x="48" y="66" font-size="28" font-weight="800" fill="#0f172a" letter-spacing="-0.4">Five layers, one <tspan fill="#1772d0">event bus</tspan>.</text>
 
-  <!-- Title -->
-  <text x="40" y="40" font-size="23" font-weight="800" fill="#0f172a">Full AI Factory &#183; 5-Layer Architecture</text>
-  <rect x="40" y="50" width="190" height="4" rx="2" fill="#1772d0" />
-  <text x="40" y="74" font-size="13" fill="#64748b">Camera-First Dual Mode is the thesis &#8212; cameras replace PLC sensors yet emit the same downstream events across all 5 layers.</text>
+  <!-- ============ 5 LAYER ROWS: gray hairlines converging on the spine ============ -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M250 132 C 360 132, 392 258, 424 258"/>
+    <path d="M250 195 C 360 195, 392 258, 424 258"/>
+    <path d="M250 258 L 424 258"/>
+    <path d="M250 321 C 360 321, 392 258, 424 258"/>
+    <path d="M250 384 C 360 384, 392 258, 424 258"/>
+  </g>
+  <g fill="#e6e9ee">
+    <circle cx="246" cy="132" r="3"/>
+    <circle cx="246" cy="195" r="3"/>
+    <circle cx="246" cy="258" r="3"/>
+    <circle cx="246" cy="321" r="3"/>
+    <circle cx="246" cy="384" r="3"/>
+  </g>
+  <text x="56" y="138" font-size="17" font-weight="600" fill="#6b7280">L1 · Presentation</text>
+  <text x="56" y="201" font-size="17" font-weight="600" fill="#6b7280">L2 · Application</text>
+  <text x="56" y="264" font-size="17" font-weight="600" fill="#6b7280">L3 · AI + Agents</text>
+  <text x="56" y="327" font-size="17" font-weight="600" fill="#6b7280">L4 · Data Platform</text>
+  <text x="56" y="390" font-size="17" font-weight="600" fill="#6b7280">L5 · Simulator</text>
 
-  <!-- ================= EVENT BUS (right rail) ================= -->
-  <rect x="888" y="92" width="184" height="560" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" />
-  <text x="980" y="116" text-anchor="middle" font-size="13" font-weight="700" fill="#1772d0">Redis Streams</text>
-  <text x="980" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#1772d0">Event Bus</text>
-  <line x1="904" y1="144" x2="1056" y2="144" stroke="#cbd5e1" stroke-width="1" />
-  <text x="980" y="162" text-anchor="middle" font-size="10" fill="#64748b">sensor:{lineId}</text>
-  <text x="980" y="178" text-anchor="middle" font-size="10" fill="#64748b">event:production:{lineId}</text>
-  <text x="980" y="194" text-anchor="middle" font-size="10" fill="#64748b">event:quality:{lineId}</text>
-  <text x="980" y="210" text-anchor="middle" font-size="10" fill="#64748b">event:maintenance</text>
-  <text x="980" y="226" text-anchor="middle" font-size="10" fill="#64748b">event:safety</text>
-  <text x="980" y="242" text-anchor="middle" font-size="10" fill="#64748b">event:energy</text>
-  <text x="980" y="258" text-anchor="middle" font-size="10" fill="#64748b">camera:{lineId}</text>
-  <text x="980" y="274" text-anchor="middle" font-size="10" fill="#64748b">agent:request:*</text>
-  <text x="980" y="290" text-anchor="middle" font-size="10" fill="#64748b">agent:response:*</text>
-  <line x1="904" y1="304" x2="1056" y2="304" stroke="#cbd5e1" stroke-width="1" />
-  <text x="980" y="324" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">Invariants</text>
-  <text x="980" y="342" text-anchor="middle" font-size="9.5" fill="#64748b">No direct module import</text>
-  <text x="980" y="358" text-anchor="middle" font-size="9.5" fill="#64748b">WS channels = 10 (fixed)</text>
-  <text x="980" y="374" text-anchor="middle" font-size="9.5" fill="#64748b">Zustand stores = 7 (fixed)</text>
-  <text x="980" y="390" text-anchor="middle" font-size="9.5" fill="#64748b">audit_log on every CUD</text>
-  <text x="980" y="406" text-anchor="middle" font-size="9.5" fill="#64748b">TimescaleDB source field</text>
-  <text x="980" y="422" text-anchor="middle" font-size="9.5" fill="#64748b">i18n ko / en key parity</text>
-  <line x1="904" y1="436" x2="1056" y2="436" stroke="#cbd5e1" stroke-width="1" />
-  <text x="980" y="456" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">Enforced by</text>
-  <text x="980" y="474" text-anchor="middle" font-size="10" fill="#64748b">arch_check.sh</text>
-  <text x="980" y="489" text-anchor="middle" font-size="10" fill="#64748b">on every Edit / Write</text>
-  <line x1="904" y1="502" x2="1056" y2="502" stroke="#cbd5e1" stroke-width="1" />
-  <text x="980" y="522" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">Audit (2026-06-10)</text>
-  <text x="980" y="540" text-anchor="middle" font-size="10" fill="#16a34a">arch 0 violations</text>
-  <text x="980" y="556" text-anchor="middle" font-size="10" fill="#16a34a">tsc 0 errors</text>
-  <text x="980" y="572" text-anchor="middle" font-size="10" fill="#16a34a">vitest 189 / 189 pass</text>
-  <text x="980" y="588" text-anchor="middle" font-size="10" fill="#16a34a">health 35 / 35 live</text>
-  <line x1="904" y1="602" x2="1056" y2="602" stroke="#cbd5e1" stroke-width="1" />
-  <text x="980" y="622" text-anchor="middle" font-size="9.5" fill="#64748b" font-style="italic">single-machine demo</text>
-  <text x="980" y="637" text-anchor="middle" font-size="9.5" fill="#64748b" font-style="italic">synthetic data</text>
+  <!-- ============ THE ONE BLUE FOCAL: Redis Streams Event Bus ============ -->
+  <circle cx="500" cy="258" r="104" fill="#1772d0" opacity="0.06"/>
+  <circle cx="500" cy="258" r="76" fill="#1772d0"/>
+  <text x="500" y="252" text-anchor="middle" font-size="22" font-weight="800" letter-spacing="0.2" fill="#ffffff">Redis Streams</text>
+  <text x="500" y="280" text-anchor="middle" font-size="15" letter-spacing="0.3" fill="#cfe2f7">Event Bus</text>
 
-  <!-- ================= L1 PRESENTATION (blue) ================= -->
-  <rect x="40" y="92" width="824" height="98" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
-  <text x="56" y="110" font-size="11" letter-spacing="1.5" fill="#64748b">L1 &#183; PRESENTATION</text>
-  <rect x="56" y="120" width="792" height="58" rx="6" fill="#f1f5f9" stroke="#2563eb" stroke-width="1.5" />
-  <text x="68" y="138" font-size="11.5" font-weight="700" fill="#0f172a">React 18 + TypeScript + Vite + TailwindCSS + shadcn/ui + React Three Fiber</text>
-  <text x="68" y="154" font-size="10.5" fill="#0f172a">20 pages &#183; 111 components &#183; Zustand 7 stores (5 domain + 2 infra) &#183; i18n ko/en &#183; 1920&#215;1080+</text>
-  <text x="68" y="170" font-size="10.5" fill="#0f172a">Surfaces &#8212; Command Center &#183; SCADA &#183; MES &#183; ERP &#183; QMS &#183; SPC &#183; WMS &#183; APS &#183; CMMS &#183; Digital Twin (3D)</text>
+  <!-- ============ THE ONE ORANGE BEAT: both modes publish the same events ============ -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M576 258 C 660 258, 690 214, 752 214"/>
+    <path d="M576 258 C 660 258, 690 302, 752 302"/>
+  </g>
+  <circle cx="754" cy="214" r="5" fill="#6b7280"/>
+  <text x="772" y="220" font-size="17" font-weight="600" fill="#6b7280">A · Full Sensor</text>
+  <circle cx="754" cy="302" r="5" fill="#6b7280"/>
+  <text x="772" y="308" font-size="17" font-weight="600" fill="#6b7280">B · Camera-First</text>
 
-  <!-- L1 to L2 edge -->
-  <line x1="452" y1="190" x2="452" y2="218" stroke="#64748b" stroke-width="1.8" marker-end="url(#ffArr)" marker-start="url(#ffArr)" />
-  <text x="462" y="208" font-size="10" fill="#64748b">WS 10ch + REST</text>
-
-  <!-- ================= L2 APPLICATION (green) ================= -->
-  <rect x="40" y="218" width="824" height="98" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
-  <text x="56" y="236" font-size="11" letter-spacing="1.5" fill="#64748b">L2 &#183; APPLICATION MODULES</text>
-  <rect x="56" y="246" width="792" height="58" rx="6" fill="#f1f5f9" stroke="#16a34a" stroke-width="1.5" />
-  <text x="68" y="264" font-size="11.5" font-weight="700" fill="#0f172a">FastAPI + Python 3.12 + SQLAlchemy 2 + Alembic (9 rev) &#183; 156 REST endpoints &#183; WS 10 channels &#183; gRPC client</text>
-  <text x="68" y="280" font-size="10.5" fill="#0f172a">19 modules, same shape (router &#183; service &#183; models &#183; schemas &#183; events) &#8212; direct import forbidden, Redis Streams only</text>
-  <text x="68" y="296" font-size="10.5" fill="#0f172a">MES &#183; ERP &#183; SPC &#183; QMS &#183; WMS &#183; APS &#183; CMMS &#183; Energy &#183; Safety &#183; Tracking &#183; Camera &#183; Predictive &#183; Document &#183; Notification &#183; Audit</text>
-
-  <!-- L2 to L3 edge -->
-  <line x1="452" y1="316" x2="452" y2="344" stroke="#64748b" stroke-width="1.8" marker-end="url(#ffArr)" marker-start="url(#ffArr)" />
-  <text x="462" y="334" font-size="10" fill="#64748b">gRPC 5s + Redis Streams</text>
-
-  <!-- ================= L3 AI ENGINE + AGENTS (amber) ================= -->
-  <rect x="40" y="344" width="824" height="106" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
-  <text x="56" y="362" font-size="11" letter-spacing="1.5" fill="#64748b">L3 &#183; AI ENGINE + MULTI-AGENT</text>
-  <rect x="56" y="372" width="792" height="66" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" />
-  <text x="68" y="390" font-size="11.5" font-weight="700" fill="#0f172a">PyTorch / ONNX (FP16) + gRPC serving &#183; LangGraph + Ollama (Qwen 2.5 3B) &#183; ChromaDB RAG &#183; MCP 22 tools</text>
-  <text x="68" y="406" font-size="10.5" fill="#0f172a">Vision &#8212; PatchCore / EfficientAD &#183; YOLOv8n &#215; 4 &#183; Pose &#183; ArcFace    Predictive &#8212; LSTM-Attention &#183; CNN-GRU &#183; TimesFM &#183; LSTM-AE</text>
-  <text x="68" y="422" font-size="10.5" fill="#0f172a">14 logical agents = 8 classes &#215; line_id (LineMonitor &#215; L1..L7 + Quality &#183; Maintenance &#183; Planning &#183; Energy &#183; Safety &#183; Coordinator &#183; Document)</text>
-
-  <!-- L3 to L4 edge -->
-  <line x1="452" y1="450" x2="452" y2="478" stroke="#64748b" stroke-width="1.8" marker-end="url(#ffArr)" marker-start="url(#ffArr)" />
-  <text x="462" y="468" font-size="10" fill="#64748b">SQLAlchemy / ChromaDB / MinIO</text>
-
-  <!-- ================= L4 DATA PLATFORM (green) ================= -->
-  <rect x="40" y="478" width="824" height="98" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
-  <text x="56" y="496" font-size="11" letter-spacing="1.5" fill="#64748b">L4 &#183; DATA PLATFORM</text>
-  <rect x="56" y="506" width="792" height="58" rx="6" fill="#f1f5f9" stroke="#16a34a" stroke-width="1.5" />
-  <text x="68" y="524" font-size="11" font-weight="700" fill="#0f172a">PostgreSQL 16 (~48 tables) &#183; TimescaleDB 2.17 (4 hypertables, source required) &#183; Redis 7 &#183; ChromaDB embedded &#183; MinIO FS fallback</text>
-  <text x="68" y="540" font-size="10.5" fill="#0f172a">Hypertables &#8212; sensor_data &#183; spc_measurements &#183; energy_readings &#183; camera_detections    RAG corpus &#8212; synthetic SOPs / manuals in ChromaDB</text>
-  <text x="68" y="556" font-size="10.5" fill="#0f172a">audit_log on every CUD &#183; timezone-aware UTC &#183; enforced by pre-commit arch_check.sh</text>
-
-  <!-- L4 to L5 edge -->
-  <line x1="452" y1="576" x2="452" y2="604" stroke="#64748b" stroke-width="1.8" marker-end="url(#ffArr)" marker-start="url(#ffArr)" />
-  <text x="462" y="594" font-size="10" fill="#64748b">writes synthetic events</text>
-
-  <!-- ================= L5 SIMULATOR (red / honesty) ================= -->
-  <rect x="40" y="604" width="824" height="100" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
-  <text x="56" y="622" font-size="11" letter-spacing="1.5" fill="#64748b">L5 &#183; SYNTHETIC FACTORY SIMULATOR</text>
-  <rect x="56" y="632" width="792" height="60" rx="6" fill="#f1f5f9" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 4" />
-  <text x="68" y="650" font-size="10.5" fill="#0f172a">7 lines &#8212; L1 Injection &#183; L2 Press &#183; L3 Assembly &#183; L4 Painting &#183; L5 Welding &#183; L6 CNC &#183; L7 Final Inspection</text>
-  <!-- ORANGE FOCAL: Camera-First / Dual Mode (the project thesis) -->
-  <rect x="62" y="656" width="780" height="18" rx="4" fill="#fef3c7" stroke="#f09228" stroke-width="1.5" />
-  <text x="68" y="669" font-size="10.5" font-weight="700" fill="#b45309">Dual Mode &#8212; A: Full Sensor (PLC values) | B: Camera-First (signal-tower / line-counting / WIP / OCR &#8594; same downstream events)</text>
-  <text x="68" y="687" font-size="10.5" fill="#0f172a">4 physics-based scenarios &#8212; heater_degradation (L1, 72h quadratic drift) &#183; die_wear &#183; electrode_wear &#183; safety_intrusion</text>
-
-  <!-- ================= Layer to Bus connectors ================= -->
-  <line x1="864" y1="149" x2="888" y2="149" stroke="#64748b" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ffArrBus)" marker-start="url(#ffArrBus)" />
-  <line x1="864" y1="275" x2="888" y2="275" stroke="#64748b" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ffArrBus)" marker-start="url(#ffArrBus)" />
-  <line x1="864" y1="405" x2="888" y2="405" stroke="#64748b" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ffArrBus)" marker-start="url(#ffArrBus)" />
-  <line x1="864" y1="535" x2="888" y2="535" stroke="#64748b" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ffArrBus)" marker-start="url(#ffArrBus)" />
-  <line x1="864" y1="662" x2="888" y2="662" stroke="#64748b" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ffArrBus)" marker-start="url(#ffArrBus)" />
-
-  <!-- Footer -->
-  <text x="40" y="730" font-size="10.5" fill="#64748b" font-style="italic">Solo developer &#183; 42 weeks (38 roadmap + 4 hardening) &#183; synthetic data calibrated against open datasets &#183; single-machine demo &#183; not deployed in a live factory</text>
+  <text x="500" y="430" text-anchor="middle" font-size="18" font-weight="700" fill="#e8833a">Both modes publish the same downstream events.</text>
 </svg>

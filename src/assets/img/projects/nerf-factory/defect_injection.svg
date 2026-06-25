@@ -1,99 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 470" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="nf-ah" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8"/></marker>
-    <marker id="nf-aho" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#f09228"/></marker>
-  </defs>
+<svg viewBox="0 0 960 470" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="960" height="470" fill="#ffffff"/>
 
-  <rect x="0" y="0" width="1100" height="470" fill="#ffffff"/>
+  <!-- ===== TITLE (headline, top-left, one blue word) ===== -->
+  <text x="48" y="72" font-size="28" font-weight="800" fill="#0f172a" letter-spacing="-0.4">One engine <tspan fill="#1772d0">perturbs</tspan> the trained field.</text>
 
-  <!-- ===== TITLE ===== -->
-  <text x="40" y="46" font-size="23" font-weight="800" fill="#0f172a" letter-spacing="-.3">Turn a few photos into unlimited labeled defect data</text>
-  <rect x="40" y="55" width="288" height="3.5" rx="1.75" fill="#1772d0"/>
-  <text x="40" y="79" font-size="13" fill="#64748b">Perturb the trained NeRF density/color fields to get physics-based defects with automatic labels.</text>
+  <!-- ============ INBOUND: gray hairlines from the trained NeRF fields ============ -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M214 186 C 320 186, 360 250, 408 250"/>
+    <path d="M214 314 C 320 314, 360 250, 408 250"/>
+  </g>
+  <g fill="#e6e9ee">
+    <circle cx="210" cy="186" r="3"/>
+    <circle cx="210" cy="314" r="3"/>
+  </g>
+  <text x="56" y="180" font-size="18" font-weight="700" fill="#6b7280">trained NeRF</text>
+  <text x="56" y="192" font-size="15" font-weight="600" fill="#6b7280">&#963; density field</text>
+  <text x="56" y="320" font-size="15" font-weight="600" fill="#6b7280">c color field</text>
 
-  <!-- ===== PIPELINE (4 stages, left to right) ===== -->
+  <!-- outbound hairlines: engine -> four defect types + COCO export -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M576 250 C 668 250, 692 132, 752 132"/>
+    <path d="M576 250 C 668 250, 692 211, 752 211"/>
+    <path d="M576 250 C 668 250, 692 289, 752 289"/>
+    <path d="M576 250 C 668 250, 692 368, 752 368"/>
+  </g>
 
-  <!-- Stage 1: Trained NeRF -->
-  <rect x="40" y="132" width="218" height="168" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
-  <rect x="40" y="132" width="218" height="34" rx="10" fill="#f1f5f9"/>
-  <rect x="40" y="156" width="218" height="10" fill="#f1f5f9"/>
-  <text x="149" y="154" font-size="13.5" font-weight="800" fill="#0f172a" text-anchor="middle">Trained NeRF</text>
-  <text x="149" y="186" font-size="11.5" fill="#64748b" text-anchor="middle">from-scratch Instant-NGP-style</text>
-  <!-- field chips -->
-  <rect x="64" y="204" width="170" height="34" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2"/>
-  <text x="149" y="220" font-size="12" font-weight="700" fill="#1e3a8a" text-anchor="middle"><tspan font-family="ui-monospace, Menlo, Consolas, monospace">&#963;</tspan> density field</text>
-  <text x="149" y="233" font-size="10.5" fill="#64748b" text-anchor="middle">where surfaces are</text>
-  <rect x="64" y="246" width="170" height="34" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2"/>
-  <text x="149" y="262" font-size="12" font-weight="700" fill="#1e3a8a" text-anchor="middle"><tspan font-family="ui-monospace, Menlo, Consolas, monospace">c</tspan> color field</text>
-  <text x="149" y="275" font-size="10.5" fill="#64748b" text-anchor="middle">what they look like</text>
+  <!-- ============ THE ONE FOCAL: the DefectInjectionEngine (orange beat) ============ -->
+  <circle cx="492" cy="250" r="104" fill="#e8833a" opacity="0.06"/>
+  <circle cx="492" cy="250" r="76" fill="#e8833a"/>
+  <text x="492" y="240" text-anchor="middle" font-size="18" font-weight="800" letter-spacing="0.2" fill="#ffffff">DefectInjection</text>
+  <text x="492" y="262" text-anchor="middle" font-size="18" font-weight="800" letter-spacing="0.2" fill="#ffffff">Engine</text>
+  <text x="492" y="286" text-anchor="middle" font-size="13" letter-spacing="0.2" fill="#ffffff">&#916;&#963; carve &#183; &#916;c tint</text>
 
-  <!-- arrow 1 -> 2 -->
-  <line x1="262" y1="216" x2="306" y2="216" stroke="#94a3b8" stroke-width="2" marker-end="url(#nf-ah)"/>
-
-  <!-- Stage 2: DefectInjectionEngine (ORANGE FOCAL) -->
-  <rect x="312" y="120" width="246" height="192" rx="12" fill="#fef3c7" stroke="#f09228" stroke-width="2.6"/>
-  <rect x="312" y="120" width="246" height="36" rx="12" fill="#fde68a"/>
-  <rect x="312" y="144" width="246" height="12" fill="#fde68a"/>
-  <text x="435" y="143" font-size="13.5" font-weight="800" fill="#78350f" text-anchor="middle">DefectInjectionEngine</text>
-  <text x="435" y="177" font-size="12" font-weight="700" fill="#b45309" text-anchor="middle">perturbs the trained fields</text>
-  <!-- perturbation rows -->
-  <rect x="336" y="192" width="198" height="40" rx="9" fill="#ffffff" stroke="#fcd9a4" stroke-width="1.3"/>
-  <text x="435" y="208" font-size="12.5" font-weight="800" fill="#b45309" text-anchor="middle"><tspan font-family="ui-monospace, Menlo, Consolas, monospace">&#916;&#963;</tspan> &#8594; carve / add mass</text>
-  <text x="435" y="223" font-size="10.5" fill="#92400e" text-anchor="middle">scratches, cracks, dents</text>
-  <rect x="336" y="240" width="198" height="40" rx="9" fill="#ffffff" stroke="#fcd9a4" stroke-width="1.3"/>
-  <text x="435" y="256" font-size="12.5" font-weight="800" fill="#b45309" text-anchor="middle"><tspan font-family="ui-monospace, Menlo, Consolas, monospace">&#916;c</tspan> &#8594; tint / stain surface</text>
-  <text x="435" y="271" font-size="10.5" fill="#92400e" text-anchor="middle">contamination</text>
-  <text x="435" y="298" font-size="11" font-style="italic" font-weight="700" fill="#b45309" text-anchor="middle">the differentiator</text>
-
-  <!-- arrow 2 -> 3 -->
-  <line x1="562" y1="216" x2="606" y2="216" stroke="#f09228" stroke-width="2.2" marker-end="url(#nf-aho)"/>
-
-  <!-- Stage 3: Defect types (chips) -->
-  <rect x="612" y="132" width="186" height="168" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
-  <rect x="612" y="132" width="186" height="34" rx="10" fill="#f1f5f9"/>
-  <rect x="612" y="156" width="186" height="10" fill="#f1f5f9"/>
-  <text x="705" y="154" font-size="13.5" font-weight="800" fill="#0f172a" text-anchor="middle">Four defect types</text>
-  <!-- chip: scratch -->
-  <rect x="634" y="180" width="142" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
-  <circle cx="652" cy="193" r="4" fill="#dc2626"/>
-  <text x="668" y="197" font-size="12" font-weight="600" fill="#334155">scratch</text>
-  <!-- chip: crack -->
-  <rect x="634" y="212" width="142" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
-  <circle cx="652" cy="225" r="4" fill="#dc2626"/>
-  <text x="668" y="229" font-size="12" font-weight="600" fill="#334155">crack</text>
-  <!-- chip: dent -->
-  <rect x="634" y="244" width="142" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
-  <circle cx="652" cy="257" r="4" fill="#1772d0"/>
-  <text x="668" y="261" font-size="12" font-weight="600" fill="#334155">dent</text>
-  <!-- chip: contamination -->
-  <rect x="634" y="276" width="142" height="26" rx="13" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
-  <circle cx="652" cy="289" r="4" fill="#16a34a"/>
-  <text x="668" y="293" font-size="12" font-weight="600" fill="#334155">contamination</text>
-
-  <!-- arrow 3 -> 4 -->
-  <line x1="802" y1="216" x2="846" y2="216" stroke="#94a3b8" stroke-width="2" marker-end="url(#nf-ah)"/>
-
-  <!-- Stage 4: SyntheticDataGenerator -->
-  <rect x="852" y="132" width="208" height="168" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
-  <rect x="852" y="132" width="208" height="34" rx="10" fill="#f1f5f9"/>
-  <rect x="852" y="156" width="208" height="10" fill="#f1f5f9"/>
-  <text x="956" y="154" font-size="13.5" font-weight="800" fill="#0f172a" text-anchor="middle">SyntheticDataGenerator</text>
-  <text x="956" y="185" font-size="11.5" fill="#64748b" text-anchor="middle">renders &#43; auto-labels</text>
-  <!-- labeled image thumbnail -->
-  <rect x="884" y="198" width="100" height="64" rx="6" fill="#eef2f7" stroke="#cbd5e1" stroke-width="1.2"/>
-  <rect x="908" y="218" width="40" height="26" rx="3" fill="none" stroke="#16a34a" stroke-width="2"/>
-  <text x="910" y="214" font-size="9.5" font-weight="700" fill="#16a34a">label</text>
-  <!-- COCO export chip (green, output) -->
-  <rect x="884" y="270" width="148" height="24" rx="8" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.3"/>
-  <text x="958" y="286" font-size="11.5" font-weight="800" fill="#166534" text-anchor="middle"><tspan font-family="ui-monospace, Menlo, Consolas, monospace">COCO export</tspan></text>
-
-  <!-- ===== TARGET CALLOUT (aspirational, clearly flagged) ===== -->
-  <text x="956" y="324" font-size="11.5" font-weight="700" fill="#64748b" text-anchor="middle">e.g. 10,000 images</text>
-  <text x="956" y="340" font-size="10.5" font-style="italic" fill="#94a3b8" text-anchor="middle">(aspirational target)</text>
-
-  <!-- ===== HONESTY FOOTER ===== -->
-  <rect x="40" y="380" width="1020" height="62" rx="8" fill="#f8f9fa"/>
-  <rect x="56" y="396" width="3" height="30" rx="1.5" fill="#f09228"/>
-  <text x="74" y="408" font-size="11.5" font-style="italic" fill="#64748b">Synthetic NeRF renders &#43; physics-injected defects; e.g. 10,000 images / <tspan font-family="ui-monospace, Menlo, Consolas, monospace" font-style="normal">COCO export</tspan> are example targets, not a</text>
-  <text x="74" y="426" font-size="11.5" font-style="italic" fill="#64748b">measured benchmark. No PSNR/SSIM/LPIPS is measured.</text>
+  <!-- ============ OUTCOMES (neutral gray dots + COCO export) ============ -->
+  <g fill="#cbd5e1">
+    <circle cx="754" cy="132" r="5"/>
+    <circle cx="754" cy="211" r="5"/>
+    <circle cx="754" cy="289" r="5"/>
+  </g>
+  <g font-size="18" font-weight="600" fill="#6b7280">
+    <text x="772" y="138">scratch &#183; crack</text>
+    <text x="772" y="217">dent</text>
+    <text x="772" y="295">contamination</text>
+  </g>
+  <circle cx="754" cy="368" r="5" fill="#1772d0"/>
+  <text x="772" y="374" font-size="18" font-weight="700" fill="#1772d0">COCO export</text>
 </svg>

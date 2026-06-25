@@ -1,111 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="arrow" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="10" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0 0 L10 4 L0 8 z" fill="#64748b"/>
-    </marker>
-  </defs>
+<svg viewBox="0 0 960 470" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="960" height="470" fill="#ffffff"/>
 
-  <!-- Title block -->
-  <text x="40" y="46" font-size="23" font-weight="700" fill="#0f172a">Physics-informed GP prior</text>
-  <rect x="40" y="56" width="220" height="3" rx="1.5" fill="#1772d0"/>
-  <text x="40" y="78" font-size="13" fill="#64748b">A physics-informed mean function biases the GP posterior so the search starts in a plausible region.</text>
+  <!-- ===== TITLE (headline, top-left, one blue phrase) ===== -->
+  <text x="48" y="64" font-size="28" font-weight="800" fill="#0f172a" letter-spacing="-0.4">The <tspan fill="#1772d0">prior mean</tspan> bends the GP posterior.</text>
 
-  <!-- ============ LEFT PANEL: Uninformed prior ============ -->
-  <g>
-    <rect x="40" y="104" width="490" height="300" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="62" y="134" font-size="15" font-weight="700" fill="#0f172a">Uninformed prior</text>
-    <text x="62" y="152" font-size="12" fill="#64748b">flat mean at 0, wide uncertainty everywhere</text>
+  <!-- ===== PLOT FRAME: gray hairline scaffolding ===== -->
+  <line x1="120" y1="360" x2="900" y2="360" stroke="#e6e9ee" stroke-width="1.5"/>
+  <line x1="120" y1="120" x2="120" y2="360" stroke="#e6e9ee" stroke-width="1.5"/>
+  <text x="510" y="392" text-anchor="middle" font-size="15" font-weight="600" fill="#6b7280">process parameter x</text>
+  <text x="108" y="116" text-anchor="end" font-size="15" font-weight="600" fill="#6b7280">response</text>
 
-    <!-- plot frame -->
-    <!-- axes: x 80..510, y 180..372 -->
-    <line x1="80" y1="372" x2="510" y2="372" stroke="#cbd5e1" stroke-width="1.5"/>
-    <line x1="80" y1="180" x2="80" y2="372" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="295" y="396" font-size="11" fill="#94a3b8" text-anchor="middle">process parameter x</text>
-    <text x="70" y="178" font-size="11" fill="#94a3b8" text-anchor="end">response</text>
+  <!-- ===== flat mean = 0 reference (quiet gray dashed) ===== -->
+  <line x1="120" y1="300" x2="900" y2="300" stroke="#cbd5e1" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="900" y="304" text-anchor="end" font-size="14" font-weight="600" fill="#6b7280">mean = 0</text>
 
-    <!-- wide grey uncertainty band around mean=0 (mean line y=300) -->
-    <path d="M80 220 L510 220 L510 380 L80 380 Z" fill="#e2e8f0" opacity="0.85"/>
-    <!-- flat GP mean at 0 -->
-    <line x1="80" y1="300" x2="510" y2="300" stroke="#64748b" stroke-width="2" stroke-dasharray="6 4"/>
-    <text x="514" y="304" font-size="11" fill="#64748b">mean = 0</text>
+  <!-- ===== narrow blue uncertainty band hugging the physics curve ===== -->
+  <path d="M120 196
+           C 230 168, 360 196, 510 250
+           C 660 304, 790 338, 900 350
+           L 900 392
+           C 790 384, 660 348, 510 292
+           C 360 236, 230 214, 120 240 Z"
+        fill="#cfe2f7" opacity="0.7"/>
 
-    <!-- observations (dots) -->
-    <circle cx="150" cy="288" r="4.5" fill="#0f172a"/>
-    <circle cx="255" cy="332" r="4.5" fill="#0f172a"/>
-    <circle cx="360" cy="276" r="4.5" fill="#0f172a"/>
-    <circle cx="445" cy="318" r="4.5" fill="#0f172a"/>
+  <!-- ===== THE ONE BLUE FOCAL: physics-informed prior mean curve ===== -->
+  <path d="M120 218
+           C 230 191, 360 205, 510 271
+           C 660 321, 790 345, 900 371"
+        fill="none" stroke="#1772d0" stroke-width="3.5"/>
 
-    <!-- band legend -->
-    <rect x="350" y="194" width="16" height="11" rx="2" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
-    <text x="372" y="204" font-size="11" fill="#64748b">±2&#963; uncertainty</text>
-  </g>
+  <!-- focal node on the prior-mean curve + faint halo -->
+  <circle cx="510" cy="271" r="74" fill="#1772d0" opacity="0.06"/>
+  <circle cx="510" cy="271" r="9" fill="#1772d0"/>
+  <text x="510" y="206" text-anchor="middle" font-size="18" font-weight="800" fill="#1772d0">physics prior mean &#956;(x)</text>
 
-  <!-- center arrow -->
-  <line x1="538" y1="254" x2="566" y2="254" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- ===== observations sit close to the curve (ink dots) ===== -->
+  <circle cx="245" cy="190" r="5" fill="#0f172a"/>
+  <circle cx="370" cy="208" r="5" fill="#0f172a"/>
+  <circle cx="640" cy="318" r="5" fill="#0f172a"/>
+  <circle cx="770" cy="343" r="5" fill="#0f172a"/>
 
-  <!-- ============ RIGHT PANEL: Physics-informed mean ============ -->
-  <g>
-    <rect x="574" y="104" width="490" height="300" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
-    <text x="596" y="134" font-size="15" font-weight="700" fill="#1e3a8a">Physics-informed mean</text>
-    <text x="596" y="152" font-size="12" fill="#64748b">mean follows a Taylor tool-wear curve, band narrows near data</text>
-
-    <!-- axes: x 614..1044, y 180..372 -->
-    <line x1="614" y1="372" x2="1044" y2="372" stroke="#cbd5e1" stroke-width="1.5"/>
-    <line x1="614" y1="180" x2="614" y2="372" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="829" y="396" font-size="11" fill="#94a3b8" text-anchor="middle">process parameter x</text>
-    <text x="604" y="178" font-size="11" fill="#94a3b8" text-anchor="end">response</text>
-
-    <!-- narrower blue uncertainty band hugging a physical curve (Taylor wear / glass-transition shape) -->
-    <!-- upper edge of band -->
-    <path d="M614 232
-             C 690 214, 760 234, 829 266
-             C 898 298, 968 326, 1044 336
-             L 1044 372
-             C 968 366, 898 340, 829 310
-             C 760 280, 690 262, 614 282 Z"
-          fill="#dbeafe" opacity="0.85"/>
-
-    <!-- physics-informed GP mean curve -->
-    <path d="M614 257
-             C 690 238, 760 248, 829 288
-             C 898 312, 968 333, 1044 354"
-          fill="none" stroke="#2563eb" stroke-width="2.5"/>
-
-    <!-- observations close to the curve -->
-    <circle cx="690" cy="240" r="4.5" fill="#0f172a"/>
-    <circle cx="760" cy="252" r="4.5" fill="#0f172a"/>
-    <circle cx="900" cy="318" r="4.5" fill="#0f172a"/>
-    <circle cx="985" cy="338" r="4.5" fill="#0f172a"/>
-
-    <!-- label for the prior mean (highlight node in accent orange) -->
-    <rect x="636" y="196" width="150" height="22" rx="8" fill="#fef3c7" stroke="#f09228" stroke-width="1.5"/>
-    <text x="711" y="211" font-size="11.5" font-weight="600" fill="#78350f" text-anchor="middle">physics prior mean &#956;(x)</text>
-
-    <!-- search-start marker -->
-    <text x="1040" y="360" font-size="11" fill="#1e3a8a" text-anchor="end">plausible start region</text>
-  </g>
-
-  <!-- ============ INSET: Empirical-Bayes weight ============ -->
-  <g>
-    <rect x="40" y="434" width="1024" height="142" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="62" y="462" font-size="14" font-weight="700" fill="#0f172a">Empirical-Bayes weight w</text>
-    <text x="62" y="481" font-size="12" fill="#475569">Prior influence shrinks automatically from 1 toward 0 as observations accumulate.</text>
-
-    <!-- mini plot axes: x 360..640, y 498..560 -->
-    <line x1="360" y1="560" x2="660" y2="560" stroke="#94a3b8" stroke-width="1.5"/>
-    <line x1="360" y1="498" x2="360" y2="560" stroke="#94a3b8" stroke-width="1.5"/>
-    <text x="356" y="503" font-size="10.5" fill="#64748b" text-anchor="end">w=1</text>
-    <text x="356" y="563" font-size="10.5" fill="#64748b" text-anchor="end">0</text>
-    <text x="660" y="575" font-size="10.5" fill="#64748b" text-anchor="middle"># observations</text>
-
-    <!-- decaying weight curve from 1 toward 0 -->
-    <path d="M360 502 C 430 510, 470 540, 540 552 C 590 559, 620 560, 658 560"
-          fill="none" stroke="#16a34a" stroke-width="2.5"/>
-    <circle cx="360" cy="502" r="3.5" fill="#16a34a"/>
-
-    <!-- annotation: data-driven over time -->
-    <text x="690" y="512" font-size="12" fill="#475569">Early: prior dominates the GP mean (few experiments).</text>
-    <text x="690" y="534" font-size="12" fill="#475569">Late: data dominates; the prior gracefully fades out.</text>
-    <text x="690" y="556" font-size="11.5" font-style="italic" fill="#065f46">+40.7% fewer iterations to 90% convergence with the prior (open injection-molding benchmark, n=20).</text>
-  </g>
+  <!-- ===== EB-weight decay inset (recolored green -> ink/gray) ===== -->
+  <text x="120" y="436" font-size="15" font-weight="700" fill="#0f172a">Empirical-Bayes weight w</text>
+  <line x1="360" y1="448" x2="360" y2="412" stroke="#e6e9ee" stroke-width="1.5"/>
+  <line x1="360" y1="448" x2="640" y2="448" stroke="#e6e9ee" stroke-width="1.5"/>
+  <text x="352" y="418" text-anchor="end" font-size="13" font-weight="600" fill="#6b7280">1</text>
+  <text x="352" y="452" text-anchor="end" font-size="13" font-weight="600" fill="#6b7280">0</text>
+  <path d="M360 414 C 430 422, 470 444, 540 447 C 590 449, 615 448, 638 448"
+        fill="none" stroke="#0f172a" stroke-width="2.5"/>
+  <text x="652" y="436" font-size="14" font-weight="600" fill="#6b7280">from 1 toward 0 as data accumulates</text>
 </svg>

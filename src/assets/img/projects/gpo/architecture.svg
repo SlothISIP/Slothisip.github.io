@@ -1,108 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="ga-ahm" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#64748b"/></marker>
-    <marker id="ga-ahb" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1772d0"/></marker>
-    <marker id="ga-aho" markerWidth="9" markerHeight="8" refX="7.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#f09228"/></marker>
-  </defs>
+<svg viewBox="0 0 960 460" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="960" height="460" fill="#ffffff"/>
 
-  <rect x="0" y="0" width="1100" height="720" fill="#ffffff"/>
+  <!-- ===== TITLE (headline, top-left, one blue word) ===== -->
+  <text x="48" y="72" font-size="29" font-weight="800" fill="#0f172a" letter-spacing="-0.4">Sync control plane, async <tspan fill="#1772d0">compute</tspan>.</text>
 
-  <!-- ===== TITLE ===== -->
-  <text x="40" y="46" font-size="23" font-weight="800" fill="#0f172a" letter-spacing="-.3">System architecture</text>
-  <rect x="40" y="55" width="232" height="3.5" rx="1.75" fill="#1772d0"/>
-  <text x="40" y="79" font-size="13" fill="#64748b">FastAPI is the synchronous control plane; long BO runs go to a GPU Celery worker.</text>
+  <!-- ============ STRUCTURE: gray hairline service skeleton ============ -->
 
-  <!-- ===== LEGEND CHIP (top-right) ===== -->
-  <rect x="700" y="30" width="360" height="28" rx="14" fill="#f1f5f9" stroke="#e2e8f0"/>
-  <line x1="716" y1="44" x2="742" y2="44" stroke="#64748b" stroke-width="1.6" marker-end="url(#ga-ahm)"/>
-  <text x="748" y="48" font-size="11.5" font-weight="700" fill="#475569">HTTP / sync</text>
-  <line x1="852" y1="44" x2="878" y2="44" stroke="#1772d0" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ga-ahb)"/>
-  <text x="884" y="48" font-size="11.5" font-weight="700" fill="#475569">pub/sub &#183; WebSocket</text>
+  <!-- inbound converging hairlines (the sync request path) -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M214 168 C 350 168, 386 256, 424 256"/>
+    <path d="M214 220 C 350 220, 386 256, 424 256"/>
+    <path d="M214 272 C 350 272, 386 256, 424 256"/>
+  </g>
+  <g fill="#e6e9ee">
+    <circle cx="210" cy="168" r="3"/>
+    <circle cx="210" cy="220" r="3"/>
+    <circle cx="210" cy="272" r="3"/>
+  </g>
+  <text x="56" y="174" font-size="18" font-weight="600" fill="#6b7280">React client</text>
+  <text x="56" y="226" font-size="18" font-weight="600" fill="#6b7280">nginx web</text>
+  <text x="56" y="278" font-size="18" font-weight="600" fill="#6b7280">FastAPI API</text>
 
-  <!-- ===== CLIENT ===== -->
-  <rect x="370" y="108" width="360" height="58" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
-  <text x="550" y="134" font-size="14.5" font-weight="800" fill="#0f172a" text-anchor="middle">Browser &#8212; React client</text>
-  <text x="550" y="153" font-size="11.5" fill="#64748b" text-anchor="middle">single-page UI</text>
+  <!-- outbound hairlines: focal -> data stores + the async beat -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M576 256 C 636 256, 658 184, 684 184"/>
+    <path d="M576 256 C 636 256, 658 256, 684 256"/>
+  </g>
+  <!-- the one orange async path (queue -> worker) -->
+  <path d="M576 256 C 636 256, 658 372, 684 372" stroke="#e8833a" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
 
-  <!-- Client <-> nginx -->
-  <line x1="530" y1="166" x2="530" y2="200" stroke="#64748b" stroke-width="1.6" marker-end="url(#ga-ahm)"/>
-  <text x="516" y="187" font-size="10.5" fill="#64748b" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">HTTPS</text>
+  <!-- ============ THE ONE BLUE FOCAL: Redis broker handing off to GPU compute ============ -->
+  <circle cx="500" cy="256" r="104" fill="#1772d0" opacity="0.06"/>
+  <circle cx="500" cy="256" r="76" fill="#1772d0"/>
+  <text x="500" y="250" text-anchor="middle" font-size="22" font-weight="800" letter-spacing="0.2" fill="#ffffff">Redis</text>
+  <text x="500" y="278" text-anchor="middle" font-size="14" letter-spacing="0.2" fill="#cfe2f7">queue · pub/sub</text>
 
-  <!-- ===== WEB (nginx) ===== -->
-  <rect x="370" y="202" width="360" height="54" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
-  <text x="550" y="226" font-size="14.5" font-weight="800" fill="#0f172a" text-anchor="middle">nginx &#8212; web</text>
-  <text x="550" y="245" font-size="11.5" fill="#64748b" text-anchor="middle">reverse proxy / static serving</text>
+  <!-- ============ OUTCOMES (gray stores; the async BO worker is the lone orange) ============ -->
+  <circle cx="684" cy="184" r="5" fill="#6b7280"/>
+  <text x="702" y="190" font-size="18" font-weight="600" fill="#6b7280" letter-spacing="0.3">PostgreSQL + TimescaleDB</text>
 
-  <!-- nginx -> API -->
-  <line x1="550" y1="256" x2="550" y2="298" stroke="#64748b" stroke-width="1.6" marker-end="url(#ga-ahm)"/>
+  <circle cx="684" cy="256" r="5" fill="#6b7280"/>
+  <text x="702" y="262" font-size="18" font-weight="600" fill="#6b7280" letter-spacing="0.3">Prometheus · Grafana</text>
 
-  <!-- ===== API (FastAPI) ===== -->
-  <rect x="330" y="300" width="440" height="76" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
-  <text x="550" y="328" font-size="15.5" font-weight="800" fill="#1e3a8a" text-anchor="middle">FastAPI &#8212; API</text>
-  <text x="550" y="349" font-size="11.5" fill="#475569" text-anchor="middle">synchronous control plane</text>
-  <text x="550" y="366" font-size="11" fill="#64748b" text-anchor="middle">routes requests &#183; enqueues jobs &#183; relays progress over WebSocket</text>
-
-  <!-- API -> Postgres / Redis / Worker -->
-  <line x1="440" y1="376" x2="200" y2="438" stroke="#64748b" stroke-width="1.6" marker-end="url(#ga-ahm)"/>
-  <line x1="550" y1="376" x2="550" y2="438" stroke="#64748b" stroke-width="1.6" marker-end="url(#ga-ahm)"/>
-
-  <!-- ===== DATA + COMPUTE ROW ===== -->
-  <!-- PostgreSQL + TimescaleDB -->
-  <rect x="60" y="440" width="280" height="92" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
-  <text x="200" y="470" font-size="14.5" font-weight="800" fill="#0f172a" text-anchor="middle">PostgreSQL</text>
-  <text x="200" y="491" font-size="12" fill="#475569" text-anchor="middle">+ TimescaleDB</text>
-  <text x="200" y="512" font-size="11" fill="#64748b" text-anchor="middle">experiments &amp; time-series storage</text>
-
-  <!-- Redis -->
-  <rect x="410" y="440" width="280" height="92" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
-  <text x="550" y="470" font-size="14.5" font-weight="800" fill="#0f172a" text-anchor="middle">Redis</text>
-  <text x="550" y="491" font-size="12" fill="#475569" text-anchor="middle">Celery queue + pub/sub</text>
-  <text x="550" y="512" font-size="11" fill="#64748b" text-anchor="middle">brokers jobs &#183; streams progress</text>
-
-  <!-- GPU Celery Worker (ORANGE FOCAL) -->
-  <rect x="760" y="432" width="280" height="108" rx="12" fill="#fef3c7" stroke="#f09228" stroke-width="2.6"/>
-  <text x="900" y="466" font-size="15.5" font-weight="800" fill="#78350f" text-anchor="middle">GPU Celery worker</text>
-  <text x="900" y="488" font-size="12" fill="#b45309" text-anchor="middle" font-weight="700">runs long Bayesian-optimization jobs</text>
-  <text x="900" y="510" font-size="11" fill="#b45309" text-anchor="middle">where the heavy compute lives</text>
-  <text x="900" y="529" font-size="10.5" fill="#b45309" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace">GPU-enabled</text>
-
-  <!-- Redis <-> Worker pub/sub (orange dashed) -->
-  <line x1="690" y1="478" x2="758" y2="478" stroke="#f09228" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ga-aho)"/>
-  <line x1="760" y1="500" x2="692" y2="500" stroke="#f09228" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ga-aho)"/>
-  <text x="725" y="463" font-size="10" fill="#b45309" text-anchor="middle" font-weight="700">queue</text>
-  <text x="725" y="518" font-size="10" fill="#b45309" text-anchor="middle" font-weight="700">progress</text>
-
-  <!-- WebSocket: Redis pub/sub -> API -> client (blue dashed) -->
-  <path d="M 470 440 C 320 400, 300 270, 360 230" fill="none" stroke="#1772d0" stroke-width="1.8" stroke-dasharray="5 3"/>
-  <path d="M 690 158 C 760 150, 760 220, 660 230" fill="none" stroke="#1772d0" stroke-width="1.8" stroke-dasharray="5 3"/>
-  <path d="M 720 145 C 740 135, 730 122, 715 120" fill="none" stroke="#1772d0" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#ga-ahb)"/>
-  <text x="318" y="332" font-size="10.5" fill="#1772d0" font-weight="700" text-anchor="end">progress events</text>
-  <text x="772" y="186" font-size="10.5" fill="#1772d0" font-weight="700">WebSocket &#8594; client</text>
-
-  <!-- ===== OBSERVABILITY GROUP ===== -->
-  <rect x="60" y="572" width="980" height="86" rx="12" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.4"/>
-  <text x="80" y="594" font-size="11" font-weight="700" fill="#64748b" letter-spacing=".5">OBSERVABILITY</text>
-
-  <rect x="80" y="602" width="290" height="44" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
-  <text x="225" y="623" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">Prometheus</text>
-  <text x="225" y="639" font-size="10.5" fill="#64748b" text-anchor="middle">scrapes metrics</text>
-
-  <rect x="405" y="602" width="290" height="44" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
-  <text x="550" y="623" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">Alertmanager</text>
-  <text x="550" y="639" font-size="10.5" fill="#64748b" text-anchor="middle">routes alerts</text>
-
-  <rect x="730" y="602" width="290" height="44" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
-  <text x="875" y="623" font-size="13" font-weight="800" fill="#0f172a" text-anchor="middle">Grafana</text>
-  <text x="875" y="639" font-size="10.5" fill="#64748b" text-anchor="middle">dashboards</text>
-
-  <line x1="370" y1="624" x2="403" y2="624" stroke="#64748b" stroke-width="1.5" marker-end="url(#ga-ahm)"/>
-  <line x1="695" y1="624" x2="728" y2="624" stroke="#64748b" stroke-width="1.5" marker-end="url(#ga-ahm)"/>
-
-  <!-- Prometheus scrapes API (dashed up) -->
-  <path d="M 225 602 C 225 540, 240 420, 326 360" fill="none" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#ga-ahm)"/>
-  <text x="150" y="556" font-size="10.5" fill="#94a3b8" font-family="ui-monospace, Menlo, Consolas, monospace">scrape /metrics</text>
-
-  <!-- ===== HONESTY FOOTER ===== -->
-  <rect x="40" y="676" width="1020" height="32" rx="8" fill="#f8f9fa"/>
-  <text x="56" y="696" font-size="11" font-style="italic" fill="#64748b">Validated on open/synthetic process datasets (Branin/Hartmann-6, open injection-molding, Kaggle CNC &amp; 3D-printer) &#8212; a personal R&amp;D project, not a production deployment.</text>
+  <circle cx="684" cy="372" r="6" fill="#e8833a"/>
+  <text x="702" y="367" font-size="19" font-weight="700" fill="#e8833a" letter-spacing="0.3">GPU Celery worker</text>
+  <text x="702" y="389" font-size="14" font-weight="600" fill="#e8833a" letter-spacing="0.2">long Bayesian-optimization jobs</text>
 </svg>

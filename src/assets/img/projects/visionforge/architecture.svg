@@ -1,129 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 660" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
-    </marker>
-    <marker id="ah-blue" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/>
-    </marker>
-    <marker id="ah-amber" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L8,3 z" fill="#f09228"/>
-    </marker>
-  </defs>
+<svg viewBox="0 0 960 470" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="960" height="470" fill="#ffffff"/>
 
-  <rect width="1100" height="660" fill="#ffffff"/>
+  <!-- ===== TITLE (headline, top-left, one blue phrase) ===== -->
+  <text x="48" y="72" font-size="29" font-weight="800" fill="#0f172a" letter-spacing="-0.4">A detected box becomes an <tspan fill="#1772d0">IPC-A-610</tspan> verdict.</text>
 
-  <!-- Title -->
-  <text x="40" y="46" font-size="23" font-weight="800" fill="#0f172a">VisionForge &#183; PCB Defect Inspection Pipeline</text>
-  <rect x="40" y="56" width="190" height="3" rx="1.5" fill="#1772d0"/>
-  <text x="40" y="80" font-size="13" fill="#64748b">Camera &#8594; YOLOv8 detection &#8594; IPC-A-610 compliance, with generative augmentation, 3D reconstruction, and a FastAPI service layer</text>
+  <!-- ============ INBOUND: gray hairlines converging on the focal ============ -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M242 176 C 372 176, 404 258, 424 258"/>
+    <path d="M242 258 C 372 258, 404 258, 424 258"/>
+    <path d="M242 340 C 372 340, 404 258, 424 258"/>
+  </g>
+  <g fill="#e6e9ee">
+    <circle cx="238" cy="176" r="3"/>
+    <circle cx="238" cy="258" r="3"/>
+    <circle cx="238" cy="340" r="3"/>
+  </g>
+  <text x="56" y="170" font-size="18" font-weight="600" fill="#6b7280">PCB input</text>
+  <text x="56" y="190" font-size="13" font-weight="600" fill="#6b7280">3034 &#215; 1586 boards</text>
+  <text x="56" y="252" font-size="18" font-weight="600" fill="#6b7280">YOLOv8 detection</text>
+  <text x="56" y="272" font-size="13" font-weight="600" fill="#6b7280">n / s / m / l / x</text>
+  <text x="56" y="340" font-size="13" font-weight="600" fill="#6b7280">boxes + confidence</text>
 
-  <!-- ============ BAND 1: Core inspection pipeline ============ -->
-  <rect x="40" y="100" width="1020" height="160" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="56" y="122" font-size="11" letter-spacing="1.5" fill="#64748b" font-weight="600">CORE INSPECTION PIPELINE</text>
+  <!-- outbound hairlines to the three outcomes -->
+  <g stroke="#e6e9ee" stroke-width="1.5" fill="none">
+    <path d="M576 258 C 668 258, 692 178, 748 178"/>
+    <path d="M576 258 C 668 258, 692 258, 748 258"/>
+    <path d="M576 258 C 668 258, 692 338, 748 338"/>
+  </g>
 
-  <!-- PCB Input -->
-  <rect x="64" y="138" width="200" height="98" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="164" y="168" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">PCB Input</text>
-  <text x="164" y="190" text-anchor="middle" font-size="12" fill="#1e3a8a">High-res board image</text>
-  <text x="164" y="210" text-anchor="middle" font-size="11" fill="#475569">high-resolution (3034 &#215; 1586)</text>
-  <text x="164" y="226" text-anchor="middle" font-size="11" fill="#475569">3034 &#215; 1586 boards</text>
+  <!-- ============ THE ONE BLUE FOCAL: compliance mapping ============ -->
+  <circle cx="500" cy="258" r="104" fill="#1772d0" opacity="0.06"/>
+  <circle cx="500" cy="258" r="76" fill="#1772d0"/>
+  <text x="500" y="250" text-anchor="middle" font-size="25" font-weight="800" letter-spacing="0.2" fill="#ffffff">IPC-A-610</text>
+  <text x="500" y="278" text-anchor="middle" font-size="14" letter-spacing="0.2" fill="#cfe2f7">Class 1 / 2 / 3 mapping</text>
 
-  <!-- Detection Engine -->
-  <rect x="316" y="138" width="210" height="98" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-  <text x="421" y="166" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46">Detection Engine</text>
-  <text x="421" y="188" text-anchor="middle" font-size="12" fill="#065f46">YOLOv8 (Ultralytics)</text>
-  <text x="421" y="208" text-anchor="middle" font-size="11" fill="#475569">yolov8 n / s / m / l / x</text>
-  <text x="421" y="224" text-anchor="middle" font-size="11" fill="#475569">boxes + confidence scores</text>
+  <!-- ============ THREE OUTCOMES (DEFECT is the lone orange) ============ -->
+  <circle cx="750" cy="178" r="5" fill="#6b7280"/>
+  <text x="768" y="184" font-size="19" font-weight="600" fill="#6b7280" letter-spacing="0.3">ACCEPTABLE</text>
 
-  <!-- Classification -->
-  <rect x="578" y="138" width="210" height="98" rx="6" fill="#fef3c7" stroke="#f09228" stroke-width="2"/>
-  <text x="683" y="166" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">Compliance Mapping</text>
-  <text x="683" y="188" text-anchor="middle" font-size="12" fill="#b45309">IPC-A-610 Class 1/2/3</text>
-  <text x="683" y="208" text-anchor="middle" font-size="11" fill="#475569">ACCEPTABLE / PROCESS_IND.</text>
-  <text x="683" y="224" text-anchor="middle" font-size="11" fill="#475569">NONCONFORMING / DEFECT</text>
+  <circle cx="750" cy="258" r="5" fill="#6b7280"/>
+  <text x="768" y="264" font-size="19" font-weight="600" fill="#6b7280" letter-spacing="0.3">PROCESS_IND.</text>
 
-  <!-- Output -->
-  <rect x="840" y="138" width="196" height="98" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-  <text x="938" y="168" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Output</text>
-  <text x="938" y="192" text-anchor="middle" font-size="13" fill="#475569" font-weight="600">PASS / FAIL verdict</text>
-  <text x="938" y="214" text-anchor="middle" font-size="11" fill="#64748b" font-style="italic">accuracy self-reported,</text>
-  <text x="938" y="228" text-anchor="middle" font-size="11" fill="#64748b" font-style="italic">not benchmarked in repo</text>
+  <circle cx="750" cy="338" r="6" fill="#e8833a"/>
+  <text x="768" y="344" font-size="19" font-weight="700" fill="#e8833a" letter-spacing="0.3">DEFECT</text>
 
-  <!-- pipeline arrows -->
-  <line x1="264" y1="187" x2="312" y2="187" stroke="#2563eb" stroke-width="1.8" marker-end="url(#ah-blue)"/>
-  <line x1="526" y1="187" x2="574" y2="187" stroke="#2563eb" stroke-width="1.8" marker-end="url(#ah-blue)"/>
-  <line x1="788" y1="187" x2="836" y2="187" stroke="#2563eb" stroke-width="1.8" marker-end="url(#ah-blue)"/>
-
-  <!-- ============ BAND 2: Supporting model modules ============ -->
-  <rect x="40" y="284" width="660" height="160" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="56" y="306" font-size="11" letter-spacing="1.5" fill="#64748b" font-weight="600">SUPPORTING MODEL MODULES</text>
-
-  <!-- Data Augmentation -->
-  <rect x="64" y="322" width="290" height="104" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
-  <text x="209" y="350" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Data Augmentation</text>
-  <text x="209" y="372" text-anchor="middle" font-size="12" fill="#475569">Stable Diffusion module (diffusers)</text>
-  <text x="209" y="390" text-anchor="middle" font-size="11" fill="#475569">NoiseScheduler &#183; CLIPTextEncoder &#183; SafetyChecker</text>
-  <text x="209" y="408" text-anchor="middle" font-size="11" fill="#64748b" font-style="italic">intended synthetic defects; not wired to</text>
-  <text x="209" y="421" text-anchor="middle" font-size="11" fill="#64748b" font-style="italic">class balancing &#183; effect not measured</text>
-
-  <!-- 3D Reconstruction -->
-  <rect x="378" y="322" width="298" height="104" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
-  <text x="527" y="350" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46">3D Reconstruction</text>
-  <text x="527" y="372" text-anchor="middle" font-size="12" fill="#065f46">NeRF (from scratch) + Open3D</text>
-  <text x="527" y="392" text-anchor="middle" font-size="11" fill="#475569">PositionalEncoder &#183; ray bundles &#183; volume render</text>
-  <text x="527" y="410" text-anchor="middle" font-size="11" fill="#475569">3D solder-joint geometry inspection</text>
-
-  <!-- augmentation feeds detection (dashed optional) -->
-  <line x1="209" y1="322" x2="209" y2="252" stroke="#64748b" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ah)"/>
-  <text x="222" y="276" font-size="10" fill="#475569" font-style="italic">geometric aug. trains detector</text>
-
-  <!-- 3D recon supports classification -->
-  <line x1="527" y1="322" x2="527" y2="240" stroke="#64748b" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ah)"/>
-  <text x="540" y="276" font-size="10" fill="#475569" font-style="italic">geometry input</text>
-
-  <!-- ============ BAND 3: Service & UI layer ============ -->
-  <rect x="724" y="284" width="336" height="160" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="740" y="306" font-size="11" letter-spacing="1.5" fill="#64748b" font-weight="600">SERVICE &amp; UI LAYER</text>
-
-  <!-- API Gateway -->
-  <rect x="748" y="322" width="288" height="50" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-  <text x="768" y="343" font-size="13" font-weight="700" fill="#1e3a8a">FastAPI Backend</text>
-  <text x="768" y="361" font-size="11" fill="#475569">VisionForge :8000 &#183; PCB_Vision API :8001</text>
-
-  <!-- Desktop GUI -->
-  <rect x="748" y="384" width="140" height="44" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-  <text x="818" y="404" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">tkinter GUI</text>
-  <text x="818" y="420" text-anchor="middle" font-size="10" fill="#475569">live overlays &#183; batch</text>
-
-  <!-- Dashboard -->
-  <rect x="896" y="384" width="140" height="44" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
-  <text x="966" y="404" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">Dashboard</text>
-  <text x="966" y="420" text-anchor="middle" font-size="10" fill="#475569">stats &#183; reports &#183; history</text>
-
-  <!-- output feeds API -->
-  <line x1="938" y1="236" x2="938" y2="318" stroke="#2563eb" stroke-width="1.8" marker-end="url(#ah-blue)"/>
-  <!-- API to UIs -->
-  <line x1="818" y1="372" x2="818" y2="380" stroke="#64748b" stroke-width="1.6" marker-end="url(#ah)"/>
-  <line x1="966" y1="372" x2="966" y2="380" stroke="#64748b" stroke-width="1.6" marker-end="url(#ah)"/>
-
-  <!-- ============ DEPLOYMENT / TECH STACK strip ============ -->
-  <rect x="40" y="476" width="1020" height="92" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="56" y="498" font-size="11" letter-spacing="1.5" fill="#64748b" font-weight="600">RUNTIME &amp; PACKAGING</text>
-  <text x="56" y="524" font-size="13" fill="#0f172a" font-weight="600">Stack</text>
-  <text x="120" y="524" font-size="12" fill="#475569">PyTorch 2.1 + CUDA 12.1 &#183; Ultralytics YOLOv8 &#183; diffusers &#183; Open3D &#183; FastAPI &#183; tkinter</text>
-  <text x="56" y="550" font-size="13" fill="#0f172a" font-weight="600">Deploy</text>
-  <text x="120" y="550" font-size="12" fill="#475569">Docker + docker-compose &#183; Kubernetes manifests (deployment/k8s)</text>
-  <text x="640" y="550" font-size="11" fill="#64748b" font-style="italic">Validated on the open PKU-Market PCB defect dataset (6 classes)</text>
-
-  <!-- legend -->
-  <text x="40" y="600" font-size="11" fill="#64748b">Legend:</text>
-  <rect x="92" y="591" width="14" height="11" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
-  <text x="112" y="600" font-size="11" fill="#475569">I/O &amp; service</text>
-  <rect x="200" y="591" width="14" height="11" rx="2" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.2"/>
-  <text x="220" y="600" font-size="11" fill="#475569">compute / model</text>
-  <rect x="328" y="591" width="14" height="11" rx="2" fill="#fef3c7" stroke="#f09228" stroke-width="1.2"/>
-  <text x="348" y="600" font-size="11" fill="#475569">compliance</text>
-  <rect x="436" y="591" width="14" height="11" rx="2" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
-  <text x="456" y="600" font-size="11" fill="#475569">caveat: built but not validated / measured in repo</text>
+  <!-- ============ QUIET OUTCOME LANE: the verdict ============ -->
+  <path d="M242 422 L 470 422" stroke="#e6e9ee" stroke-width="1.5" fill="none"/>
+  <circle cx="238" cy="422" r="3" fill="#e6e9ee"/>
+  <text x="486" y="427" font-size="15" font-weight="600" fill="#6b7280">three classes collapse to a PASS / FAIL verdict</text>
 </svg>
