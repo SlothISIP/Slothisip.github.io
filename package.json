@@ -11,6 +11,7 @@
   "scripts": {
     "clean": "rimraf _site .cache",
     "build": "eleventy",
+    "build:cv": "node tools/cv/build-cv.mjs",
     "serve": "eleventy --serve --quiet",
     "start": "eleventy --serve",
     "debug": "cross-env DEBUG=Eleventy* eleventy"

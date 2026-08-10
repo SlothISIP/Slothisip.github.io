@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ju O Kim - Resume</title>
+<style>
+  @page { size: A4; margin: 15mm 16mm 13mm; }
+
+  :root {
+    --ink:    #1a1a1a;
+    --muted:  #555555;
+    --accent: #2e74b5;
+    --rule:   #c9d7e6;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.42;
+    color: var(--ink);
+  }
+
+  /* ---------- masthead ---------- */
+
+  h1 {
+    margin: 0;
+    font-size: 26pt;
+    font-weight: 700;
+    letter-spacing: -0.4pt;
+  }
+
+  .tagline {
+    margin: 2pt 0 4pt;
+    font-size: 11.5pt;
+    color: var(--accent);
+  }
+  .tagline .sep { padding: 0 4pt; color: #9ab4cd; }
+
+  .contact {
+    font-size: 8.2pt;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  /* Keep multi-word items ("Daegu, South Korea", "Google Scholar") from
+     splitting across lines - the line breaks between items, never inside one. */
+  .contact a,
+  .contact .loc { white-space: nowrap; }
+  .contact a { color: var(--accent); text-decoration: none; }
+  .contact .sep { padding: 0 3pt; color: #aaa; }
+
+  /* ---------- sections ---------- */
+
+  h2 {
+    margin: 12pt 0 5pt;
+    padding-bottom: 2pt;
+    border-bottom: 0.7pt solid var(--rule);
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0.5pt;
+    color: var(--accent);
+    break-after: avoid;
+  }
+  h2 .note {
+    float: right;
+    font-size: 7.6pt;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--muted);
+    padding-top: 2.4pt;
+  }
+
+  p { margin: 0 0 5pt; }
+  .summary { text-align: left; }
+
+  /* ---------- skills ---------- */
+
+  /* Three registers per row: bold ink label, accent-coloured core skills,
+     muted supporting tools. */
+  .skill { margin: 0 0 2.2pt; padding-left: 0; color: var(--muted); }
+  .skill b { color: var(--ink); }
+  .skill .c { color: var(--accent); font-weight: 600; }
+
+  /* ---------- experience / education ---------- */
+
+  .entry { margin: 0 0 8pt; break-inside: avoid; }
+  .entry:last-child { margin-bottom: 0; }
+
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10pt;
+  }
+  .entry-head .role { font-weight: 700; font-size: 9.8pt; }
+  .entry-head .date {
+    font-style: italic;
+    font-size: 8.4pt;
+    color: var(--muted);
+    white-space: nowrap;
+    flex: none;
+  }
+  .entry .sub {
+    font-style: italic;
+    font-size: 8.4pt;
+    color: var(--muted);
+    margin: 1pt 0 0;
+  }
+
+  ul { margin: 2.5pt 0 0; padding-left: 11pt; }
+  li { margin: 0 0 1.6pt; }
+  li::marker { color: var(--accent); }
+
+  /* ---------- projects ---------- */
+
+  .project { margin: 0 0 4.5pt; break-inside: avoid; }
+  .project b { color: var(--ink); }
+  .scope {
+    display: inline-block;
+    margin-right: 3pt;
+    color: var(--accent);
+    font-size: 7.7pt;
+    font-weight: 700;
+    letter-spacing: 0.2pt;
+    text-transform: uppercase;
+  }
+  .page-2 { break-before: page; }
+
+  /* ---------- publications ---------- */
+
+  ol.pubs { margin: 0; padding-left: 13pt; }
+  ol.pubs li { margin: 0 0 2.8pt; break-inside: avoid; }
+  ol.pubs .me { font-weight: 700; }
+  ol.pubs .venue { font-style: italic; }
+  ol.pubs .tag { color: var(--muted); font-size: 8.2pt; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Ju O Kim</h1>
+  <p class="tagline">AI Research Engineer<span class="sep">·</span>Physics-Informed ML for Industrial Systems</p>
+  <p class="contact">
+    <span class="loc">Daegu, South Korea</span><span class="sep">|</span><a href="mailto:orcakim21@gmail.com">orcakim21@gmail.com</a><span class="sep">|</span><a href="https://www.linkedin.com/in/ju-o-kim-614b9b192">LinkedIn</a><span class="sep">|</span><a href="https://scholar.google.com/citations?user=ROKphgMAAAAJ">Google Scholar</a><span class="sep">|</span><a href="https://slothisip.github.io">slothisip.github.io</a>
+  </p>
+</header>
+
+<h2>Profile</h2>
+<p class="summary">AI Research Engineer and Computer Engineering Ph.D. student working at the intersection of physics-informed machine learning and industrial systems. Research spans neural operators, acoustic tomography, and physics-informed Bayesian optimization; engineering spans multimodal sensing, anomaly detection, and production scheduling. Author or co-author of 20 publications, including five first-author SCI/SCIE journal papers.</p>
+
+<h2>Core Expertise</h2>
+<p class="skill"><b>Scientific &amp; Industrial ML:</b> <span class="c">PyTorch, neural operators, Gaussian Processes</span> - BoTorch, GPyTorch, XGBoost, Optuna, Ray</p>
+<p class="skill"><b>Signal &amp; Sensing:</b> <span class="c">Acoustic, thermal, UWB radar</span> - beamforming (MVDR/DAS/MUSIC), GCC-PHAT/TDOA, OpenCV</p>
+<p class="skill"><b>Systems:</b> <span class="c">Python, FastAPI, Docker</span> - Celery, Redis, PostgreSQL, TimescaleDB, ONNX</p>
+<p class="skill"><b>Agents &amp; XAI:</b> <span class="c">LangGraph, MCP, Ollama</span> - deterministic guardrails, human-in-the-loop, SHAP, DoWhy, causal-learn</p>
+<p class="skill"><b>Languages:</b> <span class="c">Python</span> - TypeScript, SQL, MATLAB &nbsp;|&nbsp; Korean (native), English (professional working proficiency)</p>
+
+<h2>Experience</h2>
+
+<div class="entry">
+  <div class="entry-head">
+    <span class="role">AI Research Engineer, R&amp;D Division - JS SYSTEM (Manufacturing AI Solutions)</span>
+    <span class="date">Feb 2025 - Present</span>
+  </div>
+  <ul>
+    <li>Develop end-to-end AI systems spanning model development, data pipelines, APIs, deployment, and technical coordination.</li>
+    <li>Developed an AutoML workflow combining model screening, hyperparameter optimization, and ensemble construction.</li>
+    <li>Built acoustic anomaly-detection and on-prem multi-agent systems with local LLMs, deterministic guardrails, and human-in-the-loop control.</li>
+    <li>Delivered REST APIs and real-time monitoring dashboards across the ML lifecycle.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="entry-head">
+    <span class="role">Researcher, R&amp;D Department - Seongwoo Instruments</span>
+    <span class="date">Feb 2023 - Mar 2024</span>
+  </div>
+  <ul>
+    <li>Built a real-time micro-seismic monitoring and isolation system for superconducting seismic-wave detection under a government-funded national R&amp;D program, in collaboration with the University of Maryland Physics Lab, including a 6-month on-site assignment at UMD.</li>
+    <li>Designed digital filters and SVM/Random Forest classifiers for seismic-vs-noise discrimination; developed the MATLAB ISOLATOR module for real-time vertical-motion control.</li>
+    <li>Engineered a high-throughput real-time data-streaming pipeline on a hybrid MATLAB-Python framework.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="entry-head">
+    <span class="role">Commissioned Researcher - DGIST (Daegu Gyeongbuk Institute of Science &amp; Technology)</span>
+    <span class="date">Mar 2020 - Dec 2021</span>
+  </div>
+  <ul>
+    <li>Developed vanishing-point-based calibration for a three-viewpoint thermal camera with wide-baseline (&gt;180° / ~240°) view separation; reduced reprojection error to 0.58-0.66 px without correspondence matching (published in <i>Journal of Signal Processing Systems</i>, Springer).</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="entry-head">
+    <span class="role">Graduate Researcher, NRF Research Project - Keimyung University</span>
+    <span class="date">2020 - 2022</span>
+  </div>
+  <ul>
+    <li>Designed a DNN architecture for depth-camera distortion correction (UAV/AMR perception), trained on real-world datasets spanning varied weather and lighting.</li>
+  </ul>
+</div>
+
+<h2 class="page-2">Selected Engineering Systems</h2>
+<p class="project"><span class="scope">Applied Engineering</span><b>AI Production Scheduler.</b> Developed and validated a production-scale scheduling system for manufacturing workflows, outperforming a legacy planning baseline while satisfying all hard constraints.</p>
+<p class="project"><span class="scope">Personal R&amp;D - Open/Synthetic Data</span><b>GPO - Generative Process Optimizer.</b> On an open 564-cycle injection-molding benchmark (n=20), Bayesian optimization reached 90% convergence in 14.8 evaluations versus 35.1 for random search; a physics-informed prior reduced that to 8.8.</p>
+<p class="project"><span class="scope">R&amp;D Prototype - Open/Synthetic Data</span><b>Multi-Agent Manufacturing QC.</b> Eleven agents cross-examine ML-tool evidence, while deterministic guardrails and human review own safety decisions. Runs on-prem with Ollama and is covered by 1,150 passing tests.</p>
+<p class="project"><span class="scope">Personal Research - Public DCASE/MIMII</span><b>Acoustic Vision System.</b> Adapts an 87M-parameter audio transformer with 0.68%-1.35% trainable parameters depending on machine type; self-evaluated under the DCASE 2020 Task 2 protocol at mean AUC ~0.94 across Fan, Pump, Slider, and Valve.</p>
+
+<h2>Selected Research &amp; Publications</h2>
+<p class="project"><b>Neural acoustic tomography, <i>Measurement Science and Technology</i> (2026).</b> Single-pass 3D reconstruction ran ~950x faster per scene and improved IoU by 51.0% over a generic encoder; a topology study found that the standard Eikonal prior reduced IoU by 9.3% overall.</p>
+<p class="project"><b>FFT-free neural operator, <i>Applied Sciences</i> (2026).</b> Achieved 4.6-16.4x faster inference than FNO/MscaleFNO and a 19.6% out-of-distribution gap, 2.6x lower than FNO.</p>
+<p class="project"><b>Non-contact sensing and thermal calibration.</b> Published a UWB respiratory classifier with 94.3% accuracy and 0.969 AUC (<i>Electronics</i>, 2025), and wide-baseline thermal-camera calibration with 0.58-0.66 px reprojection error (<i>Journal of Signal Processing Systems</i>, 2024).</p>
+<p class="project"><b>Publication record.</b> Five first-author SCI/SCIE journal papers; 20 publications total. Full list and paper links: <a href="https://slothisip.github.io/#publications">slothisip.github.io/#publications</a>.</p>
+
+<h2>Education</h2>
+
+<div class="entry">
+  <div class="entry-head">
+    <span class="role">Ph.D., Computer Engineering (Artificial Intelligence) - Keimyung University, Daegu</span>
+    <span class="date">2026 - Present</span>
+  </div>
+  <p class="sub">Advisor: Prof. Deokwoo Lee.</p>
+</div>
+
+<div class="entry">
+  <div class="entry-head">
+    <span class="role">M.Eng., Computer Engineering (Artificial Intelligence) - Keimyung University, Daegu</span>
+    <span class="date">2020 - 2025</span>
+  </div>
+  <p class="sub">GPA 4.12 / 4.5. Thesis: Deep Learning Approaches for Non-Contact Biomedical Signal Processing. Advisor: Prof. Deokwoo Lee.</p>
+</div>
+
+<div class="entry">
+  <div class="entry-head">
+    <span class="role">B.Eng., Computer Engineering - Keimyung University, Daegu</span>
+    <span class="date">2014 - 2020</span>
+  </div>
+  <p class="sub">Includes mandatory military service (2014-2016).</p>
+</div>
+
+<h2>Awards</h2>
+<p>Best Paper Award, Korean Signal Processing Society (2023).</p>
+
+</body>
+</html>
