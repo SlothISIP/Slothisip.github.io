@@ -28,7 +28,7 @@
   <circle cx="500" cy="256" r="104" fill="#1772d0" opacity="0.06"/>
   <circle cx="500" cy="256" r="76" fill="#1772d0"/>
   <text x="500" y="244" text-anchor="middle" font-size="24" font-weight="800" letter-spacing="0.2" fill="#ffffff">BO core</text>
-  <text x="500" y="272" text-anchor="middle" font-size="14" letter-spacing="0.2" fill="#cfe2f7">GP · Matern 5/2</text>
+  <text x="500" y="272" text-anchor="middle" font-size="14" letter-spacing="0.2" fill="#cfe2f7">GP · Matérn 5/2</text>
   <text x="500" y="294" text-anchor="middle" font-size="14" letter-spacing="0.2" fill="#cfe2f7">EI · UCB · KG</text>
 
   <!-- outbound hairline to the focal outcome -->
