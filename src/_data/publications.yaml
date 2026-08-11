@@ -1,4 +1,163 @@
 # Single source for all publications. Detail pubs carry abstract/figures/acknowledgements; markers resolved.
+- slug: mst2026
+  title: 'Amortised Neural Acoustic Tomography: Domain-Specific Encoder Design and Topology-Dependent Eikonal Analysis'
+  authors: Ju O Kim, Deokwoo Lee
+  venue: Measurement Science and Technology (IOP Publishing)
+  year: 2026
+  badge: scie
+  detail: true
+  paper_url: https://doi.org/10.1088/1361-6501/ae8c6d
+  bib: KimMST2026
+  highlight: false
+  thumb: publications/mst2026/mst2026_thumb.jpg
+  stats:
+    - value: '~950x'
+      label: 'faster per scene'
+      sub: '127 ms vs ~2 min of optimisation'
+    - value: '+51.0%'
+      label: 'IoU over a generic encoder'
+      sub: '0.644 vs 0.426, p = 0.0015'
+    - value: '-9.3%'
+      label: 'IoU from the Eikonal prior'
+      sub: 'the standard physics loss hurts'
+  tldr: >-
+    Reconstructs 3D object geometry from acoustic pressure measurements in a single forward
+    pass -- roughly 950x faster than the per-scene optimisation it replaces -- and shows that
+    the accuracy comes from designing the encoder around acoustics, not from adding
+    physics-informed losses. The Eikonal prior, standard in SDF learning, is measured here
+    rather than assumed, and it turns out to help only narrowly and harm broadly.
+  problem: >-
+    Recovering an object's shape from how it perturbs a sound field is an inverse scattering
+    problem normally solved by optimising one scene at a time, which costs about two minutes
+    per scene and cannot be deployed. Amortising it into a learned encoder is the obvious fix,
+    but a generic set encoder throws away the structure that makes acoustic observations
+    informative -- and the field's default remedy, bolting on physics-informed losses, had
+    never been ablated in this setting.
+  approach:
+    - >-
+      Learns the transfer function T = p_scat / p_inc rather than raw pressure, which removes
+      the dominant free-space oscillation from the target; a 10.3M-parameter forward surrogate
+      reaches 0.05% relative L2 on it, validating T as a learnable quantity in 3D.
+    - >-
+      Designs the encoder along two acoustically motivated axes -- magnitude-phase input
+      (separating scattering cross-section from path length) and frequency-selective attention
+      (learning which scattering regimes carry shape) -- for 293K parameters total.
+    - >-
+      Trains in two stages -- code-match distillation against a per-scene auto-decoder, then
+      joint fine-tuning with cycle-consistency through the frozen forward model -- on a
+      100-scene 3D BEM dataset spanning 12 shape categories, with the BEM solver itself
+      validated against the analytical Mie series to 0.24% relative L2.
+    - >-
+      Ablates the Eikonal constraint systematically across both architectures, 12 shape
+      categories and 6-point (auto-decoder) / 4-point (encoder) weight sweeps, instead of
+      including it untested as the prior 2D work did.
+  results:
+    - >-
+      Single-pass inference in ~127 ms against ~120,000 ms for per-scene optimisation -- a
+      ~950x speed-up that retains 78.4% of the auto-decoder ceiling (IoU 0.644 +/- 0.015 vs
+      0.821).
+    - >-
+      The acoustic-specific encoder beats a domain-agnostic one by 51.0% (0.644 vs 0.426,
+      p = 0.0015, 3 seeds), and an augmentation ablation confirms the gain comes from the input
+      representation and attention rather than from data augmentation.
+    - >-
+      Learned attention is wavelength-selective, peaking at 2.0x uniform weight in the
+      resonance regime near 1.2 kHz and falling to 0.28x where the wavelength is far shorter
+      than the object -- an acoustic prior that mean pooling cannot express.
+    - >-
+      Eikonal regularisation degrades the encoder by 9.3% (p = 0.012). The per-category
+      breakdown explains why -- benefits are architecture-dependent and confined to convex
+      shapes that still have reconstruction headroom (ellipsoid +0.267 in the auto-decoder,
+      only +0.008 in the encoder), whereas the harm is universal, flattening topological
+      features regardless of architecture (torus -0.240 / -0.222).
+    - >-
+      Reported honestly -- zero-shot transfer to entirely unseen shape categories is weak
+      (0.280 mean IoU, 0.363 excluding the degenerate thin-shell class), thin-shell "hollowed"
+      geometry fails outright at 64^3 resolution, and the data are fully synthetic, so the
+      framework is positioned as a measurement methodology validated in simulation rather than
+      a deployed instrument.
+  abstract: >-
+    We present an amortised neural framework for three-dimensional acoustic diffraction
+    tomography that reconstructs scene geometry as signed distance functions from boundary
+    element method pressure observations. The central finding is that domain-specific encoder
+    design, rather than physics-informed loss terms, drives reconstruction accuracy. Across
+    100 synthetic scenes spanning 12 shape categories, this encoder attains 0.644 +/- 0.015
+    mean intersection over union, a 51.0% improvement over a domain-agnostic baseline, while
+    the physics losses evaluated in this amortised setting provide zero or negative benefit.
+    Inference is a single forward pass (~127 ms, a ~950x speedup over per-scene optimisation).
+    A systematic Eikonal regularisation ablation reveals a topology- and architecture-dependent
+    asymmetry -- any benefit is confined to specific convex shapes with reconstruction headroom,
+    whereas the harm, a flattening of topological features, is universal.
+  citation: >-
+    Ju O Kim and Deokwoo Lee, "Amortised neural acoustic tomography: domain-specific encoder
+    design and topology-dependent Eikonal analysis," Measurement Science and Technology (IOP
+    Publishing), vol. 37, no. 31, article 316003, 2026. DOI 10.1088/1361-6501/ae8c6d. Published
+    7 August 2026.
+  pipeline:
+    - { label: 'BEM observations', sub: 'p(f, xs, xr)' }
+    - { label: 'Magnitude + phase', sub: 'Axis A' }
+    - { label: 'Frequency attention', sub: 'alpha(f), Axis B', key: true }
+    - { label: 'Latent code', sub: 'z, 256-dim' }
+    - { label: 'SDF decoder', sub: 'geometry s(x)' }
+  figures:
+    - src: publications/mst2026/mst2026_concept.svg
+      section: problem
+      alt: 'Generic mean pooling over frequency versus learned frequency-selective attention - the core encoder design'
+      caption: 'Core idea: a generic encoder averages all 50 frequencies and dilutes the resonance band that carries geometry (IoU 0.426); the acoustic-specific encoder splits magnitude from phase and learns a frequency weighting that peaks at 2.0x in resonance and drops to 0.28x at short wavelengths (IoU 0.644).'
+    - src: publications/mst2026/mst2026_amortise.svg
+      section: problem
+      featured: true
+      alt: 'Reconstruction time per scene on a log scale - per-scene auto-decoder versus the amortised encoder'
+      caption: 'Amortisation is the point: per-scene optimisation needs ~120,000 ms and 800 epochs to reach IoU 0.821; the encoder reaches 0.644 in ~127 ms, keeping 78.4% of that ceiling for a ~950x speed-up.'
+    - src: publications/mst2026/mst2026_architecture.jpg
+      title: 'System architecture'
+      section: approach
+      alt: Acoustic-specific encoder, SDF decoder, frozen forward surrogate and the cycle-consistency path
+      caption: 'The 293K-parameter encoder maps complex BEM observations to a 256-dim latent code through magnitude-phase input and frequency-selective attention pooling. Stage 1 distils auto-decoder codes; Stage 2 fine-tunes jointly with cycle-consistency through the frozen forward surrogate. The Eikonal term is analysed, not recommended.'
+    - src: publications/mst2026/mst2026_bem.jpg
+      title: 'Measurement reference validated against theory'
+      section: approach
+      alt: Relative L2 error of BEM against the analytical Mie series across eight sphere scenes
+      caption: 'The simulated measurements are trustworthy before anything is learned from them: across eight sphere scenes (radii 3-12 cm) the BEM solver sits 0.24% from the analytical Mie series, an order of magnitude below the neural error on the same scenes.'
+    - src: publications/mst2026/mst2026_recon.jpg
+      title: 'Reconstructed geometry'
+      section: lead
+      featured: true
+      alt: 'Ground-truth versus reconstructed SDF contours at the z-midplane for six shape categories'
+      caption: 'Reconstructed geometry at the z-midplane against ground truth. Convex and multi-body scenes recover closely (sphere 0.968, cone 0.947, torus 0.939, multi-body 0.925); the ellipsoid at 0.693 shows where the reconstruction still loses the boundary.'
+    - src: publications/mst2026/mst2026_mainresults.jpg
+      title: 'Encoder design versus physics loss'
+      section: results
+      featured: true
+      alt: Mean IoU for the acoustic-specific encoder, the same encoder with Eikonal, and a generic encoder
+      caption: 'The headline result. Acoustic-specific design lifts IoU by 51.0% over a generic encoder (0.644 vs 0.426, p = 0.0015); adding the standard Eikonal prior to that same encoder costs 9.3% (p = 0.012). Error bars are one population standard deviation over 3 seeds.'
+    - src: publications/mst2026/mst2026_freqattn.jpg
+      title: 'What the encoder listens to'
+      section: results
+      featured: true
+      alt: Learned attention weight relative to uniform, plotted against frequency across three scattering regimes
+      caption: 'The learned weighting is wavelength-selective rather than arbitrary: it peaks at 2.0x uniform near 1,236 Hz where the wavelength matches the object, holds 1.42x in the Rayleigh regime, and is suppressed to 0.28x in the short-wavelength geometric regime where scattering is dominated by fine-scale, hard-to-invert interactions.'
+    - src: publications/mst2026/mst2026_dataeff.jpg
+      title: 'Data efficiency'
+      section: results
+      alt: Mean IoU against fraction of training data for the acoustic-specific and generic encoders
+      caption: 'The acoustic-specific encoder converts more data into more accuracy (0.404 to 0.647, +60% as the training set grows), while the generic encoder stays flat near 0.41 - evidence that the design extracts geometric information rather than memorising scenes.'
+    - src: publications/mst2026/mst2026_eikonal.jpg
+      title: 'Eikonal weight sweep'
+      section: results
+      alt: Mean IoU against Eikonal weight for the per-scene auto-decoder and the amortised encoder
+      caption: 'Sweeping the Eikonal weight across both architectures: the auto-decoder shows a shallow within-noise maximum at w = 0.001 then falls away, while the encoder is flat below w = 0.01 and drops sharply at 0.1. Amortisation makes explicit Eikonal supervision redundant - the encoder already inherits SDF regularity through code-match distillation.'
+    - src: publications/mst2026/mst2026_category.jpg
+      title: 'Where the physics prior helps and where it hurts'
+      section: results
+      alt: Per-category change in IoU from the Eikonal prior, for the auto-decoder and the encoder
+      caption: 'Per-category effect of the Eikonal prior. Benefit is narrow and architecture-dependent - the ellipsoid gains +0.267 in the auto-decoder but only +0.008 once amortised. Harm is broad and structural: torus -0.240 / -0.222 and wedge -0.257 / -0.170, the prior flattening exactly the topological features the reconstruction is meant to recover.'
+    - src: publications/mst2026/mst2026_percat.jpg
+      title: 'Reconstruction across all 12 categories'
+      section: results
+      alt: Per-category reconstruction IoU across the twelve shape categories with the overall mean
+      caption: 'Per-category reconstruction IoU across the full 12-category dataset (overall mean 0.82). Simple convex primitives sit near 0.9, while thin-shell hollowed geometry (0.60) and L-shapes (0.69) mark the current limits - the failure modes are reported rather than averaged away.'
+  acknowledgements: Computational resources were provided by the Department of Computer Science and Engineering, Keimyung University. This work was supported by the National Research Foundation of Korea, grant no. 2022R1I1A3069352.
 - slug: applsci2026
   title: 'FFT-Free Neural Operators for Helmholtz Scattering via Adaptive Coefficient Modulation'
   authors: Ju O Kim, Deokwoo Lee
