@@ -42,6 +42,16 @@ THUMBNAIL_*.md
 프로필사진.jpg
 논문/
 
+# Personal documents and raw photo drops at repo root (never publish these)
+/id*.png
+/id*.jpg
+/id*.jpeg
+/kim_*.jpg
+/kim_*.jpeg
+/kr-region.*
+/*.zip
+/[[]*[]]-*/
+
 # Source manuscript PDFs at repo root (papers link to the publisher, not self-hosted)
 /*.pdf
 
