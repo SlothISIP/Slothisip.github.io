@@ -9,7 +9,7 @@ description: Ju O Kim - AI Research Engineer. Non-contact biomedical sensing (UW
 keywords: Ju O Kim, AI Research Engineer, machine learning, deep learning, computer vision, UWB radar, respiratory monitoring, CNN-LSTM, thermal camera calibration, AutoML, sensor fusion, manufacturing AI, multi-agent LLM, anomaly detection
 socials:
   scholar: https://scholar.google.com/citations?user=ROKphgMAAAAJ
-  linkedin: https://www.linkedin.com/in/juo-kim-614b9b192
+  linkedin: https://www.linkedin.com/in/ju-o-kim-614b9b192
   github: https://github.com/SlothISIP
 person:
   jobTitle: AI Research Engineer
@@ -19,11 +19,11 @@ person:
   worksForUrl: https://js-system.co.kr/
   alumniOf:
     name: Keimyung University
-    url: https://www.kmu.ac.kr/main.do
+    url: https://www.kmu.ac.kr/
   image: assets/img/KimJuO.jpg
   sameAs:
     - https://scholar.google.com/citations?user=ROKphgMAAAAJ
-    - https://www.linkedin.com/in/juo-kim-614b9b192
+    - https://www.linkedin.com/in/ju-o-kim-614b9b192
     - https://github.com/SlothISIP
   knowsAbout:
     - UWB Radar
