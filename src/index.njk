@@ -100,7 +100,7 @@ isHome: true
 <section id="projects">
   <h2>Projects <span class="count">({{ projects | length }})</span></h2>
   <div class="project-grid">
-  {% for pr in projects %}
+  {% for pr in projects | sort(false, false, "order") %}
     <a class="project-card" href="/projects/{{ pr.slug }}/">
       <div class="project-card-thumb">{% thumb pr.thumb, pr.title %}</div>
       <div class="project-card-body">
