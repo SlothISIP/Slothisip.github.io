@@ -40,6 +40,6 @@
   <!-- ============ OUTCOME LINE (quiet, the headline payoff in numbers) ============ -->
   <path d="M214 404 L 470 404" stroke="#e6e9ee" stroke-width="1.5" fill="none"/>
   <circle cx="210" cy="404" r="3" fill="#e6e9ee"/>
-  <text x="56" y="409" font-size="15" font-weight="700" fill="#1772d0">F1 0.9462</text>
-  <text x="486" y="409" font-size="15" font-weight="600" fill="#6b7280">defect recall 95.91% &#183; 67.3 ms end-to-end (CPU)</text>
+  <text x="56" y="409" font-size="15" font-weight="700" fill="#1772d0">F1 &#8776;0.95</text>
+  <text x="486" y="409" font-size="15" font-weight="600" fill="#6b7280">defect recall ~96% &#183; 67.3 ms end-to-end (CPU)</text>
 </svg>

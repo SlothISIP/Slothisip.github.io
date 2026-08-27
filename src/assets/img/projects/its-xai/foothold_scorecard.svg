@@ -15,7 +15,7 @@
 
   <!-- ROW 1: F1 — the lead metric, orange focal value -->
   <text x="48" y="170" font-size="19" font-weight="600" fill="#0f172a">Meta-classifier F1-score</text>
-  <text x="660" y="170" text-anchor="end" font-size="22" font-weight="800" fill="#e8833a">0.9462</text>
+  <text x="660" y="170" text-anchor="end" font-size="22" font-weight="800" fill="#e8833a">&#8776;0.95</text>
   <rect x="700" y="148" width="212" height="34" rx="17" fill="#cfe2f7"/>
   <text x="806" y="171" text-anchor="middle" font-size="16" font-weight="800" fill="#1772d0">PASS +26%</text>
 
@@ -27,7 +27,7 @@
 
   <!-- ROW 3: defect recall -->
   <text x="48" y="302" font-size="19" font-weight="600" fill="#0f172a">Defect (FAIL) recall</text>
-  <text x="660" y="302" text-anchor="end" font-size="22" font-weight="800" fill="#0f172a">95.91%</text>
+  <text x="660" y="302" text-anchor="end" font-size="22" font-weight="800" fill="#0f172a">~96%</text>
 
   <!-- ROW 4: SHAP explain latency -->
   <text x="48" y="368" font-size="19" font-weight="600" fill="#0f172a">/explain SHAP latency</text>
