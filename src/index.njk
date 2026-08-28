@@ -64,7 +64,7 @@ isHome: true
   <dl class="skills">
   {% for s in home.skills %}
     <dt>{{ s.category }}</dt>
-    <dd>{{ s.items | join(", ") }}</dd>
+    <dd>{% if s.core %}<span class="sk-core">{{ s.core | join(" · ") }}</span>{% endif %}<span class="sk-rest">{{ s.items | join(", ") }}</span></dd>
   {% endfor %}
   </dl>
 </section>

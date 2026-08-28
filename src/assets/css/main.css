@@ -195,7 +195,10 @@ h2 .count { color: var(--muted); font-weight: 400; font-size: 16px; }
 /* ---------- Skills ---------- */
 .skills { display: grid; grid-template-columns: max-content 1fr; gap: .35rem 1rem; margin: 0; }
 .skills dt { font-weight: 700; }
-.skills dd { margin: 0; color: #333; }
+.skills dd { margin: 0; color: var(--muted); }
+/* Colour, not weight, marks the core skills — the label is already bold. */
+.sk-core { color: var(--accent); font-weight: 600; }
+.sk-core + .sk-rest::before { content: "\00a0\2014\00a0"; }
 
 /* ---------- Publication list ---------- */
 .pub-list { padding-left: 1.4rem; }
