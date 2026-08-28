@@ -5,8 +5,8 @@ role: AI Research Engineer
 org: JS SYSTEM
 url: https://slothisip.github.io
 email: orcakim21@gmail.com
-description: Ju O Kim - AI Research Engineer. Non-contact biomedical sensing (UWB radar, CNN-LSTM), multi-view thermal camera calibration, industrial AI systems, and multi-agent LLM systems for manufacturing.
-keywords: Ju O Kim, AI Research Engineer, machine learning, deep learning, computer vision, UWB radar, respiratory monitoring, CNN-LSTM, thermal camera calibration, AutoML, sensor fusion, manufacturing AI, multi-agent LLM, anomaly detection
+description: Ju O Kim - AI Research Engineer specializing in physics-informed machine learning and industrial systems, including neural operators, acoustic tomography, Bayesian optimization, multimodal sensing, production scheduling, and on-prem AI.
+keywords: Ju O Kim, AI Research Engineer, physics-informed machine learning, scientific machine learning, neural operators, acoustic tomography, Bayesian optimization, Gaussian processes, industrial AI, production scheduling, multimodal sensing, manufacturing AI, multi-agent systems, anomaly detection
 socials:
   scholar: https://scholar.google.com/citations?user=ROKphgMAAAAJ
   linkedin: https://www.linkedin.com/in/ju-o-kim-614b9b192
@@ -26,12 +26,15 @@ person:
     - https://www.linkedin.com/in/ju-o-kim-614b9b192
     - https://github.com/SlothISIP
   knowsAbout:
-    - UWB Radar
-    - Respiratory Monitoring
-    - CNN-LSTM
-    - Thermal Camera Calibration
-    - AutoML
-    - Deep Learning
-    - Computer Vision
+    - Physics-Informed Machine Learning
+    - Scientific Machine Learning
+    - Neural Operators
+    - Acoustic Tomography
+    - Bayesian Optimization
+    - Gaussian Processes
+    - Industrial AI
+    - Production Scheduling
+    - Multimodal Sensing
+    - Acoustic Anomaly Detection
+    - Multi-Agent Systems
     - Signal Processing
-    - Sensor Fusion

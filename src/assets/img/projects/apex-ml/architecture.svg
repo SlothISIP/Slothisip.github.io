@@ -31,9 +31,9 @@
   <text x="500" y="250" text-anchor="middle" font-size="24" font-weight="800" letter-spacing="0.2" fill="#ffffff">3-phase</text>
   <text x="500" y="278" text-anchor="middle" font-size="24" font-weight="800" letter-spacing="0.2" fill="#ffffff">pipeline</text>
 
-  <!-- ============ TWO OUTCOMES (the 99.7% result is the lone orange) ============ -->
+  <!-- ============ TWO OUTCOMES ============ -->
   <circle cx="754" cy="210" r="5" fill="#6b7280"/>
   <text x="772" y="216" font-size="18" font-weight="600" fill="#6b7280" letter-spacing="0.3">1 ensemble model</text>
   <circle cx="754" cy="314" r="6" fill="#e8833a"/>
-  <text x="772" y="320" font-size="20" font-weight="700" fill="#e8833a" letter-spacing="0.3">99.7% accuracy</text>
+  <text x="772" y="320" font-size="20" font-weight="700" fill="#e8833a" letter-spacing="0.3">23 core tests</text>
 </svg>

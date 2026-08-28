@@ -22,19 +22,6 @@ isHome: true
   </div>
 </section>
 
-<section id="education">
-  <h2>Education</h2>
-  <ul class="cv-list">
-  {% for e in home.education %}
-    <li>
-      <div class="cv-line"><strong>{{ e.degree }}</strong> <span class="cv-period">{{ e.period }}</span></div>
-      <div class="cv-org">{{ e.institution | safe }}</div>
-      {% if e.note %}<div class="cv-note">{{ e.note | safe }}</div>{% endif %}
-    </li>
-  {% endfor %}
-  </ul>
-</section>
-
 <section id="experience">
   <h2>Experience</h2>
   <ul class="cv-list">
@@ -43,6 +30,19 @@ isHome: true
       <div class="cv-line"><strong>{{ x.role }}</strong> <span class="cv-period">{{ x.period }}</span></div>
       <div class="cv-org">{{ x.org | safe }}</div>
       {% if x.detail %}<div class="cv-note">{{ x.detail | safe }}</div>{% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+</section>
+
+<section id="education">
+  <h2>Education</h2>
+  <ul class="cv-list">
+  {% for e in home.education %}
+    <li>
+      <div class="cv-line"><strong>{{ e.degree }}</strong> <span class="cv-period">{{ e.period }}</span></div>
+      <div class="cv-org">{{ e.institution | safe }}</div>
+      {% if e.note %}<div class="cv-note">{{ e.note | safe }}</div>{% endif %}
     </li>
   {% endfor %}
   </ul>
@@ -118,6 +118,7 @@ isHome: true
     <a class="project-card" href="/projects/{{ pr.slug }}/">
       <div class="project-card-thumb">{% thumb pr.thumb, pr.title %}</div>
       <div class="project-card-body">
+        {% if pr.scope %}<p class="project-card-scope">{{ pr.scope }}</p>{% endif %}
         <h3 class="project-card-title">{{ pr.title }}</h3>
         <p class="project-card-tagline">{{ pr.tagline }}</p>
       </div>

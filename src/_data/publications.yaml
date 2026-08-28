@@ -653,14 +653,14 @@
   year: 2020
   badge: kci
   detail: false
-  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10500831
+  paper_url: https://doi.org/10.5762/KAIS.2020.21.11.23
   bib: KimKAIS2020
 - slug: jic2020
   title: Boundary and Corner Detection for Multi-Thermal Camera Calibration
   authors: Ju O Kim, Deokwoo Lee
-  venue: Journal of Information and Control
+  venue: CICS 2020 Information and Control Conference
   year: 2020
-  badge: kci
+  badge: conf
   detail: false
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10492661
   bib: KimJIC2020
@@ -669,9 +669,9 @@
   authors: Ju O Kim, Deokwoo Lee
   venue: Transactions of KSAE
   year: 2020
-  badge: conf
+  badge: kci
   detail: false
-  paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10504746
+  paper_url: https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002651612
   bib: KimKSAE2020
 - slug: kicswinter2020
   title: Classification of Respiratory Status using UWB Radar based on a Learning Algorithm
@@ -721,11 +721,11 @@
 - slug: ijasc2019
   title: Occlusion Handled Block-Based Stereo Matching with Image Segmentation
   authors: Ji Su Kim, Cheol Hyeong Park, Ju O Kim, Deokwoo Lee
-  venue: International Journal of Advanced Smart Convergence (IJASC)
+  venue: Computer Science & Information Technology (SIPM 2019)
   year: 2019
-  badge: kci
+  badge: conf
   detail: false
-  paper_url: https://doi.org/10.7236/IJASC.2019.8.1.18
+  paper_url: https://doi.org/10.5121/csit.2019.90303
   bib: KimIJASC2019
 - slug: ieie2018a
   title: Polygon-shaped Filters for Analysis of Images in Frequency Domain

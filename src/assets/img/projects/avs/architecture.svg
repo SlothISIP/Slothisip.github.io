@@ -28,8 +28,10 @@
   <!-- ============ THE ONE BLUE FOCAL: the AST + LoRA core ============ -->
   <circle cx="500" cy="262" r="104" fill="#1772d0" opacity="0.06"/>
   <circle cx="500" cy="262" r="76" fill="#1772d0"/>
-  <text x="500" y="256" text-anchor="middle" font-size="26" font-weight="800" letter-spacing="0.2" fill="#ffffff">AST + LoRA</text>
-  <text x="500" y="284" text-anchor="middle" font-size="14" letter-spacing="0.2" fill="#cfe2f7">87M frozen · &lt;1%</text>
+  <text x="500" y="246" text-anchor="middle" font-size="26" font-weight="800" letter-spacing="0.2" fill="#ffffff">AST + LoRA</text>
+  <text x="500" y="270" text-anchor="middle" font-size="12.5" letter-spacing="0.1" fill="#cfe2f7">87M encoder frozen</text>
+  <text x="500" y="289" text-anchor="middle" font-size="12.5" font-weight="700" letter-spacing="0.1" fill="#ffffff">0.68%-1.35% trainable</text>
+  <text x="500" y="307" text-anchor="middle" font-size="10.2" letter-spacing="0.05" fill="#cfe2f7">depending on machine type</text>
 
   <!-- ============ TWO OUTCOMES (Anomaly is the lone orange) ============ -->
   <circle cx="754" cy="214" r="5" fill="#6b7280"/>

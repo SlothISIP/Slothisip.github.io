@@ -25,11 +25,11 @@
   <!-- outbound hairline tapering to the single ensemble -->
   <path d="M576 282 C 636 282, 660 248, 688 248" stroke="#e6e9ee" stroke-width="1.5" fill="none"/>
 
-  <!-- ============ THE ONE BLUE FOCAL: 92.8% survive screening ============ -->
+  <!-- ============ THE ONE BLUE FOCAL: cheap sample screening ============ -->
   <circle cx="500" cy="282" r="104" fill="#1772d0" opacity="0.06"/>
   <circle cx="500" cy="282" r="76" fill="#1772d0"/>
-  <text x="500" y="270" text-anchor="middle" font-size="34" font-weight="800" letter-spacing="0.2" fill="#ffffff">92.8%</text>
-  <text x="500" y="298" text-anchor="middle" font-size="15" letter-spacing="0.2" fill="#cfe2f7">survive screening</text>
+  <text x="500" y="270" text-anchor="middle" font-size="34" font-weight="800" letter-spacing="0.2" fill="#ffffff">10%</text>
+  <text x="500" y="298" text-anchor="middle" font-size="15" letter-spacing="0.2" fill="#cfe2f7">sample screening</text>
 
   <!-- ============ OUTCOME: one optimized ensemble (the single survivor) ============ -->
   <circle cx="690" cy="248" r="6" fill="#e8833a"/>
