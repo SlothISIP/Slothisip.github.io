@@ -629,7 +629,7 @@
   paper_url: https://ieeexplore.ieee.org/document/9369719
   bib: KimICEIC2021
 - slug: kais2021
-  title: Thermal Camera Calibration using Images with Improved Quality
+  title: Calibration of Thermal Camera with Enhanced Image
   authors: Ju O Kim, Deokwoo Lee
   venue: Journal of the Korea Academia-Industrial cooperation Society (JKAIS)
   year: 2021
@@ -638,13 +638,13 @@
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10549758
   bib: KimKAIS2021
 - slug: kics2020
-  title: Classification of Respiration Status using Signal Analysis in Z-Domain
+  title: Classification of Respiratory States Based on Signal Analysis in Z-Domain
   authors: Ju O Kim, Deokwoo Lee
   venue: The Journal of the Korean Institute of Communications and Information Sciences (KICS)
   year: 2020
   badge: kci
   detail: false
-  paper_url: null
+  paper_url: https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002658203
   bib: KimKICS2020
 - slug: kais2020
   title: Classification of Respiration Signal based on Image Information using Deep Learning
