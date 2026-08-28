@@ -1,0 +1,38 @@
+<svg viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Constraint-aware production scheduling workflow</title>
+  <desc id="desc">Manufacturing demand flows through constraint validation and a scheduling system to produce a feasible plan that is compared with a legacy baseline.</desc>
+  <rect width="1200" height="520" rx="32" fill="#f7f9fc"/>
+  <text x="72" y="92" fill="#0f172a" font-family="Arial, sans-serif" font-size="38" font-weight="700">Constraint-aware production scheduling</text>
+  <text x="72" y="134" fill="#64748b" font-family="Arial, sans-serif" font-size="21">Public-safe system overview</text>
+
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="72" y="214" width="220" height="112" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="182" y="260" fill="#0f172a" font-size="24" font-weight="700">Manufacturing</text>
+    <text x="182" y="292" fill="#475569" font-size="21">demand</text>
+
+    <path d="M304 270H382" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M370 258L384 270L370 282" fill="none" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <rect x="396" y="214" width="220" height="112" rx="18" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+    <text x="506" y="260" fill="#9a3412" font-size="24" font-weight="700">Hard-constraint</text>
+    <text x="506" y="292" fill="#c2410c" font-size="21">validation</text>
+
+    <path d="M628 270H706" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M694 258L708 270L694 282" fill="none" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <rect x="720" y="214" width="220" height="112" rx="18" fill="#eff6ff" stroke="#1772d0" stroke-width="3"/>
+    <text x="830" y="260" fill="#0f4f91" font-size="24" font-weight="700">Scheduling</text>
+    <text x="830" y="292" fill="#1772d0" font-size="21">system</text>
+
+    <path d="M952 270H1030" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M1018 258L1032 270L1018 282" fill="none" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <rect x="1044" y="214" width="116" height="112" rx="18" fill="#ecfdf5" stroke="#22c55e" stroke-width="2"/>
+    <text x="1102" y="260" fill="#166534" font-size="22" font-weight="700">Feasible</text>
+    <text x="1102" y="292" fill="#15803d" font-size="21">plan</text>
+  </g>
+
+  <rect x="396" y="382" width="544" height="64" rx="32" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <circle cx="438" cy="414" r="10" fill="#1772d0"/>
+  <text x="466" y="422" fill="#334155" font-family="Arial, sans-serif" font-size="23">Validated against a legacy planning baseline</text>
+</svg>
