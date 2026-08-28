@@ -11,7 +11,6 @@
   --muted: #6b7280;
   --line: #e3e6ea;
   --bg: #eef0f3;              /* gray shell — same page bg as the detail pages */
-  --highlight: #ecebfd;       /* soft indigo tint for highlighted papers */
   --surface: #f8f9fa;
   --maxw: 800px;
   --maxw-wide: 960px;
@@ -138,8 +137,6 @@ strong { font-weight: 700; }
 }
 .pub-badge::before { content: "\00b7 "; color: #c0c0c0; font-weight: 400; margin-right: 2px; }
 
-span.highlight, .highlight { background-color: var(--highlight); }
-
 /* ---------- Detail pages ---------- */
 .detail { max-width: var(--maxw); margin: 0 auto; }
 .detail-head h1 { font-size: 26px; margin: 0 0 .5rem; font-weight: 700; }
@@ -203,11 +200,19 @@ h2 .count { color: var(--muted); font-weight: 400; font-size: 16px; }
 /* ---------- Publication list ---------- */
 .pub-list { padding-left: 1.4rem; }
 .pub-item { margin: 0 0 1.25rem; padding: .35rem .5rem; border-radius: 6px; }
-.pub-item.highlight { background-color: var(--highlight); }
 .pub-title { margin-bottom: .1rem; }
 .pub-authors { font-size: 13px; }
 .pub-meta { color: var(--muted); font-size: 13px; }
 .pub-links { margin-top: .25rem; font-size: 12px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Publications without a detail page: one line each, links intact. */
+.pub-more-head { font-size: 14px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase;
+                 color: var(--muted); margin: 1.75rem 0 .6rem; }
+.pub-compact { list-style: none; padding: 0; margin: 0; }
+.pub-compact li { margin: 0 0 .5rem; font-size: 14px; line-height: 1.5; }
+.pub-compact-meta { color: var(--muted); font-size: 13px; }
+.pub-compact-meta::before { content: "\2014 "; }
+.pub-compact-bib { font-size: 12px; margin-left: 6px; }
 
 /* ---------- Project grid ---------- */
 .project-grid {

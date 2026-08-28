@@ -8,7 +8,6 @@
   detail: true
   paper_url: https://doi.org/10.1088/1361-6501/ae8c6d
   bib: KimMST2026
-  highlight: false
   thumb: publications/mst2026/mst2026_thumb.jpg
   stats:
     - value: '~950x'
@@ -167,7 +166,6 @@
   detail: true
   paper_url: https://www.mdpi.com/2076-3417/16/12/5997
   bib: KimAPPLSCI2026
-  highlight: false
   thumb: publications/applsci2026/applsci2026_thumb.jpg
   compare:
     title: 'High-contrast failure case: FNO vs HNO'
@@ -300,7 +298,6 @@
   detail: true
   paper_url: https://www.mdpi.com/2079-9292/14/20/4120
   bib: KimELECTRONICS2025
-  highlight: true
   thumb: publications/electronics2025/electronics2025_thumb.jpg
   compare:
     title: 'DTW-SMOTE-TS augmentation: real vs synthetic cycle'
@@ -420,7 +417,6 @@
   detail: true
   paper_url: https://link.springer.com/article/10.1007/s11265-023-01837-z
   bib: KimSPRINGER2024
-  highlight: false
   thumb: publications/springer2024/springer2024_thumb.jpg
   stats:
     - value: '<0.8 px'
@@ -535,7 +531,6 @@
   detail: true
   paper_url: https://www.mdpi.com/1424-8220/20/10/2977
   bib: KimSENSORS2020
-  highlight: false
   thumb: publications/sensors2020/sensors2020_thumb.jpg
   compare:
     title: 'High-pass-filtered radar response: normal vs apnea'
@@ -633,7 +628,6 @@
   detail: false
   paper_url: https://ieeexplore.ieee.org/document/9369719
   bib: KimICEIC2021
-  highlight: false
 - slug: kais2021
   title: Thermal Camera Calibration using Images with Improved Quality
   authors: Ju O Kim, Deokwoo Lee
@@ -643,7 +637,6 @@
   detail: false
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10549758
   bib: KimKAIS2021
-  highlight: false
 - slug: kics2020
   title: Classification of Respiration Status using Signal Analysis in Z-Domain
   authors: Ju O Kim, Deokwoo Lee
@@ -653,7 +646,6 @@
   detail: false
   paper_url: null
   bib: KimKICS2020
-  highlight: false
 - slug: kais2020
   title: Classification of Respiration Signal based on Image Information using Deep Learning
   authors: Ju O Kim, Deokwoo Lee
@@ -663,7 +655,6 @@
   detail: false
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10500831
   bib: KimKAIS2020
-  highlight: false
 - slug: jic2020
   title: Boundary and Corner Detection for Multi-Thermal Camera Calibration
   authors: Ju O Kim, Deokwoo Lee
@@ -673,7 +664,6 @@
   detail: false
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10492661
   bib: KimJIC2020
-  highlight: false
 - slug: ksae2020
   title: Detection of Abnormal Respiration Status from Mixed Signals Using High Pass Filter
   authors: Ju O Kim, Deokwoo Lee
@@ -683,7 +673,6 @@
   detail: false
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10504746
   bib: KimKSAE2020
-  highlight: false
 - slug: kicswinter2020
   title: Classification of Respiratory Status using UWB Radar based on a Learning Algorithm
   authors: Ju O Kim, Deokwoo Lee, Cheol-Hyeong Park
@@ -693,7 +682,6 @@
   detail: false
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE09346529
   bib: KimKICSWinter2020
-  highlight: false
 - slug: kicssummer2020
   title: Accuracy Improvement of Non-contact Respiration Measurement through Sensor Fusion of UWB Radar and Thermal Camera
   authors: Ju O Kim, Deokwoo Lee
@@ -703,7 +691,6 @@
   detail: false
   paper_url: null
   bib: KimKICSSummer2020
-  highlight: false
 - slug: icros2020
   title: Edge and Corner Detection for Multiple Thermal Camera Calibration
   authors: Ju O Kim, Deokwoo Lee
@@ -713,7 +700,6 @@
   detail: false
   paper_url: null
   bib: KimICROS2020
-  highlight: false
 - slug: ieie2020
   title: Production of Heat-Box based Checkerboard for Thermal Camera Calibration
   authors: Ju O Kim, Deokwoo Lee
@@ -723,7 +709,6 @@
   detail: false
   paper_url: null
   bib: KimIEIE2020
-  highlight: false
 - slug: kais2019
   title: Modeling of Polygon-shaped Filter in Frequency Domain for Realistic Image Filtering Methods
   authors: Ju O Kim, Ji Su Kim, Cheol Hyeong Park, Deokwoo Lee
@@ -733,7 +718,6 @@
   detail: false
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07997660
   bib: KimKAIS2019
-  highlight: false
 - slug: ijasc2019
   title: Occlusion Handled Block-Based Stereo Matching with Image Segmentation
   authors: Ji Su Kim, Cheol Hyeong Park, Ju O Kim, Deokwoo Lee
@@ -743,7 +727,6 @@
   detail: false
   paper_url: https://doi.org/10.7236/IJASC.2019.8.1.18
   bib: KimIJASC2019
-  highlight: false
 - slug: ieie2018a
   title: Polygon-shaped Filters for Analysis of Images in Frequency Domain
   authors: Ju O Kim, Ji-Su Kim, Cheol-Hyeong Park, Deokwoo Lee
@@ -753,7 +736,6 @@
   detail: false
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07624922
   bib: KimIEIE2018a
-  highlight: false
 - slug: ieie2018b
   title: Application to Detection and Classification of Respiratory Status based on a Signal Correlation
   authors: Su-Yeol Kim, Chae-Hwan Hwang, Ju O Kim, Cheol-Hyeong Park, Deokwoo Lee
@@ -763,7 +745,6 @@
   detail: false
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07624936
   bib: KimIEIE2018b
-  highlight: false
 - slug: ieie2018c
   title: Application to Camera Calibration using Learning Based Corner and Edge Detection
   authors: Cheol-Hyeong Park, Ji-Su Kim, Ju O Kim, Deokwoo Lee
@@ -773,4 +754,3 @@
   detail: false
   paper_url: https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07624880
   bib: KimIEIE2018c
-  highlight: false

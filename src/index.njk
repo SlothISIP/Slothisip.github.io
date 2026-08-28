@@ -71,9 +71,12 @@ isHome: true
 
 <section id="publications">
   <h2>Publications <span class="count">({{ publications | length }})</span></h2>
+  {# The five journal papers with detail pages carry the section; the rest are
+     one line each below, so a 2018 conference abstract does not take the same
+     space as an SCIE paper. Every Paper and BibTeX link survives the move. #}
   <ol class="pub-list">
-  {% for p in publications %}
-    <li class="pub-item{% if p.highlight %} highlight{% endif %}{% if p.thumb %} has-thumb{% endif %}">
+  {% for p in publications %}{% if p.detail %}
+    <li class="pub-item{% if p.thumb %} has-thumb{% endif %}">
       {% if p.thumb %}
       <a class="pub-thumb" href="/publications/{{ p.slug }}/" tabindex="-1" aria-hidden="true">{% thumb p.thumb, p.title %}</a>
       {% endif %}
@@ -93,8 +96,19 @@ isHome: true
         </div>
       </div>
     </li>
-  {% endfor %}
+  {% endif %}{% endfor %}
   </ol>
+
+  <h3 class="pub-more-head">Other publications</h3>
+  <ul class="pub-compact">
+  {% for p in publications %}{% if not p.detail %}
+    <li>
+      {% if p.paper_url %}<a href="{{ p.paper_url }}">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}<span class="pub-badge pub-badge-{{ p.badge }}">{{ p.badge | upper }}</span>
+      <span class="pub-compact-meta">{{ p.venue }}, {{ p.year }}</span>
+      <a class="pub-compact-bib" href="/data/{{ p.bib }}.bib">BibTeX</a>
+    </li>
+  {% endif %}{% endfor %}
+  </ul>
 </section>
 
 <section id="projects">
